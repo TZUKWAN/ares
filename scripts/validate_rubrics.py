@@ -25,7 +25,7 @@ REQUIRED = ["competition_id", "competition_name", "judging_dimensions", "deliver
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 WEIGHT_RE = re.compile(
     r"\d+(\.\d+)?\s*%|\d+\s*分|定性|一票|通过制|客观|计分|评分|分值|排名|机评|称重|实测"
-    r"|否决|扣分|取消|红线|不设|不计入|另行发布|分数|门槛",
+    r"|否决|扣分|取消|红线|不设|不计入|另行发布|分数|门槛|只设|板块",
     re.IGNORECASE)
 
 
