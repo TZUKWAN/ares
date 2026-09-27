@@ -259,6 +259,9 @@ def render(profile_path, out_path, outline_path=None, theme_name="auto"):
         print("版式提示 %d 条：" % len(layouts.NOTES))
         for n in layouts.NOTES:
             print("  △ " + n)
+        if STRICT:
+            print("--strict 模式：版式提示计入失败，请按提示调整内容后重渲。")
+            return 1
     if OVERFLOWS:
         print("溢出风险 %d 处：" % len(OVERFLOWS))
         for o in OVERFLOWS:
@@ -268,13 +271,19 @@ def render(profile_path, out_path, outline_path=None, theme_name="auto"):
     return 0
 
 
+STRICT = False
+
+
 def main():
+    global STRICT
     ap = argparse.ArgumentParser()
     ap.add_argument("--profile", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--outline")
     ap.add_argument("--theme", default="auto")
+    ap.add_argument("--strict", action="store_true", help="版式提示（如混量纲守卫）计入退出码")
     a = ap.parse_args()
+    STRICT = a.strict
     sys.exit(render(a.profile, a.out, a.outline, a.theme))
 
 

@@ -195,8 +195,8 @@ def chart_bar(slide, theme, c):
     page_chrome(slide, theme, c["title"], c["page_no"], c["total"], c["project_name"])
     values = [abs(v) for v in c["values"] if v]
     if values and max(values) / max(min(values), 1e-9) >= 50:
-        NOTES.append("第%d页柱状图数值跨度超过50倍（疑混用量纲），建议改用对比矩阵或拆分指标"
-                     % c["page_no"])
+        NOTES.append("第%d页柱状图数值跨度超过50倍：若为市场分层/漏斗（同量纲）可忽略；"
+                     "若为不同量纲指标混排，请改用对比矩阵或拆分同量纲多页" % c["page_no"])
     data = CategoryChartData()
     data.categories = c["categories"]
     data.add_series(c["series_name"], c["values"])
@@ -295,9 +295,15 @@ def comparison_matrix(slide, theme, c):
             r.font.name = FONT
             r.font.size = Pt(13)
             r.font.color.rgb = theme["text"]
+    if c.get("note_lines"):
+        tb = _box(slide, 0.9166, 6.42, 11.5, 0.45)
+        _para(_tf(tb), " ｜ ".join(str(x) for x in c["note_lines"]), 11, theme["muted"],
+              align=PP_ALIGN.CENTER, first=True)
     if c.get("conclusion"):
-        band = _rect(slide, 0.9166, 6.55, 11.5, 0.55, theme["light"], shape=MSO_SHAPE.ROUNDED_RECTANGLE)
-        _para(_tf(band), c["conclusion"], 14, theme["primary"], bold=True, align=PP_ALIGN.CENTER, first=True)
+        band = _rect(slide, 0.9166, 6.86, 11.5, 0.5, theme["light"], shape=MSO_SHAPE.ROUNDED_RECTANGLE)
+        _para(_tf(band), c["conclusion"], 13, theme["primary"], bold=True, align=PP_ALIGN.CENTER, first=True)
+    else:
+        pass
 
 
 # ---------------------------------------------------------------- 8 雷达图

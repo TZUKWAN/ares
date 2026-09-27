@@ -23,7 +23,7 @@ STARRED = {1, 2, 3, 4, 5, 6, 10, 12, 21, 51, 72, 83}   # 任务清单批次表�
 REQUIRED = ["competition_id", "competition_name", "judging_dimensions", "deliverable_requirements",
             "process_stages", "review_format", "sources", "confidence", "last_updated"]
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-WEIGHT_RE = re.compile(r"\d+(\.\d+)?\s*%|定性|一票|通过制|客观题|分数", re.IGNORECASE)
+WEIGHT_RE = re.compile(r"\d+(\.\d+)?\s*%|\d+\s*分|定性|一票|通过制|客观|计分|评分|分值|排名|机评|称重|实测", re.IGNORECASE)
 
 
 def check_one(cid, strict_star=True):

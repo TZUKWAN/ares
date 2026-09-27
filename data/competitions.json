@@ -11,15 +11,21 @@
     "category": "创业",
     "pipeline": "L1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.moe.gov.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "每年5-6月；支持跨院系、跨校组队，负责人身份决定组别（创意组须未注册公司）",
+      "省赛": "每年7-8月；省赛名额决定国赛推荐资格",
+      "国赛": "每年9-10月；凭计划书+PPT+佐证材料盲评，评出入围总决赛项目",
+      "决赛": "2024年总决赛在上海交通大学（10月）；2025年在郑州大学；高教主赛道产生冠"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "商业计划书（项目计划书）",
+      "项目展示PPT",
+      "项目介绍视频/VCR",
+      "佐证材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -34,15 +40,19 @@
     "category": "理科",
     "pipeline": "学术科技（按作品类型路由L2/L3）",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.tiaozhanbei.net/rules",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "两年一届，与创业计划大赛交替举办；单数年举办（第十九届为2025年）",
+      "决赛": "第十九届于2025年10月31日-11月3日在南京大学举行；决赛评出特等奖、一等"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "作品申报书",
+      "自然科学类学术论文全文",
+      "哲学社会科学类社会调查报告",
+      "科技发明制作：研究报告+实物或模型"
+    ],
     "team_rules": "",
     "notes": "三类作品（自然科学论文/哲社报告/科技发明制作）分别路由 L2/L4/L3"
   },
@@ -58,15 +68,20 @@
     "category": "创业",
     "pipeline": "L1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.gqt.org.cn/documents/zqlf/201204/t20120416_561707.htm",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "两年一届，与'大挑'交替举办（第十四届为2024年，第十五届2026年启动）",
+      "复赛": "主体赛按主题分组（科技创新、乡村振兴、数字经济、文化创意、社会治理和公共服务、生",
+      "决赛": "第十四届2024年10月29日-11月2日在西安交通大学（兴庆校区）举行；412"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "创业计划书",
+      "项目展示PPT",
+      "佐证材料",
+      "决赛路演"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -81,15 +96,16 @@
     "category": "程序",
     "pipeline": "L6",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://icpc.global/regionals/rules",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "2024年金奖28、银奖56、铜奖84"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "比赛代码提交",
+      "参赛队伍报名"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -105,7 +121,7 @@
     "category": "理科",
     "pipeline": "L2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.mcm.edu.cn",
     "cycle": "年度",
     "typical_timeline": {
       "校赛": "",
@@ -113,7 +129,11 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛论文",
+      "支撑材料（源代码/数据）",
+      "AI工具使用情况说明"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -136,7 +156,11 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "设计总结报告",
+      "实物作品",
+      "测试记录与佐证"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -148,15 +172,17 @@
     "category": "实验技能",
     "pipeline": "E2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.moe.gov.cn/srcsite/A08/moe_740/s3864/201912/t20191227_413741.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "设金奖、银奖、铜奖和各类单项奖；另设优秀选手、优秀指导教师、优秀组织高校等六类奖"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛队报名（每校每赛道1支队伍）",
+      "参赛队员",
+      "竞赛考核材料（试题、评分标准、录像等）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -168,15 +194,17 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://12umic.hit.edu.cn/2025/0321/c20015a364759/page.htm",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "第十二届2026-06-15前公布参加全国决赛作品名单"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "设计说明书及主要设计图纸",
+      "实物样机或放缩实物模型（决赛）",
+      "展页"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -188,15 +216,18 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://jwc.shmtu.edu.cn/_upload/article/files/a2/bc/5564a10048a3b7d970934ef596c1/db4612e8-6e71-44da-b224-1015525a226c.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "竞赛为教育部、财政部教高函〔2007〕30号批准的全国性学科竞赛资助项目，设竞赛",
+      "决赛": "官网 www.structurecontest.com；近年赛题含桥梁静载+移动"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "理论方案（含现场设计计算）",
+      "现场制作竹质模型",
+      "加载方案与固定螺钉数量申报"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -210,15 +241,19 @@
     "category": "艺术",
     "pipeline": "L5",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://jw.beijing.gov.cn/gjc/tzgg_15688/202604/t20260415_4582354.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "省赛": "2026年北京赛区6月18日前完成校级初评，6月22日报送赛区"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "平面类作品",
+      "视频类/动画类作品",
+      "文案类作品",
+      "策划案类作品",
+      "互动/广播/UI/科技类作品"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -233,12 +268,15 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "省赛": "2026年7月在各承办学校举行；分赛区获奖证书于各赛区完毕公示后发放电子版",
+      "决赛": "名次以现场完赛时间为主、技术方案与制作工程质量评分为辅"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "智能车参赛作品（车模）",
+      "车模技术报告",
+      "参赛队伍"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -252,15 +290,18 @@
     "category": "创业",
     "pipeline": "L1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.3chuang.net",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "由教育部委托教育部高校电子商务类专业教学指导委员会主办，2009年创办，校-省-"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "项目策划书（项目报告书）",
+      "答辩PPT",
+      "非首次参赛差异材料（3个文档）",
+      "实战赛运营佐证材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -275,12 +316,15 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "由教育部高等学校能源动力类专业教学指导委员会指导、竞赛委员会主办；主题'节能减排",
+      "决赛": "历届奖励规模：特等奖10项、一等奖40项、二等奖99项（百度百科载某届数据，各届"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "作品申报书（科技类/社会实践类）",
+      "作品本体",
+      "决赛答辩PPT"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -292,15 +336,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://gcxl.edu.cn/",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "赛制为校级初赛-省级复赛-全国总决赛三级；大赛由教育部高等教育司主办，每两年举办",
+      "复赛": "赛道设置：工程实践赛道（太阳能电动车、生物质能电动车等）、智能+工程创新赛道（智",
+      "决赛": "2025年预通知于2024-06-25发布；各赛项命题与评分规则文件由各省级赛区"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "竞赛机器人/装置作品",
+      "任务命题文档（智能+赛道决赛环节）",
+      "虚拟仿真赛道成果"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -312,15 +360,18 @@
     "category": "商科",
     "pipeline": "L4",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.uwh.edu.cn/uploads/article/20240902/82b3711d00b2bbdfe9c606e8f0a351fb.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "按《全国大学生物流设计大赛网络评审评分表》评分（安徽赛区规程）",
+      "决赛": "第九届（2025，'新青年吴兴杯'）吸引全国30个省份300多所院校4万余人参与"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "完整设计方案（案例设计）",
+      "专业水平测试",
+      "答辩PPT与现场汇报"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -335,15 +386,21 @@
     "category": "人文语言",
     "pipeline": "E1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://ucc.fltrp.com/c/2023-06-28/519465.shtml",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "校赛、省赛题目由各院校和省组委会自行决定；表现优异者晋级省赛",
+      "省赛": "阅读省赛增加Read and Create主观题模块；省赛优胜者晋级国赛",
+      "国赛": "赛题围绕\"理解中国，沟通世界\"主题；获得往届国赛冠、亚、季军的选手不得继续参加该",
+      "复赛": "第27届覆盖全国近500所高校超一万支队伍；地区复赛分华北、华东、华南、华西四赛"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "演讲赛项网络赛场/初赛参赛视频",
+      "写作赛项线上作答",
+      "阅读赛项线上作答",
+      "辩论赛队报名材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -358,12 +415,16 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "华灿奖采用校赛、赛区赛、总赛三级赛制；校赛由各赛区负责组织",
+      "省赛": "赛区赛获奖作品晋级总赛；澳门等赛区按实施方案（A3、300dpi等）征集评审"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "平面类作品",
+      "产品/空间类作品",
+      "视频/数字媒体类作品",
+      "在线报名信息与原创承诺"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -383,7 +444,12 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "学术论文",
+      "改革成果展示材料",
+      "创业推介材料",
+      "校级推荐名额材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -398,12 +464,18 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "每年发布全国统一设计任务书（如近年围绕资源循环、双碳背景的化工产品方案）",
+      "省赛": "以2026年四川省赛细则为代表：专项成绩占80%、答辩成绩占20%；赛区优胜队晋",
+      "决赛": "第十八届（2024，大连理工）450所学校3685支团队约1.9万人参赛；第十九"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "项目可行性研究报告",
+      "初步设计说明书及主要设备设计说明",
+      "典型设计图纸汇编",
+      "现代设计方法应用材料",
+      "答辩PPT与口头报告"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -419,15 +491,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.robocon.org.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "国赛": "高校系列赛分超级对抗赛（RMUC）、高校联盟赛（RMUL）、高校人工智能挑战赛等",
+      "复赛": "第二十四届（2025，深圳）33所高校76支队伍1200余名选手参赛；冠军队代表"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "RoboMaster《技术评审报告》及阶段性材料",
+      "RoboMaster开源资料",
+      "RoboCon技术审查材料与技术视频",
+      "比赛机器人整机"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -442,15 +518,20 @@
     "category": "商科",
     "pipeline": "L4",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.china-cssc.org",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "第十六届于2025年9月启动，全国1200多所学校超36万人报名；校赛多设文本评",
+      "省赛": "省赛优胜队伍按名额晋级全国总决赛",
+      "决赛": "第十六届总决赛：专科组2026年5月武汉工商学院、研究生及在华留学生组5月郑州大"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "调查报告（含完整附件）",
+      "知识赛网考",
+      "展示PPT与答辩材料",
+      "原创承诺与查重报告"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -465,12 +546,15 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "省赛": "各赛项独立发布《竞赛细则》与样题（如2026离散行业自动化逻辑算法初赛细则）；按",
+      "决赛": "奖项按赛项分设；赛项覆盖流程行业自动化、离散行业自动化（逻辑算法/工程实践）、运"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "省赛/初赛方案与工程文件",
+      "总决赛现场任务作品",
+      "答辩材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -482,15 +566,20 @@
     "category": "创业",
     "pipeline": "L1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.fwwb.org.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "大赛分A类企业命题类、B类创业实践类、C类创响无锡类（单独组织评审，不参加区域赛",
+      "初赛": "第十六届初赛线上评审于2025年4月16日—5月6日进行",
+      "决赛": "历届总决赛8月在江苏无锡举行，第十七届由江南大学承办；大赛由教育部、商务部等指导"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "A类企业命题作品（方案+系统）",
+      "B类创业实践类材料",
+      "路演PPT与演示视频",
+      "官网报名信息"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -505,15 +594,20 @@
     "category": "程序",
     "pipeline": "L6程序/L3工科",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://2024.ncccu.org.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "国赛": "2018—2024年连续入选全国普通高校学科竞赛排行榜；历届由企业联合命题、基于",
+      "初赛": "苹果公司与浙江大学联合主办；第十届（2025）累计辐射师生超65万人次、覆盖近千",
+      "决赛": "设创意类（A类）与攻关类（B类）赛道，含工业互联网数智应用等赛项；本科组与研究生"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "大数据挑战赛：模型预测结果+可复现代码",
+      "天梯赛：在线编程作答",
+      "移动应用创新赛：App原型作品",
+      "网络技术挑战赛：作品+双盲材料"
+    ],
     "team_rules": "",
     "notes": "含大数据挑战赛、团体程序设计天梯赛、移动应用创新赛、网络技术挑战赛，逐项路由"
   },
@@ -525,15 +619,19 @@
     "category": "实验技能",
     "pipeline": "E2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://yuanxi.cugb.edu.cn/competition/jszz/qgdxsdzjnjs/jszc",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "章程规定每校不超过3队、每队不超过3人；部分省份/学校组织培训（如西安石油大学组",
+      "决赛": "每两年一届；第八届2026年8月26-28日在西南石油大学（成都）举行，87所高"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "野外地质记录本及野外作业成果",
+      "室内综合应用答卷（图件+报告）",
+      "标本鉴定答题卡",
+      "报名与队员资格材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -545,15 +643,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://jwc.njupt.edu.cn/_upload/article/files/38/cd/584660744dbcbb24765c29792aa0/4ae7de96-0745-495b-a2c7-68779d379200.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "每年3-6月；部分高校设预选赛QQ群统一管理（如武汉科技大学第十四届校赛通知）",
+      "国赛": "2025年第十三届总决赛8月中下旬在杭州由浙江大学承办；一、二、三等奖约按20%"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "实物赛道方案设计书",
+      "实物作品（样机）",
+      "创意赛道项目计划书与路演PPT",
+      "光学设计赛道设计文件"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -565,15 +667,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://univ.ciciec.com/nd.jsp?id=1092",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "每年1-3月启动报名；以企业命题'杯赛'为单位参赛，第八届22个杯赛、第九届11",
+      "决赛": "约6-7月；按赛区组织"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "技术文档（合并汇总全部文档材料）",
+      "答辩PPT",
+      "技术数据（代码/工程/仿真库/测试数据）",
+      "演示视频与作品海报"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -588,12 +694,16 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "各高校材料学院组织（如海南大学、厦门工学院等均按全国评分表执行校级赛）",
+      "复赛": "评分框架与全国标准一致；部分省份成绩作为全国决赛推荐依据",
+      "决赛": "教育部高等学校材料类专业教学指导委员会主办；第十四届（2025）总决赛在宜宾举行"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "制备完成的金相试样",
+      "显微观察图像（现场采图）",
+      "报名与选拔材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -605,15 +715,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.ciscn.cn/announcement/view/382",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "2025年7月20日公示决赛名单；决赛名额由专家组根据参赛队伍总数及作品质量确定",
+      "决赛": "一等奖原则上不超过进入决赛队伍的1/5，二等奖不超过1/3；第十八届2025年8"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "作品设计报告与测试报告",
+      "可执行程序与源代码",
+      "离线备案资料（光盘）",
+      "决赛演示设备与PPT"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -627,15 +741,18 @@
     "category": "理科",
     "pipeline": "L2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://zpy.cstam.org.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "团体奖按赛区规则评定（江苏赛区以报名学校数为基准：特等奖10%、一等奖20%、二"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "个人赛答卷（闭卷笔试）",
+      "团体赛课题研究成果（理论设计与操作）",
+      "基础力学实验记录与报告",
+      "报名表与参赛费"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -647,15 +764,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.cmes.org/cmes/upload/2026/03-18/09-47-4800081058154528.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "2026年总决赛时间：过程装备8月30日前；铸造7月；热处理7月18-19日；物"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "过程装备赛：参赛作品全套材料",
+      "铸造赛：铸造工艺设计说明书+工艺图/工艺卡",
+      "热处理赛：自选作品（选拔赛）/命题作品PPT（总决赛）",
+      "物流技术赛：散料货物搬运机器人实物",
+      "智能制造赛：现场竞赛任务成果+研究生组方案报告/PPT"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -667,15 +788,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://rcccaa.drct-caa.org.cn/article_info.php?id=114",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "2026年报名截止3月31日；校赛负责人3月31日前报送晋级队伍汇总表；校赛不收",
+      "国赛": "2026年5月2-4日北京雁栖湖国际会展中心；赛前一天调试与领队会；比赛3个比赛"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "技术资格认证材料（各赛项）",
+      "机器人实物/代码（按组别）",
+      "技术挑战赛文档与演示文稿（仿真2D/3D组）",
+      "报名信息与缴费"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -689,15 +814,18 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.cnsoftbei.com/content-1-1101-1.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "评审专家组来自中科院软件所、北京大学、清华大学等高校院所（历届）；信创专项赛道设",
+      "决赛": "第十五届调整为线上举办（环境测试8月21日、第一轮评审8月22日、答辩8月23日"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "初赛作品（按所报赛题要求）",
+      "决赛作品包（修改完善版）",
+      "报名表（盖章）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -709,15 +837,17 @@
     "category": "工科",
     "pipeline": "L3工科+L1创业",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://chinaus-maker.cscse.edu.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "总决赛另有决赛评分标准，同分时创新创意部分得分高者优先"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "产品原型",
+      "参赛者声明与报名材料",
+      "作品介绍/展示材料"
+    ],
     "team_rules": "",
     "notes": "作品主体走L3，商业计划材料按L1补齐"
   },
@@ -729,15 +859,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://raicom-caia1caim2.oss-cn-hangzhou.aliyuncs.com",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "经高校教务/双创学院统一组织报名，赛道四选一：CAIR工程竞技、CAIM工程创客",
+      "省赛": "省赛一、二、三等奖比例不超过15%、25%、40%（0分与弃赛不计入）；一、二等",
+      "决赛": "国赛一、二、三等奖比例约10%、15%、20%；往届国赛一等奖作品不得再报同赛道"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "赛项比赛任务成果（竞技类）",
+      "设计说明文档（创新设计类赛项）",
+      "线上测试赛作品（部分赛项）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -752,12 +886,16 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "组别：中职组、高职组、本科A组、本科B组、研究生组，以省为单位组成赛区",
+      "省赛": "省赛按组别设一、二、三等奖，比例原则上不低于各组别实际参赛组数的7%、15%、2",
+      "决赛": "国赛一、二、三等奖比例为实际参赛竞赛小组的5%、10%、20%；另设优秀指导教师"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "理论赛答卷",
+      "仿真实践赛答卷",
+      "国赛实践任务/项目里程碑成果"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -769,15 +907,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.huawei.com/minisite/ict-competition-2025-2026-global/cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "第十届中国区报名2025年9月10日-11月30日；实践赛设网络、云、基础软件、",
+      "省赛": "按团体成绩排名确定晋级全国总决赛队伍",
+      "决赛": "晋级队伍代表中国区参加全球总决赛"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "理论考试（校赛/省初赛）",
+      "实验LAB实操（省复赛/全国赛）",
+      "创新赛作品包"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -789,15 +931,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.socchina.net/wx/inform?value=3",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "入围复赛名单公示不少于3天",
+      "复赛": "设东部、南部、中部、北部、西北、西南六大赛区",
+      "决赛": "第八届总决赛2025年8月10-13日在南京举行（东南大学、南京江北新区承办）；"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛作品（实物系统）",
+      "作品设计报告与上传材料",
+      "决赛展示与答辩材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -809,15 +955,18 @@
     "category": "理科",
     "pipeline": "L2理科/L1创业",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.culsc.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "省赛": "同一学院推荐国赛团队数不超过所在省推荐总数的15%；创新创业类决赛为项目路演答辩"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "立项报告（含研究综述与实验设计）",
+      "实验记录",
+      "研究论文",
+      "创新创业类作品包"
+    ],
     "team_rules": "",
     "notes": "创新研究类走L2，创业类走L1"
   },
@@ -829,15 +978,18 @@
     "category": "理科",
     "pipeline": "L2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://jwc.ustb.edu.cn/docs//2026-03/ce7f8929264847f5b89a67e54d9117c5.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "答辩后公示成绩；第十二届由哈尔滨工业大学承办，另设国际赛道（单独分组、单设获奖指"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "命题类创新作品",
+      "自选课题类创新作品",
+      "讲课类参赛材料",
+      "预赛报名表"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -849,15 +1001,18 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://gxbsxs.glodonedu.com/",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "第十二届预报名2025年9月16日启动、10月10日结束；各校按大赛规定名额推荐",
+      "决赛": "本科组、专科组分别评奖；设特等奖/一等奖/二等奖/三等奖/优秀奖；大赛由行业企业"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "BIM模型成果",
+      "毕业设计报告及成果包",
+      "总决赛答辩材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -869,15 +1024,20 @@
     "category": "商科",
     "pipeline": "L4商科/L1创业",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://ssyth.cubec.org.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "四大赛项独立报名：品牌策划竞赛、会展（文旅与会展）创新创业实践竞赛、国际贸易竞赛",
+      "省赛": "品牌策划省赛\"采取评审品牌策划方案的方式线上进行，根据结果产生全国总决赛入围名单",
+      "决赛": "入围团队按赛区/组别评一、二、三等奖及单项奖；系列赛事入选中国高等教育学会《全国"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "品牌策划竞赛：品牌策划书",
+      "国际贸易竞赛：参展商业计划书+展位海报+发布会材料",
+      "会展竞赛：会展/文旅策划方案",
+      "创新创业竞赛：创业计划书/模拟经营成绩"
+    ],
     "team_rules": "",
     "notes": "品牌策划/会展/国际贸易走L4，创新创业赛道走L1"
   },
@@ -891,15 +1051,18 @@
     "category": "模拟经营",
     "pipeline": "E3模拟+L1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.xcbds.com/cyds/info/openPage?flag=38",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "组委会发放免费训练账号；每校每赛项按省赛通知推选名额晋级省赛",
+      "省赛": "本科组与职教组分组；未安排省级选拔的地区参加全国网络选拔；研究生组统一参加全国初"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "模拟策略书/创业计划书",
+      "软件模拟经营决策",
+      "报名信息与团队组建"
+    ],
     "team_rules": "",
     "notes": "软件模拟经营走E3，商业计划书部分走L1"
   },
@@ -911,15 +1074,20 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://jwc.ustb.edu.cn/docs//2025-04/dfc52dfe348344bfa9d76474bf2fd08f.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "2025年报名3月18日-6月25日；主题一/二每队1-3人，主题三/专项赛1-",
+      "省赛": "按成绩排序评出不高于24%的队伍获全国赛资格；组委会统一评审的区域赛/专项赛按1",
+      "国赛": "2025年全国赛8月20-21日；一等奖20%、二等奖40%、三等奖40%，宁缺"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛作品申报表",
+      "主题一设计创意PDF（无实物组）",
+      "主题一实物组材料",
+      "主题二/专项赛材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -931,15 +1099,17 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://jcsysx.shmtu.edu.cn/_upload/article/files/c3/de/a4cf27854c9081c2b326ed67663f/96872960-f9eb-4879-b0b4-5f635466a7b4.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "国赛": "设一等奖、二等奖、三等奖；获全国一等奖的指导教师可申请优秀指导教师奖；设优秀组织"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "报名信息",
+      "创新赛类作品材料（作品报告/设计文档、演示视频）",
+      "竞技/挑战类参赛机器人与现场赛"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -951,15 +1121,18 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.nactrans.com.cn/detail/2161",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "本科/研究生赛道分别评选；一等奖≤3%、二等奖≤5%、三等奖≤8%，其余决赛作品"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛作品申报书",
+      "作品说明文档（包括研究报告或论文）",
+      "原创声明书及作品使用授权书",
+      "答辩幻灯片"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -971,15 +1144,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.chengtudasai.com/ctds/public/static/upload/file/20260622/1782117519439268.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "校赛组织方案与结果需经教务部门/院系盖章确认并报省级组委会备案核查",
+      "省赛": "须获晋级资格方可参加全国总决赛；省赛报名2026年4月1日-4月25日",
+      "国赛": "团体奖一/二/三等奖≤参赛队数10%/15%/25%；先进成图个人奖≤8%/12"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "尺规绘图试卷",
+      "产品信息建模及工程图绘制电子文件",
+      "开放赛道作品（3D打印件/BIM模型/轻量化设计报告/数字化创新设计作品等）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -991,15 +1168,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.shiep.edu.cn/_upload/article/files/b8/c0/5dd3078a4cdcbf105c345ef261ad/b2925cc5-ff2f-459e-bae6-aa108950e765.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "校赛申请条件：以校为单位不少于20支团队、以学院为单位不少于10支团队且均须官网",
+      "复赛": "本科生/青少年组线上答辩前40%、高职组前60%进入线下实操；评选特等奖（晋级国",
+      "决赛": "国赛评一、二、三等奖及优秀指导教师奖、优秀组织奖；据渤海大学转发评审方式：专家评"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "3DShow专辑官网作品",
+      "实物作品",
+      "报名信息"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1011,15 +1192,17 @@
     "category": "工科",
     "pipeline": "L3工科/L5艺术",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://jwc.xync.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1916811077&wbfileid=2DBE447559659ECE84CD0F2DDAA9B8A9",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "7-8月举行；奖项：一等奖≤有效作品数5%、二等奖≥25%、三等奖70%；结果9"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛作品（按类别）",
+      "作品报名信息与承诺材料",
+      "答辩材料（决赛）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1031,15 +1214,20 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://cse.sysu.edu.cn/sites/default/files/2024-06/2018%E2%80%9C%E4%B8%AD%E5%9B%BD%E9%AB%98%E6%A0%A1%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%A4%A7%E8%B5%9B-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%88%9B%E6%84%8F%E8%B5%9B%E2%80%9D%E9%80%9A%E7%9F%A5.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "全国分七大赛区（东北/华北/华东/华中/西北/西南/华南）；2025届截止7月2",
+      "复赛": "晋级不超过50支队伍且不超过初赛报名队数的三分之一",
+      "决赛": "2025届10-11月在海南大学；设特等奖1名（5万元）、一等奖5名（2万元）、"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "初赛材料",
+      "复赛材料",
+      "决赛材料",
+      "平台作品托管"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1053,15 +1241,19 @@
     "category": "程序",
     "pipeline": "L6",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://x-static.lanqiao.cn/upload/202604/courseimg/c3f817cf-7d61-4a06-aa37-aa9ad6fcc1b2.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "非必需，多数院校直接报名省赛；院校统一组织报名与缴费",
+      "省赛": "按组别评一二三等奖（约10%/20%/30%）；一等奖晋级国赛；双机位+录屏监考",
+      "国赛": "5-6月举行；设一二三等奖及优秀奖；国一比例不高于5%（口径以当届章程为准）；2"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "比赛答卷（软件类）",
+      "比赛环境与监考材料",
+      "报名信息"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1073,15 +1265,20 @@
     "category": "艺术",
     "pipeline": "L5",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://milan-aap.org.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "作品按院校（学院）管理，获奖信息以系统上传信息为准",
+      "省赛": "等级奖不超过各省赛区作品总数35%，一二三等奖原则上为6%/12%/17%；一二",
+      "国赛": "等级奖不超过入围国赛作品总数10%（一二三等奖2%/3%/5%），不设优秀奖；官"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "作品展示版面（展板）",
+      "视频/动态类作品及海报",
+      "报名信息与素材出处",
+      "论文（另设类别）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1093,15 +1290,20 @@
     "category": "艺术",
     "pipeline": "L5",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.ncda.org.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "通过'未来设计师大学生艺术设计作品云平台'由参赛单位集中统一提交",
+      "省赛": "评出省级一二三等奖；省一、二等奖进入国赛",
+      "国赛": "部分赛项设全国总决赛现场创作与答辩（如90/180分钟双题并行创作），现场决出总"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "平面/海报/IP/文创类作品",
+      "视频/动画/影像类作品",
+      "交互/H5/游戏类作品",
+      "作品信息与设计说明"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1113,15 +1315,20 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://mnems.xjtu.edu.cn/info/1013/1743.htm",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "微纳赛决赛2026年8月21-23日烟台（402项初赛一等奖入围）；工业工程国赛"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "工业工程与精益管理创新赛：参赛作品材料包",
+      "微纳传感赛：初赛提交物",
+      "微纳传感赛：决赛材料",
+      "具身智能精密装配赛：赛题任务+答辩材料",
+      "机械产品数字化设计赛（设计类）",
+      "机械产品数字化设计赛（数字孪生类）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1133,15 +1340,20 @@
     "category": "商科",
     "pipeline": "L4",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.cubec.org.cn/",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "各校自行组织；优秀团队按不超过校赛队伍总数50%且不超过10支推荐省赛",
+      "省赛": "评选晋级全国总决赛队伍；2026年4月10日前提交参赛方案，4月20日确定入围名",
+      "决赛": "考核'应用会计信息开展自主商业研究的能力'；设一二三等奖；2026年6月6-7日"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "知识赛在线答题",
+      "会计与商业管理案例分析报告",
+      "答辩PPT与现场陈述",
+      "全国精英赛与内地与港澳地区赛"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1153,15 +1365,18 @@
     "category": "艺术",
     "pipeline": "L5",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.cdec.org.cn/",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "省赛": "第19届常规赛道投稿量358601件、专项赛与计时赛66470件，合计42507",
+      "国赛": "评审标准按类别在官网'资料下载/获奖查询'专栏公布"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛作品（常规赛道24类）",
+      "专项赛道作品",
+      "版权存证"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1175,15 +1390,19 @@
     "category": "人文语言",
     "pipeline": "E1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://contest.i21st.cn/",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "在校本科生经校园选拔赛专区参赛；研究生走青年组网上报名通道；作品15日内完成审核",
+      "复赛": "现场环节开始引入即席演讲与问答（地区不同略有差别）",
+      "决赛": "每年4-5月举行"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "已备演讲稿（电子版）",
+      "已备演讲视频",
+      "全国阶段现场环节"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1198,12 +1417,16 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "省赛": "网络初评不对各校参赛项目数量限制；全国组委会按分赛区报名情况设定晋级总决赛配额",
+      "决赛": "分赛区晋级配额制；参赛材料全程不得出现院校、指导教师、单位名称，仅可体现参赛学生"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "创新赛道项目材料",
+      "创业赛道项目材料",
+      "项目说明书（原型配套文档）",
+      "挑战赛道（企业命题赛项）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1215,15 +1438,18 @@
     "category": "商科",
     "pipeline": "L4",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.gonghangbei.com/",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "省赛": "2026年10月；优胜作品晋级全国半决赛",
+      "决赛": "2026年11月；设二等奖、三等奖（及优秀奖、入围奖）；优秀主创获工行行内实习机"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛报名",
+      "参赛作品（金融科技创新方案）",
+      "全国阶段现场展示材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1235,15 +1461,20 @@
     "category": "人文语言",
     "pipeline": "E1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.moe.gov.cn/srcsite/A18/s3137/202503/t20250320_1183929.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "推荐比例：≤2000件时每组≤10%且总数≤150件（书写≤400件/5000件",
+      "复赛": "推荐作品须全程匿名（不得出现参赛者/指导教师姓名、学校、单位），赛区管理员官网确",
+      "决赛": "2025年9月30日前完成"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "诵读中国：诵读视频",
+      "诗教中国：诗词讲解视频",
+      "笔墨中国：作品图片+书写视频",
+      "印记中国：印屏照片+释文（+实物照片/实物作品）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1255,15 +1486,18 @@
     "category": "人文语言",
     "pipeline": "E1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://ict.sflep.com/uploadfile/2022/1205/20221205010841486.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "省赛": "案例开发与展示分析满分100分（开发20/展示30/分析30/创新20）；各省赛",
+      "决赛": "全国决赛由上海外国语大学/组委会组织；以'外教社杯'全国高校学生跨文化能力大赛（"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "原创跨文化案例及案例文本",
+      "案例展示视频（校赛/初赛）",
+      "报名表（3人团队）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1275,15 +1509,17 @@
     "category": "程序",
     "pipeline": "L6",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://astar2019.baidu.com/m/designCompetition.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "省赛": "两场成绩分开排名；获奖比例金5%/银10%/铜15%按绝对分数划定、不分省分组；",
+      "国赛": "金/银/铜奖比例约10%/20%/30%；优胜选手可获百度'人才 recruit"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "线上赛题代码提交",
+      "报名与考试服务费"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1295,15 +1531,18 @@
     "category": "艺术",
     "pipeline": "L5",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://jw.beijing.gov.cn/gjc/tzgg_15688/202503/t20250327_4046466.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "省赛": "如河南赛区一、二、三等奖分别为进入终评作品的10%、20%、30%；省赛获奖后推",
+      "决赛": "晋级终评作品在cuidc.net公示，异议实名邮件受理"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛作品版面（核心评审载体）",
+      "辅助材料（按赛区要求）",
+      "实物模型（非强制）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1315,15 +1554,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://sljzw.hhu.edu.cn/2019/0415/c11808a189613/page.htm",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "历届由水利类强校承办（河海大学、华北水利水电大学、四川大学等）；每校推荐一般不超"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "实物模型或样机",
+      "设计说明书与图纸",
+      "作品报名表与推荐汇总表",
+      "功能介绍视频",
+      "展板"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1335,15 +1578,17 @@
     "category": "理科",
     "pipeline": "L2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.cteic.com",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "赛区获奖并按名额推荐晋级全国总决赛；如深圳大学获中南赛区特等奖后晋级总决赛",
+      "决赛": "团体成绩=队员个人总成绩（理论40%+仿真20%+实验40%）的加权平均值"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "无作品类提交物，全程为考核式竞赛",
+      "报名（以学校为单位组队）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1355,15 +1600,20 @@
     "category": "理科",
     "pipeline": "L2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://sczx.bnuzh.edu.cn/docs//2023-03/b32e87dd4fc243aca3061280935010d5.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "初赛按作品质量遴选约70%进入复赛",
+      "复赛": "可现场或视频答辩，视频答辩要求两个摄像机位；双盲评审",
+      "决赛": "总成绩=实验作品成绩（论文+视频）50%+答辩成绩50%；设一、二、三等奖"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "实验作品论文/方案",
+      "实验视频",
+      "答辩PPT",
+      "报名（每队一件作品）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1375,15 +1625,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://course.educg.net/pages/contest/contest.jsp?contestID=ohnWSzDZnQo&tabDocID=10730949",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "编译赛道分ARM/RISC-V等赛道；OS赛道实现能通过测试用例的内核；按比例或",
+      "省赛": "区域赛优秀作品晋级全国总决赛",
+      "决赛": "2024 OS赛道589队报名、209队入围总决赛；2026 OS总决赛8月21"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "系统作品源码（编译器/OS内核/CPU硬件设计）",
+      "设计文档与测试报告",
+      "报名（每队1-3人）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1395,7 +1649,7 @@
     "category": "艺术",
     "pipeline": "L5",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://landscape-caup.tongji.edu.cn/c8/f4/c10586a379124/page.htm",
     "cycle": "年度",
     "typical_timeline": {
       "校赛": "",
@@ -1403,7 +1657,12 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "设计展板（A0横版）",
+      "汇报文件（PDF）",
+      "视频与照片",
+      "报名（3-7人团队+1名指导教师）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1415,15 +1674,18 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://iotcompetition.org",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "分赛区设一、二、三等奖，优胜队伍晋级全国总决赛"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "作品设计报告",
+      "作品演示视频",
+      "实物原型",
+      "报名（以学校为单位组队）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1435,15 +1697,17 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.isclab.org.cn/iscc_0/",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "获奖证书为国家级证书；博弈对抗赛邀请破阵夺旗赛优秀选手赴北京理工大学封闭环境对抗"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "线上挑战赛（破阵夺旗/无限擂台/数据安全）",
+      "创新作品赛作品",
+      "报名（校级赛→区域赛逐级）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1455,15 +1719,18 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.csgpc.org",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "按校赛成绩择优组队推荐参加全国赛；官方竞赛平台统一训练与模拟",
+      "决赛": "2026年由河南理工大学承办（7月底），400余所高校8600余名学生参赛；分测"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "技能类赛项成果数据包（数字测图成果/航测建模成果/点云成果/程序源代码）",
+      "科技论文（测绘科技论文竞赛）",
+      "开发设计竞赛作品（软硬件系统/平台+说明文档）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1477,15 +1744,20 @@
     "category": "理科",
     "pipeline": "L2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.stats.gov.cn/xw/tjxw/tzgg/202302/t20230224_1918484.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "报名截止约3月底（第九届为3月31日20:00）；每名参赛者限报一支队，每队指导",
+      "省赛": "6月进行；入围全国赛的论文同时获省赛一等奖（不占省赛名额），省赛其余论文按10%",
+      "国赛": "7月评审、8月现场答辩（第九届在承办高校）；入围国赛论文按10%、20%、70%"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛论文Word完整版",
+      "参赛论文PDF匿名版",
+      "知网查重报告",
+      "原始数据包与承诺书"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1497,15 +1769,21 @@
     "category": "商科",
     "pipeline": "L4",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://energy.qibebt.ac.cn/eneco/contribution/",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "按成绩排序，有效作品的35%晋级区域赛（非论文类作品不低于40%）；论文组与非论",
+      "省赛": "约3-4月进行；评出区域赛奖项并按名额推荐入围全国总决赛",
+      "决赛": "约5月中下旬（第十一届总决赛承办：山西财经大学）；第十届561所院校8963项有"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "研究论文类作品（能源经济类/能源金融与管理类）",
+      "调研报告类作品",
+      "创新创业设计类/泛能源大数据类作品",
+      "诚信承诺书与查重报告",
+      "决赛展示PPT"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1517,15 +1795,19 @@
     "category": "理科",
     "pipeline": "L2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.jcyxds.com",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "多在3-4月完成（第十一届要求2026年4月30日前完成校赛）；报名截止约4月中",
+      "复赛": "5-7月进行（第十一届要求7月27日前完成复赛）；按学科赛道（基础临床、法医学、",
+      "决赛": "约8月中旬（第十一届2026年8月14-18日）；评出金银铜奖等奖项；第十届26"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "作品摘要（创新研究类/实验设计类）",
+      "作品全文/实验设计方案",
+      "答辩PPT"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1537,15 +1819,19 @@
     "category": "艺术",
     "pipeline": "L5艺术/L3工科",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.cmit.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "约9月完成校内选拔与推荐报名",
+      "省赛": "2025年赛区赛评审及公示为9月27日-10月10日；省赛获奖数量原则上不超过参",
+      "决赛": "评出全国一、二、三等奖；竞赛由行业协会与高校专家组成评审委员会，评分采用官方《评"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛作品文件（按赛道）",
+      "作品说明/创意阐述材料",
+      "演示视频/路演材料（决赛）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1560,12 +1846,15 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "每队固定3名参赛学生（不可跨校组队，可校内跨学院），每人仅能加入一支队伍，一队仅",
+      "决赛": "约11-12月（2025年总决赛12月6日在杭州举行，注册税务师行业协会深度参与"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "原创税收风险管控案例分析报告",
+      "原创承诺与作品材料包",
+      "总决赛汇报PPT"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1577,15 +1866,18 @@
     "category": "模拟经营",
     "pipeline": "E3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://mba.zju.edu.cn/uploads/file/2025/20250310/20250310145341_73976.pdf",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "每校各赛道有推荐名额限制；依托官网训练平台（bisai.ibizsim.cn）练",
+      "复赛": "约2-4月；复赛表现优异者可获直通半决赛名额；按赛区综合分数排名晋级",
+      "决赛": "决策赛道竞争激烈，全国约42支队伍晋级总决赛（2026年口径）；研究生组、本科组"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "各期经营决策（线上系统内提交）",
+      "总决赛现场对抗（线上系统现场登录）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1600,12 +1892,15 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "多在4-9月间进行；每队4人，分设财务总监（默认队长）、生产总监、营销总监、人力",
+      "省赛": "按省赛成绩择优晋级全国总决赛；本科组与高职组分组进行",
+      "决赛": "约10-11月（2025年本科组全国总决赛于10月19日在南京航空航天大学举行）"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "沙盘模拟对抗决策（线上平台内完成）",
+      "管理创新路演材料（总决赛）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1617,15 +1912,17 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://bisai.ccen.com.cn/annouce/3784147313361323008?type=notice",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "10-11月举行，中国建设教育协会公布获奖名单"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "机考成果文件",
+      "综合应用作品（模型+报告）",
+      "报名表"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1637,15 +1934,20 @@
     "category": "程序",
     "pipeline": "L6",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.jsai.org.cn/notice/3019.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "挑战赛、主题赛不分赛区，直接初赛-复赛；校赛10月15日前完成",
+      "省赛": "复赛等同省级赛事，省赛10月31日前完成；一、二、三等奖不超过15%/25%/3",
+      "决赛": "12月底前举行；按入围总数不超过15%/25%/30%设奖"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "算法提交结果/代码",
+      "Docker复现文件",
+      "总决赛汇报PPT+成果演示",
+      "报名费"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1657,15 +1959,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://uiaec.ujs.edu.cn/news_show.php?id=224",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "复赛": "下半年；复赛通过作品入围终审决赛",
+      "决赛": "下半年举行；获奖作品设5个工作日实名质疑投诉期"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "大赛申报书",
+      "样机/实物模型或概念视频",
+      "答辩PPT",
+      "作品汇总表"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1677,15 +1983,18 @@
     "category": "商科",
     "pipeline": "L4",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://match.xmkeyun.com.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "省赛": "约11月举行（2025届为11月22-23日线上比赛）",
+      "决赛": "按组别（本科组等）颁一、二、三等奖：约20%/30%/50%，另为获奖学校颁发奖"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "线上比赛操作成果",
+      "报名信息",
+      "训练账号"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1701,7 +2010,7 @@
     "category": "理科",
     "pipeline": "L2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.contest.comap.com/undergraduate/contests/mcm/instructions.php",
     "cycle": "年度",
     "typical_timeline": {
       "校赛": "",
@@ -1709,7 +2018,12 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "完整论文（含Summary Sheet）",
+      "Summary Sheet",
+      "Report on Use of AI",
+      "提交确认"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1724,12 +2038,16 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "约4月中旬；总获奖比例约为初赛人数51‰",
+      "决赛": "约5月中旬"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "初赛笔试答卷",
+      "决赛笔试答卷",
+      "决赛口试",
+      "全国总决赛"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1741,15 +2059,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.chengtudasai.com",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "国赛": "约5月下旬；机械/建筑/道桥/水利/电子五类分卷",
+      "决赛": "约7月下旬（2026届7月25-28日）；个人奖按环节成绩评定一、二、三等奖"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "尺规绘图试卷",
+      "计算机二维绘图文件",
+      "三维建模文件",
+      "报名"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1764,12 +2086,15 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "复赛": "约5-6月",
+      "决赛": "教育部高等学校材料类专业教学指导委员会主办，2025年7月25-30日第十四届（"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "金相试样",
+      "金相显微图像",
+      "报名"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1781,15 +2106,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.raicom.com.cn/match-item.html?id=3407",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "2025年例：5月11日13:00-15:00；一等奖≤10%、二等奖≤15%、",
+      "省赛": "省赛一、二、三等奖总体比例不超过报名人数的40%，其中各占比不超过15%、25%",
+      "决赛": "2025年国赛8月15日举行；按选手总得分排名决出一、二、三等奖（第三方整理：约"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "赛题程序源代码",
+      "报名信息与有效证件",
+      "本地竞赛环境测试"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1801,7 +2130,7 @@
     "category": "程序",
     "pipeline": "L6",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://gplt.pintia.cn",
     "cycle": "年度",
     "typical_timeline": {
       "校赛": "",
@@ -1809,7 +2138,11 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "赛题解题程序",
+      "报名表与队员身份证明",
+      "考场随身物品"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1824,12 +2157,15 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "惯例7-8月举办（第十二届2026年8月24-26日在武汉轻工大学）；综合考评创"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "作品报告书",
+      "答辩PPT与现场答辩",
+      "讲课类：同步课堂教学实录视频",
+      "实物作品/展示材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1844,12 +2180,14 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "决出一、二、三等奖；长江大学首届18件作品参赛获一等奖1项、二等奖4项、三等奖9"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛作品文件",
+      "报名信息与校级审核材料",
+      "商业模拟类报名表"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1864,12 +2202,16 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "按科目分组，初赛成绩决定实验操作决赛资格",
+      "决赛": "2025年度决赛7月6日在湖北大学举行，全省39所高校275名学子参赛；按科目与"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "现场实验操作（决赛）",
+      "实验记录与数据报告",
+      "实验方案设计稿",
+      "初赛理论测试"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1884,12 +2226,14 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "实行笔试与实验操作相结合：笔试占30%、操作占70%；按个人/团体成绩评奖（长江"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "笔试答卷",
+      "实验操作与原始记录",
+      "选拔考试（校级）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1904,12 +2248,16 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "面向省内高校在校生（第七届另设'长江学子创意奖'面向外省和海外高校在校生作品）；",
+      "复赛": "按类别分组评审，选拔进入决赛",
+      "决赛": "第七届决赛获奖名单于2021年12月底公布（长江云）；大赛由省文旅厅、省发改委、"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "设计方案（初赛）",
+      "作品实物/样品/模型（复赛）",
+      "原创承诺与版权声明"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1929,7 +2277,11 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛作品（新闻采编类）",
+      "广告类等其他赛项作品",
+      "报名与推荐材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1944,12 +2296,14 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "决赛成绩独立于预赛；评出一、二、三等奖（如第四届一等奖1名、二等奖3名、三等奖5"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "报名材料",
+      "初赛（预赛）",
+      "决赛"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1969,7 +2323,10 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "初评作品",
+      "终评原作"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -1981,15 +2338,18 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.news.cn",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "2025年第十四届总决赛8月9-10日在武汉理工大学举行，全国近400家单位33"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "作品说明书",
+      "实物作品/船模",
+      "答辩材料（主观类）",
+      "国赛补充材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2001,15 +2361,17 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.ccpa.com.cn/site/content/4103.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "依据历届《评分准则暨理论考试大纲》"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "配合比设计方案与试验报告",
+      "试件",
+      "报名组队"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2021,7 +2383,7 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.bajasaechina.com/c743",
     "cycle": "年度",
     "typical_timeline": {
       "校赛": "",
@@ -2029,7 +2391,12 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "赛车实物",
+      "设计报告",
+      "商业营销材料",
+      "报名注册"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2041,7 +2408,7 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.formulastudent.com.cn",
     "cycle": "年度",
     "typical_timeline": {
       "校赛": "",
@@ -2049,7 +2416,11 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "赛车实物（三项赛事均为自设计自制造单座赛车）",
+      "设计报告+成本报告+营销材料",
+      "车手资格与注册"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2061,15 +2432,17 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.chinacraa.org",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "三环节之一的团队计分项"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "创新设计作品材料",
+      "校内选拔",
+      "全国决赛"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2084,12 +2457,15 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "国赛": "山东科技大学通稿：校内初评—专家网评—现场答辩三段式；沈阳理工大学通稿：网评和会",
+      "决赛": "大赛由教育部高等学校矿业类专业教学指导委员会、中国高校矿物加工工程专业协同合作联"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛作品（四类专题）",
+      "申报与推荐材料",
+      "决赛答辩材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2101,7 +2477,7 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.cagis.org.cn/Lists/content/id/4088.html",
     "cycle": "年度",
     "typical_timeline": {
       "校赛": "",
@@ -2109,7 +2485,11 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "赛题成果数据（空间数据库/分析结果）",
+      "过程文档/成果报告与专题图",
+      "报名与诚信竞赛承诺书"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2121,15 +2501,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://news.ustc.edu.cn/info/1055/52083.htm",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "河北工程大学：'初赛：邀请校内外行业专家进行网络评审，评选出若干优秀作品入围决赛",
+      "复赛": "函评依据初赛评分标准对材料匿名打分，按得分排序确定入围决赛名单（第四届54件入围",
+      "决赛": "第四届（合肥）：38所高校150余名师生；决赛作品分安全实体模型类与安全软件与仿"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "安全实体作品与模型",
+      "安全软件与仿真模拟作品",
+      "报名表与作品简介"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2141,15 +2525,18 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.csfcm.org.cn/site/content/1934.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "主评委为分赛区材料行业突出高校教师，组织4-5名老师形成评审组；第五届评出120",
+      "决赛": "第五届前31名晋级全国总决赛；第八届共47支（本科组27、研究生组20）晋级总决"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "报名信息表与作品申报书",
+      "半决赛盲评版作品材料",
+      "决赛演示材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2161,15 +2548,18 @@
     "category": "理科",
     "pipeline": "L2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://news.dhu.edu.cn/2019/0724/c523a218639/page.htm",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "兰州理工大学等高校设校级初赛、复赛（含理论环节与现场实验）选拔国赛选手",
+      "国赛": "首届（2019，东华大学）34所高校200多名师生参赛；大赛由东华大学发起、获教"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "现场聚合实验成果（聚合物产物）",
+      "实验报告",
+      "参赛信息表与抽签"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2181,15 +2571,18 @@
     "category": "理科",
     "pipeline": "L2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.lit.edu.cn/xcb/info/1007/20232.htm",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "安徽理工大学'联通杯'校赛：5个学院14个专业140余名学生参赛，按卷面评一、二",
+      "决赛": "第四届由中国建筑材料联合会专家委员会主办、其教育与人力资源学部和洛阳理工学院共同"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "预赛答卷（笔试）",
+      "决赛现场答题",
+      "报名表（以校为单位组队）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2209,7 +2602,11 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "固定命题创新作品",
+      "自选题目创新作品",
+      "报名表"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2224,12 +2621,15 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "第七届：93个项目入围决赛（含往年复查），角逐金银奖；决赛暨志愿服务交流会在武汉",
+      "国赛": "大赛由团省委、省委社会工作部、省民政厅、省水利厅、省文旅厅、省卫健委、省残联、武"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "项目申报材料（项目书）",
+      "决赛展示与答辩",
+      "书面评审材料"
+    ],
     "team_rules": "",
     "notes": "公益项目按L1产出计划书，社会价值章节加重"
   },
@@ -2241,7 +2641,7 @@
     "category": "人文语言",
     "pipeline": "E1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.ncac.gov.cn/xxfb/tzgg/202011/t20201116_50495.html",
     "cycle": "年度",
     "typical_timeline": {
       "校赛": "",
@@ -2249,7 +2649,10 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛论文（学术论文）",
+      "原创与授权承诺"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2261,15 +2664,20 @@
     "category": "人文语言",
     "pipeline": "E1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.accaglobal.com.cn/promotion/jhc/2023/",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "2024年起初赛为线上个人赛，参赛者需在约1小时内独立完成",
+      "复赛": "分赛区组织，含案例写作、小组案例分析、现场演讲陈述；设赛区复赛专场（如北京赛区X",
+      "决赛": "设北京、上海、广州、成都、沈阳、长沙等赛区；企业雇主担任评委"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "网申报名材料（个人简历/报名表）",
+      "在线测评/笔试",
+      "案例分析PPT（团队）",
+      "案例写作（部分赛区复赛环节）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2284,12 +2692,16 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "评出全部三等奖及部分二等奖，并推选入围总决赛作品；初赛成绩计入决赛总评",
+      "决赛": "历届于10-11月举行（第十二届2024年11月在重庆理工大学举行）；评出一等奖"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "竞赛设计交付物（设计说明书+设计图纸）",
+      "决赛交付物",
+      "队员变更申请（如适用）",
+      "决赛汇报PPT与壁报"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2309,7 +2721,11 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "实验理论笔试答卷",
+      "实验操作（无机+有机综合实验）",
+      "候选选手名单（参赛校提交）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2323,15 +2739,17 @@
     "category": "程序",
     "pipeline": "L6",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://ccpc.io/",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "由分站赛成绩优秀队伍参加（第十一届总决赛为2026年）；决出总决赛金银铜奖及冠军"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "赛题程序提交",
+      "网络预选赛报名",
+      "纸质资料（允许携带）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2343,15 +2761,18 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://nogstedc.cn/content/100.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "按赛题分组（赛题一每组14个作品、赛题二每组11个），线上抽签定组与顺序；每组第"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "《方案设计书》",
+      "《作品申报书》",
+      "高校参赛报名表/作品推荐汇总表",
+      "决赛答辩PPT+纸质作品书5份+展示海报1张"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2363,15 +2784,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.mysf.org.cn/",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "初赛评审遴选入围决赛队伍",
+      "决赛": "预计9月下旬；历届由高校联合承办（第五届西南交通大学、第六届福州大学、第八届江苏"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "设计说明",
+      "桥梁设计图和计算书",
+      "社会实践材料",
+      "《桥址信息调查表》+参赛报名表"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2383,15 +2808,18 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://edu.weixin.qq.com/contest",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "历届8月举行（2019年于广州）；高校专家与腾讯微信事业群代表联合评审；决出全国"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "原创微信小程序作品（可运行）",
+      "作品介绍/说明材料与演示材料",
+      "决赛路演PPT与现场演示",
+      "报名组队信息"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2403,15 +2831,18 @@
     "category": "理科",
     "pipeline": "L2",
     "organizer": "",
-    "official_url": "",
+    "official_url": "http://www.cmathc.cn/article/147.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "数学类考数学分析+高等代数+解析几何；非数学类考高等数学；由各赛区组委会组织阅卷",
+      "决赛": "获奖总数约为参赛人数的35%以内，一、二、三等约按2:3:5分布（第十二届获奖数"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "初赛（分区赛）答卷",
+      "决赛答卷",
+      "报名信息（以高校为单位）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2423,15 +2854,18 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.car.org.cn/index.php?s=/articles_1855.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "PPT宣讲20分钟＋问答不超过20分钟；评委由高校专家1人＋设计院专家4人组成；"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "设计说明书（含计算书作附件）",
+      "图纸",
+      "计算书",
+      "调研报告（如当年题目要求）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2446,12 +2880,16 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "复赛": "2024年分东部、西部、南部、北部四大片区（5月10日前报送组委会）；2026年",
+      "决赛": "2026年总决赛作品提交5月30日前；全部总决赛作品均获奖，评一、二、三等奖，等"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛报名表",
+      "参赛作品设计文件册（图纸＋作品简介＋效果图等详细资料）",
+      "演示文稿（PPT）",
+      "作品规模与选题"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2466,12 +2904,15 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "第五届邀请通过土木工程学科专业认证的高校，初赛选拔出40支队伍进决赛；第六届42",
+      "决赛": "决赛为期约3天（2025年7月3-5日浙大紫金港；第五届2023年10月29日武"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "初赛/报名阶段：报名表＋设计（计算）报告",
+      "决赛实体模型",
+      "决赛设计报告/方案讲解材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2483,15 +2924,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.thtf.com.cn/detail/2839.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "校赛": "1992年由清华同方倡导并支持设立；主办单位为建环学科教指委（第32届为教育部高",
+      "初赛": "四门课程（工程热力学、传热学、流体力学、建筑环境学）各占1/4；第32届107所",
+      "决赛": "第32届研究生赛道72个作品中7组晋级决赛；第31届决赛2025年8月29日在北"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "本科生赛道：网络选拔赛答题",
+      "研究生赛道：创新创意方案作品",
+      "决赛/颁奖典礼"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2511,7 +2956,12 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "A1设计图纸（本科组2张、专科组1张）",
+      "辅助电子图片（效果图/现状照片/地形图各1张）",
+      "Revit模型（及当年要求的扩展数字成果）",
+      "设计说明文档"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2531,7 +2981,11 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "三张A1展板（设计图纸）",
+      "设计视频（不超过2分钟）",
+      "报名信息"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2543,15 +2997,19 @@
     "category": "创业",
     "pipeline": "L1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.cyctdesign.cn/evaluation.html",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "第十二届科技创新专项含\"未来产业及其他赛道\"等分赛道，2025年9月23-25日",
+      "决赛": "第十二届科技创新专项决赛暨青年创新创业交流分享会2025年11月18-20日在武"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "项目报名信息",
+      "商业计划书/项目计划书",
+      "路演PPT与现场路演答辩",
+      "专项赛作品（视赛道而定）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2566,12 +3024,14 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "国赛": "每年一届；第六届2016年（武汉）、第九届2019年7月21-24日（沈阳）、第"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "实践作品（五类任选）",
+      "作品说明材料",
+      "报名信息"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2583,15 +3043,19 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.delta-china.com.cn/event/deltacup/2022/index.asp",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "初赛": "初赛100分制=方案书80分+知识考核20分；每个区域选出实际参赛队伍数量的25",
+      "决赛": "评选出15支队伍进入冠军争霸赛"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "项目设计方案书（初赛）",
+      "自动化产品知识网络考核",
+      "初赛会评PPT及视频",
+      "决赛提交物"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2603,15 +3067,17 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.caa.org.cn/",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "第五届总决赛2023年9月16-18日举行；按赛道（智能工厂/智能生活/智能设施"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛报名信息",
+      "创意初评方案（参赛项目方案）",
+      "作品与技术材料（总决赛）"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2623,7 +3089,7 @@
     "category": "人文语言",
     "pipeline": "E1",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://www.tac-online.org.cn/2024-01/15/content_42933345.html",
     "cycle": "年度",
     "typical_timeline": {
       "校赛": "",
@@ -2631,7 +3097,10 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "参赛译文（每组别一份）",
+      "报名凭据"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2643,7 +3112,7 @@
     "category": "艺术",
     "pipeline": "L5",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://web.archive.org/web/20250815144043/http://www.yuanyebei.com/index.php?m=YuanYeBei&a=about_stu",
     "cycle": "年度",
     "typical_timeline": {
       "校赛": "",
@@ -2651,7 +3120,12 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "毕业设计类/课程设计类作品",
+      "毕业论文类",
+      "主题竞赛作品",
+      "报名信息"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2666,12 +3140,14 @@
     "official_url": "",
     "cycle": "年度",
     "typical_timeline": {
-      "校赛": "",
-      "省赛": "",
-      "国赛": ""
+      "决赛": "第二十届总决赛暨颁奖典礼2025年6月在南京大学举行；前20强队伍获证书与奖金，"
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "中期报告",
+      "最终报告（作品提交）",
+      "总决赛陈述材料"
+    ],
     "team_rules": "",
     "notes": ""
   },
@@ -2683,7 +3159,7 @@
     "category": "工科",
     "pipeline": "L3",
     "organizer": "",
-    "official_url": "",
+    "official_url": "https://web.archive.org/web/20260810000038/https://www.sampechina.org/",
     "cycle": "年度",
     "typical_timeline": {
       "校赛": "",
@@ -2691,7 +3167,12 @@
       "国赛": ""
     },
     "tracks": [],
-    "deliverables_required": [],
+    "deliverables_required": [
+      "结构试件（机翼/桥梁类赛项）",
+      "设计报告/计算材料",
+      "工程结构创新应用设计赛方案（该赛项）",
+      "学生论文（国际大学生论文大赛）"
+    ],
     "team_rules": "",
     "notes": ""
   }
