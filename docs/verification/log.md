@@ -28,3 +28,32 @@
 - 收口验证：`python docs/verification/verify.py C` → 全部 PASS。
 
 （待续）
+
+## 阶段B 中期记录（2026-09-28）
+
+- 批次 1-6（全★）、7-15、16-24、34-42 已完成并逐份 PASS（validate_rubrics.py），官方权重拿到：1/2/4/6/9/12/14/15/21/23(部分)/34/36/39 等；未公开权重一律标【推断】并写明依据。
+- 中期抽验 005/021/034：官方原文引用充分，★赛事 past_winning_patterns 齐备。
+
+## 阶段D 六线三模块（T4.1–T4.9）— PASS（2026-09-28）
+
+- 九条生产线 SKILL.md 全部按六要素结构（触发/执行步骤/输入/输出/自检清单/协作接口）固化，全部引用 ares-writing-style。
+- T4.1 创业线：references/bp-outline.md 固化附录二十章章节引擎（每节内容要求/纪律引用/数据字段映射/字数区间）；references/financial-params.md 固化财务参数规则。
+- 收口验证：verify.py D → 全部 PASS。
+
+## 阶段E 外围组件（T5.1–T5.3）— PASS（2026-09-28）
+
+- T5.1 六个 Commands：用途/需补充信息/参数说明/触发示例四件套。
+- T5.2 五个 Agents：角色/可用工具/输入输出契约/交接格式，职责无重叠。
+- T5.3 Hook on-project-init：自动三步 + 手动等价指令 + 幂等性。
+- 收口验证：verify.py E → 全部 PASS。
+
+## 阶段G 打包（初版）
+
+- T7.1 plugin.json：16 skills + 6 commands + 5 agents + 1 hooks + data + scripts，v1.0.0。
+- T7.2 docs/跨平台安装说明.md：ZCode/Claude Code/Codex/其他 Harness 四类安装法 + 验证指令。
+- T7.3 发布包：待阶段F全绿后执行。
+
+## 阶段F 端到端真实使用测试（启动）
+
+- 方式：每轮派独立"测试用户"子代理，在隔离沙箱 ares-e2e/roundN/ 以真实用户指令驱动插件，插件目录只读。
+- 第1轮 T6.1 创业赛全流程：运行中。
