@@ -17,6 +17,7 @@ from theme import FONT, SIZES, MARGIN, TITLE_BAND_H, FOOTER_H, SLIDE_W, SLIDE_H
 
 IN = 914400
 OVERFLOWS = []
+NOTES = []   # 版式级提示（如柱状图数值跨度过大），由 build_ppt 汇总打印
 
 
 def In(x):
@@ -153,18 +154,27 @@ def three_columns(slide, theme, c):
     n = len(cols)
     gap = 0.35
     w = (13.333 - 2 * 0.9166 - (n - 1) * gap) / n
+    # 卡片高度自适应内容，避免大面积空置
+    est = []
+    for col in cols:
+        n_lines = sum(max(1, -(-len(str(line)) // 18)) for line in col.get("lines", [])) or 1
+        h = 0.95 + 0.36 * n_lines + (1.0 if col.get("metric") else 0.25)
+        est.append(h)
+    card_h = max(2.2, min(4.9, max(est)))
+    top = 1.7 + max(0.0, (4.9 - card_h) / 2)
     for i, col in enumerate(cols):
         x = 0.9166 + i * (w + gap)
-        _rect(slide, x, 1.7, w, 4.9, theme["light"], shape=MSO_SHAPE.ROUNDED_RECTANGLE)
-        head = _rect(slide, x, 1.7, w, 0.85, theme["primary"], shape=MSO_SHAPE.ROUNDED_RECTANGLE)
+        _rect(slide, x, top, w, card_h, theme["light"], shape=MSO_SHAPE.ROUNDED_RECTANGLE)
+        head = _rect(slide, x, top, w, 0.85, theme["primary"], shape=MSO_SHAPE.ROUNDED_RECTANGLE)
         _para(_tf(head), col["head"], 18, theme["on_primary"], bold=True, align=PP_ALIGN.CENTER, first=True)
-        tb = _box(slide, x + 0.25, 2.75, w - 0.5, 3.0)
+        body_h = card_h - 0.95 - (1.05 if col.get("metric") else 0.25)
+        tb = _box(slide, x + 0.25, top + 0.95, w - 0.5, max(0.5, body_h))
         tf = _tf(tb)
         for j, line in enumerate(col.get("lines", [])):
             _para(tf, line, 14, theme["text"], first=(j == 0))
-        _fit(c["page_no"], "三栏%d" % (i + 1), "\n".join(col.get("lines", [])), w - 0.5, 3.0, 14)
+        _fit(c["page_no"], "三栏%d" % (i + 1), "\n".join(col.get("lines", [])), w - 0.5, max(0.5, body_h), 14)
         if col.get("metric"):
-            m = _box(slide, x + 0.25, 5.65, w - 0.5, 0.8)
+            m = _box(slide, x + 0.25, top + card_h - 0.95, w - 0.5, 0.8)
             _para(_tf(m), col["metric"], 24, theme["accent"], bold=True, align=PP_ALIGN.CENTER, first=True)
 
 
@@ -183,6 +193,10 @@ def _chart_note(slide, theme, c, chart):
 
 def chart_bar(slide, theme, c):
     page_chrome(slide, theme, c["title"], c["page_no"], c["total"], c["project_name"])
+    values = [abs(v) for v in c["values"] if v]
+    if values and max(values) / max(min(values), 1e-9) >= 50:
+        NOTES.append("第%d页柱状图数值跨度超过50倍（疑混用量纲），建议改用对比矩阵或拆分指标"
+                     % c["page_no"])
     data = CategoryChartData()
     data.categories = c["categories"]
     data.add_series(c["series_name"], c["values"])
@@ -399,21 +413,26 @@ def quadrant(slide, theme, c):
 def team_cards(slide, theme, c):
     page_chrome(slide, theme, c["title"], c["page_no"], c["total"], c["project_name"])
     members = c["members"]  # [(姓名, 角色, 一句话贡献)]
-    n = len(members)
+    n = max(1, len(members))
     gap = 0.3
     w = (13.333 - 2 * 0.9166 - (n - 1) * gap) / n
+    w = min(w, 3.4)  # 少数成员时限制卡宽并居中，避免单卡空旷
+    total_w = n * w + (n - 1) * gap
+    x0 = (13.333 - total_w) / 2
+    card_h = 3.9
+    top = 1.9 + max(0.0, (4.5 - card_h) / 2)
     for i, (name, role, contrib) in enumerate(members):
-        x = 0.9166 + i * (w + gap)
-        _rect(slide, x, 1.9, w, 4.5, theme["light"], shape=MSO_SHAPE.ROUNDED_RECTANGLE)
-        avatar = _rect(slide, x + w / 2 - 0.55, 2.25, 1.1, 1.1, theme["primary"], shape=MSO_SHAPE.OVAL)
+        x = x0 + i * (w + gap)
+        _rect(slide, x, top, w, card_h, theme["light"], shape=MSO_SHAPE.ROUNDED_RECTANGLE)
+        avatar = _rect(slide, x + w / 2 - 0.55, top + 0.35, 1.1, 1.1, theme["primary"], shape=MSO_SHAPE.OVAL)
         _para(_tf(avatar), name[:1] if name else "?", 28, theme["on_primary"], bold=True,
               align=PP_ALIGN.CENTER, first=True)
-        tb = _box(slide, x + 0.15, 3.55, w - 0.3, 2.6)
+        tb = _box(slide, x + 0.15, top + 1.65, w - 0.3, 2.1)
         tf = _tf(tb)
         _para(tf, name, 18, theme["text"], bold=True, align=PP_ALIGN.CENTER, first=True)
         _para(tf, role, 13, theme["accent"], bold=True, align=PP_ALIGN.CENTER)
         _para(tf, contrib, 12, theme["muted"], align=PP_ALIGN.CENTER)
-        _fit(c["page_no"], "成员%s" % name, contrib, w - 0.3, 1.4, 12)
+        _fit(c["page_no"], "成员%s" % name, contrib, w - 0.3, 1.1, 12)
 
 
 # ---------------------------------------------------------------- 14 里程碑+数据组合

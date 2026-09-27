@@ -23,6 +23,7 @@ from pptx import Presentation
 from pptx.util import Emu
 
 import layouts
+import layouts
 from layouts import LAYOUTS, OVERFLOWS
 from theme import SLIDE_H, SLIDE_W, THEMES, pick_theme
 
@@ -134,11 +135,11 @@ def default_outline(p):
     pages.append({"layout": "architecture", "title": "一套架构支撑全链路服务",
                   "layers": [("感知层", ["传感器/数据接入", "边缘采集"]), ("算法层", ["核心算法", "模型训练", "推理引擎"]),
                              ("应用层", feats[:3] + ["管理后台"])]})
-    pages.append({"layout": "chart_bar", "title": "关键指标全面领先对标方案",
-                  "categories": [str(m.get("metric", "指标%d" % (i + 1))) for i, m in enumerate(metrics[:4])] or ["指标"],
-                  "series_name": "实测值",
-                  "values": [_num_or(m.get("value")) for m in metrics[:4]] or [0],
-                  "note_lines": ["%s：%s" % (_flat(m.get("metric")), _flat(m.get("value"))) for m in metrics[:4]],
+    ms = metrics[:5]
+    pages.append({"layout": "comparison_matrix", "title": "关键指标全面领先对标方案",
+                  "dimensions": [_flat(m.get("metric"), "指标%d" % (i + 1))[:12] for i, m in enumerate(ms)] or ["指标"],
+                  "columns": [("本项目", True, [_flat(m.get("value"), "—") for m in ms]),
+                               ("对标方案", False, [_flat(m.get("benchmark"), "—") for m in ms])],
                   "conclusion": "所有指标来自实测，测试方法与样本见计划书技术章节"})
     pages.append({"layout": "flow_chain", "title": "从部署到告警只需三步",
                   "steps": [("部署", "即装即用"), ("学习", "7天场景建模"), ("守护", "全天候在线")],
@@ -254,6 +255,10 @@ def render(profile_path, out_path, outline_path=None, theme_name="auto"):
     print("已生成 %s（%d 页，主题：%s）" % (out_path, total, theme["name"]))
     for line in report:
         print("  " + line)
+    if layouts.NOTES:
+        print("版式提示 %d 条：" % len(layouts.NOTES))
+        for n in layouts.NOTES:
+            print("  △ " + n)
     if OVERFLOWS:
         print("溢出风险 %d 处：" % len(OVERFLOWS))
         for o in OVERFLOWS:
