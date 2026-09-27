@@ -77,10 +77,13 @@ def scan(path, strict=False, allow_questions=False):
             if w in t:
                 violations.append("第%d段 命中泛泛表述「%s」：%s" % (idx, w, t[:50]))
         if not is_heading:
+            # 短行（封面主/副标题等）不参与标点密度统计，避免误伤获奖标题惯用的破折号
+            short_line = len(t) <= 20
             body_chars += len(t)
-            body_dashes += len(DASH_RE.findall(t))
-            body_quotes += len(QUOTE_RE.findall(t))
-            body_colons += t.count("：") + t.count(":")
+            if not short_line:
+                body_dashes += len(DASH_RE.findall(t))
+                body_quotes += len(QUOTE_RE.findall(t))
+                body_colons += t.count("：") + t.count(":")
             if not allow_questions:
                 for w in BANNED_QUESTIONS:
                     if w in t:

@@ -185,6 +185,26 @@ def main(argv):
         return 2
     data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
     missing, warnings = validate(profile, data_dir)
+
+    # 非商业类生产线（L2建模/L5艺术/L6程序/E1人文/E2技能/E3模拟纯训练）：
+    # 商业性字段降级为警告，避免调研类项目被迫填"不适用"
+    pipeline = None
+    try:
+        tracks = json.load(io.open(os.path.join(data_dir, "tracks.json"), encoding="utf-8"))["entries"]
+        cid = (profile.get("competition") or {}).get("id")
+        for e in tracks:
+            if e.get("competition_id") == cid:
+                pipeline = e.get("pipeline")
+                break
+    except (ValueError, KeyError, OSError):
+        pass
+    if pipeline in ("L2", "L5", "L6", "E1", "E2"):
+        biz_prefixes = ("financials.", "business_model.", "competitors", "advantages")
+        downgraded = [m for m in missing if m.startswith(biz_prefixes)]
+        if downgraded:
+            missing = [m for m in missing if not m.startswith(biz_prefixes)]
+            warnings.append("非商业类生产线（%s）跳过商业性必填项 %d 个：%s"
+                            % (pipeline, len(downgraded), "、".join(downgraded)))
     if quiet:
         print("[PASS]" if not missing else "[FAIL] 缺失 %d 项" % len(missing))
     else:

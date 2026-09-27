@@ -5,7 +5,7 @@ consistency_check.py — Ares 跨文件关键数字一致性扫描（ares-judge 
 用法：
     python consistency_check.py <产出目录或文件...> --profile <project.json>
 
-扫描对象：.docx / .pptx / .xlsx / .md / .html / .txt
+扫描对象：.docx（含表格）/ .pptx（含表格）/ .xlsx / .md / .html / .txt
 
 核对逻辑：从 project.json 提取关键数字（团队人数、专利数、试点数、获奖数、性能指标、
 起始营收、市场规模三值），在产出物文本中按句检索：

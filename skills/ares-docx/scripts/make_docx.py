@@ -170,7 +170,7 @@ def add_formula(doc, chapter_no, eq_no, formula, note=""):
     p = doc.add_paragraph()
     p.paragraph_format.first_line_indent = None
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    _set_font(p.add_run(formula + "        (%d-1)" % chapter_no), "宋体", 12)
+    _set_font(p.add_run(formula + "        (%d-%d)" % (chapter_no, eq_no)), "宋体", 12)
     if note:
         p2 = doc.add_paragraph()
         _set_font(p2.add_run(note), "宋体", 12)

@@ -543,23 +543,6 @@
       "notes": "任务制对抗，任务策略书重要"
     },
     {
-      "track_id": "T030",
-      "competition_id": 21,
-      "competition_name": "市场调查与分析大赛",
-      "track": "默认赛道",
-      "pipeline": "L4",
-      "default_deliverables": [
-        "01-调研问卷.docx",
-        "02-样本数据(DEMO标注)/",
-        "03-分析代码/",
-        "04-分析报告.docx",
-        "05-答辩PPT.pptx",
-        "06-数据真实性清单.md"
-      ],
-      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
-      "notes": ""
-    },
-    {
       "track_id": "T031",
       "competition_id": 22,
       "competition_name": "“西门子杯”智能制造挑战赛",
@@ -2885,6 +2868,40 @@
       ],
       "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
       "notes": ""
+    },
+    {
+      "track_id": "T161",
+      "competition_id": 21,
+      "competition_name": "市场调查与分析大赛",
+      "track": "本科组",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": "本科生队，知识赛网考+省赛盲评+总决赛报告与答辩"
+    },
+    {
+      "track_id": "T162",
+      "competition_id": 21,
+      "competition_name": "市场调查与分析大赛",
+      "track": "研究生组",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": "研究生队，单独排名评奖，流程同本科组"
     }
   ]
 }
