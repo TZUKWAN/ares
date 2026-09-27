@@ -1,0 +1,182 @@
+{
+ "competition_id": 83,
+ "competition_name": "美国大学生数学建模竞赛",
+ "judging_dimensions": [
+  {
+   "dimension": "Summary Sheet（摘要页质量）",
+   "weight": "初评决定性维度（约25%，triage主要依据）【推断】",
+   "official_wording": "COMAP官方MCM竞赛说明原文：'The summary is an essential part of your MCM/ICM paper and should appear as the first page of your solution report. The judges place considerable weight on the summary, and winning papers are often distinguished from other papers based on the quality of the summary.'初评分档权重为【推断：由'triage轮评委每篇仅数分钟、主要读摘要'的评审惯例（COMAP评委培训及UMAP Journal评委评语）推定】。",
+   "scoring_points": [
+    "一页以内：重述问题并澄清模糊概念、给出关键假设、建模思路、主要结果（带具体数字）、敏感性分析结论、优缺点自评",
+    "让评委不读全文即可复述你的模型与结论",
+    "逻辑链完整（问题-假设-模型-结果-结论），使用逻辑词衔接而非整段加粗",
+    "摘要必须最后写；照抄问题重述或与正文脱节是典型弱摘要"
+   ],
+   "common_deductions": [
+    "摘要只复述题目、无方法与定量结果（triage直接出局的最常见原因）",
+    "摘要超一页",
+    "摘要结论与正文结果不一致"
+   ]
+  },
+  {
+   "dimension": "假设与建模（Assumptions & Justification / Model）",
+   "weight": "约35%（模型合理性约30%+创造性约5%）【推断】",
+   "official_wording": "官方说明原文：'MCM/ICM judges are primarily interested in the team's thought processes, analysis of the problem, modeling approaches, and mathematical methods'，并要求'State and justify reasonable assumptions that bear on the problem'。中文圈通行'假设的合理性、建模的创造性'两维来自全国大学生数学建模竞赛评审原则的同构迁移（mcmicm.org.cn给出'模型合理性30%'等口径，属第三方转述）；百分比归并为【推断：参照AMS JMM 2021 MCM总监报告公开评分表（Executive Summary/Assumptions & Justification/Model-Value Added等栏）与UMAP Journal评委评语推定】。",
+   "scoring_points": [
+    "假设必要、合理、逐条给出依据，并说明其对模型的影响",
+    "模型选择有motivation：为何适用、与问题结构匹配",
+    "方法灵活开放、不限于单一套路；O奖常体现多模型互补或递进（从简单基准到改进模型）",
+    "MCM A题偏连续/微分方程、B题偏离散/运筹、C题偏数据分析，方法须与题型匹配"
+   ],
+   "common_deductions": [
+    "假设无依据清单式罗列、假设与模型脱节",
+    "直接套模板模型（如万能用神经网络/层次分析法）无针对性",
+    "模型与数据错配：C题不清洗数据、乱用黑箱模型不可解释"
+   ]
+  },
+  {
+   "dimension": "结果、检验与敏感性分析",
+   "weight": "约25%【推断】",
+   "official_wording": "官方说明要求'Present an analysis of the problem, motivating or justifying the model being used'并提交'analysis of your findings'；'Solutions are judged as varying degrees of successfully completing the contest'。UMAP Journal评委评语反复强调'better submissions explicitly discussed why key assumptions were made and how assumptions affected the model...stronger submissions presented...'敏感性检验；权重为【推断】。",
+   "scoring_points": [
+    "回答题目全部要求的问题（完整响应所有子问题）",
+    "结果给出定量答案并做合理性讨论",
+    "敏感性分析/误差分析/稳定性检验：说明结论对关键参数的依赖",
+    "给出模型优缺点（strengths and weaknesses）与改进方向"
+   ],
+   "common_deductions": [
+    "漏答子问题、只解第一问",
+    "结果无检验、数字来源不可复现",
+    "敏感性分析流于形式（只改一步画一张图）"
+   ]
+  },
+  {
+   "dimension": "表述清晰度（Exposition）与规范",
+   "weight": "约15%【推断】",
+   "official_wording": "官方要求全英文、至少12号可读字体、每页页眉含队号与页码、不出现任何身份信息；'MCM/ICM judges are primarily interested in the team's thought processes...'暗示表述承载思维展示。权重为【推断：参照评委评语'清晰完整回应所有要求'的重要程度推定】。",
+   "scoring_points": [
+    "结构规范：Summary Sheet、目录、问题重述、假设、符号说明、模型、求解、检验、优缺点、结论、参考文献、附录",
+    "图表专业自明：编号、标题、轴标签齐全，图优于表、表优于大段文字",
+    "全文无学校/姓名信息，仅以控制号（Control Number）标识",
+    "如实申报AI使用：文末附Report on Use of AI（不计入25页）"
+   ],
+   "common_deductions": [
+    "全文排版混乱、图表无编号或模糊",
+    "论文中出现姓名/学校等身份信息（违规划入Disqualified风险）",
+    "使用AI未申报，或整段AI生成内容被查重判抄袭"
+   ]
+  }
+ ],
+ "deliverable_requirements": [
+  {
+   "item": "完整论文（含Summary Sheet）",
+   "format": "Adobe PDF电子文件，英文，≥12号可读字体，全文≤25页（摘要、正文、附录、代码、参考文献全部计入），文件以队号命名（如0000000.pdf），≤25MB",
+   "page_limit": "25页（含一切）；AI使用报告附后不计页数",
+   "deadline_note": "赛期约4天（2026年为2月9-13日）；美东时间截止日晚9点前经官网提交"
+  },
+  {
+   "item": "Summary Sheet",
+   "format": "论文第一页，一页摘要，含队号、题号、摘要全文",
+   "page_limit": "1页",
+   "deadline_note": "随论文同时提交"
+  },
+  {
+   "item": "Report on Use of AI",
+   "format": "列于参考文献后的AI使用申报章节",
+   "page_limit": "不计入25页",
+   "deadline_note": "随论文同时提交"
+  },
+  {
+   "item": "提交确认",
+   "format": "官网在线提交系统",
+   "page_limit": "未明确",
+   "deadline_note": "逾期不受理；提交后不可更改"
+  }
+ ],
+ "process_stages": [
+  {
+   "stage": "报名组队",
+   "format": "指导教师经官网注册，团队1-3人同校组队，缴费后获取控制号",
+   "notes": "赛前数周截止；MCM/ICM合并称'美赛'，按题分组：MCM为A/B/C题，ICM为D/E/F题"
+  },
+  {
+   "stage": "比赛期（约96小时）",
+   "format": "线上自主选题作答，任选A-F一题，期间可查资料但队内独立完成",
+   "notes": "2月上旬举行；下载赛题、建模、写作、提交一体完成"
+  },
+  {
+   "stage": "评审（多轮triage）",
+   "format": "初审triage评委快速分档（重点读摘要与结构）→ 复评细读打分 → 终审：O奖须经全体评委、竞赛总监与执行总监一致认可",
+   "notes": "数轮'持续评审'；COMAP不提供复议（no rejudge）"
+  },
+  {
+   "stage": "放榜与发表",
+   "format": "官网公布各题Outstanding名单及特设奖（SIAM、INFORMS、ASA、Frank Giordano等），O奖论文收录于UMAP Journal'专家评语'",
+   "notes": "约赛后2-3个月（2026届结果5月8-9日公布）"
+  }
+ ],
+ "review_format": "全球统一英文论文盲评：多轮triage筛选按Successful Participant→Honorable Mention→Meritorious→Finalist→Outstanding分档，O奖需评审层全票一致认可。",
+ "judge_preferences": [
+  "摘要是生死线：评委每篇初评时间极短（常≤10分钟），摘要须自含完整方法与定量结论",
+  "偏爱完整、自洽、可复现的工作而非炫技：回答全部子问题+敏感性分析+优缺点反思",
+  "假设要给出理由并讨论其影响，模型选择要有动机",
+  "图表达专业、论文结构清晰；OM奖论文常被作为范文展示图表叙事",
+  "方法与题型匹配：C题重数据清洗、可视化与统计/机器学习合理性，A/B题重机理建模与优化"
+ ],
+ "past_winning_patterns": [
+  "O奖率仅约0.1%-0.2%（业内常引0.14%-0.16%），F奖紧随其后；O奖论文均为'摘要-建模-检验-写作'四强俱佳的全面型，无短板",
+  "近三年O奖选题分布：2024年A题'资源可得性与海七鳃鳗性别比'（生态机理+微分方程/概率模型）、B题'搜寻失联潜艇'（贝叶斯搜索/最优化）、C题'网球动量'（温网数据+序列分析），2025年C题'奥运奖牌表建模'（外推2028洛杉矶：分层/贝叶斯/组合预测），以O奖夺冠的论文普遍给出多模型对比+敏感性检验+清晰可视化",
+  "O奖论文普遍结构完整：一页强摘要（含具体数字结论）、假设逐条论证、模型递进（简单基准→改进模型）、敏感性分析、明确的Strengths & Weaknesses一节",
+  "C题（数据洞察）O奖极重视数据清洗透明度与图表质量；A/B题O奖重视机理推导与求解方法论证；F/E等ICM政策题O奖重视政策建议的可操作性与模型支撑",
+  "近年O奖中中国队占比高，且特设奖（SIAM/INFORMS/ASA/Frank Giordano）常与O奖同队产生；获奖论文全部公开于COMAP与UMAP Journal，备赛可精读近三年各题O奖范文提炼图表与摘要写法",
+  "合规成为硬门槛：2024年起强制AI使用报告，查重趋严，O奖论文均规范申报AI辅助且正文原创性高"
+ ],
+ "forbidden_or_risky": [
+  "不得在论文任何位置出现姓名、学校等身份信息，仅以控制号标识",
+  "与他人讨论赛题、求助校外人员代做、购买论文属违规，可判Disqualified/Unsuccessful",
+  "使用AI必须如实申报（Report on Use of AI），未申报或全文AI生成按学术不端处理",
+  "超过25页限制、摘要超1页、非PDF或超25MB可能影响评审或被判不合格",
+  "COMAP不接受改判申请（no rejudge），违规认定以官方终裁为准"
+ ],
+ "sources": [
+  {
+   "title": "COMAP官方——MCM: The Mathematical Contest in Modeling（竞赛说明：摘要页、25页限制、评审口径、奖项等级）",
+   "url": "https://www.contest.comap.com/undergraduate/contests/mcm/instructions.php",
+   "accessed": "2026-09-28",
+   "authority": "A"
+  },
+  {
+   "title": "COMAP——MCM/ICM Info Session Recording, Resources & FAQs（多轮评审、不改判）",
+   "url": "https://www.comap.org/blog/item/mcm-icm-info-session-recording-resources-faqs",
+   "accessed": "2026-09-28",
+   "authority": "A"
+  },
+  {
+   "title": "AMS JMM 2021——MCM Director's Overview（公开评分表：Executive Summary/Assumptions & Justification/Model-Value Added等）",
+   "url": "https://meetings.ams.org",
+   "accessed": "2026-09-28",
+   "authority": "B"
+  },
+  {
+   "title": "The UMAP Journal Vol.33 No.3（2012 O奖论文与评委评语：假设论证与敏感性分析的评委标准）",
+   "url": "https://www.scribd.com/document/332/Umap-journal-vol33",
+   "accessed": "2026-09-28",
+   "authority": "B"
+  },
+  {
+   "title": "知乎专栏——美赛的O/F/M奖都是怎么评出来的？评审到底看什么？",
+   "url": "https://zhuanlan.zhihu.com",
+   "accessed": "2026-09-28",
+   "authority": "C"
+  },
+  {
+   "title": "mcmicm.org.cn——美赛获奖价值与2026规则变化（四维度权重口径，第三方转述）",
+   "url": "https://mcmicm.org.cn",
+   "accessed": "2026-09-28",
+   "authority": "C"
+  }
+ ],
+ "confidence": "high",
+ "last_updated": "2026-09-28",
+ "notes": "官方（COMAP instructions/FAQ）明确：摘要页权重'considerable weight'、25页上限、五级奖项、评委关注思维过程/问题分析/建模方法/数学方法、AI申报要求、多轮评审不改判。四维惯例（假设合理性/建模创造性/结果正确性/表述清晰度）源自全国大学生数学建模竞赛评审原则的通行迁移，为业界共识但非COMAP明文；各维度百分比除摘要页定性地位外均为【推断】，其中mcmicm.org.cn'模型合理性30%'为第三方口径仅作参照。O奖率0.1%-0.2%为多来源（CSDN、知乎、高校新闻）一致数字。近三年赛题中2024 A/B/C与2025 C经英文文献（ResearchGate、Scribd）核实，2026届（2月9-13日比赛、5月8-9日放榜）以COMAP官网结果页为准。"
+}

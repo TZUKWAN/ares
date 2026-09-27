@@ -120,15 +120,19 @@ def collect(paths):
 
 
 def candidates(nums, unit):
-    """按档案单位筛选句内可比数字，避免同句其他论断数字的交叉误报。"""
-    if unit in ("人", "项", "万", "亿", "%"):
-        return [v for (v, u) in nums if u == unit]
+    """按档案单位筛选句内可比数字，避免同句其他论断数字的交叉误报。
+    nums: [(value, unit, followed_by_ascii)]"""
+    if unit:
+        # 任意显式单位（人/项/万/亿/%/元/个百分点…）精确匹配
+        return [v for (v, u, _s) in nums if u == unit]
     # 无单位约束（试点类）：优先 个/家/件
-    picked = [v for (v, u) in nums if u in ("个", "家", "件")]
+    picked = [v for (v, u, _s) in nums if u in ("个", "家", "件")]
     if picked:
         return picked
-    if len(nums) == 1 and nums[0][1] is None:
-        return [nums[0][0]]
+    # 裸数字兜底（仅当句内唯一）：排除年份与后跟ASCII字母的型号数（60GHz/5G/3.2s）
+    bare = [v for (v, u, suf) in nums if u is None and not suf and not (1900 <= v <= 2100)]
+    if len(nums) == 1 and bare:
+        return bare
     return []
 
 
@@ -152,6 +156,9 @@ def main(argv):
     print("扫描 %d 个文件，核对 %d 项关键数字。" % (len(docs), len(claims)))
     mismatches, warnings = [], []
     for name, value, unit, note, keywords, required in claims:
+        if value == 0:
+            warnings.append("%s（%s）档案值为 0，跳过比对（无相关成果是合法状态）" % (name, note))
+            continue
         is_metric = name.startswith("metric:")
         metric_name = name.split(":", 1)[1] if is_metric else None
         found_any = False
@@ -166,8 +173,9 @@ def main(argv):
                 nums = []
                 for m in NUM_RE.finditer(sent):
                     u = UNIT_ALIASES.get(m.group(2), m.group(2))
+                    nxt = sent[m.end():m.end() + 1]
                     try:
-                        nums.append((float(m.group(1)), u))
+                        nums.append((float(m.group(1)), u, bool(nxt and re.match(r"[A-Za-z]", nxt))))
                     except ValueError:
                         continue
                 for num in candidates(nums, unit):

@@ -26,6 +26,8 @@ ID_RE = re.compile(r"id\s*=\s*[\"']([^\"']+)[\"']", re.IGNORECASE)
 CLASS_RE = re.compile(r"class\s*=\s*[\"']([^\"']+)[\"']", re.IGNORECASE)
 ONCLICK_RE = re.compile(r"onclick\s*=", re.IGNORECASE)
 LISTENER_RE = re.compile(r"addEventListener\(\s*['\"]click['\"]|\.onclick\s*=", re.IGNORECASE)
+SCRIPT_BODY_RE = re.compile(r"<script\b[^>]*>(.*?)</script>", re.IGNORECASE | re.DOTALL)
+JS_NAV_RE = re.compile(r"(?:location\.href|window\.location(?:\.href)?|window\.open|location\.assign)\s*[=(]\s*['\"]([^'\"?]+)", re.IGNORECASE)
 
 
 def collect_html_files(root):
@@ -64,7 +66,6 @@ def main(argv):
             if f.lower().endswith(".js"):
                 js_text += io.open(os.path.join(base, f), encoding="utf-8", errors="replace").read()
     has_listener_js = bool(LISTENER_RE.search(js_text))
-
     problems = []
     all_pages = {os.path.relpath(h, root).replace("\\", "/").lower() for h in htmls}
     linked_pages = set()
@@ -123,6 +124,12 @@ def main(argv):
                 if raw.strip().startswith(("http://", "https://", "mailto:", "tel:")):
                     continue
                 t = resolve_link(rel, raw)
+                if t and t in all_pages:
+                    targets.add(t)
+            # 内联 <script> 与 onclick 中的 JS 跳转（location.href/window.open 等）计入可达性
+            inline_js = "".join(SCRIPT_BODY_RE.findall(text))
+            for nav in JS_NAV_RE.findall(inline_js):
+                t = resolve_link(rel, nav)
                 if t and t in all_pages:
                     targets.add(t)
             link_map[rel] = targets

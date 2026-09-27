@@ -156,6 +156,16 @@ def validate(profile, data_dir=None):
                             "competition.name=%r 与主库 %r 不一致" % (comp["name"], match["name"]))
             except (ValueError, KeyError) as e:
                 warnings.append("competitions.json 无法解析：%s" % e)
+        tracks_path = os.path.join(data_dir, "tracks.json")
+        if os.path.exists(tracks_path) and comp.get("id") is not None and comp.get("track"):
+            try:
+                tracks = json.load(io.open(tracks_path, encoding="utf-8"))["entries"]
+                valid = {e["track"] for e in tracks if e["competition_id"] == comp["id"]}
+                if valid and comp["track"] not in valid:
+                    warnings.append("competition.track=%r 不在该赛事 tracks.json 赛道列表 %s 中"
+                                    % (comp["track"], sorted(valid)))
+            except (ValueError, KeyError) as e:
+                warnings.append("tracks.json 无法解析：%s" % e)
     return missing, warnings
 
 

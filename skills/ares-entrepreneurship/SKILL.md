@@ -24,6 +24,8 @@ description: Ares 竞赛插件 L1 创业竞赛生产线。中国国际大学生�
 
 01-商业计划书.docx ｜ 02-财务三表.xlsx ｜ 03-路演PPT.pptx ｜ 04-项目原型/ ｜ 05-源代码/ ｜ 06-演示数据/ ｜ 07-路演讲稿-8分钟.docx ｜ 07-路演讲稿-5分钟.docx ｜ 08-答辩QA预案.docx ｜ 09-一分钟VCR脚本.docx（可选）｜ 10-评审报告.md ｜ 11-数据真实性清单.md
 
+注：赛事 rubric 的 deliverable_requirements 若要求额外提交物（如一分钟VCR、佐证材料视频、查重报告），以 rubric 为准增补进交付清单并在交付说明中标注来源（rubrics/NNN.json）。章节字数用 `python <插件目录>/scripts/count_words.py 01-商业计划书.docx` 对照 bp-outline.md 区间自查。
+
 ## 四、输入输出契约
 
 - 输入：project.json（数字唯一来源）、rubric 权重。

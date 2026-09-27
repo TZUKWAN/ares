@@ -34,6 +34,27 @@ def _f(x):
         return 0.0
 
 
+def _flat(v, fallback=""):
+    """把档案里任意结构（字符串/列表/字典/数字）摊平成可上页的干净文本，杜绝 repr/json 痕迹。"""
+    if v is None:
+        return fallback
+    if isinstance(v, str):
+        return v.strip() or fallback
+    if isinstance(v, bool):
+        return str(v)
+    if isinstance(v, (int, float)):
+        return str(v)
+    if isinstance(v, list):
+        parts = [_flat(x) for x in v]
+        parts = [p for p in parts if p]
+        return "；".join(parts) if parts else fallback
+    if isinstance(v, dict):
+        parts = [_flat(x) for x in v.values()]
+        parts = [p for p in parts if p]
+        return "；".join(parts) if parts else fallback
+    return str(v)
+
+
 def _finance_series(profile, years_out):
     fin = profile.get("financials", {})
     rev0 = _f(fin.get("revenue_start_wan")) or 200.0
@@ -56,8 +77,9 @@ def _finance_series(profile, years_out):
     revs, profits, labels = [], [], []
     rev = rev0
     for i in range(years):
+        ramp = 0.6 + 0.4 * (i / max(1, years - 1))   # 与 build_financials 同口径：首年60%爬坡到100%
         revs.append(round(rev, 1))
-        profits.append(round(rev * base_margin, 1))
+        profits.append(round(rev * base_margin * ramp, 1))
         labels.append("第%d年" % (i + 1))
         rev *= (1 + growth)
     years_out.extend(labels)
@@ -93,7 +115,7 @@ def default_outline(p):
                   "columns": [
                       {"head": "机会", "lines": [str(market.get("tam", "")), str(market.get("growth", ""))]},
                       {"head": "方案", "lines": [p.get("one_liner", "")]},
-                      {"head": "壁垒", "lines": [str(p.get("advantages", [""])[:1])] if p.get("advantages") else [""]}]})
+                      {"head": "壁垒", "lines": [_flat(p.get("advantages"), "核心优势见后页")[:60]]}]})
     pages.append({"layout": "chart_bar", "title": "千亿市场正在以两位数速度扩张",
                   "categories": ["TAM 总市场", "SAM 可服务", "SOM 初期可获得"],
                   "series_name": "市场规模（亿元）",
@@ -116,7 +138,7 @@ def default_outline(p):
                   "categories": [str(m.get("metric", "指标%d" % (i + 1))) for i, m in enumerate(metrics[:4])] or ["指标"],
                   "series_name": "实测值",
                   "values": [_num_or(m.get("value")) for m in metrics[:4]] or [0],
-                  "note_lines": [str(json.dumps(m, ensure_ascii=False))[:80] for m in metrics[:4]],
+                  "note_lines": ["%s：%s" % (_flat(m.get("metric")), _flat(m.get("value"))) for m in metrics[:4]],
                   "conclusion": "所有指标来自实测，测试方法与样本见计划书技术章节"})
     pages.append({"layout": "flow_chain", "title": "从部署到告警只需三步",
                   "steps": [("部署", "即装即用"), ("学习", "7天场景建模"), ("守护", "全天候在线")],
@@ -126,9 +148,9 @@ def default_outline(p):
                   "kpis": [[str(len(ach.get("patents", []))) + " 项", "专利"], [str(len(ach.get("pilots", []))) + " 个", "试点"],
                            [str(len(ach.get("awards", []))) + " 项", "奖项"]]})
     pages.append({"layout": "three_columns", "title": "三重壁垒随时间越挖越深",
-                  "columns": [{"head": "技术壁垒", "lines": [str(a) for a in p.get("advantages", [])[:1]]},
+                  "columns": [{"head": "技术壁垒", "lines": [_flat(p.get("advantages"), "核心算法领先")[:80] or "核心算法领先"]},
                               {"head": "数据壁垒", "lines": ["场景数据持续积累"]},
-                              {"head": "生态壁垒", "lines": [str(ach.get("partners", "") or "合作网络")]},
+                              {"head": "生态壁垒", "lines": [_flat(ach.get("partners"), "合作网络持续扩大")[:80] or "合作网络持续扩大"]},
                               ]})
     pages.append({"layout": "comparison_matrix", "title": "和竞品同台对比，我们赢得干净利落",
                   "dimensions": ["核心性能", "成本", "部署难度", "服务"],
@@ -140,7 +162,7 @@ def default_outline(p):
                   "categories": [str(r) for r in (biz.get("revenue_streams", []) or ["硬件", "服务"])],
                   "series_name": "收入占比",
                   "values": [60, 40][:max(1, len(biz.get("revenue_streams", []) or []))] or [60, 40],
-                  "note_lines": [str(biz.get("pricing", ""))[:100]],
+                  "note_lines": [_flat(biz.get("pricing"), "定价体系见计划书")[:100]],
                   "conclusion": "毛利率高于行业均值，第二曲线占比逐季提升"})
     pages.append({"layout": "three_columns", "title": "线下沉、上协同，获客成本持续下降",
                   "columns": [{"head": "渠道", "lines": ["社区网格化地推", "行业协会渠道"]},
@@ -165,7 +187,7 @@ def default_outline(p):
     pages.append({"layout": "three_columns", "title": "商业价值之上，是不可替代的社会价值",
                   "columns": [{"head": "就业", "lines": [str(social.get("employment", ""))]},
                               {"head": "教育", "lines": [str(social.get("education", ""))]},
-                              {"head": "行业", "lines": [str(social.get("others", "") or "")]}]})
+                              {"head": "行业", "lines": [_flat(social.get("others"), "行业价值见计划书")[:80]]}]})
     pages.append({"layout": "closing", "title": "", "slogan": p.get("slogan", ""),
                   "thanks": "感谢聆听，恳请各位评委专家批评指正",
                   "contact": comp.get("name", "")})
@@ -210,6 +232,7 @@ def render(profile_path, out_path, outline_path=None, theme_name="auto"):
         pages = default_outline(p)
     theme_key = theme_name if theme_name != "auto" else pick_theme(p)
     theme = THEMES[theme_key]
+    del layouts.OVERFLOWS[:]
     prs = Presentation()
     prs.slide_width = Emu(SLIDE_W)
     prs.slide_height = Emu(SLIDE_H)

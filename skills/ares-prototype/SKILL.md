@@ -32,7 +32,7 @@ description: Ares 竞赛插件多页 HTML 原型系统生成技能。创业/工�
 1. 从 project.json 提取功能点与痛点，规划页面地图（每功能至少一页）。
 2. 按 design-system.md 搭 assets（css/js/data）。
 3. 逐页生成 HTML，导航互通，接模拟数据流转。
-4. 运行死链扫描：`python skills/ares-prototype/scripts/scan_prototype.py <原型目录>`，全部 a/button 有归宿才通过。
+4. 运行死链扫描：`python skills/ares-prototype/scripts/scan_prototype.py <原型目录>`，全部 a/button 有归宿才通过。扫描口径：按钮绑定认可 onclick 属性与 JS 脚本（内联 `<script>` 与外部 .js 均计）中对按钮 id/class 的 click 监听；页面可达性同时计入 `<a href>` 与 JS 跳转（location.href/window.open 等）。
 5. 写 原型导览.md 并与实际页面核对。
 
 ## 五、输出
