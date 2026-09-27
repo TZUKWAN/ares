@@ -74,7 +74,13 @@ def extract_texts(paths):
         try:
             if ext == ".docx":
                 from docx import Document
-                yield p, "\n".join(par.text for par in Document(p).paragraphs)
+                doc = Document(p)
+                parts = [par.text for par in doc.paragraphs]
+                for tbl in doc.tables:
+                    for row in tbl.rows:
+                        for cell in row.cells:
+                            parts.append(cell.text)
+                yield p, "\n".join(parts)
             elif ext == ".pptx":
                 from pptx import Presentation
                 prs = Presentation(p)

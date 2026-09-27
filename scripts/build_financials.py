@@ -55,8 +55,11 @@ def parse_args():
     mm = re.search(r"(\d+(?:\.\d+)?)", str(fin.get("margin_ratio_vs_industry") or "1.2"))
     a.margin_mult = a.margin_mult if a.margin_mult is not None else float(mm.group(1))
     a.industry_margin = a.industry_margin if a.industry_margin is not None else 12.0
-    a.funding = a.funding if a.funding is not None else 400.0
-    a.equity_stake = a.equity_stake if a.equity_stake is not None else 15.0
+    # 融资方案同样从档案读取（funding_wan/equity_stake_pct，兼容别名），命令行可覆盖
+    a.funding = a.funding if a.funding is not None else float(
+        fin.get("funding_wan") or fin.get("funding") or 400.0)
+    a.equity_stake = a.equity_stake if a.equity_stake is not None else float(
+        fin.get("equity_stake_pct") or fin.get("equity_stake") or 15.0)
     a.years = a.years if a.years is not None else int(fin.get("years") or 6)
     return a
 
