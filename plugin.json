@@ -1,0 +1,60 @@
+{
+  "name": "ares",
+  "display_name": "Ares 超级竞赛插件",
+  "version": "1.0.0",
+  "description": "一句话生成大学生竞赛全套参赛材料：商业计划书/财务三表/路演PPT/多页HTML原型/讲稿/答辩预案/模拟评审，内置132项赛事主库与专属评审标准档案。",
+  "author": "TZUKWAN",
+  "license": "MIT",
+  "min_platform": "任意支持 Skills 或自然语言技能触发的 Agent 平台",
+  "skills": [
+    {"name": "ares", "path": "skills/ares/SKILL.md", "role": "总控路由"},
+    {"name": "ares-writing-style", "path": "skills/ares-writing-style/SKILL.md", "role": "共享写作纪律"},
+    {"name": "ares-docx", "path": "skills/ares-docx/SKILL.md", "role": "Word 生产"},
+    {"name": "ares-ppt", "path": "skills/ares-ppt/SKILL.md", "role": "PPTX 程序化生成"},
+    {"name": "ares-data", "path": "skills/ares-data/SKILL.md", "role": "数据与实验数据"},
+    {"name": "ares-prototype", "path": "skills/ares-prototype/SKILL.md", "role": "多页HTML原型"},
+    {"name": "ares-judge", "path": "skills/ares-judge/SKILL.md", "role": "模拟评审与质检"},
+    {"name": "ares-entrepreneurship", "path": "skills/ares-entrepreneurship/SKILL.md", "role": "L1 创业竞赛线"},
+    {"name": "ares-modeling", "path": "skills/ares-modeling/SKILL.md", "role": "L2 理科建模线"},
+    {"name": "ares-engineering", "path": "skills/ares-engineering/SKILL.md", "role": "L3 工科作品线"},
+    {"name": "ares-business-case", "path": "skills/ares-business-case/SKILL.md", "role": "L4 商科分析线"},
+    {"name": "ares-art-design", "path": "skills/ares-art-design/SKILL.md", "role": "L5 艺术设计线"},
+    {"name": "ares-coding-contest", "path": "skills/ares-coding-contest/SKILL.md", "role": "L6 程序算法线"},
+    {"name": "ares-humanities", "path": "skills/ares-humanities/SKILL.md", "role": "E1 人文语言模块"},
+    {"name": "ares-lab-skills", "path": "skills/ares-lab-skills/SKILL.md", "role": "E2 实验技能模块"},
+    {"name": "ares-simulation", "path": "skills/ares-simulation/SKILL.md", "role": "E3 模拟经营模块"}
+  ],
+  "commands": [
+    {"name": "ares-start", "path": "commands/ares-start.md", "role": "全流程启动"},
+    {"name": "ares-bp", "path": "commands/ares-bp.md", "role": "只出商业计划书含三表"},
+    {"name": "ares-ppt", "path": "commands/ares-ppt.md", "role": "只出路演PPT"},
+    {"name": "ares-prototype", "path": "commands/ares-prototype.md", "role": "只出原型"},
+    {"name": "ares-review", "path": "commands/ares-review.md", "role": "模拟评审"},
+    {"name": "ares-sync", "path": "commands/ares-sync.md", "role": "档案变更全量同步"}
+  ],
+  "agents": [
+    {"name": "researcher", "path": "agents/researcher.md", "role": "调研"},
+    {"name": "writer", "path": "agents/writer.md", "role": "写作"},
+    {"name": "engineer", "path": "agents/engineer.md", "role": "开发"},
+    {"name": "analyst", "path": "agents/analyst.md", "role": "分析"},
+    {"name": "reviewer", "path": "agents/reviewer.md", "role": "评审"}
+  ],
+  "hooks": [
+    {"name": "on-project-init", "path": "hooks/on-project-init.md", "role": "项目初始化建档"}
+  ],
+  "data": [
+    {"path": "data/competitions.json", "role": "132项赛事主库"},
+    {"path": "data/tracks.json", "role": "赛道→生产线→产出物映射"},
+    {"path": "data/rubrics/", "role": "132份专属评审标准档案"}
+  ],
+  "scripts": [
+    {"path": "scripts/validate_profile.py", "role": "project.json 完整性校验"},
+    {"path": "scripts/consistency_check.py", "role": "跨文件关键数字一致性扫描"},
+    {"path": "scripts/build_financials.py", "role": "财务三表参数化生成"},
+    {"path": "scripts/validate_rubrics.py", "role": "rubric 档案校验"}
+  ],
+  "dependencies": {
+    "python": ">=3.10",
+    "packages": ["python-docx", "python-pptx", "openpyxl", "numpy", "matplotlib"]
+  }
+}

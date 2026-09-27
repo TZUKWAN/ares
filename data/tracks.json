@@ -1,0 +1,2890 @@
+{
+  "version": "1.0",
+  "description": "赛事→生产线→默认产出物→交付目录映射；子赛道已逐项展开",
+  "entries": [
+    {
+      "track_id": "T001",
+      "competition_id": 1,
+      "competition_name": "中国国际大学生创新大赛",
+      "track": "高教主赛道",
+      "pipeline": "L1",
+      "default_deliverables": [
+        "01-商业计划书.docx",
+        "02-财务三表.xlsx",
+        "03-路演PPT.pptx",
+        "04-项目原型/",
+        "05-源代码/",
+        "06-演示数据/",
+        "07-路演讲稿-8分钟.docx",
+        "07-路演讲稿-5分钟.docx",
+        "08-答辩QA预案.docx",
+        "09-一分钟VCR脚本.docx(可选)",
+        "10-评审报告.md",
+        "11-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
+      "notes": "本科生创意组/研究生创意组/初创组/成长组按注册年限区分"
+    },
+    {
+      "track_id": "T002",
+      "competition_id": 1,
+      "competition_name": "中国国际大学生创新大赛",
+      "track": "青年红色筑梦之旅赛道",
+      "pipeline": "L1",
+      "default_deliverables": [
+        "01-商业计划书.docx",
+        "02-财务三表.xlsx",
+        "03-路演PPT.pptx",
+        "04-项目原型/",
+        "05-源代码/",
+        "06-演示数据/",
+        "07-路演讲稿-8分钟.docx",
+        "07-路演讲稿-5分钟.docx",
+        "08-答辩QA预案.docx",
+        "09-一分钟VCR脚本.docx(可选)",
+        "10-评审报告.md",
+        "11-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
+      "notes": "公益组/创意组/创业组，社会价值章节权重高"
+    },
+    {
+      "track_id": "T003",
+      "competition_id": 1,
+      "competition_name": "中国国际大学生创新大赛",
+      "track": "职教赛道",
+      "pipeline": "L1",
+      "default_deliverables": [
+        "01-商业计划书.docx",
+        "02-财务三表.xlsx",
+        "03-路演PPT.pptx",
+        "04-项目原型/",
+        "05-源代码/",
+        "06-演示数据/",
+        "07-路演讲稿-8分钟.docx",
+        "07-路演讲稿-5分钟.docx",
+        "08-答辩QA预案.docx",
+        "09-一分钟VCR脚本.docx(可选)",
+        "10-评审报告.md",
+        "11-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
+      "notes": "职教创意组/创业组"
+    },
+    {
+      "track_id": "T004",
+      "competition_id": 1,
+      "competition_name": "中国国际大学生创新大赛",
+      "track": "产业命题赛道",
+      "pipeline": "L1",
+      "default_deliverables": [
+        "01-商业计划书.docx",
+        "02-财务三表.xlsx",
+        "03-路演PPT.pptx",
+        "04-项目原型/",
+        "05-源代码/",
+        "06-演示数据/",
+        "07-路演讲稿-8分钟.docx",
+        "07-路演讲稿-5分钟.docx",
+        "08-答辩QA预案.docx",
+        "09-一分钟VCR脚本.docx(可选)",
+        "10-评审报告.md",
+        "11-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
+      "notes": "按命题企业需求产出方案，命题解析前置"
+    },
+    {
+      "track_id": "T005",
+      "competition_id": 2,
+      "competition_name": "“挑战杯”课外学术科技作品竞赛",
+      "track": "自然科学类学术论文",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": "限定本科生，按学术论文线产出"
+    },
+    {
+      "track_id": "T006",
+      "competition_id": 2,
+      "competition_name": "“挑战杯”课外学术科技作品竞赛",
+      "track": "哲学社会科学类社会调查报告",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": "按调研报告线产出，含问卷与数据"
+    },
+    {
+      "track_id": "T007",
+      "competition_id": 2,
+      "competition_name": "“挑战杯”课外学术科技作品竞赛",
+      "track": "科技发明制作",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": "A类硬件/B类软件，按工科作品线产出"
+    },
+    {
+      "track_id": "T008",
+      "competition_id": 3,
+      "competition_name": "“挑战杯”创业计划大赛",
+      "track": "默认赛道",
+      "pipeline": "L1",
+      "default_deliverables": [
+        "01-商业计划书.docx",
+        "02-财务三表.xlsx",
+        "03-路演PPT.pptx",
+        "04-项目原型/",
+        "05-源代码/",
+        "06-演示数据/",
+        "07-路演讲稿-8分钟.docx",
+        "07-路演讲稿-5分钟.docx",
+        "08-答辩QA预案.docx",
+        "09-一分钟VCR脚本.docx(可选)",
+        "10-评审报告.md",
+        "11-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T009",
+      "competition_id": 4,
+      "competition_name": "ACM-ICPC",
+      "track": "默认赛道",
+      "pipeline": "L6",
+      "default_deliverables": [
+        "01-训练计划.md",
+        "02-题库清单.md",
+        "03-错题本模板.md",
+        "04-模板代码库/",
+        "05-赛前模拟题与题解/"
+      ],
+      "output_dir_layout": "输出/{选手名或队伍}/（训练材料按编号排列）",
+      "notes": ""
+    },
+    {
+      "track_id": "T010",
+      "competition_id": 5,
+      "competition_name": "全国大学生数学建模竞赛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T011",
+      "competition_id": 6,
+      "competition_name": "全国大学生电子设计竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T012",
+      "competition_id": 7,
+      "competition_name": "中国大学生医学技术技能大赛",
+      "track": "默认赛道",
+      "pipeline": "E2",
+      "default_deliverables": [
+        "01-操作规范手册.docx",
+        "02-常见扣分点清单.md",
+        "03-训练打卡计划.xlsx",
+        "04-实验报告模板.docx"
+      ],
+      "output_dir_layout": "输出/{赛事名}/（手册、扣分点、打卡计划、报告模板）",
+      "notes": ""
+    },
+    {
+      "track_id": "T013",
+      "competition_id": 8,
+      "competition_name": "全国大学生机械创新设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T014",
+      "competition_id": 9,
+      "competition_name": "全国大学生结构设计竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T015",
+      "competition_id": 10,
+      "competition_name": "全国大学生广告艺术大赛",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T016",
+      "competition_id": 11,
+      "competition_name": "全国大学生智能汽车竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T017",
+      "competition_id": 12,
+      "competition_name": "电子商务三创赛",
+      "track": "默认赛道",
+      "pipeline": "L1",
+      "default_deliverables": [
+        "01-商业计划书.docx",
+        "02-财务三表.xlsx",
+        "03-路演PPT.pptx",
+        "04-项目原型/",
+        "05-源代码/",
+        "06-演示数据/",
+        "07-路演讲稿-8分钟.docx",
+        "07-路演讲稿-5分钟.docx",
+        "08-答辩QA预案.docx",
+        "09-一分钟VCR脚本.docx(可选)",
+        "10-评审报告.md",
+        "11-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T018",
+      "competition_id": 13,
+      "competition_name": "节能减排社会实践与科技竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T019",
+      "competition_id": 14,
+      "competition_name": "工程实践与创新能力大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T020",
+      "competition_id": 15,
+      "competition_name": "全国大学生物流设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T021",
+      "competition_id": 16,
+      "competition_name": "外研社英语系列赛（4项）",
+      "track": "英语演讲赛项",
+      "pipeline": "E1",
+      "default_deliverables": [
+        "01-参赛稿件.docx",
+        "02-针对性训练方案.docx",
+        "03-评分标准对照自评表.xlsx"
+      ],
+      "output_dir_layout": "输出/{项目名}/（稿件、训练方案、自评表）",
+      "notes": "定题演讲+即兴演讲，已备稿与问答评分"
+    },
+    {
+      "track_id": "T022",
+      "competition_id": 16,
+      "competition_name": "外研社英语系列赛（4项）",
+      "track": "英语写作赛项",
+      "pipeline": "E1",
+      "default_deliverables": [
+        "01-参赛稿件.docx",
+        "02-针对性训练方案.docx",
+        "03-评分标准对照自评表.xlsx"
+      ],
+      "output_dir_layout": "输出/{项目名}/（稿件、训练方案、自评表）",
+      "notes": "议论文/说明文限时写作"
+    },
+    {
+      "track_id": "T023",
+      "competition_id": 16,
+      "competition_name": "外研社英语系列赛（4项）",
+      "track": "英语阅读赛项",
+      "pipeline": "E1",
+      "default_deliverables": [
+        "01-参赛稿件.docx",
+        "02-针对性训练方案.docx",
+        "03-评分标准对照自评表.xlsx"
+      ],
+      "output_dir_layout": "输出/{项目名}/（稿件、训练方案、自评表）",
+      "notes": "Read & Reason 模块化阅读"
+    },
+    {
+      "track_id": "T024",
+      "competition_id": 16,
+      "competition_name": "外研社英语系列赛（4项）",
+      "track": "英语辩论赛项",
+      "pipeline": "E1",
+      "default_deliverables": [
+        "01-参赛稿件.docx",
+        "02-针对性训练方案.docx",
+        "03-评分标准对照自评表.xlsx"
+      ],
+      "output_dir_layout": "输出/{项目名}/（稿件、训练方案、自评表）",
+      "notes": "British Parliamentary 赛制"
+    },
+    {
+      "track_id": "T025",
+      "competition_id": 17,
+      "competition_name": "华灿奖",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T026",
+      "competition_id": 18,
+      "competition_name": "大创年会展示",
+      "track": "默认赛道",
+      "pipeline": "L1",
+      "default_deliverables": [
+        "01-商业计划书.docx",
+        "02-财务三表.xlsx",
+        "03-路演PPT.pptx",
+        "04-项目原型/",
+        "05-源代码/",
+        "06-演示数据/",
+        "07-路演讲稿-8分钟.docx",
+        "07-路演讲稿-5分钟.docx",
+        "08-答辩QA预案.docx",
+        "09-一分钟VCR脚本.docx(可选)",
+        "10-评审报告.md",
+        "11-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T027",
+      "competition_id": 19,
+      "competition_name": "全国大学生化工设计竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T028",
+      "competition_id": 20,
+      "competition_name": "全国大学生机器人大赛（RM/RC）",
+      "track": "RoboMaster机甲大师",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": "对抗赛，技术报告+开源要求"
+    },
+    {
+      "track_id": "T029",
+      "competition_id": 20,
+      "competition_name": "全国大学生机器人大赛（RM/RC）",
+      "track": "RoboCon机器人大赛",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": "任务制对抗，任务策略书重要"
+    },
+    {
+      "track_id": "T030",
+      "competition_id": 21,
+      "competition_name": "市场调查与分析大赛",
+      "track": "默认赛道",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T031",
+      "competition_id": 22,
+      "competition_name": "“西门子杯”智能制造挑战赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T032",
+      "competition_id": 23,
+      "competition_name": "服务外包创新创业大赛",
+      "track": "默认赛道",
+      "pipeline": "L1",
+      "default_deliverables": [
+        "01-商业计划书.docx",
+        "02-财务三表.xlsx",
+        "03-路演PPT.pptx",
+        "04-项目原型/",
+        "05-源代码/",
+        "06-演示数据/",
+        "07-路演讲稿-8分钟.docx",
+        "07-路演讲稿-5分钟.docx",
+        "08-答辩QA预案.docx",
+        "09-一分钟VCR脚本.docx(可选)",
+        "10-评审报告.md",
+        "11-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T033",
+      "competition_id": 24,
+      "competition_name": "中国高校计算机大赛（4项）",
+      "track": "大数据挑战赛",
+      "pipeline": "L6",
+      "default_deliverables": [
+        "01-训练计划.md",
+        "02-题库清单.md",
+        "03-错题本模板.md",
+        "04-模板代码库/",
+        "05-赛前模拟题与题解/"
+      ],
+      "output_dir_layout": "输出/{选手名或队伍}/（训练材料按编号排列）",
+      "notes": "数据建模+算法，提交方案报告"
+    },
+    {
+      "track_id": "T034",
+      "competition_id": 24,
+      "competition_name": "中国高校计算机大赛（4项）",
+      "track": "团体程序设计天梯赛",
+      "pipeline": "L6",
+      "default_deliverables": [
+        "01-训练计划.md",
+        "02-题库清单.md",
+        "03-错题本模板.md",
+        "04-模板代码库/",
+        "05-赛前模拟题与题解/"
+      ],
+      "output_dir_layout": "输出/{选手名或队伍}/（训练材料按编号排列）",
+      "notes": "团队按梯度答题，走训练线"
+    },
+    {
+      "track_id": "T035",
+      "competition_id": 24,
+      "competition_name": "中国高校计算机大赛（4项）",
+      "track": "移动应用创新赛",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": "App作品，原型+代码+文档"
+    },
+    {
+      "track_id": "T036",
+      "competition_id": 24,
+      "competition_name": "中国高校计算机大赛（4项）",
+      "track": "网络技术挑战赛",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": "命题攻关，系统作品+技术报告"
+    },
+    {
+      "track_id": "T037",
+      "competition_id": 24,
+      "competition_name": "中国高校计算机大赛（4项）",
+      "track": "人工智能创意赛",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": "与id50同源，AI应用创意作品"
+    },
+    {
+      "track_id": "T038",
+      "competition_id": 25,
+      "competition_name": "地质技能竞赛",
+      "track": "默认赛道",
+      "pipeline": "E2",
+      "default_deliverables": [
+        "01-操作规范手册.docx",
+        "02-常见扣分点清单.md",
+        "03-训练打卡计划.xlsx",
+        "04-实验报告模板.docx"
+      ],
+      "output_dir_layout": "输出/{赛事名}/（手册、扣分点、打卡计划、报告模板）",
+      "notes": ""
+    },
+    {
+      "track_id": "T039",
+      "competition_id": 26,
+      "competition_name": "光电设计竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T040",
+      "competition_id": 27,
+      "competition_name": "集成电路创新创业大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T041",
+      "competition_id": 28,
+      "competition_name": "金相技能大赛",
+      "track": "默认赛道",
+      "pipeline": "E2",
+      "default_deliverables": [
+        "01-操作规范手册.docx",
+        "02-常见扣分点清单.md",
+        "03-训练打卡计划.xlsx",
+        "04-实验报告模板.docx"
+      ],
+      "output_dir_layout": "输出/{赛事名}/（手册、扣分点、打卡计划、报告模板）",
+      "notes": ""
+    },
+    {
+      "track_id": "T042",
+      "competition_id": 29,
+      "competition_name": "信息安全竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T043",
+      "competition_id": 30,
+      "competition_name": "周培源力学竞赛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T044",
+      "competition_id": 31,
+      "competition_name": "机械工程创新创意大赛（5项A2）",
+      "track": "过程装备实践与创新赛项",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T045",
+      "competition_id": 31,
+      "competition_name": "机械工程创新创意大赛（5项A2）",
+      "track": "铸造工艺设计与设备创新赛项",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T046",
+      "competition_id": 31,
+      "competition_name": "机械工程创新创意大赛（5项A2）",
+      "track": "热处理创新创业赛项",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T047",
+      "competition_id": 31,
+      "competition_name": "机械工程创新创意大赛（5项A2）",
+      "track": "起重机创意赛项",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T048",
+      "competition_id": 31,
+      "competition_name": "机械工程创新创意大赛（5项A2）",
+      "track": "智能制造赛项",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T049",
+      "competition_id": 32,
+      "competition_name": "RoboCup中国赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T050",
+      "competition_id": 33,
+      "competition_name": "“中国软件杯”软件设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T051",
+      "competition_id": 34,
+      "competition_name": "中美青年创客大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T052",
+      "competition_id": 35,
+      "competition_name": "RAICOM睿抗",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T053",
+      "competition_id": 36,
+      "competition_name": "“大唐杯”信息通信技术大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T054",
+      "competition_id": 37,
+      "competition_name": "华为ICT大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T055",
+      "competition_id": 38,
+      "competition_name": "嵌入式芯片与系统设计竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T056",
+      "competition_id": 39,
+      "competition_name": "全国大学生生命科学竞赛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T057",
+      "competition_id": 40,
+      "competition_name": "物理实验竞赛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T058",
+      "competition_id": 41,
+      "competition_name": "BIM毕业设计创新大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T059",
+      "competition_id": 42,
+      "competition_name": "商业精英挑战赛（4项）",
+      "track": "品牌策划赛项",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T060",
+      "competition_id": 42,
+      "competition_name": "商业精英挑战赛（4项）",
+      "track": "会展管理赛项",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T061",
+      "competition_id": 42,
+      "competition_name": "商业精英挑战赛（4项）",
+      "track": "国际贸易赛项",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": "含外贸函电与谈判环节"
+    },
+    {
+      "track_id": "T062",
+      "competition_id": 42,
+      "competition_name": "商业精英挑战赛（4项）",
+      "track": "创新创业赛项",
+      "pipeline": "L1",
+      "default_deliverables": [
+        "01-商业计划书.docx",
+        "02-财务三表.xlsx",
+        "03-路演PPT.pptx",
+        "04-项目原型/",
+        "05-源代码/",
+        "06-演示数据/",
+        "07-路演讲稿-8分钟.docx",
+        "07-路演讲稿-5分钟.docx",
+        "08-答辩QA预案.docx",
+        "09-一分钟VCR脚本.docx(可选)",
+        "10-评审报告.md",
+        "11-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
+      "notes": "按创业线产出"
+    },
+    {
+      "track_id": "T063",
+      "competition_id": 42,
+      "competition_name": "商业精英挑战赛（4项）",
+      "track": "商务数据分析赛项",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": "以当年通知为准，第五赛道预留"
+    },
+    {
+      "track_id": "T064",
+      "competition_id": 43,
+      "competition_name": "“学创杯”创业综合模拟大赛",
+      "track": "默认赛道",
+      "pipeline": "E3",
+      "default_deliverables": [
+        "01-决策模型.xlsx",
+        "02-策略手册.docx",
+        "03-历史规则复盘.md",
+        "04-训练脚本.docx"
+      ],
+      "output_dir_layout": "输出/{赛事名}/（决策模型、策略手册、复盘、训练脚本）",
+      "notes": ""
+    },
+    {
+      "track_id": "T065",
+      "competition_id": 44,
+      "competition_name": "智能机器人创意大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T066",
+      "competition_id": 45,
+      "competition_name": "中国机器人及人工智能大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T067",
+      "competition_id": 46,
+      "competition_name": "交通科技大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T068",
+      "competition_id": 47,
+      "competition_name": "先进成图技术与产品信息建模大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T069",
+      "competition_id": 48,
+      "competition_name": "三维数字化创新设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T070",
+      "competition_id": 49,
+      "competition_name": "中国大学生计算机设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T071",
+      "competition_id": 50,
+      "competition_name": "人工智能创意赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T072",
+      "competition_id": 51,
+      "competition_name": "蓝桥杯",
+      "track": "默认赛道",
+      "pipeline": "L6",
+      "default_deliverables": [
+        "01-训练计划.md",
+        "02-题库清单.md",
+        "03-错题本模板.md",
+        "04-模板代码库/",
+        "05-赛前模拟题与题解/"
+      ],
+      "output_dir_layout": "输出/{选手名或队伍}/（训练材料按编号排列）",
+      "notes": ""
+    },
+    {
+      "track_id": "T073",
+      "competition_id": 52,
+      "competition_name": "米兰设计周高校展",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T074",
+      "competition_id": 53,
+      "competition_name": "未来设计师·数字艺术设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T075",
+      "competition_id": 54,
+      "competition_name": "机械工程创新创意大赛（4项A3）",
+      "track": "工业工程精益改善赛项",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T076",
+      "competition_id": 54,
+      "competition_name": "机械工程创新创意大赛（4项A3）",
+      "track": "微纳传感器与创新应用赛项",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T077",
+      "competition_id": 54,
+      "competition_name": "机械工程创新创意大赛（4项A3）",
+      "track": "精密装配大赛赛项",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T078",
+      "competition_id": 54,
+      "competition_name": "机械工程创新创意大赛（4项A3）",
+      "track": "数字化设计与仿真赛项",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T079",
+      "competition_id": 55,
+      "competition_name": "会计与商业管理案例竞赛",
+      "track": "默认赛道",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T080",
+      "competition_id": 56,
+      "competition_name": "中国好创意数字艺术设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T081",
+      "competition_id": 57,
+      "competition_name": "“21世纪杯”英语演讲",
+      "track": "默认赛道",
+      "pipeline": "E1",
+      "default_deliverables": [
+        "01-参赛稿件.docx",
+        "02-针对性训练方案.docx",
+        "03-评分标准对照自评表.xlsx"
+      ],
+      "output_dir_layout": "输出/{项目名}/（稿件、训练方案、自评表）",
+      "notes": ""
+    },
+    {
+      "track_id": "T082",
+      "competition_id": 58,
+      "competition_name": "iCAN创新创业大赛",
+      "track": "默认赛道",
+      "pipeline": "L1",
+      "default_deliverables": [
+        "01-商业计划书.docx",
+        "02-财务三表.xlsx",
+        "03-路演PPT.pptx",
+        "04-项目原型/",
+        "05-源代码/",
+        "06-演示数据/",
+        "07-路演讲稿-8分钟.docx",
+        "07-路演讲稿-5分钟.docx",
+        "08-答辩QA预案.docx",
+        "09-一分钟VCR脚本.docx(可选)",
+        "10-评审报告.md",
+        "11-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T083",
+      "competition_id": 59,
+      "competition_name": "“工行杯”金融科技创新大赛",
+      "track": "默认赛道",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T084",
+      "competition_id": 60,
+      "competition_name": "中华经典诵写讲大赛",
+      "track": "默认赛道",
+      "pipeline": "E1",
+      "default_deliverables": [
+        "01-参赛稿件.docx",
+        "02-针对性训练方案.docx",
+        "03-评分标准对照自评表.xlsx"
+      ],
+      "output_dir_layout": "输出/{项目名}/（稿件、训练方案、自评表）",
+      "notes": ""
+    },
+    {
+      "track_id": "T085",
+      "competition_id": 61,
+      "competition_name": "跨文化能力大赛",
+      "track": "默认赛道",
+      "pipeline": "E1",
+      "default_deliverables": [
+        "01-参赛稿件.docx",
+        "02-针对性训练方案.docx",
+        "03-评分标准对照自评表.xlsx"
+      ],
+      "output_dir_layout": "输出/{项目名}/（稿件、训练方案、自评表）",
+      "notes": ""
+    },
+    {
+      "track_id": "T086",
+      "competition_id": 62,
+      "competition_name": "百度之星",
+      "track": "默认赛道",
+      "pipeline": "L6",
+      "default_deliverables": [
+        "01-训练计划.md",
+        "02-题库清单.md",
+        "03-错题本模板.md",
+        "04-模板代码库/",
+        "05-赛前模拟题与题解/"
+      ],
+      "output_dir_layout": "输出/{选手名或队伍}/（训练材料按编号排列）",
+      "notes": ""
+    },
+    {
+      "track_id": "T087",
+      "competition_id": 63,
+      "competition_name": "工业设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T088",
+      "competition_id": 64,
+      "competition_name": "水利创新设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T089",
+      "competition_id": 65,
+      "competition_name": "化工实验大赛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T090",
+      "competition_id": 66,
+      "competition_name": "化学实验创新设计竞赛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T091",
+      "competition_id": 67,
+      "competition_name": "计算机系统能力大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T092",
+      "competition_id": 68,
+      "competition_name": "花园设计建造竞赛",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T093",
+      "competition_id": 69,
+      "competition_name": "物联网设计竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T094",
+      "competition_id": 70,
+      "competition_name": "信息安全与对抗技术竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T095",
+      "competition_id": 71,
+      "competition_name": "测绘创新创业智能大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T096",
+      "competition_id": 72,
+      "competition_name": "统计建模大赛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T097",
+      "competition_id": 73,
+      "competition_name": "能源经济学术创意大赛",
+      "track": "默认赛道",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T098",
+      "competition_id": 74,
+      "competition_name": "基础医学创新研究暨实验设计论坛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T099",
+      "competition_id": 75,
+      "competition_name": "数字媒体科技作品竞赛",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T100",
+      "competition_id": 76,
+      "competition_name": "税收风险管控案例大赛",
+      "track": "默认赛道",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T101",
+      "competition_id": 77,
+      "competition_name": "企业竞争模拟大赛",
+      "track": "默认赛道",
+      "pipeline": "E3",
+      "default_deliverables": [
+        "01-决策模型.xlsx",
+        "02-策略手册.docx",
+        "03-历史规则复盘.md",
+        "04-训练脚本.docx"
+      ],
+      "output_dir_layout": "输出/{赛事名}/（决策模型、策略手册、复盘、训练脚本）",
+      "notes": ""
+    },
+    {
+      "track_id": "T102",
+      "competition_id": 78,
+      "competition_name": "数智化企业经营沙盘大赛",
+      "track": "默认赛道",
+      "pipeline": "E3",
+      "default_deliverables": [
+        "01-决策模型.xlsx",
+        "02-策略手册.docx",
+        "03-历史规则复盘.md",
+        "04-训练脚本.docx"
+      ],
+      "output_dir_layout": "输出/{赛事名}/（决策模型、策略手册、复盘、训练脚本）",
+      "notes": ""
+    },
+    {
+      "track_id": "T103",
+      "competition_id": 79,
+      "competition_name": "数字建筑创新应用大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T104",
+      "competition_id": 80,
+      "competition_name": "全球校园AI算法精英大赛",
+      "track": "默认赛道",
+      "pipeline": "L6",
+      "default_deliverables": [
+        "01-训练计划.md",
+        "02-题库清单.md",
+        "03-错题本模板.md",
+        "04-模板代码库/",
+        "05-赛前模拟题与题解/"
+      ],
+      "output_dir_layout": "输出/{选手名或队伍}/（训练材料按编号排列）",
+      "notes": ""
+    },
+    {
+      "track_id": "T105",
+      "competition_id": 81,
+      "competition_name": "智能农业装备创新大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T106",
+      "competition_id": 82,
+      "competition_name": "“科云杯”财会职业能力大赛",
+      "track": "默认赛道",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T107",
+      "competition_id": 83,
+      "competition_name": "美国大学生数学建模竞赛",
+      "track": "MCM数学建模竞赛",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": "A/B连续题，英文论文"
+    },
+    {
+      "track_id": "T108",
+      "competition_id": 83,
+      "competition_name": "美国大学生数学建模竞赛",
+      "track": "ICM跨学科建模竞赛",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": "C数据/D运筹/E可持续/F政策，英文论文"
+    },
+    {
+      "track_id": "T109",
+      "competition_id": 84,
+      "competition_name": "全国大学生英语竞赛",
+      "track": "默认赛道",
+      "pipeline": "E1",
+      "default_deliverables": [
+        "01-参赛稿件.docx",
+        "02-针对性训练方案.docx",
+        "03-评分标准对照自评表.xlsx"
+      ],
+      "output_dir_layout": "输出/{项目名}/（稿件、训练方案、自评表）",
+      "notes": ""
+    },
+    {
+      "track_id": "T110",
+      "competition_id": 85,
+      "competition_name": "成图大赛个人赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T111",
+      "competition_id": 86,
+      "competition_name": "金相技能大赛个人赛",
+      "track": "默认赛道",
+      "pipeline": "E2",
+      "default_deliverables": [
+        "01-操作规范手册.docx",
+        "02-常见扣分点清单.md",
+        "03-训练打卡计划.xlsx",
+        "04-实验报告模板.docx"
+      ],
+      "output_dir_layout": "输出/{赛事名}/（手册、扣分点、打卡计划、报告模板）",
+      "notes": ""
+    },
+    {
+      "track_id": "T112",
+      "competition_id": 87,
+      "competition_name": "RAICOM个人赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T113",
+      "competition_id": 88,
+      "competition_name": "天梯赛个人赛",
+      "track": "默认赛道",
+      "pipeline": "L6",
+      "default_deliverables": [
+        "01-训练计划.md",
+        "02-题库清单.md",
+        "03-错题本模板.md",
+        "04-模板代码库/",
+        "05-赛前模拟题与题解/"
+      ],
+      "output_dir_layout": "输出/{选手名或队伍}/（训练材料按编号排列）",
+      "notes": ""
+    },
+    {
+      "track_id": "T114",
+      "competition_id": 89,
+      "competition_name": "湖北省物理实验创新设计竞赛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T115",
+      "competition_id": 90,
+      "competition_name": "湖北省信息技术创新大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T116",
+      "competition_id": 91,
+      "competition_name": "湖北省生物实验技能竞赛",
+      "track": "默认赛道",
+      "pipeline": "E2",
+      "default_deliverables": [
+        "01-操作规范手册.docx",
+        "02-常见扣分点清单.md",
+        "03-训练打卡计划.xlsx",
+        "04-实验报告模板.docx"
+      ],
+      "output_dir_layout": "输出/{赛事名}/（手册、扣分点、打卡计划、报告模板）",
+      "notes": ""
+    },
+    {
+      "track_id": "T117",
+      "competition_id": 92,
+      "competition_name": "湖北省化学实验技能大赛",
+      "track": "默认赛道",
+      "pipeline": "E2",
+      "default_deliverables": [
+        "01-操作规范手册.docx",
+        "02-常见扣分点清单.md",
+        "03-训练打卡计划.xlsx",
+        "04-实验报告模板.docx"
+      ],
+      "output_dir_layout": "输出/{赛事名}/（手册、扣分点、打卡计划、报告模板）",
+      "notes": ""
+    },
+    {
+      "track_id": "T118",
+      "competition_id": 93,
+      "competition_name": "湖北省文化创意设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T119",
+      "competition_id": 94,
+      "competition_name": "湖北新闻传播教育创新实践技能竞赛",
+      "track": "默认赛道",
+      "pipeline": "E1",
+      "default_deliverables": [
+        "01-参赛稿件.docx",
+        "02-针对性训练方案.docx",
+        "03-评分标准对照自评表.xlsx"
+      ],
+      "output_dir_layout": "输出/{项目名}/（稿件、训练方案、自评表）",
+      "notes": ""
+    },
+    {
+      "track_id": "T120",
+      "competition_id": 95,
+      "competition_name": "湖北省网络空间安全实践能力竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T121",
+      "competition_id": 96,
+      "competition_name": "湖北高校美术与设计大展",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T122",
+      "competition_id": 97,
+      "competition_name": "海洋航行器设计与制作大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T123",
+      "competition_id": 98,
+      "competition_name": "全国混凝土设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T124",
+      "competition_id": 99,
+      "competition_name": "中国汽车工程学会巴哈大赛（含电动）",
+      "track": "巴哈大赛油动组",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T125",
+      "competition_id": 99,
+      "competition_name": "中国汽车工程学会巴哈大赛（含电动）",
+      "track": "巴哈大赛电动组",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T126",
+      "competition_id": 100,
+      "competition_name": "中国大学生方程式系列赛事（3项）",
+      "track": "中国大学生方程式油车组",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T127",
+      "competition_id": 100,
+      "competition_name": "中国大学生方程式系列赛事（3项）",
+      "track": "中国大学生方程式电车组",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T128",
+      "competition_id": 100,
+      "competition_name": "中国大学生方程式系列赛事（3项）",
+      "track": "中国大学生无人驾驶方程式",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": "含自动驾驶系统设计"
+    },
+    {
+      "track_id": "T129",
+      "competition_id": 101,
+      "competition_name": "制冷空调行业大学生科技竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T130",
+      "competition_id": 102,
+      "competition_name": "矿物加工工程实践作品大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T131",
+      "competition_id": 103,
+      "competition_name": "GIS应用技能竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T132",
+      "competition_id": 104,
+      "competition_name": "安全科学与工程实践与创新作品大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T133",
+      "competition_id": 105,
+      "competition_name": "“光威杯”高性能复合材料科技创新竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T134",
+      "competition_id": 106,
+      "competition_name": "高分子材料实验实践大赛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T135",
+      "competition_id": 107,
+      "competition_name": "无机非金属材料基础知识大赛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T136",
+      "competition_id": 108,
+      "competition_name": "焊接创新大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T137",
+      "competition_id": 109,
+      "competition_name": "湖北省青年志愿服务项目大赛",
+      "track": "默认赛道",
+      "pipeline": "L1",
+      "default_deliverables": [
+        "01-商业计划书.docx",
+        "02-财务三表.xlsx",
+        "03-路演PPT.pptx",
+        "04-项目原型/",
+        "05-源代码/",
+        "06-演示数据/",
+        "07-路演讲稿-8分钟.docx",
+        "07-路演讲稿-5分钟.docx",
+        "08-答辩QA预案.docx",
+        "09-一分钟VCR脚本.docx(可选)",
+        "10-评审报告.md",
+        "11-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T138",
+      "competition_id": 110,
+      "competition_name": "全国大学生版权征文活动",
+      "track": "默认赛道",
+      "pipeline": "E1",
+      "default_deliverables": [
+        "01-参赛稿件.docx",
+        "02-针对性训练方案.docx",
+        "03-评分标准对照自评表.xlsx"
+      ],
+      "output_dir_layout": "输出/{项目名}/（稿件、训练方案、自评表）",
+      "notes": ""
+    },
+    {
+      "track_id": "T139",
+      "competition_id": 111,
+      "competition_name": "全国就业力大比拼",
+      "track": "默认赛道",
+      "pipeline": "E1",
+      "default_deliverables": [
+        "01-参赛稿件.docx",
+        "02-针对性训练方案.docx",
+        "03-评分标准对照自评表.xlsx"
+      ],
+      "output_dir_layout": "输出/{项目名}/（稿件、训练方案、自评表）",
+      "notes": ""
+    },
+    {
+      "track_id": "T140",
+      "competition_id": 112,
+      "competition_name": "制药工程设计竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T141",
+      "competition_id": 113,
+      "competition_name": "化学实验邀请赛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T142",
+      "competition_id": 114,
+      "competition_name": "中国大学生程序设计竞赛（CCPC）",
+      "track": "默认赛道",
+      "pipeline": "L6",
+      "default_deliverables": [
+        "01-训练计划.md",
+        "02-题库清单.md",
+        "03-错题本模板.md",
+        "04-模板代码库/",
+        "05-赛前模拟题与题解/"
+      ],
+      "output_dir_layout": "输出/{选手名或队伍}/（训练材料按编号排列）",
+      "notes": ""
+    },
+    {
+      "track_id": "T143",
+      "competition_id": 115,
+      "competition_name": "油气储运工程设计技能大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T144",
+      "competition_id": 116,
+      "competition_name": "“茅以升公益桥”创新设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T145",
+      "competition_id": 117,
+      "competition_name": "微信小程序应用开发赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T146",
+      "competition_id": 118,
+      "competition_name": "全国大学生数学竞赛",
+      "track": "默认赛道",
+      "pipeline": "L2",
+      "default_deliverables": [
+        "01-论文.docx(摘要独立成页)",
+        "02-求解代码/",
+        "03-实验数据/",
+        "04-结果图表/",
+        "05-灵敏度分析章节(含于论文)",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（论文、代码、数据、图表分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T147",
+      "competition_id": 119,
+      "competition_name": "CAR-ASHRAE学生设计竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T148",
+      "competition_id": 120,
+      "competition_name": "世界大学生桥梁设计大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T149",
+      "competition_id": 121,
+      "competition_name": "全国大学生岩土工程竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T150",
+      "competition_id": 122,
+      "competition_name": "全国高等学校人工环境学科奖",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T151",
+      "competition_id": 123,
+      "competition_name": "“谷雨杯”可持续建筑设计竞赛",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T152",
+      "competition_id": 124,
+      "competition_name": "UIA-霍普杯国际大学生建筑设计竞赛",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T153",
+      "competition_id": 125,
+      "competition_name": "“创青春”中国青年创新创业大赛",
+      "track": "默认赛道",
+      "pipeline": "L1",
+      "default_deliverables": [
+        "01-商业计划书.docx",
+        "02-财务三表.xlsx",
+        "03-路演PPT.pptx",
+        "04-项目原型/",
+        "05-源代码/",
+        "06-演示数据/",
+        "07-路演讲稿-8分钟.docx",
+        "07-路演讲稿-5分钟.docx",
+        "08-答辩QA预案.docx",
+        "09-一分钟VCR脚本.docx(可选)",
+        "10-评审报告.md",
+        "11-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T154",
+      "competition_id": 126,
+      "competition_name": "采矿工程专业实践作品大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T155",
+      "competition_id": 127,
+      "competition_name": "“台达杯”国际高校绿色智造大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T156",
+      "competition_id": 128,
+      "competition_name": "菲尼克斯智能技术创新与应用大赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T157",
+      "competition_id": 129,
+      "competition_name": "韩素音国际翻译大赛",
+      "track": "默认赛道",
+      "pipeline": "E1",
+      "default_deliverables": [
+        "01-参赛稿件.docx",
+        "02-针对性训练方案.docx",
+        "03-评分标准对照自评表.xlsx"
+      ],
+      "output_dir_layout": "输出/{项目名}/（稿件、训练方案、自评表）",
+      "notes": ""
+    },
+    {
+      "track_id": "T158",
+      "competition_id": 130,
+      "competition_name": "园冶杯大学生国际竞赛",
+      "track": "默认赛道",
+      "pipeline": "L5",
+      "default_deliverables": [
+        "01-设计概念文档.docx",
+        "02-视觉稿/",
+        "03-设计说明.docx",
+        "04-作品展示展板/",
+        "05-参赛PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（概念文档、视觉稿、说明、展板、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T159",
+      "competition_id": 131,
+      "competition_name": "“花旗杯”金融创新应用大赛",
+      "track": "默认赛道",
+      "pipeline": "L4",
+      "default_deliverables": [
+        "01-调研问卷.docx",
+        "02-样本数据(DEMO标注)/",
+        "03-分析代码/",
+        "04-分析报告.docx",
+        "05-答辩PPT.pptx",
+        "06-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
+      "notes": ""
+    },
+    {
+      "track_id": "T160",
+      "competition_id": 132,
+      "competition_name": "SAMPE中国复合材料系列竞赛",
+      "track": "默认赛道",
+      "pipeline": "L3",
+      "default_deliverables": [
+        "01-设计说明书或技术报告.docx",
+        "02-作品原型或仿真/",
+        "03-源代码/",
+        "04-测试数据与性能对比表.xlsx",
+        "05-展示PPT.pptx",
+        "06-演示视频脚本.docx",
+        "07-实物制作指引.docx(硬件类)",
+        "08-数据真实性清单.md"
+      ],
+      "output_dir_layout": "输出/{项目名}/（报告、原型、代码、测试数据、PPT分目录）",
+      "notes": ""
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema_version": "1.0",
+  "description": "Ares 插件单一事实源 Project Profile（project.json）固化结构。所有产出物（Word/PPT/财务三表/原型/讲稿）中的关键数字必须先查此文件；文件中没有的字段由生成方回填后其他模块方可引用；data_confidence 全程维护。",
+  "rules": [
+    "任何产出物中的关键数字（市场规模、增长率、营收、团队人数、专利数、试点数等）必须从本档案读取，禁止凭空编造",
+    "档案缺失字段由当前生成模块回填本档案后，其他模块方可引用该数字",
+    "data_confidence 分 real（用户提供真实数据）/ estimated（AI估算）/ placeholder（占位待填）三类，新增关键数据时必须同步登记",
+    "financials.years 默认 6 年；起始年营收默认 185-255 万元区间；增长率默认 25%-40% 区间逐年上浮；利润率默认行业均值×1.13-1.4；融资默认 400 万元出让 10%-25%，均可按用户真实数据调整"
+  ],
+  "schema": {
+    "project_name": {"type": "string", "required": true, "desc": "项目全称"},
+    "one_liner": {"type": "string", "required": true, "desc": "一句话简介（产品是什么+为谁+解决什么）"},
+    "slogan": {"type": "string", "required": true, "desc": "口号，直击核心价值，禁空泛文艺，封面与结束页首尾呼应"},
+    "competition": {
+      "type": "object", "required": true,
+      "fields": {
+        "id": {"type": "integer", "required": true, "desc": "competitions.json 中的赛事 id"},
+        "name": {"type": "string", "required": true, "desc": "赛事全称"},
+        "level": {"type": "string", "required": true, "desc": "A1/A2/A3/B1/B2"},
+        "track": {"type": "string", "required": true, "desc": "赛道，须与 tracks.json 中 track 名一致"},
+        "deadline": {"type": "string", "required": false, "desc": "关键截止时间，可空"}
+      }
+    },
+    "pain_points": {"type": "array", "required": true, "item_fields": {"desc": "痛点描述", "evidence": "佐证数据与来源", "mapped_feature": "对应产品功能名"}, "desc": "痛点清单，与产品功能一一对应可追溯"},
+    "solution": {
+      "type": "object", "required": true,
+      "fields": {
+        "features": {"type": "array", "desc": "核心功能列表（只列核心，基础功能不列）"},
+        "tech_stack": {"type": "array", "desc": "技术栈及选型理由"},
+        "innovations": {"type": "array", "desc": "创新点，每条含量化佐证"},
+        "performance_metrics": {"type": "array", "desc": "性能指标（实测值 vs 对标值）"}
+      }
+    },
+    "market": {"type": "object", "required": true, "fields": {"tam": "总市场规模（亿元/万亿元，含来源年份）", "sam": "可服务市场", "som": "初期可获得市场", "growth": "增速及预测", "sources": "数据来源清单（机构+年份+URL）"}, "desc": "市场规模三层测算"},
+    "policy": {"type": "array", "required": false, "desc": "利好政策清单，每条含发布时间/政策名/利好条款/发布机构"},
+    "business_model": {"type": "object", "required": true, "fields": {"revenue_streams": "收入来源及占比", "pricing": "定价体系", "costs": "成本结构"}, "desc": "商业模式"},
+    "competitors": {"type": "array", "required": true, "desc": "竞品清单，2-3直接+1-2间接，各含对比维度数据"},
+    "advantages": {"type": "array", "required": true, "desc": "相对优势，归因到难以复制的壁垒，各配量化佐证"},
+    "financials": {"type": "object", "required": true, "fields": {"revenue_start_wan": "起始年营收（万元）", "growth_rate_range": "年增长率区间如 25%-40%", "margin_ratio_vs_industry": "利润率相对行业均值倍数如 1.2", "years": "预测年数默认6"}, "desc": "财务参数，build_financials.py 读取"},
+    "team": {"type": "array", "required": true, "item_fields": {"name": "姓名", "role": "分工角色", "school": "学院学校", "major": "专业", "contribution": "项目内具体贡献", "achievements": "个人成果"}, "desc": "团队成员与分工"},
+    "advisors": {"type": "array", "required": false, "desc": "指导老师/顾问，含与项目的强相关性和实际指导贡献"},
+    "milestones": {"type": "array", "required": true, "desc": "里程碑时间线，已发生+规划"},
+    "achievements": {"type": "object", "required": true, "fields": {"patents": "专利（真实才填）", "papers": "论文", "pilots": "试点/签约", "awards": "获奖", "partners": "合作伙伴"}, "desc": "已有成果，严禁虚构"},
+    "social_value": {"type": "object", "required": true, "fields": {"employment": "带动就业量化", "education": "教育引领量化", "others": "其他社会价值"}, "desc": "项目社会价值"},
+    "data_confidence": {"type": "object", "required": true, "fields": {"real": "用户提供真实数据清单", "estimated": "AI估算数据清单", "placeholder": "占位待填清单"}, "desc": "数据真实性登记簿，交付时生成《数据真实性清单》"}
+  }
+}

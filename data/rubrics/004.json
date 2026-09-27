@@ -1,0 +1,164 @@
+{
+  "competition_id": 4,
+  "competition_name": "ACM-ICPC",
+  "judging_dimensions": [
+    {
+      "dimension": "解题数（通过题数）",
+      "weight": "客观题：排名首要依据，按通过题数降序排名",
+      "official_wording": "ICPC官方区域赛规则（icpc.global/regionals/rules）：'A team's score is determined by problems solved'——队伍成绩首先由解题数决定。",
+      "scoring_points": [
+        "现场5小时内通过更多题目",
+        "每题仅在首次通过（AC）后计分，未通过题目不计入",
+        "同一队同一题重复通过以首次为准"
+      ],
+      "common_deductions": [
+        "算法复杂度不达标导致TLE（超时）不算通过",
+        "内存超限MLE、答案错误WA均不计分",
+        "罚时策略失当导致同分排序落后"
+      ]
+    },
+    {
+      "dimension": "总用时（含罚时）",
+      "weight": "客观题：解题数相同则按总用时升序排名；每题用时=开赛至首次AC的经过时间+每次被拒提交罚20分钟（编译错误不计罚时）",
+      "official_wording": "ICPC官方区域赛规则：'The time consumed for a solved problem is the time elapsed from the beginning of the contest to the submission of the first accepted run plus 20 penalty minutes for every rejected run for that problem'（每题首次通过用时+每次被拒提交20分钟罚时）；2024-2025赛季规则（ICPC/UCup）：编译错误不加罚时，总罚时为各已通过题罚时之和。",
+      "scoring_points": [
+        "一次性AC可零罚时通过，控制错误提交次数",
+        "罚时只对最终通过的题目累计",
+        "同分情况下总用时少者排名靠前"
+      ],
+      "common_deductions": [
+        "频繁暴力提交试错，单题累积大量20分钟罚时",
+        "编译错误虽不罚时但浪费时间成本"
+      ]
+    },
+    {
+      "dimension": "并列裁定",
+      "weight": "客观题：解题数与总用时均相同时，以最后一次通过提交的时间更早者列前",
+      "official_wording": "ICPC通行排名规则（各区域赛规则一致采用）：以过题数、总罚时之后，比较最后通过题目的最早提交时间【推断：为ICPC各区域通行细则，未逐字核对全部站点原文】。",
+      "scoring_points": [
+        "奖牌线与晋级线上的同分队伍按此裁定",
+        "队长需掌握实时榜单进行终盘决策"
+      ],
+      "common_deductions": [
+        "终盘盲目开难题不交，丢掉并列裁定优势"
+      ]
+    },
+    {
+      "dimension": "奖牌线（金银铜）",
+      "weight": "通过制：区域赛金/银/铜奖大致按参赛队数的约10%/20%/30%比例授予（亚洲区域赛通行做法；EC-Final 2024金28/银56/铜84，恰为10%/20%/30%），其余为优胜奖（Honorable Mention）",
+      "official_wording": "亚洲区域赛与EC-Final通行奖牌比例约10%/20%/30%（知乎参赛者统计与赛事新闻交叉验证）；具体各站奖牌数以当站竞赛手册为准【推断：官方未在公开页固定死比例，个别站点微调】。",
+      "scoring_points": [
+        "达到金线（如名次进入前约10%）即区域赛金奖",
+        "中国区站点竞争激烈，金线过题数逐年水涨船高（如部分站点金线8-10题）"
+      ],
+      "common_deductions": [
+        "同校多队受名额限制（可行性裁定）影响奖牌归属"
+      ]
+    },
+    {
+      "dimension": "晋级通道",
+      "weight": "通过制：区域赛前列队伍晋级洲际决赛（亚洲为EC-Final），EC-Final优胜队伍晋级World Finals（2024年中国区每站点约38个EC-Final晋级名额；WF获奖校晋级名额上限5、其他学校3）",
+      "official_wording": "知乎对2024 ICPC EC-Final的名额统计：'每个赛站38个名额，WF学校晋级名额上限为5，其他为3，不含贡献名额和邀请赛名额'【推断：为社区统计的当年执行口径，非官方章程原文】。",
+      "scoring_points": [
+        "区域赛奖牌/名次决定EC-Final资格",
+        "EC-Final名次决定World Finals出线权"
+      ],
+      "common_deductions": [
+        "校际名额限制：同校多队强队可能因名额分配无法全部晋级"
+      ]
+    }
+  ],
+  "deliverable_requirements": [
+    {
+      "item": "比赛代码提交",
+      "format": "现场经评测系统（如DOMjudge/Kattis/UCup judge）提交，C/C++/Java/Python等允许语言",
+      "page_limit": "未明确",
+      "deadline_note": "仅限比赛5小时内提交，赛后封榜与重测"
+    },
+    {
+      "item": "参赛队伍报名",
+      "format": "每队3名在校生+教练，1台共用计算机",
+      "page_limit": "未明确",
+      "deadline_note": "经网络预选赛/校际选拔获得区域赛资格（中国区各站点）"
+    }
+  ],
+  "process_stages": [
+    {
+      "stage": "网络预选赛/校际选拔",
+      "format": "线上赛，按成绩分配各区域赛站点名额",
+      "notes": "中国区各高校经校内选拔与网络赛出线（如北大ICPC总部协调亚洲区名额）"
+    },
+    {
+      "stage": "区域赛（亚洲区中国站点）",
+      "format": "现场5小时封闭赛，3人1机，约12-13题，机器自动评测",
+      "notes": "2024年亚洲东区站点包括济南、杭州、南京、成都、沈阳、昆明等；南京站冠军浙江大学，成都站前三为北大、清华、浙大"
+    },
+    {
+      "stage": "EC-Final（亚洲东区决赛）",
+      "format": "现场5小时赛，约13题，评出金银铜（2024年12月，上海）",
+      "notes": "2024年金奖28、银奖56、铜奖84"
+    },
+    {
+      "stage": "World Finals（全球总决赛）",
+      "format": "现场5小时赛，决出全球冠亚季军与奖牌",
+      "notes": "2024年World Finals中北京大学（Naive Birds队）获金奖"
+    }
+  ],
+  "review_format": "现场5小时上机竞赛，评测机自动判题，按过题数+总用时（含每错1次罚20分钟）客观排名，无人工评审环节",
+  "judge_preferences": [
+    "客观判题：唯一标准是程序的正确性与时空效率，无主观打分",
+    "策略管理：开题顺序、罚时控制与封榜决策直接影响名次",
+    "团队协作：算法手、码力手、调试手分工与白板沟通效率",
+    "稳定性：强队靠低错误提交率与首小时快速过题建立优势"
+  ],
+  "past_winning_patterns": [
+    "传统强校垄断奖牌：清华、北大、浙大、上交、中科大、复旦等长期包揽中国区金奖与WF名额",
+    "2024年区域赛格局：南京站冠军浙江大学；成都站前三北京大学、清华大学、浙江大学",
+    "EC-Final 2024奖牌结构金28/银56/铜84，中国队占出线主力",
+    "获奖队伍共性：系统化集训队体制（选拔-集训-模拟赛）、Codeforces/AtCoder高频训练、赛模板库化",
+    "三人分工明确（读题/算法设计/编码调试）+教练带队复盘是强队标配",
+    "呈现形式无路演，成绩即排名，金奖线随参赛规模水涨船高（部分站点金线8题以上）"
+  ],
+  "forbidden_or_risky": [
+    "比赛期间禁止访问互联网、使用手机及任何外部资料（现场仅限随队打印的队内纸质资料，具体范围以当站手册为准）",
+    "2024-2025赛季规则明确禁止使用AI/大模型辅助作答，违规取消资格【推断：以当季官方规则原文为准】",
+    "代码抄袭/与其他队伍交流以作弊论处",
+    "同校多队名额限制：校内选拔竞争激烈，重复参赛资格核查严格（每人每年限代表一队）",
+    "赛后重测（rejudge）可能改变排名，奖牌以重测后榜单为准"
+  ],
+  "sources": [
+    {
+      "title": "ICPC Regional Contest Rules（官方规则：过题数+罚时排名原文）",
+      "url": "https://icpc.global/regionals/rules",
+      "accessed": "2026-09-28",
+      "authority": "A"
+    },
+    {
+      "title": "ICPC 2024-2025 Season Rules（UCup：20分钟罚时与编译错误豁免条款）",
+      "url": "https://ucup.ac/rule/2024-2025-season-rules",
+      "accessed": "2026-09-28",
+      "authority": "A"
+    },
+    {
+      "title": "北京大学获第42届ICPC全球总决赛金牌（赛制与奖牌设置新闻）",
+      "url": "https://news.pku.edu.cn",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    },
+    {
+      "title": "如何评价2024 ICPC EC-Final（知乎：各站点晋级WF名额38个、WF校上限5等社区统计）",
+      "url": "https://www.zhihu.com",
+      "accessed": "2026-09-28",
+      "authority": "C"
+    },
+    {
+      "title": "2024 ICPC Asia Nanjing Regional Contest Standings（官方排名页：浙大冠军）",
+      "url": "https://icpc.global",
+      "accessed": "2026-09-28",
+      "authority": "A"
+    }
+  ],
+  "confidence": "high",
+  "last_updated": "2026-09-28",
+  "notes": "赛制（5小时/3人1机）、计分与罚时规则（每题首次AC用时+每次被拒提交罚20分钟、编译错误豁免）、排名规则（过题数→总用时→最后通过时间）来自ICPC官方规则页与2024-2025赛季规则（authority A）并经CERC等多站点交叉验证。奖牌比例约10%/20%/30%与各站38个晋级名额为区域赛通行做法/社区统计，官方未固定公布，已标注【推断】。题目数量区域赛通常12-13题（EC-Final 13题），随站点浮动。"
+}

@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 样例输出（验证脚本产物，不入库）
+skills/ares-docx/scripts/样例输出/
+skills/ares-data/scripts/样例输出/
+
+# 工作产物
+输出/
+project.json
+*.log
+
+# 系统
+Thumbs.db
+.DS_Store

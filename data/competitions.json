@@ -1,0 +1,2698 @@
+[
+  {
+    "id": 1,
+    "name": "中国国际大学生创新大赛",
+    "aliases": [
+      "互联网+",
+      "国创赛",
+      "创新大赛"
+    ],
+    "level": "A1",
+    "category": "创业",
+    "pipeline": "L1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 2,
+    "name": "“挑战杯”课外学术科技作品竞赛",
+    "aliases": [
+      "挑战杯学术",
+      "大挑"
+    ],
+    "level": "A1",
+    "category": "理科",
+    "pipeline": "学术科技（按作品类型路由L2/L3）",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": "三类作品（自然科学论文/哲社报告/科技发明制作）分别路由 L2/L4/L3"
+  },
+  {
+    "id": 3,
+    "name": "“挑战杯”创业计划大赛",
+    "aliases": [
+      "挑战杯创业",
+      "小挑",
+      "创青春杯"
+    ],
+    "level": "A1",
+    "category": "创业",
+    "pipeline": "L1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 4,
+    "name": "ACM-ICPC",
+    "aliases": [
+      "ICPC",
+      "国际大学生程序设计竞赛"
+    ],
+    "level": "A2",
+    "category": "程序",
+    "pipeline": "L6",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 5,
+    "name": "全国大学生数学建模竞赛",
+    "aliases": [
+      "国赛数模",
+      "CUMCM",
+      "数模国赛"
+    ],
+    "level": "A2",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 6,
+    "name": "全国大学生电子设计竞赛",
+    "aliases": [
+      "电赛",
+      "TI杯"
+    ],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 7,
+    "name": "中国大学生医学技术技能大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "实验技能",
+    "pipeline": "E2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 8,
+    "name": "全国大学生机械创新设计大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 9,
+    "name": "全国大学生结构设计竞赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 10,
+    "name": "全国大学生广告艺术大赛",
+    "aliases": [
+      "大广赛"
+    ],
+    "level": "A2",
+    "category": "艺术",
+    "pipeline": "L5",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 11,
+    "name": "全国大学生智能汽车竞赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 12,
+    "name": "电子商务三创赛",
+    "aliases": [
+      "三创赛"
+    ],
+    "level": "A2",
+    "category": "创业",
+    "pipeline": "L1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 13,
+    "name": "节能减排社会实践与科技竞赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 14,
+    "name": "工程实践与创新能力大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 15,
+    "name": "全国大学生物流设计大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "商科",
+    "pipeline": "L4",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 16,
+    "name": "外研社英语系列赛（4项）",
+    "aliases": [
+      "外研社国才杯",
+      "国才杯"
+    ],
+    "level": "A2",
+    "category": "人文语言",
+    "pipeline": "E1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 17,
+    "name": "华灿奖",
+    "aliases": [],
+    "level": "A2",
+    "category": "艺术",
+    "pipeline": "L5",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 18,
+    "name": "大创年会展示",
+    "aliases": [],
+    "level": "A2",
+    "category": "创业",
+    "pipeline": "L1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 19,
+    "name": "全国大学生化工设计竞赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 20,
+    "name": "全国大学生机器人大赛（RM/RC）",
+    "aliases": [
+      "RoboMaster",
+      "RoboCon",
+      "机甲大师"
+    ],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 21,
+    "name": "市场调查与分析大赛",
+    "aliases": [
+      "市调大赛",
+      "正大杯"
+    ],
+    "level": "A2",
+    "category": "商科",
+    "pipeline": "L4",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 22,
+    "name": "“西门子杯”智能制造挑战赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 23,
+    "name": "服务外包创新创业大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "创业",
+    "pipeline": "L1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 24,
+    "name": "中国高校计算机大赛（4项）",
+    "aliases": [
+      "C4",
+      "高校计算机大赛"
+    ],
+    "level": "A2",
+    "category": "程序",
+    "pipeline": "L6程序/L3工科",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": "含大数据挑战赛、团体程序设计天梯赛、移动应用创新赛、网络技术挑战赛，逐项路由"
+  },
+  {
+    "id": 25,
+    "name": "地质技能竞赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "实验技能",
+    "pipeline": "E2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 26,
+    "name": "光电设计竞赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 27,
+    "name": "集成电路创新创业大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 28,
+    "name": "金相技能大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "实验技能",
+    "pipeline": "E2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 29,
+    "name": "信息安全竞赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 30,
+    "name": "周培源力学竞赛",
+    "aliases": [
+      "力学竞赛"
+    ],
+    "level": "A2",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 31,
+    "name": "机械工程创新创意大赛（5项A2）",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 32,
+    "name": "RoboCup中国赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 33,
+    "name": "“中国软件杯”软件设计大赛",
+    "aliases": [
+      "软件杯"
+    ],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 34,
+    "name": "中美青年创客大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3工科+L1创业",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": "作品主体走L3，商业计划材料按L1补齐"
+  },
+  {
+    "id": 35,
+    "name": "RAICOM睿抗",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 36,
+    "name": "“大唐杯”信息通信技术大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 37,
+    "name": "华为ICT大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 38,
+    "name": "嵌入式芯片与系统设计竞赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 39,
+    "name": "全国大学生生命科学竞赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "理科",
+    "pipeline": "L2理科/L1创业",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": "创新研究类走L2，创业类走L1"
+  },
+  {
+    "id": 40,
+    "name": "物理实验竞赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 41,
+    "name": "BIM毕业设计创新大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 42,
+    "name": "商业精英挑战赛（4项）",
+    "aliases": [],
+    "level": "A2",
+    "category": "商科",
+    "pipeline": "L4商科/L1创业",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": "品牌策划/会展/国际贸易走L4，创新创业赛道走L1"
+  },
+  {
+    "id": 43,
+    "name": "“学创杯”创业综合模拟大赛",
+    "aliases": [
+      "学创杯"
+    ],
+    "level": "A2",
+    "category": "模拟经营",
+    "pipeline": "E3模拟+L1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": "软件模拟经营走E3，商业计划书部分走L1"
+  },
+  {
+    "id": 44,
+    "name": "智能机器人创意大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 45,
+    "name": "中国机器人及人工智能大赛",
+    "aliases": [],
+    "level": "A2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 46,
+    "name": "交通科技大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 47,
+    "name": "先进成图技术与产品信息建模大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 48,
+    "name": "三维数字化创新设计大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 49,
+    "name": "中国大学生计算机设计大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3工科/L5艺术",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 50,
+    "name": "人工智能创意赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 51,
+    "name": "蓝桥杯",
+    "aliases": [
+      "蓝桥"
+    ],
+    "level": "A3",
+    "category": "程序",
+    "pipeline": "L6",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 52,
+    "name": "米兰设计周高校展",
+    "aliases": [],
+    "level": "A3",
+    "category": "艺术",
+    "pipeline": "L5",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 53,
+    "name": "未来设计师·数字艺术设计大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "艺术",
+    "pipeline": "L5",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 54,
+    "name": "机械工程创新创意大赛（4项A3）",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 55,
+    "name": "会计与商业管理案例竞赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "商科",
+    "pipeline": "L4",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 56,
+    "name": "中国好创意数字艺术设计大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "艺术",
+    "pipeline": "L5",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 57,
+    "name": "“21世纪杯”英语演讲",
+    "aliases": [
+      "21世纪杯"
+    ],
+    "level": "A3",
+    "category": "人文语言",
+    "pipeline": "E1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 58,
+    "name": "iCAN创新创业大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "创业",
+    "pipeline": "L1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 59,
+    "name": "“工行杯”金融科技创新大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "商科",
+    "pipeline": "L4",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 60,
+    "name": "中华经典诵写讲大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "人文语言",
+    "pipeline": "E1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 61,
+    "name": "跨文化能力大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "人文语言",
+    "pipeline": "E1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 62,
+    "name": "百度之星",
+    "aliases": [],
+    "level": "A3",
+    "category": "程序",
+    "pipeline": "L6",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 63,
+    "name": "工业设计大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "艺术",
+    "pipeline": "L5",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 64,
+    "name": "水利创新设计大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 65,
+    "name": "化工实验大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 66,
+    "name": "化学实验创新设计竞赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 67,
+    "name": "计算机系统能力大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 68,
+    "name": "花园设计建造竞赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "艺术",
+    "pipeline": "L5",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 69,
+    "name": "物联网设计竞赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 70,
+    "name": "信息安全与对抗技术竞赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 71,
+    "name": "测绘创新创业智能大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 72,
+    "name": "统计建模大赛",
+    "aliases": [
+      "统计建模"
+    ],
+    "level": "A3",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 73,
+    "name": "能源经济学术创意大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "商科",
+    "pipeline": "L4",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 74,
+    "name": "基础医学创新研究暨实验设计论坛",
+    "aliases": [],
+    "level": "A3",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 75,
+    "name": "数字媒体科技作品竞赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "艺术",
+    "pipeline": "L5艺术/L3工科",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 76,
+    "name": "税收风险管控案例大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "商科",
+    "pipeline": "L4",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 77,
+    "name": "企业竞争模拟大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "模拟经营",
+    "pipeline": "E3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 78,
+    "name": "数智化企业经营沙盘大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "模拟经营",
+    "pipeline": "E3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 79,
+    "name": "数字建筑创新应用大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 80,
+    "name": "全球校园AI算法精英大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "程序",
+    "pipeline": "L6",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 81,
+    "name": "智能农业装备创新大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 82,
+    "name": "“科云杯”财会职业能力大赛",
+    "aliases": [],
+    "level": "A3",
+    "category": "商科",
+    "pipeline": "L4",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 83,
+    "name": "美国大学生数学建模竞赛",
+    "aliases": [
+      "美赛",
+      "MCM",
+      "ICM"
+    ],
+    "level": "A3",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 84,
+    "name": "全国大学生英语竞赛",
+    "aliases": [],
+    "level": "B1",
+    "category": "人文语言",
+    "pipeline": "E1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 85,
+    "name": "成图大赛个人赛",
+    "aliases": [],
+    "level": "B1",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 86,
+    "name": "金相技能大赛个人赛",
+    "aliases": [],
+    "level": "B1",
+    "category": "实验技能",
+    "pipeline": "E2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 87,
+    "name": "RAICOM个人赛",
+    "aliases": [],
+    "level": "B1",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 88,
+    "name": "天梯赛个人赛",
+    "aliases": [],
+    "level": "B1",
+    "category": "程序",
+    "pipeline": "L6",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 89,
+    "name": "湖北省物理实验创新设计竞赛",
+    "aliases": [],
+    "level": "B1",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 90,
+    "name": "湖北省信息技术创新大赛",
+    "aliases": [],
+    "level": "B1",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 91,
+    "name": "湖北省生物实验技能竞赛",
+    "aliases": [],
+    "level": "B1",
+    "category": "实验技能",
+    "pipeline": "E2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 92,
+    "name": "湖北省化学实验技能大赛",
+    "aliases": [],
+    "level": "B1",
+    "category": "实验技能",
+    "pipeline": "E2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 93,
+    "name": "湖北省文化创意设计大赛",
+    "aliases": [],
+    "level": "B1",
+    "category": "艺术",
+    "pipeline": "L5",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 94,
+    "name": "湖北新闻传播教育创新实践技能竞赛",
+    "aliases": [],
+    "level": "B1",
+    "category": "人文语言",
+    "pipeline": "E1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 95,
+    "name": "湖北省网络空间安全实践能力竞赛",
+    "aliases": [],
+    "level": "B1",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 96,
+    "name": "湖北高校美术与设计大展",
+    "aliases": [],
+    "level": "B1",
+    "category": "艺术",
+    "pipeline": "L5",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 97,
+    "name": "海洋航行器设计与制作大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 98,
+    "name": "全国混凝土设计大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 99,
+    "name": "中国汽车工程学会巴哈大赛（含电动）",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 100,
+    "name": "中国大学生方程式系列赛事（3项）",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 101,
+    "name": "制冷空调行业大学生科技竞赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 102,
+    "name": "矿物加工工程实践作品大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 103,
+    "name": "GIS应用技能竞赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 104,
+    "name": "安全科学与工程实践与创新作品大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 105,
+    "name": "“光威杯”高性能复合材料科技创新竞赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 106,
+    "name": "高分子材料实验实践大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 107,
+    "name": "无机非金属材料基础知识大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 108,
+    "name": "焊接创新大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 109,
+    "name": "湖北省青年志愿服务项目大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "创业",
+    "pipeline": "L1创业（公益方向）",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": "公益项目按L1产出计划书，社会价值章节加重"
+  },
+  {
+    "id": 110,
+    "name": "全国大学生版权征文活动",
+    "aliases": [],
+    "level": "B2",
+    "category": "人文语言",
+    "pipeline": "E1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 111,
+    "name": "全国就业力大比拼",
+    "aliases": [],
+    "level": "B2",
+    "category": "人文语言",
+    "pipeline": "E1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 112,
+    "name": "制药工程设计竞赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 113,
+    "name": "化学实验邀请赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 114,
+    "name": "中国大学生程序设计竞赛（CCPC）",
+    "aliases": [
+      "CCPC"
+    ],
+    "level": "B2",
+    "category": "程序",
+    "pipeline": "L6",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 115,
+    "name": "油气储运工程设计技能大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 116,
+    "name": "“茅以升公益桥”创新设计大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 117,
+    "name": "微信小程序应用开发赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 118,
+    "name": "全国大学生数学竞赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "理科",
+    "pipeline": "L2",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 119,
+    "name": "CAR-ASHRAE学生设计竞赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 120,
+    "name": "世界大学生桥梁设计大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 121,
+    "name": "全国大学生岩土工程竞赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 122,
+    "name": "全国高等学校人工环境学科奖",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 123,
+    "name": "“谷雨杯”可持续建筑设计竞赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "艺术",
+    "pipeline": "L5",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 124,
+    "name": "UIA-霍普杯国际大学生建筑设计竞赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "艺术",
+    "pipeline": "L5",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 125,
+    "name": "“创青春”中国青年创新创业大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "创业",
+    "pipeline": "L1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 126,
+    "name": "采矿工程专业实践作品大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 127,
+    "name": "“台达杯”国际高校绿色智造大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 128,
+    "name": "菲尼克斯智能技术创新与应用大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 129,
+    "name": "韩素音国际翻译大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "人文语言",
+    "pipeline": "E1",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 130,
+    "name": "园冶杯大学生国际竞赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "艺术",
+    "pipeline": "L5",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 131,
+    "name": "“花旗杯”金融创新应用大赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "商科",
+    "pipeline": "L4",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  },
+  {
+    "id": 132,
+    "name": "SAMPE中国复合材料系列竞赛",
+    "aliases": [],
+    "level": "B2",
+    "category": "工科",
+    "pipeline": "L3",
+    "organizer": "",
+    "official_url": "",
+    "cycle": "年度",
+    "typical_timeline": {
+      "校赛": "",
+      "省赛": "",
+      "国赛": ""
+    },
+    "tracks": [],
+    "deliverables_required": [],
+    "team_rules": "",
+    "notes": ""
+  }
+]
