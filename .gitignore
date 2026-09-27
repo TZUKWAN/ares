@@ -15,3 +15,6 @@ project.json
 # 系统
 Thumbs.db
 .DS_Store
+
+# 调研子代理临时抓取缓存
+.tmp_search/
