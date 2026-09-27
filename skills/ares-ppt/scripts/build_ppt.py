@@ -15,6 +15,7 @@ import argparse
 import io
 import json
 import os
+import re as _re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -159,10 +160,19 @@ def default_outline(p):
                               [(str(c.get("name", "竞品%d" % i)), False,
                                 [str(c.get("perf", "—")), str(c.get("cost", "—")), str(c.get("deploy", "—")), str(c.get("service", "—"))])
                                for i, c in enumerate(compet[:3])])})
+    streams = biz.get("revenue_streams", []) or ["硬件", "服务"]
+    pcts = []
+    for r in streams:
+        m = _re.search(r"(\d+(?:\.\d+)?)\s*%", str(r))
+        pcts.append(float(m.group(1)) if m else None)
+    if pcts and all(x is not None for x in pcts) and abs(sum(pcts) - 100) < 1:
+        pie_vals = pcts
+    else:
+        pie_vals = [round(100.0 / len(streams), 1)] * len(streams)
     pages.append({"layout": "chart_pie", "title": "两条收入曲线构成盈利模型",
-                  "categories": [str(r) for r in (biz.get("revenue_streams", []) or ["硬件", "服务"])],
+                  "categories": [_flat(r, "收入流")[:12] for r in streams],
                   "series_name": "收入占比",
-                  "values": [60, 40][:max(1, len(biz.get("revenue_streams", []) or []))] or [60, 40],
+                  "values": pie_vals,
                   "note_lines": [_flat(biz.get("pricing"), "定价体系见计划书")[:100]],
                   "conclusion": "毛利率高于行业均值，第二曲线占比逐季提升"})
     pages.append({"layout": "three_columns", "title": "线下沉、上协同，获客成本持续下降",

@@ -183,6 +183,7 @@ def _chart_note(slide, theme, c, chart):
     note = c.get("note_lines") or []
     tb = _box(slide, 8.6, 1.9, 3.9, 4.6)
     tf = _tf(tb)
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     for i, line in enumerate(note):
         _para(tf, line, 14, theme["text"], first=(i == 0))
     _fit(c["page_no"], "图表页侧注", "\n".join(note), 3.9, 4.6, 14)
@@ -243,6 +244,15 @@ def chart_pie(slide, theme, c):
     chart.legend.position = XL_LEGEND_POSITION.RIGHT
     chart.legend.include_in_layout = False
     chart.legend.font.size = Pt(13)
+    plot = chart.plots[0]
+    plot.has_data_labels = True
+    labels = plot.data_labels
+    labels.show_percentage = True
+    labels.show_value = False
+    labels.number_format = "0%"
+    labels.number_format_is_linked = False
+    labels.font.size = Pt(13)
+    labels.font.name = FONT
     series = chart.plots[0].series[0]
     palette = (theme["primary"], theme["accent"], theme["muted"], theme["light"])
     for i, point in enumerate(series.points):
@@ -255,7 +265,9 @@ def chart_pie(slide, theme, c):
 def comparison_matrix(slide, theme, c):
     page_chrome(slide, theme, c["title"], c["page_no"], c["total"], c["project_name"])
     dims = c["dimensions"]
-    cols = c["columns"]  # [(名称, 是否本项目, [各维度取值])]
+    cols = [col for col in c["columns"]
+            if not all(str(v).strip() in ("—", "-", "", "无", "N/A") for v in col[2])]
+    cols = cols or c["columns"]  # 兜底：全部占位时保留原列
     rows, cols_n = len(dims) + 1, len(cols) + 1
     tbl_shape = slide.shapes.add_table(rows, cols_n, In(0.9), In(1.8), In(11.5), In(4.6))
     table = tbl_shape.table

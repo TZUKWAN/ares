@@ -87,3 +87,27 @@
 
 - 用户手改档案（营收 200→230、融资 400→500、股权 15%→18%）后执行 /ares-sync：9 个文件正确传播（三表重算勾稽 PASS、PPT 财务页重渲、BP 八章与表 8-1、两版讲稿、QA/真实性清单最小订正），35 个文件字节原样；正则残留检索旧数字 0 命中；一致性扫描 0。
 - 反馈 4 条已修复：build_financials 融资参数真正从档案读取（funding_wan/equity_stake_pct，高危）；consistency_check 纳入 docx 表格文本（实测抓到表格内矛盾数字）；ares-sync 映射补 08/11/pages.json 并明确"引用即同步"原则；生成日志落盘位置定义为 输出/生成日志.md。
+
+## 阶段F 第2轮（T6.2 建模赛 2024 国赛A题）— 通过（2026-09-28）
+
+- L2 线 6 项交付齐备：论文（摘要独立成页、8图9表、数字与代码输出同源）、8 模块求解代码（run_all 一键复现，395s 重跑 10 个数据文件哈希一致）、官方模板实验数据、8 幅 300dpi 图表、灵敏度分析（3参数±10/20%）、数据真实性清单。
+- 官方原题从 mcm.edu.cn 下载核实，纠正用户转述两处偏差（直径9m非半径、把手中心）并写入假设节；结果量级与公开优秀解法互证。
+- 模拟评审 2 轮：首轮 2 个 P0（缺候选模型对比、数据不符）修复后复检 92.8 分，P0 清零。
+- 反馈已修复：add_formula 公式编号参数生效、ares-modeling 补质检适配口径与官方题面渠道、consistency_check 文档补 docx 表格说明。
+
+## 阶段F 第5轮（跨平台 AGENTS.md 触发 + 全插件扫描）— 通过（2026-09-28）
+
+- 仅 3 行 AGENTS.md 指引即完成 建档（validate_profile 0）+ L4 线调研问卷产出（check_style 0 一次过）；全程自然语言触发，未用 Commands/Agents/Hooks。
+- 全插件客观扫描：verify.py all 四阶段 170 项断言全 PASS；round1/3/4 共 30 份文本交付物机扫 30/30 零违禁；rubric 132/132 PASS。
+- 反馈 6 条已修复：check_style --strict 短行豁免（封面主副标题破折号）、validate_profile 非商业线必填放宽（L2/L5/L6/E1/E2 商业字段降级为警告）、tracks.json id21 补本科/研究生组、AGENTS.md 片段补根路径与单项模式提示、L4 问卷机扫豁免说明、建模线口径文档化。
+
+## 全量复测（2026-09-28）— 全绿
+
+- verify.py all（A/C/D/E 170+ 断言）PASS；rubric 132/132 PASS。
+- PPT 视觉验收终轮 21/21 全过（visual-judge 判定 deliverable_ready=true）：第3页占位列自动隐藏、第13页饼图百分比标签+侧注居中均已确认修复。
+- 五轮真实使用测试累计 36 条反馈全部闭环。
+
+## 平台冒烟记录（T7.1 DoD：≥2 平台）
+
+- 平台一（类 ZCode/Claude Code，Commands+Skills 全量）：第1/3/4轮 加载→触发（/ares-start、/ares-ppt、/ares-sync）→产出 全部成功。
+- 平台二（Codex 式，仅 AGENTS.md 指引）：第5轮 加载→自然语言触发→产出 成功。
