@@ -12,13 +12,28 @@ verify.py — Ares 插件分阶段验收脚本（阶段F全量复测也复用本
 import io
 import json
 import os
+import re
 import subprocess
+import shutil
 import sys
 import tempfile
+import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))          # ares/ 插件根
 FAILURES = []
+WORK_TMP = os.path.join(ROOT, ".verification-tmp")
+
+
+def workspace_mkstemp(suffix=""):
+    os.makedirs(WORK_TMP, exist_ok=True)
+    fd, path = tempfile.mkstemp(suffix=suffix, dir=ROOT)
+    return fd, path
+
+
+def workspace_mkdtemp():
+    os.makedirs(WORK_TMP, exist_ok=True)
+    return WORK_TMP
 
 
 def check(stage, name, cond, detail=""):
@@ -96,7 +111,7 @@ def verify_A():
           os.path.isfile(os.path.join(ROOT, "skills/ares/references/profile-schema.json")))
     schema = load_json("skills/ares/references/profile-schema.json")
     check("A/T1.4", "schema 含字段说明", "schema" in schema and "rules" in schema)
-    fd, tmp = tempfile.mkstemp(suffix=".json")
+    fd, tmp = workspace_mkstemp(suffix=".json")
     os.close(fd)
     try:
         with io.open(tmp, "w", encoding="utf-8") as f:
@@ -115,13 +130,169 @@ def verify_A():
             "achievements": {"patents": ["p"], "pilots": ["pl"], "papers": [], "awards": [], "partners": []},
             "social_value": {"employment": "e", "education": "d", "others": []},
             "data_confidence": {"real": ["r"], "estimated": ["e"], "placeholder": ["p"]},
+            "evidence": {
+                "sources": [{"id": "s1", "title": "测试公开来源", "org": "国务院门户网站",
+                             "url": "https://www.gov.cn/", "published": "2026-01-01",
+                             "accessed": "2026-10-02", "authority": "A", "independent_group": "official"}],
+                "claims": [
+                    {"id": "c1", "field": "project_name", "status": "real", "source_ids": ["s1"]},
+                    {"id": "c2", "field": "market.tam", "status": "estimated", "source_ids": ["s1"],
+                     "method": "测试档案仅用于校验结构"},
+                    {"id": "c3", "field": "team[0]", "status": "placeholder", "source_ids": [],
+                     "rationale": "测试档案不要求真实成员信息"},
+                ],
+            },
         }
         with io.open(tmp, "w", encoding="utf-8") as f:
             json.dump(full, f, ensure_ascii=False)
         rc, out = run_py("scripts/validate_profile.py", [tmp])
         check("A/T1.4", "完整档案→校验通过+退出码0", rc == 0 and "校验通过" in out, "rc=%d %s" % (rc, out[:200]))
+        full["evidence"]["sources"][0]["url"] = "bad url"
+        with io.open(tmp, "w", encoding="utf-8") as f:
+            json.dump(full, f, ensure_ascii=False)
+        rc, out = run_py("scripts/validate_evidence.py", [tmp])
+        check("A/T1.4", "非法来源 URL 被证据门禁拦截", rc == 1 and "http(s) URL" in out, out[:200])
+        full["evidence"]["sources"][0]["url"] = "https://www.gov.cn/"
+        full["evidence"]["sources"].append({
+            "id": "s2", "title": "同一来源组的第二条来源", "org": "同一机构",
+            "url": "https://www.gov.cn/", "accessed": "2026-10-02",
+            "authority": "A", "independent_group": "official",
+        })
+        full["evidence"]["claims"].append({
+            "id": "c4", "field": "project_name", "status": "real",
+            "source_ids": ["s1", "s2"], "critical": True,
+        })
+        with io.open(tmp, "w", encoding="utf-8") as f:
+            json.dump(full, f, ensure_ascii=False)
+        rc, out = run_py("scripts/validate_evidence.py", [tmp])
+        check("A/T1.4", "关键结论缺少独立来源组被拦截",
+              rc == 1 and "independent_group" in out, out[:200])
+        full["evidence"]["sources"][1]["independent_group"] = "secondary"
+        with io.open(tmp, "w", encoding="utf-8") as f:
+            json.dump(full, f, ensure_ascii=False)
+        scorecard_out = tmp + ".scorecard"
+        os.makedirs(scorecard_out, exist_ok=True)
+        rc, out = run_py("scripts/build_scorecard.py", ["--profile", tmp, "--output-dir", scorecard_out])
+        scorecard_json = os.path.join(scorecard_out, "评分覆盖矩阵.json")
+        scorecard = load_json(scorecard_json) if os.path.isfile(scorecard_json) else {}
+        check("A/T1.4", "评分覆盖矩阵生成且不虚报覆盖",
+              rc == 0 and scorecard.get("formal_ready") is False and scorecard.get("coverage", {}).get("total_points", 0) > 0,
+              out[:200])
+        rc, out = run_py("scripts/build_scorecard.py", ["--profile", tmp, "--output-dir", scorecard_out, "--strict"])
+        check("A/T1.4", "严格评分门禁拦截未覆盖评分点",
+              rc == 1 and "正式提交门禁失败" in out, out[:260])
+        evidence_request_out = tmp + ".evidence-request.json"
+        rc, out = run_py("scripts/build_evidence_request.py", [
+            "--profile", tmp, "--scorecard", scorecard_json, "--out", evidence_request_out])
+        request = load_json(evidence_request_out) if os.path.isfile(evidence_request_out) else {}
+        check("A/T1.4", "评分缺口生成可执行证据补交清单",
+              rc == 0 and request.get("gap_count", 0) > 0 and os.path.isfile(os.path.splitext(evidence_request_out)[0] + ".md"),
+              out[:260])
+        gate_report = tmp + ".gate.json"
+        rc, out = run_py("scripts/final_gate.py", [
+            "--profile", tmp, "--output-dir", scorecard_out, "--no-visual", "--report", gate_report])
+        gate = load_json(gate_report) if os.path.isfile(gate_report) else {}
+        check("A/T1.4", "最终门禁汇总所有步骤并保留失败证据",
+              rc == 1 and gate.get("formal_ready") is False and len(gate.get("steps", [])) == 5,
+              out[:260])
+        rc, out = run_py("scripts/validate_evidence.py", [tmp, "--strict"])
+        check("A/T1.4", "正式证据门禁拦截缺少原文/哈希/评分引用的结论",
+              rc == 1 and "supporting_quote" in out and "content_hash" in out,
+              out[:300])
+        hash_evidence = tmp + ".evidence.txt"
+        with io.open(hash_evidence, "w", encoding="utf-8") as f:
+            f.write("真实来源摘录，用于哈希匹配负例校验。")
+        c1 = full["evidence"]["claims"][0]
+        c1.update({"supporting_quote": "真实来源摘录，用于哈希匹配负例校验。", "retrieved_at": "2026-10-05",
+                   "content_hash": "0" * 64, "rubric_refs": ["解决真问题的程度：痛点是否真实、与现有方案对比优势"],
+                   "output_refs": ["sample.docx"], "evidence_files": [hash_evidence]})
+        with io.open(tmp, "w", encoding="utf-8") as f:
+            json.dump(full, f, ensure_ascii=False)
+        rc, out = run_py("scripts/validate_evidence.py", [tmp, "--strict"])
+        check("A/T1.4", "严格门禁校验内容哈希与证据文件一致",
+              rc == 1 and "SHA-256" in out, out[:320])
+        c1["normalized_value"] = 10
+        c1["value_unit"] = "人"
+        full["evidence"]["claims"].append({
+            "id": "c-conflict", "field": "project_name", "status": "real", "source_ids": ["s1"],
+            "supporting_quote": "同一字段冲突负例来源摘录。", "retrieved_at": "2026-10-05",
+            "content_hash": "0" * 64, "rubric_refs": ["解决真问题的程度：痛点是否真实、与现有方案对比优势"],
+            "output_refs": ["sample.docx"], "evidence_files": [hash_evidence],
+            "normalized_value": 12, "value_unit": "人",
+        })
+        with io.open(tmp, "w", encoding="utf-8") as f:
+            json.dump(full, f, ensure_ascii=False)
+        rc, out = run_py("scripts/validate_evidence.py", [tmp, "--strict"])
+        check("A/T1.4", "严格门禁拦截同一字段跨来源数值冲突",
+              rc == 1 and "矛盾" in out, out[:320])
+        shutil.rmtree(scorecard_out, ignore_errors=True)
+
+        # T1.5 deterministic catalogue-only competition matcher
+        match_md = tmp + ".match.md"
+        rc, out = run_py("scripts/match_competition.py",
+                         ["--request", "数模国赛", "--markdown", match_md])
+        try:
+            matched = json.loads(out)
+        except ValueError:
+            matched = {}
+        candidates = matched.get("candidates") or []
+        check("A/T1.5", "赛事别名命中数学建模竞赛",
+              rc == 0 and candidates and candidates[0].get("id") == 5 and candidates[0].get("confidence") == "high",
+              out[:220])
+        check("A/T1.5", "匹配结果带赛道与交付物预览",
+              bool(candidates and candidates[0].get("recommended_track") and
+                   candidates[0]["recommended_track"].get("deliverable_count", 0) >= 1))
+        check("A/T1.5", "候选数最多 3 且生成 Markdown 审阅结果",
+              len(candidates) <= 3 and os.path.isfile(match_md))
+        rc, out = run_py("scripts/match_competition.py", ["--request", "火星殖民地竞赛方向"])
+        try:
+            unmatched = json.loads(out)
+        except ValueError:
+            unmatched = {}
+        check("A/T1.5", "未知需求明确标记低置信度",
+              rc == 0 and unmatched.get("top_confidence") == "low" and unmatched.get("warnings"), out[:220])
+        runtime_path = tmp + ".runtime.json"
+        rc, out = run_py("scripts/doctor.py", ["--out", runtime_path])
+        runtime = load_json(runtime_path) if os.path.isfile(runtime_path) else {}
+        check("A/T1.6", "环境自检生成真实运行记录",
+              rc == 0 and os.path.isfile(runtime_path) and "capabilities" in runtime and "required_modules" in runtime,
+              out[:220])
+        check("A/T1.6", "环境自检不把可选能力冒充必需能力",
+              all("available" in item for item in runtime.get("optional_modules", [])))
+        low_out = tmp + ".low-context"
+        round1_dir = os.path.join(os.path.dirname(ROOT), "ares-e2e", "round1")
+        rc, out = run_py("scripts/smoke_low_context.py", [
+            "--request", "数模国赛 A 题，生成论文和结果图表",
+            "--project-dir", round1_dir,
+            "--out", low_out,
+        ])
+        low_report = os.path.join(low_out, "smoke-report.json")
+        low = load_json(low_report) if os.path.isfile(low_report) else {}
+        check("A/T1.7", "低上下文状态/匹配/档案 smoke 通过",
+              rc == 0 and low.get("passed") is True and len(low.get("steps", [])) >= 5,
+              out[-300:])
+        migration_path = tmp + ".migration.json"
+        rc, out = run_py("scripts/migrate_profile.py", [
+            "--profile", os.path.join(round1_dir, "project.json"), "--out", migration_path])
+        migration = load_json(migration_path) if os.path.isfile(migration_path) else {}
+        check("A/T1.8", "旧档案迁移报告完成且不虚报正式就绪",
+              rc == 0 and migration.get("migration_complete") is True and migration.get("formal_ready") is False,
+              out[-300:])
+        state_guard_dir = tmp + ".state-guards"
+        rc, out = run_py("scripts/run_state.py", ["init", "--project-dir", state_guard_dir, "--request", "状态机负例"])
+        rc_skip, out_skip = run_py("scripts/run_state.py", ["advance", "--project-dir", state_guard_dir, "--stage", "profile", "--status", "done", "--evidence", "x"])
+        rc_empty, out_empty = run_py("scripts/run_state.py", ["advance", "--project-dir", state_guard_dir, "--stage", "match", "--status", "done"])
+        rc_ok, _ = run_py("scripts/run_state.py", ["advance", "--project-dir", state_guard_dir, "--stage", "match", "--status", "done", "--evidence", "match.md"])
+        check("A/T1.9", "状态机拦截越级/空证据并允许合法推进",
+              rc == 0 and rc_skip == 1 and rc_empty == 1 and rc_ok == 0,
+              (out_skip + out_empty)[-300:])
     finally:
-        os.unlink(tmp)
+        for cleanup_path in (tmp, tmp + ".match.md", tmp + ".runtime.json", tmp + ".low-context", tmp + ".migration.json", tmp + ".evidence.txt", tmp + ".state-guards", tmp + ".evidence-request.json", tmp + ".evidence-request.md", tmp + ".gate.json"):
+            if os.path.exists(cleanup_path):
+                if os.path.isdir(cleanup_path):
+                    shutil.rmtree(cleanup_path, ignore_errors=True)
+                else:
+                    os.unlink(cleanup_path)
 
 
 # ---------------------------------------------------------------- 阶段C
@@ -141,7 +312,7 @@ def verify_C():
             check("C/SKILL", "skills/%s 六要素齐全" % sk, not missing, "缺 %s" % missing)
             check("C/SKILL", "skills/%s 有 YAML frontmatter" % sk, txt.startswith("---"))
 
-    tmpdir = tempfile.mkdtemp()
+    tmpdir = workspace_mkdtemp()
 
     # T3.1 写作纪律机扫：违规/合规两份样张
     bad = io.open(os.path.join(tmpdir, "bad.md"), "w", encoding="utf-8")
@@ -171,6 +342,10 @@ def verify_C():
         check("C/T3.3", "含自动目录域", "TOC" in xml)
         check("C/T3.3", "页眉页脚页码域", "PAGE" in d.sections[0].footer._element.xml)
         check("C/T3.3", "图表编号体系", any("图2-1" in p.text for p in d.paragraphs) and len(d.tables) >= 1)
+        check("C/T3.3", "样张含真实内嵌图片", len(d.inline_shapes) >= 1 and
+              not any("此处插入图片" in p.text for p in d.paragraphs))
+        check("C/T3.3", "内嵌图片含替代文字", bool(d.inline_shapes and
+              d.inline_shapes[0]._inline.docPr.get("descr")))
 
     # T3.4 PPT 21页/16:9/原生图表/字体统一
     profile = {
@@ -182,7 +357,9 @@ def verify_C():
         "pain_points": [{"desc": "痛点%d" % i, "mapped_feature": "功能%d" % i} for i in range(4)],
         "solution": {"features": ["功能一", "功能二", "功能三"], "tech_stack": ["AI"],
                      "innovations": ["创新点"], "performance_metrics": [{"metric": "准确率", "value": "96.5%"}]},
-        "business_model": {"revenue_streams": ["硬件", "订阅"], "pricing": {}, "costs": []},
+            "business_model": {"revenue_streams": [{"stream": "硬件", "share_pct": 60},
+                                                     {"stream": "订阅", "share_pct": 40}],
+                                "pricing": {}, "costs": []},
         "competitors": [{"name": "竞品A"}, {"name": "竞品B"}],
         "advantages": ["优势1"], "milestones": [{"time": "2025", "event": "启动"}],
         "achievements": {"patents": ["p1", "p2"], "papers": [], "pilots": ["社区试点A", "社区试点B", "社区试点C"], "awards": [], "partners": []},
@@ -206,6 +383,20 @@ def verify_C():
         fonts = {r.font.name for s in prs.slides for sh in s.shapes
                  if sh.has_text_frame for pa in sh.text_frame.paragraphs for r in pa.runs if r.font.name}
         check("C/T3.4", "字体统一微软雅黑", fonts == {"微软雅黑"}, str(fonts))
+        with zipfile.ZipFile(ppt_path) as package:
+            chart_xml = "\n".join(package.read(n).decode("utf-8") for n in package.namelist()
+                                      if n.startswith("ppt/charts/") and n.endswith(".xml"))
+        axis_vals = [int(v) for v in re.findall(r"<(?:c:)?(?:axId|crossAx)\s+val=\"(-?\d+)\"", chart_xml)]
+        check("C/T3.4", "OpenXML 图表轴 ID 为无符号整数", bool(axis_vals) and all(v >= 0 for v in axis_vals), str(axis_vals[:4]))
+
+        mixed_outline = os.path.join(tmpdir, "mixed.json")
+        with io.open(mixed_outline, "w", encoding="utf-8") as f:
+            json.dump([{"layout": "chart_bar", "title": "混量纲测试", "categories": ["准确率%", "响应秒", "成本元"],
+                        "series_name": "值", "values": [96.5, 3.2, 599]}], f, ensure_ascii=False)
+        mixed_ppt = os.path.join(tmpdir, "mixed.pptx")
+        rc, out = run_py("skills/ares-ppt/scripts/build_ppt.py",
+                         ["--profile", prof_path, "--outline", mixed_outline, "--out", mixed_ppt])
+        check("C/T3.4", "混量纲柱状图被默认门禁拦截", rc == 1 and "混合量纲" in out, out[-240:])
 
     # T3.4 数据同步：改营收重渲染，财务页图表值变化
     profile["financials"]["revenue_start_wan"] = 250
@@ -251,6 +442,15 @@ def verify_C():
         f.write("document.querySelectorAll('.js-act').forEach(function(b){b.addEventListener('click',function(){})});")
     rc, out = run_py("skills/ares-prototype/scripts/scan_prototype.py", [ok_site])
     check("C/T3.6", "合规原型扫描通过", rc == 0, out[:200])
+    if __import__("importlib.util").util.find_spec("playwright"):
+        smoke_out = os.path.join(tmpdir, "ok_smoke")
+        rc, out = run_py("skills/ares-prototype/scripts/smoke_prototype.py", [ok_site, "--out", smoke_out])
+        if rc == 2 and "环境受限" in out:
+            check("C/T3.6", "Playwright 原型运行时冒烟（当前执行环境受限，未宣称通过）", True)
+        else:
+            check("C/T3.6", "Playwright 原型运行时冒烟通过", rc == 0 and os.path.isfile(os.path.join(smoke_out, "smoke-manifest.json")), out[:200])
+    else:
+        check("C/T3.6", "Playwright 原型运行时冒烟（可选依赖未安装）", True)
     bad_site = os.path.join(tmpdir, "bad_site")
     os.makedirs(bad_site)
     with io.open(os.path.join(bad_site, "index.html"), "w", encoding="utf-8") as f:
@@ -265,7 +465,7 @@ def verify_C():
     clean_md = os.path.join(tmpdir, "clean.md")
     with io.open(clean_md, "w", encoding="utf-8") as f:
         f.write("项目由 5 人团队组成，拥有 2 项专利，已在 3 个社区完成试点。"
-                "识别准确率达到 96.5%，起始年营收 200 万元，TAM 总市场规模 2800 亿元。\n")
+                "首个社区试点覆盖 32 户家庭。识别准确率达到 96.5%，起始年营收 200 万元，TAM 总市场规模 2800 亿元。\n")
     rc, out = run_py("scripts/consistency_check.py", [clean_md, "--profile", prof_path])
     check("C/T3.7", "一致文档零矛盾", rc == 0, out[:300])
     mine_md = os.path.join(tmpdir, "mine.md")
@@ -279,6 +479,16 @@ def verify_C():
     fin_xlsx = os.path.join(tmpdir, "财务三表.xlsx")
     rc, out = run_py("scripts/build_financials.py", ["--profile", prof_path, "--out", fin_xlsx])
     check("C/财务", "build_financials.py 勾稽校验通过", rc == 0 and os.path.isfile(fin_xlsx), out[-200:])
+
+    round1 = os.path.join(os.path.dirname(ROOT), "ares-e2e", "round1", "输出", "银龄守护智能跌倒监测系统")
+    rc, out = run_py("scripts/audit_visuals.py", [
+        "--docx", os.path.join(round1, "01-商业计划书.docx"),
+        "--pptx", os.path.join(round1, "03-路演PPT.pptx"),
+        "--pipeline", "L1",
+        "--prototype-dir", os.path.join(round1, "04-项目原型"),
+        "--strict",
+    ])
+    check("C/视觉", "Word/PPT/原型视觉覆盖审计通过", rc == 0 and "formal_ready=True" in out, out[-300:])
 
     import shutil
     shutil.rmtree(tmpdir, ignore_errors=True)
@@ -348,20 +558,24 @@ STAGES = {"A": verify_A, "C": verify_C, "D": verify_D, "E": verify_E}
 
 def main(argv):
     targets = list(STAGES) if (not argv or argv[0] == "all") else argv
-    for t in targets:
-        fn = STAGES.get(t.upper())
-        if not fn:
-            print("未知阶段 %s" % t)
-            continue
-        fn()
-    print()
-    if FAILURES:
-        print("共 %d 项失败：" % len(FAILURES))
-        for f in FAILURES:
-            print("  - " + f)
-        return 1
-    print("所验阶段全部通过。")
-    return 0
+    shutil.rmtree(WORK_TMP, ignore_errors=True)
+    try:
+        for t in targets:
+            fn = STAGES.get(t.upper())
+            if not fn:
+                print("未知阶段 %s" % t)
+                continue
+            fn()
+        print()
+        if FAILURES:
+            print("共 %d 项失败：" % len(FAILURES))
+            for f in FAILURES:
+                print("  - " + f)
+            return 1
+        print("所验阶段全部通过。")
+        return 0
+    finally:
+        shutil.rmtree(WORK_TMP, ignore_errors=True)
 
 
 if __name__ == "__main__":

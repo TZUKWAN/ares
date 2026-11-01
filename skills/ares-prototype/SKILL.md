@@ -20,6 +20,7 @@ description: Ares 竞赛插件多页 HTML 原型系统生成技能。创业/工�
 5. 内置模拟数据（`assets/data.js` 内置 JSON，DEMO 标注），实现 列表→详情→表单→结果页 的完整数据流转；图表用内联 SVG 或本地 JS 绘制。
 6. 页面必须覆盖计划书产品功能章节的每一个功能点，功能与痛点一一对应可追溯（页脚注明对应痛点编号）。
 7. 同时交付 `原型导览.md`：页面地图、演示动线（路演时按什么顺序点）、各页与计划书章节对应关系。
+8. 需要进入 PPT 时运行 `ares-ppt/scripts/capture_prototype.py` 生成 `screenshots/`，再用 `build_ppt.py --prototype-dir` 自动插入三步 Demo 页；截图必须来自真实本地页面，禁止用占位图。
 
 ## 三、面向演示的专项要求
 
@@ -33,7 +34,8 @@ description: Ares 竞赛插件多页 HTML 原型系统生成技能。创业/工�
 2. 按 design-system.md 搭 assets（css/js/data）。
 3. 逐页生成 HTML，导航互通，接模拟数据流转。
 4. 运行死链扫描：`python skills/ares-prototype/scripts/scan_prototype.py <原型目录>`，全部 a/button 有归宿才通过。扫描口径：按钮绑定认可 onclick 属性与 JS 脚本（内联 `<script>` 与外部 .js 均计）中对按钮 id/class 的 click 监听；页面可达性同时计入 `<a href>` 与 JS 跳转（location.href/window.open 等）。
-5. 写 原型导览.md 并与实际页面核对。
+5. 在环境提供 Playwright 时运行 `python skills/ares-prototype/scripts/smoke_prototype.py <原型目录> --out smoke/`，检查每页真实加载、运行时异常和截图；没有 Playwright 时保留静态扫描结果并明确标注未完成运行时验收。
+6. 写 原型导览.md 并与实际页面核对。
 
 ## 五、输出
 
@@ -43,6 +45,7 @@ description: Ares 竞赛插件多页 HTML 原型系统生成技能。创业/工�
 
 - [ ] ≥8 页互通；双击 index.html 离线可运行
 - [ ] scan_prototype.py 扫描 0 死链 0 死按钮
+- [ ] Playwright 运行时冒烟通过，或在交付清单中明确记录环境未安装及其风险
 - [ ] 计划书每个功能点都有对应页面，页脚可追溯痛点编号
 - [ ] 列表→详情→表单→结果数据流转完整；模拟数据带 DEMO 标注
 - [ ] 首屏 3 秒讲清产品；核心演示闭环 ≤3 次点击

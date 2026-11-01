@@ -11,7 +11,10 @@ from pptx.chart.data import CategoryChartData
 from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+from pptx.oxml.xmlchemy import OxmlElement
+from pptx.oxml.ns import qn
 from pptx.util import Emu, Pt
+import os
 
 from theme import FONT, SIZES, MARGIN, TITLE_BAND_H, FOOTER_H, SLIDE_W, SLIDE_H
 
@@ -77,6 +80,19 @@ def _rect(slide, x, y, w, h, fill, shape=MSO_SHAPE.RECTANGLE, line_color=None, s
         sp.line.width = Pt(1)
     sp.shadow.inherit = False
     return sp
+
+
+def _picture(slide, path, x, y, w, h):
+    if not path or not os.path.isfile(path):
+        raise FileNotFoundError("PPT 图片素材不存在：%s" % path)
+    return slide.shapes.add_picture(path, In(x), In(y), In(w), In(h))
+
+
+def _source_note(slide, theme, text):
+    if not text:
+        return
+    box = _box(slide, 8.55, 5.95, 3.85, 0.45)
+    _para(_tf(box), "来源：" + str(text), 9, theme["muted"], align=PP_ALIGN.RIGHT, first=True)
 
 
 def page_chrome(slide, theme, title, page_no, total, project_name):
@@ -195,9 +211,18 @@ def _chart_note(slide, theme, c, chart):
 def chart_bar(slide, theme, c):
     page_chrome(slide, theme, c["title"], c["page_no"], c["total"], c["project_name"])
     values = [abs(v) for v in c["values"] if v]
-    if values and max(values) / max(min(values), 1e-9) >= 50:
-        NOTES.append("第%d页柱状图数值跨度超过50倍：若为市场分层/漏斗（同量纲）可忽略；"
-                     "若为不同量纲指标混排，请改用对比矩阵或拆分同量纲多页" % c["page_no"])
+    units = [str(u).strip() for u in (c.get("units") or []) if str(u).strip()]
+    if not units:
+        for category in c.get("categories", []):
+            label = str(category)
+            hit = next((u for u in ("%", "个百分点", "秒", "元", "万元", "亿元", "人", "项") if u in label), "")
+            units.append(hit)
+    if len(set(units)) > 1:
+        raise ValueError("第%d页柱状图包含混合量纲 %s，请拆分为同量纲图或使用对比矩阵" %
+                         (c["page_no"], ", ".join(sorted(set(units)))))
+    if values and max(values) / max(min(values), 1e-9) >= 50 and not c.get("allow_large_span"):
+        NOTES.append("第%d页柱状图数值跨度超过50倍：仅允许同量纲市场分层/漏斗；"
+                     "不同量纲指标必须改用对比矩阵或拆分同量纲多页" % c["page_no"])
     data = CategoryChartData()
     data.categories = c["categories"]
     data.add_series(c["series_name"], c["values"])
@@ -208,9 +233,72 @@ def chart_bar(slide, theme, c):
     plot.series[0].format.fill.solid()
     plot.series[0].format.fill.fore_color.rgb = theme["accent"]
     chart.value_axis.tick_labels.font.size = Pt(12)
+    if c.get("log_scale"):
+        scaling = chart.value_axis._element.find(qn("c:scaling"))
+        if scaling is not None and scaling.find(qn("c:logBase")) is None:
+            log_base = OxmlElement("c:logBase")
+            log_base.set("val", "10")
+            scaling.append(log_base)
     chart.category_axis.tick_labels.font.size = Pt(12)
     chart.category_axis.tick_labels.font.name = FONT
     _chart_note(slide, theme, c, chart)
+
+
+def market_funnel(slide, theme, c):
+    """Show TAM/SAM/SOM as a labeled funnel instead of a misleading linear axis."""
+    page_chrome(slide, theme, c["title"], c["page_no"], c["total"], c["project_name"])
+    values = [float(v) for v in c.get("values", [])]
+    categories = c.get("categories", [])
+    if not values or len(values) != len(categories) or max(values) <= 0:
+        raise ValueError("market_funnel 需要等长且为正的 values/categories")
+    max_value = max(values)
+    colors = (theme["primary"], theme["accent"], theme["muted"])
+    for i, (label, value) in enumerate(zip(categories, values)):
+        y = 1.65 + i * 1.25
+        width = max(2.2, 8.6 * (value / max_value) ** 0.35)
+        x = 1.0 + (8.6 - width) / 2
+        bar = _rect(slide, x, y, width, 0.82, colors[i % len(colors)], shape=MSO_SHAPE.ROUNDED_RECTANGLE)
+        tf = _tf(bar)
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        _para(tf, "%s：%s" % (label, value), 16, theme["on_primary"], bold=True,
+              align=PP_ALIGN.CENTER, first=True)
+    note = _box(slide, 9.9, 1.65, 2.2, 3.8)
+    _para(_tf(note), "口径", 17, theme["primary"], bold=True, first=True)
+    for line in c.get("note_lines", []):
+        _para(_tf(note), line, 12, theme["text"])
+    _source_note(slide, theme, c.get("source", ""))
+
+
+def image_page(slide, theme, c):
+    page_chrome(slide, theme, c["title"], c["page_no"], c["total"], c["project_name"])
+    _picture(slide, c["image_path"], 0.9, 1.65, 8.1, 4.75)
+    panel = _rect(slide, 9.35, 1.65, 3.0, 4.75, theme["light"], shape=MSO_SHAPE.ROUNDED_RECTANGLE)
+    tf = _tf(panel)
+    tf.margin_left = In(0.22)
+    tf.margin_right = In(0.22)
+    tf.margin_top = In(0.22)
+    _para(tf, c.get("headline", "项目现场证据"), 19, theme["primary"], bold=True, first=True)
+    for line in c.get("lines", []):
+        _para(tf, line, 13, theme["text"])
+    _source_note(slide, theme, c.get("source", ""))
+
+
+def prototype_demo(slide, theme, c):
+    page_chrome(slide, theme, c["title"], c["page_no"], c["total"], c["project_name"])
+    shots = c.get("screenshots") or []
+    if not shots:
+        raise ValueError("prototype_demo 必须提供 screenshots")
+    slots = [(0.9, 1.55, 3.7, 4.75), (4.8, 1.55, 3.7, 4.75), (8.7, 1.55, 3.7, 4.75)]
+    for i, shot in enumerate(shots[:3]):
+        path = shot.get("path") if isinstance(shot, dict) else shot
+        label = shot.get("label", "步骤 %d" % (i + 1)) if isinstance(shot, dict) else "步骤 %d" % (i + 1)
+        x, y, w, h = slots[i]
+        _picture(slide, path, x, y, w, h)
+        cap = _box(slide, x, 6.32, w, 0.32)
+        _para(_tf(cap), label, 12, theme["primary"], bold=True, align=PP_ALIGN.CENTER, first=True)
+        if i < min(2, len(shots) - 1):
+            arrow = _rect(slide, x + w + 0.1, 3.55, 0.45, 0.42, theme["accent"], shape=MSO_SHAPE.RIGHT_ARROW)
+    _source_note(slide, theme, c.get("source", "原型截图；演示数据按 DEMO 标注"))
 
 
 def chart_line(slide, theme, c):
@@ -520,9 +608,10 @@ def pain_solution(slide, theme, c):
 
 LAYOUTS = {
     "cover": cover, "closing": closing, "agenda": agenda,
-    "three_columns": three_columns, "chart_bar": chart_bar, "chart_line": chart_line,
+    "three_columns": three_columns, "chart_bar": chart_bar, "market_funnel": market_funnel, "chart_line": chart_line,
     "chart_pie": chart_pie, "comparison_matrix": comparison_matrix, "radar_page": radar_page,
     "timeline": timeline, "architecture": architecture, "flow_chain": flow_chain,
     "quadrant": quadrant, "team_cards": team_cards, "milestone_data": milestone_data,
     "quote_fullscreen": quote_fullscreen, "policy_list": policy_list, "pain_solution": pain_solution,
+    "image": image_page, "prototype_demo": prototype_demo,
 }

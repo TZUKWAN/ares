@@ -42,6 +42,14 @@
     "milestones": {"type": "array", "required": true, "desc": "里程碑时间线，已发生+规划"},
     "achievements": {"type": "object", "required": true, "fields": {"patents": "专利（真实才填）", "papers": "论文", "pilots": "试点/签约", "awards": "获奖", "partners": "合作伙伴"}, "desc": "已有成果，严禁虚构"},
     "social_value": {"type": "object", "required": true, "fields": {"employment": "带动就业量化", "education": "教育引领量化", "others": "其他社会价值"}, "desc": "项目社会价值"},
-    "data_confidence": {"type": "object", "required": true, "fields": {"real": "用户提供真实数据清单", "estimated": "AI估算数据清单", "placeholder": "占位待填清单"}, "desc": "数据真实性登记簿，交付时生成《数据真实性清单》"}
+    "data_confidence": {"type": "object", "required": true, "fields": {"real": "用户提供真实数据清单", "estimated": "AI估算数据清单", "placeholder": "占位待填清单"}, "desc": "数据真实性登记簿，交付时生成《数据真实性清单》"},
+    "evidence": {
+      "type": "object", "required_when": "data_confidence.real 或 data_confidence.estimated 非空",
+      "fields": {
+        "sources": "结构化来源对象列表：id/kind(web|artifact)/title/org/url或path/published/accessed/authority/independent_group；可选 snapshot_path/snapshot_sha256",
+        "claims": "字段级结论对象列表：id/field/status/source_ids/method/rationale/evidence_files/rubric_refs/output_refs/supporting_quote/retrieved_at/content_hash；数值结论可填 normalized_value/value_unit 供跨来源冲突检测；正式强证据可标 strong_evidence=true"
+      },
+      "desc": "关键数字与文字结论的证据台账；生产门禁由 scripts/validate_evidence.py 执行"
+    }
   }
 }

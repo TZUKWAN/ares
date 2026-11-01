@@ -14,14 +14,17 @@ PPT 全部由程序代码生成（python-pptx），不使用任何内置模板�
 ## 二、执行步骤（三层架构）
 
 1. 内容层：从 project.json 提取每页内容（本技能 SKILL 与 build_ppt.py 的 default_outline 承担；生产线可另产出 pages.json）。
-2. 版式层：`scripts/layouts.py` 版式引擎，18 种可复用版式函数——封面、结束页、目录导航、一句话标题+三栏要点、柱状图页、折线图页、饼图页、对比矩阵、雷达图、时间线、分层架构图、流程链路、四象限、团队卡片（头像+信息）、里程碑+数据组合、全屏金句、政策列表、痛点→功能映射。版式选择规则：对比→矩阵/雷达、历程→时间线、构成→饼图、趋势→折线、层级→架构图、因果→流程链路。
-3. 渲染层：`scripts/build_ppt.py` 输出 16:9 PPTX，图表全部为原生 PPT 图表（不用截图）。
+2. 版式层：`scripts/layouts.py` 版式引擎，包含文字、表格、市场漏斗、原生图表、真实图片和 `prototype_demo` 三步产品演示版式。图片页必须提供 `image_path`，Demo 页必须提供至少 3 张原型截图；素材缺失直接失败。
+3. 渲染层：`scripts/build_ppt.py` 输出 16:9 PPTX，图表为原生 PPT 图表，图片/原型截图作为媒体嵌入；保存前自动规范 OpenXML 图表轴 ID。
 
 运行：
 
 ```
-python skills/ares-ppt/scripts/build_ppt.py --profile project.json --out 输出/项目名/03-路演PPT.pptx
-# 可选：--outline pages.json 按赛事裁剪；--theme tech_blue|eco_green|vitality_orange|auto
+python skills/ares-ppt/scripts/build_ppt.py --profile project.json --out 输出/项目名/03-路演PPT.pptx --strict
+# 可选：--outline pages.json；--asset-dir 素材根目录；--prototype-dir 原型目录（自动加入 Demo 页）；
+#       --theme tech_blue|eco_green|vitality_orange|auto
+# 原型截图：python skills/ares-ppt/scripts/capture_prototype.py 输出/项目名/04-项目原型
+# 独立渲染：python skills/ares-ppt/scripts/render_ppt.py 输出/项目名/03-路演PPT.pptx 审计/ppt_png
 ```
 
 ## 三、设计系统
@@ -38,8 +41,10 @@ python skills/ares-ppt/scripts/build_ppt.py --profile project.json --out 输出/
 ## 五、质量自检清单
 
 - [ ] 16:9；字体统一微软雅黑；主题色全套一致
-- [ ] 逐页溢出检查 0 警告（退出码 0）；版式守卫 0 条混量纲提示（或确认属同量纲分层页）
+- [ ] 逐页溢出检查 0 警告（退出码 0）；版式守卫 0 条混量纲提示（`--strict` 默认执行）
 - [ ] 图表为原生图表且数据与 project.json 一致
+- [ ] 产品页/痛点页/试点页按内容插入真实图片；若有原型，PPT 含三步 Demo 截图与演示动线
+- [ ] 用 render_ppt.py 经 PowerPoint 独立打开并导出全部页面，页数一致且逐页视觉检查
 - [ ] 每页标题一句话总结；正文 ≤120 字/页；论点带数据
 - [ ] 页码页脚齐全；封面与结束页 slogan 首尾呼应
 - [ ] 修改档案营收数字重渲染后，财务页与摘要页同步变化（变更同步验收项）

@@ -21,9 +21,9 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from pptx import Presentation
+from pptx.oxml.ns import qn
 from pptx.util import Emu
 
-import layouts
 import layouts
 from layouts import LAYOUTS, OVERFLOWS
 from theme import SLIDE_H, SLIDE_W, THEMES, pick_theme
@@ -57,11 +57,84 @@ def _flat(v, fallback=""):
     return str(v)
 
 
+def _required(value, field):
+    if value is None or value == "" or value == [] or value == {}:
+        raise ValueError("project.json 缺少 PPT 必需字段：%s" % field)
+    return value
+
+
+def _resolve_asset(path, base_dirs):
+    if not path:
+        raise ValueError("PPT 素材路径为空")
+    candidates = [path] if os.path.isabs(path) else [os.path.join(d, path) for d in base_dirs]
+    for candidate in candidates:
+        if os.path.isfile(candidate):
+            return os.path.abspath(candidate)
+    raise FileNotFoundError("PPT 素材不存在：%s（搜索目录：%s）" % (path, ", ".join(base_dirs)))
+
+
+def _prototype_screenshots(prototype_dir):
+    if not prototype_dir:
+        return []
+    prototype_dir = os.path.abspath(prototype_dir)
+    candidates = []
+    for folder in (os.path.join(prototype_dir, "screenshots"),
+                   os.path.join(prototype_dir, "assets")):
+        if os.path.isdir(folder):
+            candidates.extend(os.path.join(folder, f) for f in sorted(os.listdir(folder))
+                              if f.lower().endswith((".png", ".jpg", ".jpeg")))
+    return candidates[:3]
+
+
+def _normalize_chart_axis_ids(prs):
+    """python-pptx may serialize signed int32 axis IDs; OpenXML requires uint32."""
+    changed = 0
+    for slide in prs.slides:
+        for shape in slide.shapes:
+            if not getattr(shape, "has_chart", False):
+                continue
+            for tag in ("c:axId", "c:crossAx"):
+                nodes = shape.chart._element.iter(qn(tag))
+                for node in nodes:
+                    raw = node.get("val")
+                    try:
+                        value = int(raw)
+                    except (TypeError, ValueError):
+                        continue
+                    if value < 0:
+                        node.set("val", str(value % (2 ** 32)))
+                        changed += 1
+    return changed
+
+
+def _prepare_asset_pages(pages, base_dirs):
+    prepared = []
+    for spec in pages:
+        item = dict(spec)
+        if item.get("layout") == "image":
+            item["image_path"] = _resolve_asset(item.get("image_path") or item.get("image"), base_dirs)
+        if item.get("layout") == "prototype_demo":
+            shots = []
+            for shot in item.get("screenshots", []):
+                if isinstance(shot, dict):
+                    shot = dict(shot)
+                    shot["path"] = _resolve_asset(shot.get("path"), base_dirs)
+                else:
+                    shot = {"path": _resolve_asset(shot, base_dirs)}
+                shots.append(shot)
+            item["screenshots"] = shots
+        prepared.append(item)
+    return prepared
+
+
 def _finance_series(profile, years_out):
     fin = profile.get("financials", {})
-    rev0 = _f(fin.get("revenue_start_wan")) or 200.0
-    years = int(_f(fin.get("years")) or 6)
-    growth = 0.32
+    _required(fin.get("revenue_start_wan"), "financials.revenue_start_wan")
+    _required(fin.get("years"), "financials.years")
+    _required(fin.get("growth_rate_range"), "financials.growth_rate_range")
+    rev0 = _f(fin.get("revenue_start_wan"))
+    years = int(_f(fin.get("years")))
+    growth = None
     gr = str(fin.get("growth_rate_range", ""))
     import re
     m = re.findall(r"(\d+(?:\.\d+)?)\s*%", gr)
@@ -71,6 +144,8 @@ def _finance_series(profile, years_out):
             growth = (lo + hi) / 200.0
         else:
             growth = lo / 100.0
+    if growth is None or years <= 0:
+        raise ValueError("financials.growth_rate_range/years 无法生成财务曲线")
     margin_mult = 1.2
     mm = re.search(r"(\d+(?:\.\d+)?)", str(fin.get("margin_ratio_vs_industry", "")))
     if mm:
@@ -88,7 +163,7 @@ def _finance_series(profile, years_out):
     return revs, profits
 
 
-def default_outline(p):
+def default_outline(p, prototype_dir=None):
     """附录三精简版 21 页，内容全部取自 project.json。"""
     comp = p.get("competition", {})
     team = p.get("team", [])
@@ -98,13 +173,12 @@ def default_outline(p):
     biz = p.get("business_model", {})
     fin = p.get("financials", {})
     pains = p.get("pain_points", [])
-    feats = sol.get("features", []) or ["核心功能一", "核心功能二", "核心功能三"]
-    metrics = sol.get("performance_metrics", [])
-    m0 = metrics[0] if metrics else {}
-    compet = p.get("competitors", [])
+    feats = _required(sol.get("features"), "solution.features")
+    metrics = _required(sol.get("performance_metrics"), "solution.performance_metrics")
+    compet = _required(p.get("competitors"), "competitors")
     years, revs, profits = [], [], []
     revs, profits = _finance_series(p, years)
-    milestones = p.get("milestones", [])[:5]
+    milestones = _required(p.get("milestones"), "milestones")[:5]
     social = p.get("social_value", {})
     pages = []
 
@@ -122,13 +196,14 @@ def default_outline(p):
                   "categories": ["TAM 总市场", "SAM 可服务", "SOM 初期可获得"],
                   "series_name": "市场规模（亿元）",
                   "values": [_num_or(market.get("tam")), _num_or(market.get("sam")), _num_or(market.get("som"))],
-                  "note_lines": [str(market.get("growth", "")), "来源：" + _src_text(market)],
+                   "note_lines": ["对数刻度展示市场分层", str(market.get("growth", "")), "来源：" + _src_text(market, p)],
+                   "allow_large_span": True, "log_scale": True,
                   "conclusion": "刚性需求未被现有方案满足，细分赛道存在明确空白"})
-    policies = p.get("policy", []) or []
+    policies = _required(p.get("policy"), "policy")
     pages.append({"layout": "policy_list", "title": "政策红利正在为这个行业开路",
                   "policies": [[str(pl.get("name", pl) if isinstance(pl, dict) else pl),
                                 str(pl.get("benefit", "")) if isinstance(pl, dict) else "利好条款见计划书政策章节"]
-                               for pl in policies[:4]] or [["政策持续加码", "近两年国家与地方专项政策密集出台，详见计划书政策环境章节"]]})
+                                for pl in policies[:4]]})
     pages.append({"layout": "pain_solution", "title": "四个真实痛点，全部指向同一个未被满足的需求",
                   "pairs": [[pp.get("desc", ""), pp.get("mapped_feature", ""), "详见产品页"] for pp in pains[:4]]})
     pages.append({"layout": "three_columns", "title": "产品以三大核心功能闭环解决上述痛点",
@@ -138,7 +213,7 @@ def default_outline(p):
                              ("应用层", feats[:3] + ["管理后台"])]})
     ms = metrics[:5]
     pages.append({"layout": "comparison_matrix", "title": "关键指标全面领先对标方案",
-                  "dimensions": [_flat(m.get("metric"), "指标%d" % (i + 1))[:12] for i, m in enumerate(ms)] or ["指标"],
+                  "dimensions": [_flat(m.get("metric"), "指标%d" % (i + 1))[:12] for i, m in enumerate(ms)],
                   "columns": [("本项目", True, [_flat(m.get("value"), "—") for m in ms]),
                                ("对标方案", False, [_flat(m.get("benchmark"), "—") for m in ms])],
                   "conclusion": "所有指标来自实测，测试方法与样本见计划书技术章节"})
@@ -146,7 +221,7 @@ def default_outline(p):
                   "steps": [("部署", "即装即用"), ("学习", "7天场景建模"), ("守护", "全天候在线")],
                   "conclusion": p.get("one_liner", "")})
     pages.append({"layout": "milestone_data", "title": "成果可验证，每一项都有出处",
-                  "milestones": milestones and [[m.get("time", ""), m.get("event", "")] for m in milestones] or [["2026", "项目启动"]],
+                  "milestones": [[m.get("time", ""), m.get("event", "")] for m in milestones],
                   "kpis": [[str(len(ach.get("patents", []))) + " 项", "专利"], [str(len(ach.get("pilots", []))) + " 个", "试点"],
                            [str(len(ach.get("awards", []))) + " 项", "奖项"]]})
     pages.append({"layout": "three_columns", "title": "三重壁垒随时间越挖越深",
@@ -160,17 +235,23 @@ def default_outline(p):
                               [(str(c.get("name", "竞品%d" % i)), False,
                                 [str(c.get("perf", "—")), str(c.get("cost", "—")), str(c.get("deploy", "—")), str(c.get("service", "—"))])
                                for i, c in enumerate(compet[:3])])})
-    streams = biz.get("revenue_streams", []) or ["硬件", "服务"]
+    streams = _required(biz.get("revenue_streams"), "business_model.revenue_streams")
     pcts = []
+    stream_labels = []
     for r in streams:
-        m = _re.search(r"(\d+(?:\.\d+)?)\s*%", str(r))
-        pcts.append(float(m.group(1)) if m else None)
-    if pcts and all(x is not None for x in pcts) and abs(sum(pcts) - 100) < 1:
-        pie_vals = pcts
-    else:
-        pie_vals = [round(100.0 / len(streams), 1)] * len(streams)
+        if isinstance(r, dict):
+            stream_labels.append(_flat(r.get("stream"), "收入流"))
+            value = r.get("share_pct")
+            pcts.append(float(value) if value is not None else None)
+        else:
+            stream_labels.append(_flat(r, "收入流"))
+            m = _re.search(r"(\d+(?:\.\d+)?)\s*%", str(r))
+            pcts.append(float(m.group(1)) if m else None)
+    if not pcts or any(x is None for x in pcts) or abs(sum(pcts) - 100) >= 1:
+        raise ValueError("business_model.revenue_streams 必须为每条收入流提供 share_pct，且合计 100%")
+    pie_vals = pcts
     pages.append({"layout": "chart_pie", "title": "两条收入曲线构成盈利模型",
-                  "categories": [_flat(r, "收入流")[:12] for r in streams],
+                  "categories": [s[:12] for s in stream_labels],
                   "series_name": "收入占比",
                   "values": pie_vals,
                   "note_lines": [_flat(biz.get("pricing"), "定价体系见计划书")[:100]],
@@ -190,8 +271,7 @@ def default_outline(p):
                   "note_lines": ["起始年营收 %s 万元" % str(fin.get("revenue_start_wan", "")),
                                  "年增长率 %s" % str(fin.get("growth_rate_range", ""))],
                   "conclusion": "预测基于已签订单与试点转化率推算"})
-    roadmap = [[str(m.get("time", "")), str(m.get("event", ""))] for m in milestones] or \
-              [["第1年", "完成产品定型与种子客户"], ["第2-3年", "区域复制与渠道建设"], ["第4-6年", "平台化与生态构建"]]
+    roadmap = [[str(m.get("time", "")), str(m.get("event", ""))] for m in milestones]
     pages.append({"layout": "timeline", "title": "三步走的发展路径清晰可见", "nodes": roadmap})
     pages.append({"layout": "quote_fullscreen", "title": "", "quote": p.get("slogan", ""),
                   "attribution": "发展规划：短期守住试点，中期复制区域，长期构建平台"})
@@ -199,6 +279,14 @@ def default_outline(p):
                   "columns": [{"head": "就业", "lines": [str(social.get("employment", ""))]},
                               {"head": "教育", "lines": [str(social.get("education", ""))]},
                               {"head": "行业", "lines": [_flat(social.get("others"), "行业价值见计划书")[:80]]}]})
+    if prototype_dir:
+        shots = _prototype_screenshots(prototype_dir)
+        if not shots:
+            raise ValueError("指定了 prototype_dir，但未找到 screenshots/*.png|jpg；请先运行 capture_prototype.py")
+        pages.append({"layout": "prototype_demo", "title": "三步走完一次产品 Demo",
+                      "screenshots": [{"path": s, "label": "步骤 %d" % (i + 1)}
+                                      for i, s in enumerate(shots)],
+                      "source": "原型截图；页面内 DEMO 数据已标注"})
     pages.append({"layout": "closing", "title": "", "slogan": p.get("slogan", ""),
                   "thanks": "感谢聆听，恳请各位评委专家批评指正",
                   "contact": comp.get("name", "")})
@@ -225,25 +313,44 @@ def _num_or(v):
         return 0
 
 
-def _src_text(market):
+def _src_text(market, profile=None):
     srcs = market.get("sources", [])
     if isinstance(srcs, list) and srcs:
         s0 = srcs[0]
         if isinstance(s0, dict):
-            return "%s %s" % (s0.get("org", s0.get("title", "")), s0.get("year", ""))
+            label = "%s %s" % (s0.get("org", s0.get("title", "")), s0.get("year", ""))
+            if s0.get("url"):
+                return "%s %s" % (label, s0["url"])
+            if profile:
+                evidence_sources = ((profile.get("evidence") or {}).get("sources") or [])
+                match = next((s for s in evidence_sources
+                              if s.get("org") == s0.get("org") or s.get("title") == s0.get("title")), None)
+                if match and match.get("url"):
+                    return "%s %s" % (label, match["url"])
+            return label + "（URL待补）"
         return str(s0)
-    return "见计划书市场章节"
+    return "来源待补（禁止正式提交）"
 
 
-def render(profile_path, out_path, outline_path=None, theme_name="auto"):
+def render(profile_path, out_path, outline_path=None, theme_name="auto", asset_dir=None,
+           prototype_dir=None):
     p = json.load(io.open(profile_path, encoding="utf-8"))
     if outline_path:
         pages = json.load(io.open(outline_path, encoding="utf-8"))
     else:
-        pages = default_outline(p)
+        pages = default_outline(p, prototype_dir=prototype_dir)
+    base_dirs = [os.path.dirname(os.path.abspath(profile_path))]
+    if outline_path:
+        base_dirs.insert(0, os.path.dirname(os.path.abspath(outline_path)))
+    if asset_dir:
+        base_dirs.insert(0, os.path.abspath(asset_dir))
+    if prototype_dir:
+        base_dirs.insert(0, os.path.abspath(prototype_dir))
+    pages = _prepare_asset_pages(pages, base_dirs)
     theme_key = theme_name if theme_name != "auto" else pick_theme(p)
     theme = THEMES[theme_key]
     del layouts.OVERFLOWS[:]
+    del layouts.NOTES[:]
     prs = Presentation()
     prs.slide_width = Emu(SLIDE_W)
     prs.slide_height = Emu(SLIDE_H)
@@ -261,6 +368,7 @@ def render(profile_path, out_path, outline_path=None, theme_name="auto"):
         fn(slide, theme, c)
         report.append("第%02d页 [%s] %s" % (i, layout_name, spec.get("title", spec.get("quote", ""))[:30]))
     os.makedirs(os.path.dirname(os.path.abspath(out_path)) or ".", exist_ok=True)
+    normalized = _normalize_chart_axis_ids(prs)
     prs.save(out_path)
     print("已生成 %s（%d 页，主题：%s）" % (out_path, total, theme["name"]))
     for line in report:
@@ -277,6 +385,8 @@ def render(profile_path, out_path, outline_path=None, theme_name="auto"):
         for o in OVERFLOWS:
             print("  ! " + o)
         return 1
+    if normalized:
+        print("OpenXML 图表轴 ID 已规范化：%d 个。" % normalized)
     print("逐页溢出检查：通过。")
     return 0
 
@@ -291,10 +401,15 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--outline")
     ap.add_argument("--theme", default="auto")
-    ap.add_argument("--strict", action="store_true", help="版式提示（如混量纲守卫）计入退出码")
+    ap.add_argument("--asset-dir", help="图片素材根目录；页大纲中的 image_path/screenshots 相对它解析")
+    ap.add_argument("--prototype-dir", help="原型目录；自动读取 screenshots/ 生成产品 Demo 页")
+    ap.add_argument("--strict", dest="strict", action="store_true", default=True,
+                    help="版式提示计入退出码（默认开启）")
+    ap.add_argument("--no-strict", dest="strict", action="store_false",
+                    help="仅用于兼容旧草稿，允许非阻断版式提示")
     a = ap.parse_args()
     STRICT = a.strict
-    sys.exit(render(a.profile, a.out, a.outline, a.theme))
+    sys.exit(render(a.profile, a.out, a.outline, a.theme, a.asset_dir, a.prototype_dir))
 
 
 if __name__ == "__main__":

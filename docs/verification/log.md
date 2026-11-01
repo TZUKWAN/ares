@@ -107,7 +107,28 @@
 - PPT 视觉验收终轮 21/21 全过（visual-judge 判定 deliverable_ready=true）：第3页占位列自动隐藏、第13页饼图百分比标签+侧注居中均已确认修复。
 - 五轮真实使用测试累计 36 条反馈全部闭环。
 
+## 2026-10-02 ARES 质量整改复测
+
+- 证据门禁：`validate_profile.py`、`validate_evidence.py --check-url` 通过；URL 非法、artifact 路径不存在、关键结论缺少独立来源组的负例均被拦截。
+- Word：E2E 文档检查为 332 段、8 表、1 张真实内嵌图片、0 个占位；Word COM 独立导出退出码 0。
+- PPT：E2E 文档为 22 页、3 张图片、3 个原生图表；PowerPoint COM 独立导出 22 页 PNG 退出码 0；已抽查比较矩阵和产品 Demo 页。
+- 一致性：扫描 32 个文件、核对 12 项数字，零矛盾；仅保留空 awards 的合法警告。
+- 说明：bundled artifact 渲染器仍以 `3221225477` 异常退出，LibreOffice 不在本机；Word COM、PowerPoint COM 和 Playwright 独立验收均已通过，未将 bundled renderer 异常伪报为通过。
+
 ## 平台冒烟记录（T7.1 DoD：≥2 平台）
 
 - 平台一（类 ZCode/Claude Code，Commands+Skills 全量）：第1/3/4轮 加载→触发（/ares-start、/ares-ppt、/ares-sync）→产出 全部成功。
 - 平台二（Codex 式，仅 AGENTS.md 指引）：第5轮 加载→自然语言触发→产出 成功。
+
+## 2026-10-05 证据闭环与当前环境复核
+
+- round1 已补充 `evidence_snapshots/`：国家统计局人口摘录、国务院办公厅智慧健康养老政策摘录、项目 DEMO 口径摘录；`market.sources` 已迁移为带官方 URL 的结构化来源。
+- `python ares/scripts/validate_evidence.py ares-e2e/round1/project.json --check-url --strict`：通过；strict claim 缺口已清零。
+- `python ares/scripts/migrate_profile.py --profile ares-e2e/round1/project.json --out 迁移缺口报告.json`：`migration_complete=True`；报告仍保留 `formal_ready=False`，正式就绪以严格评分门禁为准。
+- `python ares/scripts/build_scorecard.py ... --strict`：按预期阻断 19 个未覆盖或缺少强证据的 rubric 点，避免把 DEMO/估算数据误报成正式提交材料；当前普通矩阵覆盖率 4/23。
+- `python ares/docs/verification/verify.py all`：A/C/D/E 全部通过；包含 Playwright 运行时、Word/PPT 独立渲染、严格证据负例和视觉覆盖审计。
+- 复测修复：`smoke_prototype.py` 的持久化 `BrowserContext` 改为在上下文创建时设置 viewport，10 个页面运行时冒烟真实 PASS；Word COM 导出 PDF、PowerPoint COM 导出 22 页 PNG 均真实 PASS。
+- `doctor.py --strict`：必需能力通过，Playwright/win32com 与 Word/PowerPoint COM probe 可用；MarkItDown/LibreOffice 作为可选能力记录未安装。
+- 最终发布包：208 个文件，ZIP 完整性通过；精确 SHA-256 记录在工作区 `CLAUDE_STATE.md` 和 `ares-dist/ares-v1.0.zip.sha256`。
+- 证据冲突门禁：为 `normalized_value/value_unit` 增加同一字段跨来源冲突检测，负例已纳入 A 阶段回归；最终发布包随后重新构建。
+- 评分缺口交付化：`build_evidence_request.py` 为 round1 生成 19 项原始材料补交清单和 claim 模板，未自动填充任何事实。

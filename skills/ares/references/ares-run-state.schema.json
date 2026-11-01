@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ares Run State",
+  "type": "object",
+  "required": ["schema_version", "run_id", "project_dir", "current_stage", "stages", "blocking_items", "next_action"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "run_id": {"type": "string", "minLength": 1},
+    "project_dir": {"type": "string", "minLength": 1},
+    "request": {"type": "string"},
+    "competition": {"type": ["object", "null"]},
+    "current_stage": {"enum": ["match", "profile", "plan", "research", "produce", "review", "deliver"]},
+    "stages": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status", "evidence"],
+        "properties": {
+          "status": {"enum": ["pending", "in_progress", "blocked", "done"]},
+          "evidence": {"type": "array", "items": {"type": "string"}},
+          "note": {"type": "string"}
+        }
+      }
+    },
+    "blocking_items": {"type": "array", "items": {"type": "string"}},
+    "next_action": {"type": "string", "minLength": 1},
+    "updated_at": {"type": "string", "minLength": 1}
+  }
+}

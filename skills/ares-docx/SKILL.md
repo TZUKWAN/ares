@@ -31,10 +31,10 @@ description: Ares 竞赛插件 Word 文档生产规范。生成商业计划书�
 ## 三、执行步骤
 
 1. 读取生产线的章节内容与 project.json（数字全部取档案）。
-2. 调用 `scripts/make_docx.py` 的模板函数库构建文档（封面→目录→章节→参考文献→页眉页脚），或按本规范用 python-docx 自行组装（保持上表全部参数）。
+2. 调用 `scripts/make_docx.py` 的模板函数库构建文档（封面→目录→章节→真实图片/表格→参考文献→页眉页脚），或按本规范用 python-docx 自行组装（保持上表全部参数）。插图必须调用 `add_figure` 并传入真实图片路径、来源、替代文字；`add_figure_placeholder` 会直接失败。
 3. 段落化正文写入（遵守 ares-writing-style：无小标题、无分点、无违禁词）。
 4. 生成后运行本技能自检（第五节），并交给 ares-judge 复检。
-5. 需要时导出 PDF（Windows 可用 Word COM，或用户在 Word 中另存）。
+5. 独立视觉验收：Windows 运行 `scripts/render_docx.py <input.docx> <output.pdf>` 通过 Word 自己导出 PDF；没有 Word 时再使用平台提供的 LibreOffice 渲染器，并明确记录限制。
 
 ## 四、输出
 
@@ -45,7 +45,7 @@ description: Ares 竞赛插件 Word 文档生产规范。生成商业计划书�
 - [ ] 封面要素齐全；目录域存在（打开可一键更新）
 - [ ] 页眉页脚页码正确，封面无页眉页码
 - [ ] 标题层级样式与上表一致；正文宋体小四 1.5 倍行距首行缩进
-- [ ] 图表编号连续且被正文引用；表用三线表；图不模糊
+- [ ] 图表编号连续且被正文引用；表用三线表、重复表头与可读列宽；图已真实嵌入、DPI 达标、含替代文字和来源
 - [ ] 参考文献符合 GB/T 7714，正文引用上标 [n] 与文献表对应
 - [ ] 全文数字与 project.json 一致（ares-judge 一致性扫描通过）
 - [ ] ares-writing-style 机扫 0 违禁

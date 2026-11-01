@@ -12,7 +12,7 @@
 ## 参数说明
 
 - 输入：输出目录 + project.json + rubrics/NNN.json。
-- 行为：consistency_check.py（零矛盾）→ check_style.py（文本 0 违禁）→ PPT 溢出检查（退出码 0）→ 逐维度打分（百分制+权重）→ 评审报告（评分总表/扣分点三要素/修复指令/复检结论）。
+- 行为：先运行 `validate_profile.py` 与 `validate_evidence.py --check-url`（数据和来源门禁）→ consistency_check.py（零矛盾）→ check_style.py（文本 0 违禁）→ PPT 严格检查与 PowerPoint 独立渲染（PNG 页数完整）→ 逐维度打分（百分制+权重）→ 评审报告（评分总表/扣分点三要素/修复指令/复检结论）。
 - 输出：`输出/项目名/10-评审报告.md`。
 
 ## 触发示例

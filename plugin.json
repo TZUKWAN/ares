@@ -25,6 +25,7 @@
     {"name": "ares-simulation", "path": "skills/ares-simulation/SKILL.md", "role": "E3 模拟经营模块"}
   ],
   "commands": [
+    {"name": "ares", "path": "commands/ares.md", "role": "低上下文稳定总入口"},
     {"name": "ares-start", "path": "commands/ares-start.md", "role": "全流程启动"},
     {"name": "ares-bp", "path": "commands/ares-bp.md", "role": "只出商业计划书含三表"},
     {"name": "ares-ppt", "path": "commands/ares-ppt.md", "role": "只出路演PPT"},
@@ -49,12 +50,29 @@
   ],
   "scripts": [
     {"path": "scripts/validate_profile.py", "role": "project.json 完整性校验"},
+    {"path": "scripts/validate_evidence.py", "role": "来源与字段级证据校验"},
+    {"path": "skills/ares-ppt/scripts/capture_prototype.py", "role": "原型页面离线截图"},
+    {"path": "skills/ares-ppt/scripts/render_ppt.py", "role": "PowerPoint 独立渲染验收"},
     {"path": "scripts/consistency_check.py", "role": "跨文件关键数字一致性扫描"},
     {"path": "scripts/build_financials.py", "role": "财务三表参数化生成"},
-    {"path": "scripts/validate_rubrics.py", "role": "rubric 档案校验"}
+    {"path": "scripts/validate_rubrics.py", "role": "rubric 档案校验"},
+    {"path": "scripts/run_state.py", "role": "低上下文运行状态与断点续跑"},
+    {"path": "scripts/doctor.py", "role": "本机必需/可选能力自检"},
+    {"path": "scripts/match_competition.py", "role": "确定性赛事匹配"},
+    {"path": "scripts/smoke_low_context.py", "role": "低上下文入口与断点协议 smoke"},
+    {"path": "scripts/migrate_profile.py", "role": "旧 project.json 非破坏性迁移缺口报告"},
+    {"path": "scripts/build_evidence_request.py", "role": "评分缺口到原始材料的补交清单"},
+    {"path": "scripts/final_gate.py", "role": "交付前统一质量总闸门"},
+    {"path": "scripts/build_scorecard.py", "role": "评分点覆盖矩阵"},
+    {"path": "scripts/audit_visuals.py", "role": "Word/PPT/原型视觉覆盖审计"},
+    {"path": "scripts/ingest_material.py", "role": "本地资料导入与来源哈希"},
+    {"path": "skills/ares-docx/scripts/render_docx.py", "role": "Word 独立渲染验收"},
+    {"path": "skills/ares-prototype/scripts/smoke_prototype.py", "role": "Playwright 原型运行时冒烟"}
   ],
   "dependencies": {
     "python": ">=3.10",
-    "packages": ["python-docx", "python-pptx", "openpyxl", "numpy", "matplotlib"]
+    "packages": ["python-docx", "python-pptx", "openpyxl", "numpy", "matplotlib"],
+    "optional_packages": ["playwright (原型运行时冒烟；需本机已有 Chrome/Edge 或 Playwright 浏览器)", "markitdown (外部 DOCX/PPTX/PDF/XLSX 资料导入增强)"],
+    "optional_mcp": ["官方 MCP Registry/Fetch 仅作为人工配置选项；默认不自动启用，需配置 URL allowlist 以避免访问内网地址"]
   }
 }

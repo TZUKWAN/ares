@@ -6,7 +6,7 @@ make_docx.py — ares-docx 统一版式模板函数库 + 样例生成（T3.3 DoD
     python skills/ares-docx/scripts/make_docx.py [输出路径.docx]
 
 生产线脚本可 import 本模块复用 new_document/add_cover/add_toc/add_heading/add_body/
-add_figure_placeholder/add_table_numbered/add_reference_gbt7714/finalize。
+add_figure/add_table_numbered/add_reference_gbt7714/finalize。
 
 版式规范（与 skills/ares-docx/SKILL.md 第二节一致）：
 正文宋体小四 1.5 倍行距首行缩进 2 字符；一级黑体三号；二级黑体四号；三级黑体小四；
@@ -14,13 +14,20 @@ add_figure_placeholder/add_table_numbered/add_reference_gbt7714/finalize。
 """
 import os
 import sys
+import tempfile
 
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
 from docx.enum.section import WD_SECTION
+from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
-from docx.shared import Pt, RGBColor
+from docx.shared import Inches, Pt, RGBColor
+
+try:
+    from PIL import Image
+except ImportError:  # pragma: no cover - python-docx normally brings Pillow
+    Image = None
 
 
 def _set_font(run, cn_font, size_pt, bold=False, en_font="Times New Roman"):
@@ -137,32 +144,167 @@ def add_body(doc, text, indent=True):
     return p
 
 
-def add_figure_placeholder(doc, chapter_no, fig_no, caption, hint="（此处插入图片，300dpi 起）"):
-    p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    _set_font(p.add_run(hint), "宋体", 10.5)
+def _set_keep_with_next(paragraph):
+    paragraph.paragraph_format.keep_with_next = True
+    paragraph.paragraph_format.keep_together = True
+
+
+def _set_alt_text(inline_shape, alt_text):
+    if not alt_text:
+        return
+    doc_pr = inline_shape._inline.docPr
+    doc_pr.set("descr", str(alt_text))
+    doc_pr.set("title", str(alt_text))
+
+
+def _image_dpi(image_path):
+    if Image is None:
+        return None
+    with Image.open(image_path) as image:
+        dpi = image.info.get("dpi")
+        if not dpi:
+            return None
+        return float(dpi[0]), float(dpi[1])
+
+
+def add_figure(doc, chapter_no, fig_no, caption, image_path, source="", width_inches=None,
+               height_inches=None, alt_text="", dpi_min=300):
+    """Embed a real figure and bind its caption/source to the same block.
+
+    ``image_path`` is mandatory. Missing files, unsupported/undetermined DPI or
+    a low-resolution image fail before the document is written, preventing an
+    output that only pretends to contain a figure.
+    """
+    if not image_path or not os.path.isfile(image_path):
+        raise FileNotFoundError("图片素材不存在：%s" % image_path)
+    dpi = _image_dpi(image_path)
+    if dpi is None:
+        raise ValueError("图片缺少 DPI 元数据（至少 %.0f dpi）：%s" % (dpi_min, image_path))
+    if min(dpi) + 0.01 < dpi_min:
+        raise ValueError("图片 DPI %.1fx%.1f 低于要求 %.0f：%s" % (dpi[0], dpi[1], dpi_min, image_path))
+
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.first_line_indent = None
+    _set_keep_with_next(p)
+    run = p.add_run()
+    kwargs = {}
+    if width_inches is not None:
+        kwargs["width"] = Inches(float(width_inches))
+    if height_inches is not None:
+        kwargs["height"] = Inches(float(height_inches))
+    inline = run.add_picture(image_path, **kwargs)
+    _set_alt_text(inline, alt_text or caption)
+
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.first_line_indent = None
+    p.paragraph_format.keep_with_next = bool(source)
     _set_font(p.add_run("图%d-%d  %s" % (chapter_no, fig_no, caption)), "宋体", 10.5)
+    if source:
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.first_line_indent = None
+        _set_font(p.add_run("来源：" + str(source)), "宋体", 9)
+    return inline
 
 
-def add_table_numbered(doc, chapter_no, tab_no, caption, header_row, rows):
+def add_figure_placeholder(doc, chapter_no, fig_no, caption, hint="（此处插入图片，300dpi 起）"):
+    """Removed placeholder API kept only to fail loudly for old producers."""
+    raise ValueError(
+        "禁止生成插图占位符；请调用 add_figure(..., image_path=真实素材路径)。"
+    )
+
+
+def _set_cell_shading(cell, fill):
+    tc_pr = cell._tc.get_or_add_tcPr()
+    shd = tc_pr.find(qn("w:shd"))
+    if shd is None:
+        shd = OxmlElement("w:shd")
+        tc_pr.append(shd)
+    shd.set(qn("w:fill"), fill)
+
+
+def _set_cell_border(cell, **kwargs):
+    tc = cell._tc
+    tc_pr = tc.get_or_add_tcPr()
+    borders = tc_pr.first_child_found_in("w:tcBorders")
+    if borders is None:
+        borders = OxmlElement("w:tcBorders")
+        tc_pr.append(borders)
+    for edge in ("top", "left", "bottom", "right", "insideH", "insideV"):
+        if edge not in kwargs:
+            continue
+        tag = "w:%s" % edge
+        element = borders.find(qn(tag))
+        if element is None:
+            element = OxmlElement(tag)
+            borders.append(element)
+        for key in ("val", "sz", "space", "color"):
+            if key in kwargs[edge]:
+                element.set(qn("w:%s" % key), str(kwargs[edge][key]))
+
+
+def _set_repeat_table_header(row):
+    tr_pr = row._tr.get_or_add_trPr()
+    tbl_header = OxmlElement("w:tblHeader")
+    tbl_header.set(qn("w:val"), "true")
+    tr_pr.append(tbl_header)
+
+
+def _set_row_cant_split(row):
+    tr_pr = row._tr.get_or_add_trPr()
+    cant_split = OxmlElement("w:cantSplit")
+    tr_pr.append(cant_split)
+
+
+def add_table_numbered(doc, chapter_no, tab_no, caption, header_row, rows, source="", col_widths=None):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.first_line_indent = None
     _set_font(p.add_run("表%d-%d  %s" % (chapter_no, tab_no, caption)), "宋体", 10.5)
     table = doc.add_table(rows=1 + len(rows), cols=len(header_row))
-    table.style = "Table Grid"
+    # Do not rely on locale-specific table style names; borders/shading below
+    # define the visual system explicitly.
+    table.autofit = False
+    if col_widths is None:
+        lengths = []
+        for j, head in enumerate(header_row):
+            vals = [str(head)] + [str(row[j]) for row in rows if j < len(row)]
+            lengths.append(max(1, max(len(v) for v in vals)))
+        total = sum(lengths) or 1
+        col_widths = [6.4 * n / total for n in lengths]
+    if len(col_widths) != len(header_row):
+        raise ValueError("col_widths 数量必须与 header_row 一致")
     for j, cell_text in enumerate(header_row):
         cell = table.cell(0, j)
+        cell.width = Inches(float(col_widths[j]))
+        cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+        _set_cell_shading(cell, "1F4E79")
+        _set_cell_border(cell, top={"val": "single", "sz": "12", "color": "1F4E79"},
+                         bottom={"val": "single", "sz": "8", "color": "1F4E79"})
         cell.paragraphs[0].paragraph_format.first_line_indent = None
-        _set_font(cell.paragraphs[0].add_run(cell_text), "宋体", 10.5, bold=True)
+        p = cell.paragraphs[0]
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        _set_font(p.add_run(cell_text), "宋体", 10.5, bold=True)
+    _set_repeat_table_header(table.rows[0])
+    _set_row_cant_split(table.rows[0])
     for i, row in enumerate(rows, 1):
+        _set_row_cant_split(table.rows[i])
         for j, cell_text in enumerate(row):
             cell = table.cell(i, j)
+            cell.width = Inches(float(col_widths[j]))
+            cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+            _set_cell_border(cell, bottom={"val": "single" if i == len(rows) else "nil",
+                                            "sz": "8" if i == len(rows) else "0",
+                                            "color": "1F4E79"})
             cell.paragraphs[0].paragraph_format.first_line_indent = None
             _set_font(cell.paragraphs[0].add_run(str(cell_text)), "宋体", 10.5)
+    if source:
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.first_line_indent = None
+        _set_font(p.add_run("来源：" + str(source)), "宋体", 9)
     return table
 
 
@@ -189,6 +331,10 @@ def add_reference_gbt7714(doc, refs):
 
 
 def finalize(doc):
+    """Run structural guards before a document is handed to the caller."""
+    placeholders = [p.text for p in doc.paragraphs if "此处插入图片" in p.text]
+    if placeholders:
+        raise ValueError("文档仍含插图占位符，请补入真实素材后再交付")
     return doc
 
 
@@ -211,7 +357,30 @@ def build_sample(out_path):
     add_body(doc, "系统采用点云特征与时序注意力相结合的两级识别架构，在自建 2000 段真实场景数据集上训练。")
     add_formula(doc, 2, 1, "Acc = (TP + TN) / (TP + TN + FP + FN) = 96.5%",
                 note="式中 TP 为真阳性样本数，其余同惯例，数据集划分与基线对比见附录。")
-    add_figure_placeholder(doc, 2, 1, "系统总体架构")
+    figure_path = os.path.join(tempfile.gettempdir(), "ares_docx_sample_architecture.png")
+    if Image is None:
+        raise RuntimeError("生成样例插图需要 Pillow")
+    image = Image.new("RGB", (1800, 900), "white")
+    from PIL import ImageDraw
+    draw = ImageDraw.Draw(image)
+    boxes = [(120, 260, 480, 520, "感知层\n60GHz 毫米波雷达"),
+             (720, 260, 1080, 520, "边缘层\n特征提取与识别"),
+             (1320, 260, 1680, 520, "应用层\n告警与档案")]
+    for x1, y1, x2, y2, label in boxes:
+        draw.rounded_rectangle((x1, y1, x2, y2), radius=32, fill="#DEEBF7", outline="#1F4E79", width=8)
+        draw.multiline_text(((x1 + x2) // 2, (y1 + y2) // 2), label, fill="#1F4E79", anchor="mm", align="center", spacing=18)
+    draw.line((480, 390, 720, 390), fill="#2E75B6", width=14)
+    draw.line((1080, 390, 1320, 390), fill="#2E75B6", width=14)
+    image.save(figure_path, dpi=(300, 300))
+    try:
+        add_figure(doc, 2, 1, "系统总体架构", figure_path,
+                   source="样例架构图，生成于模板验收；正式项目需替换为项目证据图",
+                   width_inches=6.1, alt_text="毫米波雷达跌倒监测系统三层架构")
+    finally:
+        try:
+            os.unlink(figure_path)
+        except OSError:
+            pass
     add_table_numbered(doc, 2, 1, "与对标方案性能对比",
                        ["指标", "本系统", "视觉方案", "穿戴方案"],
                        [["识别准确率", "96.5%", "91.2%", "88.7%"],

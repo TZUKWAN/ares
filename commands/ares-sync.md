@@ -13,7 +13,7 @@ project.json 变更后，找出受影响的产出物并重渲染，保证全部�
 
 - 输入：变更后的 project.json；可选变更字段清单（未提供则按 diff 自动识别）。
 - 受影响映射：financials.* → 02-财务三表.xlsx（重跑 build_financials.py）、03-路演PPT.pptx（重跑 build_ppt.py）、01-商业计划书第八章、07-讲稿数字段；market.*/pain_points/advantages → 计划书对应章节与 PPT 对应页；solution.features → 原型功能页与计划书三章；achievements.* → 计划书 4.7/3.9 与 PPT 成果页。
-- 行为：逐项重渲染 → consistency_check.py 复扫 → 零矛盾收口，输出同步清单（改了哪些文件哪些数字）。
+- 行为：逐项重渲染 → `validate_profile.py` 与 `validate_evidence.py --check-url` 复核档案和来源 → consistency_check.py 复扫 → PPT 严格检查与 PowerPoint 独立渲染 → 零矛盾收口，输出同步清单（改了哪些文件哪些数字）。
 - 输出：同步清单.md（或对话内清单）+ 更新后的产出物。
 
 ## 触发示例

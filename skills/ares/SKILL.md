@@ -5,7 +5,7 @@ description: Ares 竞赛插件总控路由技能。用户表达任何参赛、�
 
 # Ares 总控路由技能
 
-Ares 是大学生学科竞赛与创新创业竞赛的超级插件。用户只需一句话需求，本技能负责把需求解析成赛事、赛道、档案与生产计划，并调度生产线技能完成全套材料。核心逻辑全部固化在本文件，各平台（支持或 Commands/Agents/Hooks 与否）均可通过自然语言触发本技能，功能不打折。
+Ares 是大学生学科竞赛与创新创业竞赛的超级插件。用户只需一句话需求，本技能负责把需求解析成赛事、赛道、档案与生产计划，并调度生产线技能完成全套材料。`/Ares` 是稳定总入口；低上下文模型按 `commands/ares.md` 的阶段协议和 `ares-run.json` 断点执行，不要求一次性记住全套赛事档案。核心逻辑全部固化在本文件，各平台（支持或 Commands/Agents/Hooks 与否）均可通过自然语言触发本技能，功能不打折。
 
 ## 零、单一事实源原则（全局强制）
 
@@ -41,6 +41,8 @@ Ares 是大学生学科竞赛与创新创业竞赛的超级插件。用户只需
 
 ```
 python <插件目录>/scripts/validate_profile.py project.json
+python <插件目录>/scripts/validate_evidence.py project.json
+python <插件目录>/scripts/build_scorecard.py --profile project.json --output-dir 输出/项目名
 ```
 
 向用户确认档案摘要（项目名、赛事赛道、团队、成果、数据登记情况）。placeholder 项在摘要中显著标注。
@@ -68,6 +70,7 @@ python <插件目录>/scripts/validate_profile.py project.json
 2. 模拟评审：执行 ares-judge 技能，按 rubric 维度打分，输出《10-评审报告.md》。
 3. 自动修复高优先级扣分点后复检。
 4. 输出交付清单与《11-数据真实性清单.md》（区分【用户提供真实数据】【AI估算】【占位待填】三类）。
+5. 运行 `build_scorecard.py`，评分点没有 claim 绑定或交付物缺失时，正式模式不得标记为可提交。
 
 诚信护栏（全程强制）：模拟/合成数据在文件头部与交付清单标注 DEMO；严禁虚构专利号、获奖记录、合作协议；论文类产出提示查重与 AIGC 检测风险；引用数据必须带出处与年份。
 
@@ -90,6 +93,8 @@ python <插件目录>/scripts/validate_profile.py project.json
 
 - [ ] 赛事匹配结果与用户确认过（或用户明确授权自动选择）
 - [ ] project.json 通过 validate_profile.py
+- [ ] evidence.sources/evidence.claims 通过 validate_evidence.py；正式交付必须再通过 `validate_evidence.py --strict`，关键来源按需通过 --check-url
+- [ ] 评分点覆盖矩阵已生成；正式交付通过 `build_scorecard.py --strict`，关键评分点均绑定 claim、证据和产物位置
 - [ ] 全部产出物数字与 project.json 一致（一致性扫描零矛盾）
 - [ ] 全部文本通过 ares-writing-style 自检（机扫 + 人工）
 - [ ] 评审报告有维度/得分/权重/扣分点/建议/证据位置

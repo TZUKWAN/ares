@@ -40,8 +40,8 @@ def collect_html_files(root):
 
 
 def resolve_link(from_rel, href):
-    """把页面内相对链接解析为相对根目录的正斜杠路径。"""
-    target = href.split("#")[0].strip()
+    """把页面内相对链接解析为相对根目录的正斜杠路径（剥离 #锚点 与 ?查询串）。"""
+    target = href.split("#")[0].split("?")[0].strip()
     if not target:
         return ""
     joined = os.path.normpath(os.path.join(os.path.dirname(from_rel), target))

@@ -18,7 +18,9 @@ validate_profile.py — Ares 插件 project.json 完整性校验（T1.4）
 import json
 import io
 import os
+import re
 import sys
+from datetime import date
 
 # 字段 → 说明（与 skills/ares/references/profile-schema.json 保持一致）
 REQUIRED_SCALAR = {
@@ -88,6 +90,159 @@ REQUIRED_LISTS = {
 OPTIONAL = {"policy": "政策清单", "advisors": "指导老师", "competition.deadline": "截止时间"}
 
 LEVELS = {"A1", "A2", "A3", "B1", "B2"}
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+URL_RE = re.compile(r"^https?://[^\s]+$", re.IGNORECASE)
+AUTHORITIES = {"A", "B", "C"}
+CONFIDENCE = {"real", "estimated", "placeholder"}
+
+
+def _valid_date(value):
+    if not DATE_RE.match(str(value or "")):
+        return False
+    try:
+        date.fromisoformat(str(value))
+        return True
+    except ValueError:
+        return False
+
+
+def _get_field(profile, dotted):
+    """Resolve a simple dotted profile path; list indices are accepted as [N]."""
+    cur = profile
+    for part in str(dotted).split("."):
+        m = re.match(r"^([^\[]+)(?:\[(\d+)\])?$", part)
+        if not m or not isinstance(cur, dict) or m.group(1) not in cur:
+            return None, False
+        cur = cur[m.group(1)]
+        if m.group(2) is not None:
+            idx = int(m.group(2))
+            if not isinstance(cur, list) or idx >= len(cur):
+                return None, False
+            cur = cur[idx]
+    return cur, True
+
+
+def validate_evidence(profile, base_dir=None):
+    """Validate the structured evidence ledger used by all production outputs.
+
+    The legacy ``market.sources`` list remains accepted as content, but it is
+    deliberately not treated as auditable provenance. Profiles with any real
+    or estimated data must provide ``evidence.sources`` and ``evidence.claims``.
+    """
+    errors, warnings = [], []
+    dc = profile.get("data_confidence") or {}
+    needs_ledger = bool(dc.get("real") or dc.get("estimated"))
+    evidence = profile.get("evidence")
+    if not needs_ledger:
+        return errors, warnings
+    if not isinstance(evidence, dict):
+        return ["evidence（含 real/estimated 数据时必须提供来源与结论台账）"], warnings
+
+    sources = evidence.get("sources")
+    claims = evidence.get("claims")
+    if not isinstance(sources, list) or not sources:
+        errors.append("evidence.sources（至少 1 条结构化来源）")
+        sources = []
+    if not isinstance(claims, list) or not claims:
+        errors.append("evidence.claims（至少 1 条字段级结论）")
+        claims = []
+
+    source_ids = set()
+    source_groups = {}
+    for i, src in enumerate(sources, 1):
+        if not isinstance(src, dict):
+            errors.append("evidence.sources[%d] 必须是对象" % i)
+            continue
+        sid = str(src.get("id", "")).strip()
+        if not sid:
+            errors.append("evidence.sources[%d].id 缺失" % i)
+        elif sid in source_ids:
+            errors.append("evidence.sources[%d].id 重复：%s" % (i, sid))
+        else:
+            source_ids.add(sid)
+            source_groups[sid] = str(src.get("independent_group", "")).strip()
+        for key in ("title", "org", "accessed", "authority", "independent_group"):
+            if not str(src.get(key, "")).strip():
+                errors.append("evidence.sources[%d].%s 缺失" % (i, key))
+        kind = str(src.get("kind", "web")).strip() or "web"
+        if kind not in ("web", "artifact"):
+            errors.append("evidence.sources[%d].kind 须为 web/artifact" % i)
+        if kind == "web":
+            if not str(src.get("url", "")).strip():
+                errors.append("evidence.sources[%d].url 缺失" % i)
+            elif not URL_RE.match(str(src["url"])):
+                errors.append("evidence.sources[%d].url 不是 http(s) URL" % i)
+        elif not str(src.get("path", "")).strip():
+            errors.append("evidence.sources[%d].path 缺失" % i)
+        elif base_dir:
+            raw_path = str(src.get("path", "")).strip()
+            resolved = raw_path if os.path.isabs(raw_path) else os.path.join(base_dir, raw_path)
+            if not os.path.exists(os.path.normpath(resolved)):
+                errors.append("evidence.sources[%d].path 不存在：%s" % (i, raw_path))
+        if src.get("accessed") and not _valid_date(src.get("accessed")):
+            errors.append("evidence.sources[%d].accessed 日期非法" % i)
+        if src.get("published") and not _valid_date(src.get("published")):
+            errors.append("evidence.sources[%d].published 日期非法" % i)
+        if src.get("authority") not in AUTHORITIES:
+            errors.append("evidence.sources[%d].authority 须为 A/B/C" % i)
+
+    claim_ids = set()
+    for i, claim in enumerate(claims, 1):
+        if not isinstance(claim, dict):
+            errors.append("evidence.claims[%d] 必须是对象" % i)
+            continue
+        cid = str(claim.get("id", "")).strip()
+        if not cid:
+            errors.append("evidence.claims[%d].id 缺失" % i)
+        elif cid in claim_ids:
+            errors.append("evidence.claims[%d].id 重复：%s" % (i, cid))
+        else:
+            claim_ids.add(cid)
+        field = str(claim.get("field", "")).strip()
+        status = str(claim.get("status", "")).strip()
+        if not field:
+            errors.append("evidence.claims[%d].field 缺失" % i)
+        elif field not in ("free_text", "derived"):
+            _value, exists = _get_field(profile, field)
+            if not exists:
+                errors.append("evidence.claims[%d].field 不存在：%s" % (i, field))
+        if status not in CONFIDENCE:
+            errors.append("evidence.claims[%d].status 须为 real/estimated/placeholder" % i)
+        source_refs = claim.get("source_ids", [])
+        if not isinstance(source_refs, list):
+            errors.append("evidence.claims[%d].source_ids 必须为列表" % i)
+            source_refs = []
+        unknown = [str(s) for s in source_refs if str(s) not in source_ids]
+        if unknown:
+            errors.append("evidence.claims[%d] 引用了不存在的 source_id：%s" % (i, ",".join(unknown)))
+        if status in ("real", "estimated") and not source_refs:
+            errors.append("evidence.claims[%d] 的 %s 结论必须绑定 source_ids" % (i, status))
+        if status == "placeholder" and not str(claim.get("rationale", "")).strip():
+            errors.append("evidence.claims[%d] 为 placeholder 时必须填写 rationale" % i)
+        if status == "estimated" and not str(claim.get("method", "")).strip():
+            errors.append("evidence.claims[%d] 为 estimated 时必须填写 method" % i)
+        if claim.get("critical"):
+            unique_refs = set(str(s) for s in source_refs)
+            if len(unique_refs) < 2:
+                errors.append("evidence.claims[%d] 标记 critical 时至少需要 2 个 source_id" % i)
+            elif len({source_groups.get(s) for s in unique_refs}) < 2:
+                errors.append("evidence.claims[%d] 标记 critical 时必须来自至少 2 个 independent_group" % i)
+        if claim.get("evidence_files") and not isinstance(claim["evidence_files"], list):
+            errors.append("evidence.claims[%d].evidence_files 必须为列表" % i)
+        if claim.get("rubric_refs") and not isinstance(claim["rubric_refs"], list):
+            errors.append("evidence.claims[%d].rubric_refs 必须为列表" % i)
+        if claim.get("output_refs") and not isinstance(claim["output_refs"], list):
+            errors.append("evidence.claims[%d].output_refs 必须为列表" % i)
+        if claim.get("supporting_quote") and not str(claim.get("supporting_quote")).strip():
+            errors.append("evidence.claims[%d].supporting_quote 不能为空" % i)
+
+    if source_ids and claims:
+        referenced = {str(s) for c in claims if isinstance(c, dict)
+                      for s in (c.get("source_ids") or [])}
+        unused = sorted(source_ids - referenced)
+        if unused:
+            warnings.append("evidence.sources 有未被结论引用的来源：%s" % ",".join(unused))
+    return errors, warnings
 
 
 def is_empty(v):
@@ -100,7 +255,7 @@ def is_empty(v):
     return False
 
 
-def validate(profile, data_dir=None):
+def validate(profile, data_dir=None, evidence_base_dir=None):
     missing, warnings = [], []
     for key, label in REQUIRED_SCALAR.items():
         if key not in profile or is_empty(profile.get(key)):
@@ -140,6 +295,10 @@ def validate(profile, data_dir=None):
     dc = profile.get("data_confidence") or {}
     if isinstance(dc, dict) and all(is_empty(dc.get(k)) for k in ("real", "estimated", "placeholder")):
         warnings.append("data_confidence 三类登记全空，关键数据未做真实性登记")
+
+    evidence_errors, evidence_warnings = validate_evidence(profile, evidence_base_dir)
+    missing.extend(evidence_errors)
+    warnings.extend(evidence_warnings)
 
     if data_dir:
         comps_path = os.path.join(data_dir, "competitions.json")
@@ -184,7 +343,7 @@ def main(argv):
         print("JSON 解析失败：%s" % e)
         return 2
     data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
-    missing, warnings = validate(profile, data_dir)
+    missing, warnings = validate(profile, data_dir, os.path.dirname(os.path.abspath(path)))
 
     # 非商业类生产线（L2建模/L5艺术/L6程序/E1人文/E2技能/E3模拟纯训练）：
     # 商业性字段降级为警告，避免调研类项目被迫填"不适用"
