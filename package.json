@@ -1,0 +1,22 @@
+{
+  "name": "ares",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Ares 超级竞赛插件 —— 大学生竞赛全套参赛材料生成（132项赛事主库 + 评审标准档案 + 六线三模块生产线）DeepSeek Harness bundle：16 个 runtime skill，纯 Skills + 脚本 + 数据文件，无 MCP 依赖",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "dsh": ">=0.2"
+  },
+  "license": "MIT",
+  "author": "TZUKWAN",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 ---
 name: ares-entrepreneurship
 description: Ares 竞赛插件 L1 创业竞赛生产线。中国国际大学生创新大赛、挑战杯创业计划、电商三创、iCAN、创青春、服务外包、学创杯等创业类赛事全套材料生产。触发词：创业类赛事、商业计划书、路演、BP。
+whenToUse: 赛事匹配结果为 L1 创业竞赛线（互联网+、挑战杯创业、三创赛、iCAN 等）时由总控调度。
 ---
 
 # ares-entrepreneurship L1 创业竞赛线

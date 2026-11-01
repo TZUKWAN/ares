@@ -1,6 +1,7 @@
 ---
 name: ares
 description: Ares 竞赛插件总控路由技能。用户表达任何参赛、备赛、竞赛材料需求（竞赛/比赛/大赛 + 参赛/备赛/计划书/路演/PPT/原型/论文 等关键词）时由本技能接管：解析需求 → 匹配赛事 → 建立档案 → 编排生产线 → 质检交付。
+whenToUse: 用户输入 /Ares、/ares-start、/ares-bp、/ares-ppt、/ares-prototype、/ares-review、/ares-sync 任一命令；表达参赛备赛意图（竞赛/比赛/大赛 + 计划书/路演/PPT/原型/论文/评审等）；当前目录存在 project.json 或 ares-run.json。
 ---
 
 # Ares 总控路由技能
@@ -124,3 +125,5 @@ project.json 变更后：读变更字段 → 找出引用该字段的产出物�
 ## 九、平台适配
 
 支持 Commands 的平台：六个命令入口直接可用。不支持的平台：本 SKILL.md 即完整逻辑，自然语言触发即可。支持 Hooks 的平台：on-project-init 在建档时自动创建目录骨架（见 hooks/on-project-init.md）；不支持的平台按该文件内的手动指令等价执行。
+
+DeepSeek Harness（DSH）适配要点：本插件以 DSH bundle 形态加载时，16 个技能由宿主插件 index.js 注册为 runtime skill；生产线技能由本总控按名称调度，用户只需触发总控。路径解析规则：插件根目录 = 本文件所在目录的上两级（skills/ares/ → 插件根），全部脚本与数据按该根定位。脚本一律用 pwsh 工具执行（`python "<插件根>/scripts/xxx.py" ...`）；信息采集与检查点确认用 ask_user_question；机械执行可分派 subagent（写作/开发/分析纪律见 agents/*.md，经 resourceBase 读取）。低上下文场景优先走 scripts/run_state.py 断点协议（见 commands/ares.md 阶段协议）。

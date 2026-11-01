@@ -1,0 +1,9 @@
+# Ares bundle 补丁
+# 单一宿主插件：注册 16 个 runtime skill（ares 总控 + 6 共享 + 6 生产线 + 3 扩展模块）。
+# Ares 第一版按设计决策不做 MCP 服务器、不依赖任何外部服务 —— 纯 Skills + Python 脚本 + 数据文件，
+# 脚本由模型经 pwsh 工具以 `python "<插件根>/scripts/xxx.py"` 执行（插件根 = bundle 目录）。
+# 无 Node 侧重逻辑、无 Python 环境硬依赖：缺 Python 时技能仍可加载，脚本调用在会话内 fail-closed 报告。
+- insert:
+    - id: ares
+      name: ares
+      config: {}

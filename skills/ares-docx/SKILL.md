@@ -1,6 +1,7 @@
 ---
 name: ares-docx
 description: Ares 竞赛插件 Word 文档生产规范。生成商业计划书、建模论文、技术报告、设计说明、讲稿、QA 预案等 docx 时引用本技能。触发词：Word、docx、文档、计划书排版、论文排版。
+whenToUse: 需要产出 Word/docx 交付物（计划书、论文、报告、讲稿、问卷）时。
 ---
 
 # ares-docx Word 生产规范

@@ -1,6 +1,7 @@
 ---
 name: ares-coding-contest
 description: Ares 竞赛插件 L6 程序算法线（训练与备赛辅助，非代考）。ACM-ICPC、蓝桥杯、百度之星、CCPC、天梯赛、AI 算法精英赛等赛事的训练计划、题库、模板代码库、模拟题生产。触发词：蓝桥杯、ACM、算法竞赛、刷题计划。
+whenToUse: 赛事匹配结果为 L6 程序算法线（蓝桥杯、ACM、CCPC 等）训练备赛时由总控调度。
 ---
 
 # ares-coding-contest L6 程序算法线

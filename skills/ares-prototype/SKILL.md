@@ -1,6 +1,7 @@
 ---
 name: ares-prototype
 description: Ares 竞赛插件多页 HTML 原型系统生成技能。创业/工科类作品原型（可交互多页 Web 系统）产出时引用。触发词：原型、演示系统、可交互、网页系统、前端作品。
+whenToUse: 需要产出多页 HTML 交互原型系统时。
 ---
 
 # ares-prototype 多页 HTML 原型系统

@@ -1,6 +1,7 @@
 ---
 name: ares-ppt
 description: Ares 竞赛插件 PPTX 程序化生成技能（python-pptx，无模板）。路演/答辩/展示 PPT 生成与重渲染时引用。触发词：PPT、路演、答辩幻灯片、演示文稿。
+whenToUse: 需要生成或重渲染 PPTX（路演、答辩、展示）时。
 ---
 
 # ares-ppt PPTX 程序化生成
