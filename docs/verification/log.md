@@ -132,3 +132,15 @@
 - 最终发布包：208 个文件，ZIP 完整性通过；精确 SHA-256 记录在工作区 `CLAUDE_STATE.md` 和 `ares-dist/ares-v1.0.zip.sha256`。
 - 证据冲突门禁：为 `normalized_value/value_unit` 增加同一字段跨来源冲突检测，负例已纳入 A 阶段回归；最终发布包随后重新构建。
 - 评分缺口交付化：`build_evidence_request.py` 为 round1 生成 19 项原始材料补交清单和 claim 模板，未自动填充任何事实。
+
+## DeepSeek Harness（DSH）插件适配 — 通过（2026-11-01）
+
+- 形态：本仓库即 DSH bundle（package.json dsh.bundle.patch + cordis.patch.yml insert 宿主 ares + index.js 动态注册 16 个 runtime skill），无 MCP 依赖（Ares 设计决策六），profile 以 link 直连仓库本体，单一事实源。
+- index.js 契约与 metis-academic/designcraft 同款：ctx.inject(['skills']) → scope.skills.register（总控 user+model 双触发，线技能 model 触发），scope.effect 管理释放，单技能失败告警跳过。
+- 16 个技能 frontmatter 补 whenToUse；总控 SKILL.md 平台适配节补 DSH 要点（插件根=技能目录上两级、pwsh 执行、ask_user_question 检查点、run_state 断点协议）。
+- 离线验证：node --check 通过；cordis.patch.yml 解析合法；模拟 skills.register 合同 16/16 注册成功。
+- 实机验证（ares-dev profile = dsh-base + dsh-headless + ares link）：
+  - dsh --dump-config 装配段出现 ares；
+  - headless 会话中 16 个 ares 技能全部可见；
+  - E2E 冒烟：模型加载 ares 技能 → 插件根解析为 D:\METIS超级合并\ares（正确）→ pwsh 执行 scripts/doctor.py → 退出码 0、必需能力全可用、ares-doctor.json 落盘。
+- 附带修复：scan_prototype.py 本地链接剥离 ?查询串；round1 测试夹具重建（06-演示数据 DEMO 文件、04-项目原型 3 页 HTML）；合并并行会话低上下文加固改造（恢复 152 个被删文件 + 保留 22 处脚本增强 + 18 个新工具），verify.py all 全绿。
