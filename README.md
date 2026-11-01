@@ -69,7 +69,7 @@ Ares 是一个面向大学生学科竞赛与创新创业竞赛的超级插件，
 
 ## 安装
 
-见《跨平台安装说明.md》：ZCode 插件目录直装；Claude Code 挂载 skills 目录；Codex 用 AGENTS.md 指引；其他平台自然语言触发。
+见《跨平台安装说明.md》：ZCode 插件目录直装；Claude Code 挂载 skills 目录；Codex 用 AGENTS.md 指引；DeepSeek Harness 把本仓库作为 DSH bundle link 进 profile（根目录已含 package.json/cordis.patch.yml/index.js）；其他平台自然语言触发。
 
 ## 能力边界
 
