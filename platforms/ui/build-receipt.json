@@ -1,0 +1,31 @@
+{
+  "mode": "built",
+  "htmlBytes": 4825089,
+  "htmlSha256": "e88c2ebd1aceae5b5b2fb657933942c6076f0dfd573ec04dd389d7a54e51aecc",
+  "sceneInputSha256": "ffd7da7573f916748b009f12b163ee8b29cbbc3366a9f59adb52197f697adc7b",
+  "mediaAreSeparateBoundedResources": true,
+  "media": [
+    {
+      "file": "orb.mp4",
+      "bytes": 8334089,
+      "sha256": "f387a705bed9905ebd622d401239ebb8764be7404080d698e893ffa6e32c087f"
+    },
+    {
+      "file": "orb.jpg",
+      "bytes": 35428,
+      "sha256": "6b4b3aec60c636d5702a80fdf3e4e6816a7f83a22065e5d4b11be478392c3f43"
+    },
+    {
+      "file": "jellyfish.mp4",
+      "bytes": 724052,
+      "sha256": "8c6ebbb719c5e6c340b69dc12a7cb775d5c1b6907432049b863d50d301122e47"
+    },
+    {
+      "file": "jellyfish.jpg",
+      "bytes": 25289,
+      "sha256": "3c4d3751d2cb89ed86355a429b0429ba1e5f160d5090acc4d337d4309688edf3"
+    }
+  ],
+  "pageSdk": "@modelcontextprotocol/ext-apps@2.0.0",
+  "compiler": "esbuild@0.28.2"
+}

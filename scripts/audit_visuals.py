@@ -44,7 +44,8 @@ def _docx(path):
         "tables": len(doc.tables),
         "captions": len(captions),
         "placeholders": placeholders,
-        "status": "pass" if doc.inline_shapes and doc.tables and not placeholders else "review",
+        "status": "structure-checked" if (paragraphs or doc.inline_shapes) and not placeholders else "review",
+        "has_content": bool(paragraphs or doc.inline_shapes),
     }
 
 
@@ -65,16 +66,18 @@ def _pptx(path):
     with zipfile.ZipFile(path) as zf:
         media = [n for n in zf.namelist() if n.startswith("ppt/media/")]
     joined = "\n".join(texts)
+    has_content=bool(joined.strip() or image_count or chart_count or any(not getattr(shape,'is_placeholder',False) for slide in prs.slides for shape in slide.shapes))
     demo_markers = [x for x in ("demo", "原型", "演示", "样机", "截图") if x.lower() in joined.lower()]
     return {
         "path": path,
         "exists": True,
         "slides": len(prs.slides),
+        "has_content": has_content,
         "images": image_count,
         "media_files": len(media),
         "charts": chart_count,
         "demo_markers": demo_markers,
-        "status": "pass" if image_count and demo_markers else "review",
+        "status": "structure-checked" if len(prs.slides) else "review",
     }
 
 
@@ -87,10 +90,8 @@ def audit(docx_path=None, pptx_path=None, pipeline="L1", prototype_dir=None, str
             result["files"]["docx"] = _docx(docx_path)
             if strict:
                 item = result["files"]["docx"]
-                if item["images"] < 1:
-                    result["blocking_items"].append("Word 没有真实内嵌图片")
-                if item["tables"] < 1:
-                    result["blocking_items"].append("Word 没有表格")
+                if not item['has_content']:
+                    result['blocking_items'].append('Word 没有有效内容')
                 if item["placeholders"]:
                     result["blocking_items"].append("Word 存在图片占位段落")
     if pptx_path:
@@ -98,20 +99,18 @@ def audit(docx_path=None, pptx_path=None, pipeline="L1", prototype_dir=None, str
             result["blocking_items"].append("PPT 文件不存在：%s" % pptx_path)
         else:
             result["files"]["pptx"] = _pptx(pptx_path)
-            if strict and pipeline in {"L1", "L3", "L4", "L5"}:
-                item = result["files"]["pptx"]
-                if item["images"] < 3:
-                    result["blocking_items"].append("PPT 图片少于 3 张，无法支撑产品/场景/演示叙事")
-                if not item["demo_markers"]:
-                    result["blocking_items"].append("PPT 没有可识别的产品演示/原型/样机标识")
+            if strict and not result['files']['pptx']['has_content']:
+                result['blocking_items'].append('PPT 没有有效幻灯片内容')
     if prototype_dir:
         pages = []
         for base, _dirs, names in os.walk(prototype_dir):
             pages.extend(name for name in names if name.lower().endswith(".html"))
         result["prototype"] = {"path": prototype_dir, "html_pages": len(pages), "exists": os.path.isdir(prototype_dir)}
-        if strict and (not pages or len(pages) < 3):
-            result["blocking_items"].append("原型 Demo 页面少于 3 个")
-    result["formal_ready"] = not result["blocking_items"]
+        if strict and not pages:
+            result['blocking_items'].append('原型目录没有实际页面')
+    result['structure_ready']=not result['blocking_items']
+    result['visual_review_status']='not-rendered-or-reviewed-by-this-check'
+    result['formal_ready']=False
     return result
 
 
@@ -137,11 +136,11 @@ def main(argv=None):
             print("已生成：%s" % out)
         else:
             print(text)
-        print("视觉审计：formal_ready=%s；阻断项=%d" % (result["formal_ready"], len(result["blocking_items"])))
+        print("结构检查=%s；版式与视觉内容尚需独立复核；阻断项=%d" % (result["structure_ready"], len(result["blocking_items"])))
         if result["blocking_items"]:
             for item in result["blocking_items"]:
                 print("  - " + item)
-        return 0 if result["formal_ready"] or not args.strict else 1
+        return 0 if result["structure_ready"] or not args.strict else 1
     except (OSError, ValueError, ImportError, zipfile.BadZipFile) as exc:
         print("视觉审计失败：%s" % exc)
         return 1

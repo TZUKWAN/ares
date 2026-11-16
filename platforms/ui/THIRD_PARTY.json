@@ -1,0 +1,58 @@
+[
+  {
+    "name": "@modelcontextprotocol/client",
+    "version": "2.4.0",
+    "license": "Apache-2.0",
+    "path": "platforms/ui/licenses/_modelcontextprotocol_client_2.4.0-LICENSE",
+    "sha256": "0382b0057770ca05e9c350a50aa3b1c1fea84da0bc81d723bf00b9aa841be58a"
+  },
+  {
+    "name": "@modelcontextprotocol/core",
+    "version": "2.4.0",
+    "license": "Apache-2.0",
+    "path": "platforms/ui/licenses/_modelcontextprotocol_core_2.4.0-LICENSE",
+    "sha256": "0382b0057770ca05e9c350a50aa3b1c1fea84da0bc81d723bf00b9aa841be58a"
+  },
+  {
+    "name": "@modelcontextprotocol/ext-apps",
+    "version": "2.0.0",
+    "license": "MIT",
+    "path": "platforms/ui/licenses/_modelcontextprotocol_ext-apps_2.0.0-LICENSE",
+    "sha256": "0382b0057770ca05e9c350a50aa3b1c1fea84da0bc81d723bf00b9aa841be58a"
+  },
+  {
+    "name": "eventsource-parser",
+    "version": "3.1.1",
+    "license": "MIT",
+    "path": "platforms/ui/licenses/eventsource-parser_3.1.1-LICENSE",
+    "sha256": "835eb611a23301b27115ca1be9f754c876e643ceb7fe63049c6b50609a1cafeb"
+  },
+  {
+    "name": "eventsource",
+    "version": "3.0.7",
+    "license": "MIT",
+    "path": "platforms/ui/licenses/eventsource_3.0.7-LICENSE",
+    "sha256": "f683a72ffe6a9675b5507af22fe0f448d8c8de3da1e14f139d370a7e6a54a23e"
+  },
+  {
+    "name": "jose",
+    "version": "6.2.17",
+    "license": "MIT",
+    "path": "platforms/ui/licenses/jose_6.2.17-LICENSE.md",
+    "sha256": "8078b0829d6c3e9ecde2f003e1966e4cad3efc6e7a640efbab0313cc166b1af1"
+  },
+  {
+    "name": "pkce-challenge",
+    "version": "5.0.1",
+    "license": "MIT",
+    "path": "platforms/ui/licenses/pkce-challenge_5.0.1-LICENSE",
+    "sha256": "feb87a2e0c305de3464cc44077da5393c52d8ca6362d37427157d04ec6f4510d"
+  },
+  {
+    "name": "zod",
+    "version": "4.6.7",
+    "license": "MIT",
+    "path": "platforms/ui/licenses/zod_4.6.7-LICENSE",
+    "sha256": "3f1189b28e3866e0d979968d466b78f813f76827cfdca1fbb124cc0a5c8841f8"
+  }
+]

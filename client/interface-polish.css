@@ -1,0 +1,489 @@
+/* ARES interface finish. Functional colours and motion share one vocabulary.
+ * Loaded last through the existing workshop.css route; no external resources. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] {
+  --ui-bg: #060a10;
+  --ui-surface: #0c141e;
+  --ui-raised: #111e2b;
+  --ui-border: #9ec7e324;
+  --ui-border-hover: #a3d9f25c;
+  --ui-text: #d5e5ef;
+  --ui-muted: #91a9bb;
+  --ui-accent: #a5ddf5;
+  --ui-mint: #96dbc8;
+  --ui-amber: #edbd8c;
+  --ui-radius: 8px;
+  --ui-ease: cubic-bezier(.2, .75, .2, 1);
+  --ui-fast: 150ms;
+  --ui-normal: 240ms;
+  --a-paper: var(--ui-surface);
+  --a-line: var(--ui-border);
+  --a-ink: var(--ui-text);
+  --a-muted: var(--ui-muted);
+  --a-green: var(--ui-accent);
+  --work-command-height: 82px;
+  background: var(--ui-bg);
+  color: var(--ui-text);
+  font-size: 15px;
+  letter-spacing: .015em;
+  -webkit-font-smoothing: antialiased;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] ::selection { background: #8acbeb38; color: #eff9ff; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] * { scrollbar-color: #719bb546 transparent; scrollbar-width: thin; }
+
+/* Controls: one height, deliberate hit areas, lit edges, tactile press. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-btn, .ff-tools button,
+  .nebula-artifact-context>button, .document-toolbar button, .document-footer button) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 38px;
+  padding: 8px 13px;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  background: linear-gradient(155deg, #18273799, #0c172499);
+  color: #b9cfde;
+  font: 500 14px/1.45 var(--sys-font);
+  letter-spacing: .02em;
+  box-shadow: inset 0 1px #deefff05, 0 2px 5px #00000012;
+  transition: color var(--ui-fast), background var(--ui-fast),
+    border-color var(--ui-fast), box-shadow var(--ui-fast),
+    transform var(--ui-fast) var(--ui-ease);
+  cursor: pointer;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-btn, .ff-tools button,
+  .nebula-artifact-context>button, .document-toolbar button, .document-footer button):hover:not(:disabled) {
+  color: #e1f3ff;
+  border-color: var(--ui-border-hover);
+  background: linear-gradient(140deg, #20394b, #122332);
+  box-shadow: inset 0 1px #d5f1ff0d, 0 3px 14px #0003, 0 0 18px #83c8ec08;
+  transform: translateY(-1px);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-btn, .ff-tools button,
+  .nebula-artifact-context>button, .document-toolbar button, .document-footer button):active:not(:disabled) {
+  transform: translateY(1px) scale(.98);
+  box-shadow: inset 0 1px 4px #0004;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.primary {
+  background: linear-gradient(130deg, #c3e9f8, #90cde9);
+  color: #102331;
+  border-color: #c0e9fc99;
+  box-shadow: inset 0 1px #ffffff66, 0 3px 12px #71c4f018;
+  font-weight: 600;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.primary:hover:not(:disabled) {
+  background: linear-gradient(130deg, #e3f6ff, #aedff4);
+  color: #102331;
+  border-color: #dcf5ff;
+  box-shadow: inset 0 1px #fff8, 0 4px 22px #8edbff25;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.primary::before {
+  content: ''; position: absolute; inset: -50%; pointer-events: none;
+  background: linear-gradient(110deg, transparent 36%, #fff6 49%, transparent 62%);
+  transform: translateX(-90%); transition: transform 650ms var(--ui-ease);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.primary:hover::before { transform: translateX(90%); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.quiet { background: #13233340; box-shadow: none; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.icon { width: 38px; padding: 8px; flex: none; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.danger { color: #eeb1ae; border-color: #e69b9738; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-btn, .ff-tools button):disabled {
+  opacity: .48; transform: none; box-shadow: none; cursor: not-allowed;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.primary:disabled {
+  color: #91aabd; background: #152331; border-color: var(--ui-border); opacity: .65;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] button svg { flex-shrink: 0; transition: color var(--ui-fast); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(button, input, select, textarea, summary, a):focus-visible {
+  outline: 2px solid #a7e0fc; outline-offset: 3px;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-btn,.ff-tools button,.nebula-artifact-context>button,.document-toolbar button,.document-footer button)[data-ui-pressable]::after {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(100px circle at var(--ui-pointer-x, 50%) var(--ui-pointer-y, 50%), #a9e2ff12, transparent);
+  opacity: 0; transition: opacity var(--ui-normal);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-btn,.ff-tools button,.nebula-artifact-context>button,.document-toolbar button,.document-footer button)[data-ui-pressable]:hover::after { opacity: 1; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-press-wave {
+  position: absolute; pointer-events: none; border-radius: 50%; z-index: 3;
+  width: var(--wave-size); height: var(--wave-size);
+  left: var(--wave-x); top: var(--wave-y);
+  background: radial-gradient(circle, #b8e6ff26, #b8e6ff08 62%, transparent 72%);
+}
+
+/* Fields carry their own focus, checked, invalid and disabled states. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-input, .ares-workflow-select,
+  .nebula-artifact-context select, .nebula-cloud-toolbar select, .document-toolbar select) {
+  border-radius: var(--ui-radius);
+  border: 1px solid #99b9d02f;
+  background-color: #09111b;
+  color: #d1e2ed;
+  min-height: 42px;
+  padding: 10px 12px;
+  font: 14px/1.65 var(--sys-font);
+  box-shadow: inset 0 1px 4px #0002;
+  transition: border-color var(--ui-fast), box-shadow var(--ui-normal), background var(--ui-normal);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-input, .ares-workflow-select,
+  .nebula-artifact-context select, .nebula-cloud-toolbar select):hover:not(:disabled) { border-color: #a4d6f055; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-input, .ares-workflow-select,
+  .nebula-artifact-context select, .nebula-cloud-toolbar select):focus {
+  outline: none; border-color: #9ed8f0a6;
+  box-shadow: 0 0 0 3px #84c4e614, inset 0 1px 3px #0002; background-color: #0d1925;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-input::placeholder { color: #6e879b; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-search { position: relative; min-width: 0; border: 0; padding: 0; background: transparent; box-shadow: none; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-search>.ares-input { padding-left: 40px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-search>svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #8bb0c7; pointer-events: none; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-input:disabled { color: #70889b; cursor: wait; opacity: .65; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-input:user-invalid { border-color: #dc9690; box-shadow: 0 0 0 3px #df8b8010; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-field { margin-bottom: 22px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-label { display: block; margin-bottom: 9px; font-size: 13px; color: #bacfdf; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-help { color: #8ba2b6; font-size: 13px; line-height: 1.85; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-option { padding: 12px 14px; border-radius: 8px; background: #111e2b66; transition: background var(--ui-normal), border-color var(--ui-normal); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-option:has(:checked) { border-color: #a0d9f04a; background: #25435955; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] input[type=checkbox] { width: 17px; height: 17px; flex: none; accent-color: #a5dcef; cursor: pointer; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-code, .ares-editor-code) { font-size: 13px !important; line-height: 1.85; tab-size: 2; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-alert, .ares-inline-note) { border-radius: 8px; padding: 13px 16px; font-size: 13px; line-height: 1.8; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-pill { border-radius: 5px; padding: 4px 8px; font-size: 12px; line-height: 1.5; letter-spacing: 0; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] summary { padding: 8px 0; font-size: 13px; transition: color var(--ui-fast); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] summary:hover { color: #d7effd; }
+
+/* Main surface and dock use the same thin horizon and quiet blue lighting. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .work-header { border-bottom-color: #a9c5dd1c; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .work-project-heading>button {
+  border-radius: 6px; padding: 4px 0; font-weight: 500; color: #d7e7f2;
+  transition: color var(--ui-fast), text-shadow var(--ui-normal);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .work-project-heading>button:hover { color: #f0faff; text-shadow: 0 0 22px #85cfee38; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .ff-tools { gap: 8px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-now { color: #8ba5b9; gap: 24px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-now strong { color: #c5dfee; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .process-number {
+  background: #0b1722e8; border-color: #9ac6df52; color: #bad4e5;
+  box-shadow: inset 0 1px #c4e8ff0b;
+  transition: background var(--ui-normal), border-color var(--ui-normal), box-shadow var(--ui-normal);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .process-step:hover .process-number,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .process-step.is-selected .process-number {
+  border-color: #c4e7fa; color: #effaff; background: #19354be8;
+  box-shadow: 0 0 0 4px #8dcceb0a, 0 0 24px #a0dfff27;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .process-product>strong { letter-spacing: .12em; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .process-node strong { text-shadow: 0 2px 8px #02070c; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar { padding-bottom: 16px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-instruments {
+  min-height: 54px; padding: 6px; border-radius: 14px;
+  background: linear-gradient(150deg, #12202bd9, #0a111be8);
+  border: 1px solid #a3c5dd2b;
+  box-shadow: inset 0 1px #d7efff0a, 0 12px 30px #0005;
+  backdrop-filter: blur(18px);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav { gap: 4px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button {
+  display: flex; flex-direction: row; align-items: center; justify-content: center;
+  width: 106px; min-height: 44px; gap: 9px; padding: 10px 14px;
+  border: 1px solid transparent; border-radius: 9px;
+  font-size: 14px; color: #91aabd; letter-spacing: .02em;
+  transition: background var(--ui-normal), color var(--ui-fast), border-color var(--ui-normal), transform var(--ui-fast);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button svg { width: 17px; height: 17px; stroke-width: 1.55; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button:hover { color: #d4efff; background: #8dbad411; transform: translateY(-1px); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button[aria-current] {
+  color: #e3f3ff; border-color: #94c8e334;
+  background: linear-gradient(150deg, #385c7544, #1a34432b);
+  box-shadow: inset 0 1px #c0e4fa12, 0 2px 10px #0002;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button[aria-current]::after {
+  left: calc(50% - 12px); bottom: -3px; width: 24px; height: 1px;
+  background: #b7e6ff; box-shadow: 0 0 8px #a4defa8c;
+}
+
+/* The document monitor is a tool surface, not a second dashboard. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .ff-right.work-artifact {
+  border: 1px solid var(--ui-border); border-top-color: #b2d6ed42;
+  border-radius: 12px; background: linear-gradient(160deg, #0e1924e8, #090f17eb);
+  box-shadow: inset 0 1px #e0f1ff05, 0 12px 40px #0002;
+  overflow: hidden;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-heading { gap: 12px; padding: 18px; border-bottom-color: var(--ui-border); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-heading span { color: #d1e4ef; font-size: 15px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-heading strong { font-size: 13px; color: #8ba7bc; margin-top: 5px; line-height: 1.65; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-heading>button {
+  color: #9dbed3; font: 13px var(--sys-font); padding: 8px;
+  border: 1px solid transparent; border-radius: 7px; background: transparent;
+  cursor: pointer; transition: background var(--ui-normal), color var(--ui-normal);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-heading>button:hover { color: #daf2ff; background: #91bbd515; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-source-tabs { gap: 22px; padding: 0 18px; border-bottom-color: var(--ui-border); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-source-tabs button { font-size: 14px; min-height: 44px; padding: 12px 0; transition: color var(--ui-fast), border-color var(--ui-normal); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-source-tabs button[aria-selected=true] { color: #d9f0fd; border-bottom-color: #aedff7; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-context { padding: 16px 16px 12px; align-items: end; gap: 8px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-context label { gap: 8px; color: #8aa5b9; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-context>button { min-height: 43px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .work-document-changes { padding: 13px 16px; background: #91bed604; border-top-color: var(--ui-border); font-size: 12px; color: #8aa4b7; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .work-document-changes strong { color: #b9d8e9; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-statebar { padding: 10px 14px; font-size: 12px; gap: 8px; border-color: var(--ui-border); color: #90afc3; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-statebar code { font-size: 11px; color: #819bae; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-footer { gap: 10px; padding: 10px 12px; border-color: var(--ui-border); font-size: 11px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-footer>div { display: flex; gap: 6px; flex-wrap: wrap; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-footer button { min-height: 32px; padding: 7px 9px; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-toolbar { padding: 12px 16px; gap: 10px; border-color: var(--ui-border); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-toolbar button { min-height: 34px; font-size: 13px; padding: 7px 10px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-toolbar select { padding: 6px 10px; min-height: 34px; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-topline { padding: 16px 20px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-topline strong { font-size: 16px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .work-live-preview .document-prose { padding: 22px 24px; font-size: 15px; line-height: 1.95; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .work-live-preview .document-prose h1 { font-size: 23px; font-weight: 600; line-height: 1.5; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-empty { color: #8da6b9; font-size: 14px; line-height: 1.9; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-empty h3 { font-size: 19px; font-weight: 500; color: #c5dfed; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-editor { padding: 22px; border-radius: 8px; font-size: 15px !important; line-height: 1.9; }
+
+/* Functional panels stay in the same workspace; the resident chat never travels. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console:is(.is-studio, .is-workpiece) {
+  left: 20px; right: calc(var(--resident-chat-space) + 20px);
+  top: 96px; bottom: calc(var(--resident-chat-height) + var(--work-command-height) + 2px);
+  border: 1px solid #a0c7df2e; border-radius: 14px;
+  background: linear-gradient(150deg, #101c28f5, #080f18fa);
+  box-shadow: inset 0 1px #c9e8ff08, 0 20px 70px #0006;
+  backdrop-filter: blur(18px); animation: none;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading {
+  min-height: 76px; padding: 18px 24px; gap: 20px;
+  background: linear-gradient(110deg, #17304332, transparent 70%);
+  border-bottom: 1px solid var(--ui-border);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading>div:first-child { gap: 11px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading>div:first-child>span { font-size: 10px; letter-spacing: .2em; color: #7495ae; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading h2 { font-size: 21px; font-weight: 500; letter-spacing: .02em; color: #d9eaf5; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-actions { gap: 8px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-body { padding: 26px; overscroll-behavior: contain; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-body>.ares-heading { min-height: 0; height: auto; padding: 0 0 18px; margin: 0 0 16px; align-items: center; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-heading h1 { font-size: 27px; font-weight: 500; letter-spacing: .01em; line-height: 1.5; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-subtitle { font-size: 14px; line-height: 1.85; color: #8fa9bd; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-board-card, .ares-node, .ares-skill-card,
+  .ares-library-card, .ares-milestone, .ares-extension-card, .ares-catalog-card,
+  .competition-product-files article) {
+  border: 1px solid var(--ui-border); border-radius: 10px;
+  background: linear-gradient(145deg, #16263559, #0b152155);
+  box-shadow: inset 0 1px #c8e6ff04;
+  transition: border-color var(--ui-normal), background var(--ui-normal), box-shadow var(--ui-normal);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-skill-card, .ares-library-card,
+  .ares-extension-card, .ares-catalog-card, .competition-product-files article):hover {
+  border-color: #9dcced48; background-color: #1a30421f; box-shadow: inset 0 1px #c8e6ff09, 0 6px 20px #0002;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice { padding: 4px 10px; border: 1px solid var(--ui-border); border-radius: 10px; margin-bottom: 12px; background: #13233245; transition: border-color var(--ui-normal), background var(--ui-normal); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice:hover { border-color: #a1d3ed55; background: #1c34474d; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice:has(.is-selected) { border-color: #a6d9ef54; background: linear-gradient(120deg, #2b50604a, #1323333d); box-shadow: inset 3px 0 #9cdbedb3; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice .galaxy-project-choice { display: flex; flex-direction: column; align-items: flex-start; text-align: left; border: 0; border-radius: 6px; background: transparent; box-shadow: none; padding: 20px 12px; gap: 9px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice .galaxy-project-choice strong { font-size: 18px; color: #d1e6f3; font-weight: 500; line-height: 1.6; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice .galaxy-project-choice span { font-size: 13px; color: #8ca8bd; line-height: 1.75; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table { border-collapse: separate; border-spacing: 0; font-size: 14px; line-height: 1.75; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table th { font-size: 12px; color: #90abc0; padding: 13px 15px; font-weight: 500; background: #172b3a55; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table td { padding: 15px; border-color: #a0c6df16; transition: background var(--ui-fast); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table tbody tr:hover td { background: #9ac8e408; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table .ares-btn { min-height: 32px; padding: 7px 10px; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-toolbar { border: 1px solid var(--ui-border); border-radius: 10px; padding: 14px 16px; background: #13253530; gap: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table-wrap { border-radius: 10px; border-color: var(--ui-border); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-library { gap: 16px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-library-card { padding: 22px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-library-card::before { display: none; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-library-card h3 { font-size: 18px; line-height: 1.6; font-weight: 500; margin: 12px 0; color: #cde4f2; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-library-card p { font-size: 14px; color: #91afc5; line-height: 1.9; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-skill-code { font-size: 11px; color: #82a9c2; letter-spacing: .02em; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-library-card>.ares-actions { padding-top: 15px; border-top-color: var(--ui-border); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-capability-tabs { border-radius: 10px; padding: 5px; border-color: var(--ui-border); background: #0a16208c; gap: 5px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-capability-tabs>button { padding: 10px 14px; font-size: 13px; border-radius: 6px; transition: color var(--ui-normal), background var(--ui-normal); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-capability-tabs>button[aria-selected=true] { background: #30536b66; border-color: #9ac6df3d; color: #cde9f9; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-current-event { padding: 5px 0 22px; margin-bottom: 22px; border-color: var(--ui-border); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-current-event h2 { font-size: 23px; font-weight: 500; line-height: 1.6; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-current-event p { line-height: 1.8; margin: 10px 0 15px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .progress-kpis>div { padding: 19px; border-radius: 10px; border-color: var(--ui-border); background: linear-gradient(140deg, #1d35464d, #0c1b2955); box-shadow: inset 0 1px #d2edff07; overflow: hidden; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .progress-kpis span { color: #99b6ca; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .progress-kpis p { font-size: 12px; color: #89a7bd; line-height: 1.8; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .progress-kpis .primary>i { transition: width 500ms var(--ui-ease); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .process-progress-table button[data-action=workshop-step] { font-size: 14px; line-height: 1.7; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .process-activity { border-radius: 10px; padding: 17px; border-color: var(--ui-border); background: #172c3a3d; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .process-activity strong { font-size: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .process-activity p { font-size: 14px; color: #a8c2d5; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .process-activity :is(time, small) { font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-node>header { gap: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-node>header h3 { font-size: 18px; font-weight: 500; line-height: 1.65; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-node>p { font-size: 14px; line-height: 1.9; color: #a4bed1; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-piece { padding: 15px; border-radius: 8px; border-color: var(--ui-border); background: #0a152055; gap: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-piece strong { font-size: 14px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-piece small { font-size: 12px; line-height: 1.75; color: #8fabc0; }
+
+/* Workflow editing: selected node, handle, dependency and inspector form one system. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-studio-head { padding-bottom: 23px; margin-bottom: 20px; border-color: var(--ui-border); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-studio-head h2 { font-size: 25px; font-weight: 500; line-height: 1.55; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-map { border: 1px solid var(--ui-border); border-radius: 10px; background-color: #08121d; overflow: hidden; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-toolbar { padding: 10px 12px; border-bottom: 1px solid var(--ui-border); background: #111f2ad9; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-toolbar .ares-btn { min-height: 30px; padding: 6px 9px; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-step { border-radius: 9px; border-color: #91b7d13b; background: linear-gradient(145deg, #162939, #0d1a27); box-shadow: inset 0 1px #c3e7ff09, 0 5px 12px #0003; transition: border-color var(--ui-normal), box-shadow var(--ui-normal), background var(--ui-normal); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-step:hover { border-color: #b3dcf589; box-shadow: 0 5px 18px #0005, 0 0 15px #90caef0d; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-step.active { border-color: #acdff4a6; background: linear-gradient(145deg, #25475c, #142b3d); box-shadow: inset 0 1px #c2e6ff18, 0 0 0 3px #9accee0b, 0 6px 22px #0004; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-editor { border-radius: 10px; background: #0c1721a3; border-color: var(--ui-border); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-editor .ares-tabs { padding: 0 4px; gap: 16px; border-color: var(--ui-border); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-editor .ares-tabs button { padding: 13px 4px; font-size: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-suggestion { border-radius: 9px; color: #bcddeb; border-color: #91d2ed45; background: #1d425c45; }
+
+/* Dialogs use compact content height; progressive detail, readable typography. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-backdrop {
+  display: flex; align-items: center; justify-content: center;
+  right: var(--resident-chat-space); bottom: var(--resident-chat-height);
+  padding: 28px; background: #02060b8c; backdrop-filter: blur(9px);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-backdrop.is-nebula-detail { padding: 28px; background: #02060b80; backdrop-filter: blur(9px); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .is-nebula-detail .ares-modal {
+  width: min(740px, 100%); height: auto; max-height: 100%; margin: 0;
+  border: 1px solid #a7d4ec42; border-radius: 14px;
+  background: linear-gradient(145deg, #132330fa, #0a131efa);
+  box-shadow: inset 0 1px #dcf1ff0a, 0 26px 100px #0008;
+  padding: 26px; overflow: auto; overscroll-behavior: contain; animation: none;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal.wide { width: min(1100px, 100%); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-head { padding-bottom: 20px; margin-bottom: 22px; gap: 20px; border-bottom: 1px solid var(--ui-border); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-head h2,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .is-nebula-detail .ares-modal-head h2 { color: #dcecf6; font-size: 23px; line-height: 1.55; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-head p { font-size: 13px; line-height: 1.85; color: #93aec2; margin-top: 9px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-footer,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .is-nebula-detail .ares-modal-footer {
+  position: sticky; bottom: -26px; margin: 26px -26px -26px;
+  padding: 16px 26px; gap: 9px; border-top: 1px solid var(--ui-border);
+  background: #0c1823f7; backdrop-filter: blur(12px); flex-wrap: wrap; z-index: 2;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-facts { margin-top: 0; padding: 18px 0; gap: 16px; border-top: 0; border-bottom-color: var(--ui-border); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-facts span { color: #8ea8bc; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-facts strong { color: #c7dfec; font-size: 14px; font-weight: 500; line-height: 1.7; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-section { margin-top: 25px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-section h3 { color: #b7d9ed; font-size: 16px; margin-bottom: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-section>p { color: #b0c5d5; font-size: 15px; line-height: 1.95; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-outputs article { padding: 15px; background: #17304530; border-color: var(--ui-border); border-radius: 9px; gap: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-outputs strong { font-size: 14px; color: #c9dfec; line-height: 1.65; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-outputs small { color: #90a9bc; font-size: 12px; line-height: 1.75; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-dependency { padding: 13px 0; border-bottom-color: var(--ui-border); font-size: 14px; color: #bdd8e8; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-dependency:hover { color: #ecf9ff; }
+
+/* Native DSH composer: scoped public hooks only, no altered tool/menu logic. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat {
+  background: linear-gradient(170deg, #101b27, #09121d 55%, #0b1520);
+  border-left-color: #99c3df29;
+  box-shadow: inset 1px 0 #d2eeff03, -10px 0 40px #0002;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading { min-height: 80px; padding: 20px; border-color: var(--ui-border); gap: 15px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading>div { gap: 7px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading span { color: #86aac4; font-size: 10px; letter-spacing: .18em; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading strong { font-size: 19px; color: #d7eaf7; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading .ares-btn { min-height: 34px; padding: 7px 10px; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-chat-channel { display: none; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-context { margin: 14px 20px 0; padding-left: 10px; border-left: 2px solid #91cfe767; font-size: 12px; line-height: 1.8; color: #99b5c9; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-body { padding: 14px 16px 16px; gap: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-assistant-status { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 0 4px; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-assistant-status .ares-btn { margin-left: auto; min-height: 30px; padding: 6px 9px; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-empty { padding: 22px 8px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-empty-code { color: #7ca1bc; letter-spacing: .18em; font-size: 10px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-empty h3 { color: #deedf7; font-size: 24px; font-weight: 500; line-height: 1.5; margin-top: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-empty p { font-size: 14px; color: #95afc2; line-height: 1.9; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-empty-actions { gap: 10px; margin-top: 24px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] [data-ares-chat-shortcut] {
+  position: relative; border-radius: 9px; background: linear-gradient(145deg, #1c334650, #10213060);
+  border-color: #a2c8e025; padding: 16px 13px; font-size: 14px; min-height: 85px;
+  transition: background var(--ui-normal), border-color var(--ui-normal), transform var(--ui-fast), box-shadow var(--ui-normal);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] [data-ares-chat-shortcut]:hover { background: #2a4c6255; border-color: #b0ddf261; transform: translateY(-2px); box-shadow: 0 4px 18px #0002; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-shortcut-number { color: #85b4cf; font-size: 10px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-shortcut-arrow { color: #96c5de; transition: transform var(--ui-normal), color var(--ui-normal); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] [data-ares-chat-shortcut]:hover .ares-native-shortcut-arrow { transform: translate(2px, -2px); color: #d7f2ff; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-composer-card] {
+  border-radius: 12px !important; border: 1px solid #a1d1ee42 !important;
+  background: linear-gradient(155deg, #192b3b, #101e2c) !important;
+  box-shadow: inset 0 1px #d8efff0b, 0 5px 22px #0003 !important;
+  transition: border-color var(--ui-normal), box-shadow var(--ui-normal);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-composer-card]:focus-within {
+  border-color: #a8defa8c !important; box-shadow: 0 0 0 3px #8ccce80b, 0 6px 25px #0004 !important;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-composer-input] { font-size: 15px !important; line-height: 1.75 !important; color: #d2e6f4 !important; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-composer-placeholder] { font-size: 14px !important; color: #7997ae !important; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-resize::after { content: ''; position: absolute; left: 3px; top: 40%; height: 50px; width: 2px; border-radius: 2px; background: #9bc6e52b; transition: background var(--ui-normal), box-shadow var(--ui-normal); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-resize:hover::after { background: #b7e4fd; box-shadow: 0 0 12px #9bd3f8; }
+
+/* Real pending state has indeterminate light, never a made-up completion %. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-ui-pending {
+  position: absolute; z-index: 91; pointer-events: none;
+  top: 0; left: 0; right: var(--resident-chat-space); height: 2px;
+  background: #8ecfec0b; overflow: hidden;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-ui-pending::before {
+  content: ''; position: absolute; inset: 0; width: 35%;
+  background: linear-gradient(90deg, transparent, #a5e0fc, transparent);
+  animation: ares-ui-pending 1.6s ease-in-out infinite;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-toast {
+  background: #122636f5; color: #d3eaf6; border: 1px solid #a3d4ee4a;
+  border-radius: 10px; padding: 14px 20px; font-size: 14px;
+  box-shadow: 0 8px 30px #0005; backdrop-filter: blur(16px); animation: none;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-toast.error { color: #f0c5be; background: #2b1d24f5; border-color: #e9aaa54a; }
+@keyframes ares-ui-pending { from { transform: translateX(-110%); } to { transform: translateX(390%); } }
+
+/* Compact layouts keep the same control vocabulary and preserve the composer. */
+@media (max-width: 1200px) {
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-body { padding: 20px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading { padding: 16px 20px; }
+}
+@media (max-width: 1000px) {
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat { border-left: 0; border-top: 1px solid var(--ui-border); }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading { min-height: 44px; padding: 9px 16px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading>div { gap: 10px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading strong { font-size: 16px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-context { margin: 5px 16px 0; font-size: 12px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-body { padding: 9px 12px 12px; gap: 7px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-assistant-status { font-size: 11px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-empty { padding: 12px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-empty h3 { font-size: 20px; }
+}
+@media (max-width: 760px) {
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] { --work-command-height: 72px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console:is(.is-studio, .is-workpiece) { left: 9px; right: 9px; top: 18px; bottom: calc(var(--resident-chat-height) + var(--work-command-height)); border-radius: 11px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading { min-height: 62px; padding: 12px 14px; gap: 10px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading h2 { font-size: 19px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading>div:first-child>span { display: none; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-actions { gap: 6px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-actions .ares-btn { min-height: 34px; font-size: 12px; padding: 7px 9px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-body { padding: 17px 14px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar { padding-bottom: 10px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-instruments { padding: 5px; border-radius: 12px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav { gap: 1px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button { width: 76px; min-height: 43px; gap: 6px; padding: 9px 5px; font-size: 13px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button svg { width: 15px; height: 15px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-backdrop,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-backdrop.is-nebula-detail { padding: 10px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal.wide,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .is-nebula-detail .ares-modal { padding: 19px; height: auto; border-radius: 12px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-head { padding-bottom: 17px; margin-bottom: 17px; gap: 10px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-head h2,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .is-nebula-detail .ares-modal-head h2 { font-size: 21px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-footer,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .is-nebula-detail .ares-modal-footer { bottom: -19px; margin: 22px -19px -19px; padding: 14px 19px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-facts { gap: 9px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-facts strong { font-size: 13px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-search { flex-wrap: wrap; gap: 10px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-search .ares-input { flex-basis: 100%; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice { padding: 4px 7px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice .galaxy-project-choice { padding: 14px 9px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice .galaxy-project-choice strong { font-size: 16px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-studio-head h2 { font-size: 21px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-heading h1 { font-size: 23px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-toolbar { padding: 9px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] *, .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] *::before,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy][data-ares-motion=off] *,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy][data-ares-motion=off] *::before,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy][data-ares-motion=off] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

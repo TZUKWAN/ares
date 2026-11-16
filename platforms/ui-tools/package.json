@@ -1,0 +1,10 @@
+{
+  "name": "ares-portable-ui-build",
+  "version": "2.4.0",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@modelcontextprotocol/ext-apps": "2.0.0",
+    "esbuild": "0.28.2"
+  }
+}

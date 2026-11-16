@@ -1,0 +1,29 @@
+[
+  {
+    "family": "syncopate",
+    "file": "forge-display.woff2",
+    "bytes": 20784,
+    "sha256": "1abe540f6bada1b99f6e87af103f1596c3d57106fec42edac879677ad2b15b60",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/apache/syncopate/Syncopate-Bold.ttf",
+    "license": "https://raw.githubusercontent.com/google/fonts/main/apache/syncopate/LICENSE.txt",
+    "unicodeSubset": "Latin/symbols"
+  },
+  {
+    "family": "jetbrainsmono",
+    "file": "forge-mono.woff2",
+    "bytes": 66928,
+    "sha256": "1cf8432c7bb33425ed2e5dc9d2d9e95bd6cdee7808e63bf3970900a6f816039a",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf",
+    "license": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/OFL.txt",
+    "unicodeSubset": "Latin/symbols"
+  },
+  {
+    "family": "notosanssc",
+    "file": "forge-cjk.woff2",
+    "bytes": 2032900,
+    "sha256": "ce8ddfaf81a7936564c5ed3941b49b6bad4e727852919e0ec680348a902fdaff",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf",
+    "license": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssc/OFL.txt",
+    "unicodeSubset": "GB2312 common characters + actual reference/ARES catalogue text; other characters use system fallback"
+  }
+]

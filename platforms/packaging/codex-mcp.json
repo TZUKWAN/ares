@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "ares": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${PLUGIN_ROOT}/scripts/ares-mcp.mjs", "--host", "codex"],
+      "cwd": "${PLUGIN_ROOT}"
+    }
+  }
+}

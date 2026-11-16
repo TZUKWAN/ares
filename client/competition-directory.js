@@ -1,0 +1,41 @@
+/** Catalogue management only: drafts and immutable project versions stay elsewhere. */
+const e=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export function createCompetitionDirectory({request,render,onCatalog}){
+ const state={directory:null,selected:null,query:'',showRemoved:false,busy:false,error:null,notice:null,lastRemoval:null,newName:'',newPipeline:'L1',trackName:'',trackPipeline:'',names:new Map()};
+ const selected=()=>state.directory?.competitions.find(c=>c.id===state.selected);
+ function accept(directory,preferred){state.directory=directory;if(!directory.competitions.some(c=>c.id===preferred))preferred=directory.competitions.find(c=>!c.removed)?.id||directory.competitions[0]?.id||null;state.selected=preferred;}
+ async function load(id=state.selected){state.busy=true;state.error=null;render();try{const result=await request('competition/directory');accept(result.directory,id);}catch(error){state.error=error.message;}finally{state.busy=false;render();}}
+ const input=(label,value,field,extra='')=>`<input class="ares-input" aria-label="${e(label)}" data-directory-field="${e(field)}" value="${e(value)}" maxlength="${field==='newName'||field.startsWith('competition:')?120:180}" ${extra.replace(/maxlength="\d+"/g,'')} ${state.busy?'disabled':''}>`;
+ const button=(label,action,extra='',kind='quiet')=>`<button type="button" class="ares-btn ${kind}" data-action="directory-${action}" ${extra} ${state.busy?'disabled':''}>${e(label)}</button>`;
+ const pipeline=(field,value)=>`<select class="ares-input" aria-label="${field==='newPipeline'?'新比赛作品方向':'新增赛道作品方向'}" data-directory-field="${field}" ${state.busy?'disabled':''}>${Object.entries(state.directory?.pipelines||{}).map(([key,title])=>`<option value="${key}" ${key===value?'selected':''}>${e(title)}</option>`).join('')}</select>`;
+ function markup(){
+  const c=selected(),rows=(state.directory?.competitions||[]).filter(c=>(state.showRemoved||!c.removed)&&c.name.toLowerCase().includes(state.query.trim().toLowerCase())),disabled=state.busy?'disabled':'';
+  return `<section class="ares-directory-manager" aria-label="比赛与赛道管理" aria-busy="${state.busy}">${state.error?`<div class="ares-alert" role="alert">${e(state.error)} ${button('读取最新','reload')}</div>`:''}${state.notice?`<div class="directory-notice" role="status">${e(state.notice)} ${state.lastRemoval?button('撤销删除','undo'):''}</div>`:''}<div class="directory-toolbar">${input('查找目录比赛',state.query,'query','data-search="directory" placeholder="查找比赛"')}<label class="directory-show-removed"><input type="checkbox" data-directory-field="showRemoved" ${state.showRemoved?'checked':''} ${disabled}>显示已删除</label></div><div class="directory-layout"><aside class="directory-competitions"><div class="directory-list" aria-label="可管理的比赛">${rows.map(row=>`<button type="button" class="directory-choice ${row.id===state.selected?'is-selected':''}" data-action="directory-select" data-id="${row.id}" aria-pressed="${row.id===state.selected}" ${disabled}><span>${e(row.name)}</span><small>${row.removed?'已删除':row.tracks.filter(t=>!t.removed&&!t.legacy).length+' 个赛道'}${row.source==='user'?' · 自建':''}</small></button>`).join('')||`<p class="ares-help">${state.directory?'暂无匹配比赛，可在下方新增或显示已删除项。':'正在读取目录…'}</p>`}</div><div class="directory-add-competition"><h3>新增比赛</h3>${input('新比赛名称',state.newName,'newName','placeholder="比赛名称" maxlength="120"')}<label class="ares-label">作品方向</label>${pipeline('newPipeline',state.newPipeline)}${button('添加比赛','competition-add','','primary')}</div></aside><section class="directory-detail">${c?`<header><div><span class="ares-eyebrow">${c.source==='user'?'自建比赛':'内置比赛'}</span><h3>${e(c.name)}</h3></div>${button(c.removed?'恢复比赛':'删除比赛',c.removed?'competition-restore':'competition-remove','data-id="'+c.id+'"',c.removed?'':'quiet danger')}</header>${c.removed?'<p class="ares-help">恢复后，原来的赛道和已存流程仍可使用。</p>':`<div class="directory-rename">${input('修改比赛名称',state.names.get('competition:'+c.id)??c.name,'competition:'+c.id,'maxlength="120"')}${button('保存名称','competition-rename','data-id="'+c.id+'"')}</div><div class="directory-track-heading"><h3>比赛赛道</h3><span>${c.tracks.filter(t=>!t.removed&&!t.legacy).length} 项可选</span></div><div class="directory-tracks">${c.tracks.filter(t=>state.showRemoved||!t.removed).map(t=>`<div class="directory-track ${t.removed?'is-removed':''}" data-directory-track="${e(t.track)}"><div>${input('修改赛道名称',state.names.get('track:'+c.id+':'+t.track)??t.name,'track:'+c.id+':'+t.track,t.removed?'disabled':'')}<small>${e(state.directory.pipelines[t.pipeline]||t.pipeline)}${t.legacy?' · 历史兼容项':''}${t.removed?' · 已删除':''}</small></div><div class="ares-actions">${t.removed?button('恢复','track-restore',`data-track="${e(t.track)}" aria-label="恢复赛道 ${e(t.name)}"`):button('保存','track-rename',`data-track="${e(t.track)}" aria-label="保存赛道 ${e(t.name)}"`)+button('删除','track-remove',`data-track="${e(t.track)}" aria-label="删除赛道 ${e(t.name)}"`,'quiet danger')}</div></div>`).join('')||'<p class="directory-empty">还没有赛道，在下方添加即可开始编排。</p>'}</div><div class="directory-add-track"><h3>新增赛道</h3>${input('新赛道名称',state.trackName,'trackName','placeholder="例如：本科组、研究生组"')}<div>${pipeline('trackPipeline',state.trackPipeline||c.tracks.find(t=>!t.removed)?.pipeline||'L1')}${button('添加赛道','track-add','','primary')}</div></div>`}`:'<div class="directory-empty">添加比赛后，就能在这里管理它的赛道。</div>'}</section></div><p class="directory-footnote">目录改动即时保存；删除仅移出可选目录，已有项目、作品和已存流程保留。</p></section>`;
+ }
+ function inputEvent(event){const el=event.target,key=el.dataset.directoryField;if(!key)return false;if(key==='showRemoved'){state.showRemoved=el.checked;render();}else if(key==='query'){state.query=el.value;render();}else if(key.startsWith('competition:')||key.startsWith('track:'))state.names.set(key,el.value);else if(['newName','newPipeline','trackName','trackPipeline'].includes(key))state[key]=el.value;return true;}
+ async function action(action,el){
+  if(!action.startsWith('directory-'))return false;const kind=action.slice(10);
+  if(state.busy)return true;if(kind==='reload'){await load();return true;}if(kind==='select'){state.selected=Number(el.dataset.id);state.trackName='';state.trackPipeline='';state.error=null;render();return true;}
+  const c=selected();let body={action:kind,competitionId:Number(el.dataset.id||c?.id),expectedRevision:state.directory?.revision};
+  if(kind==='competition-add')body={action:kind,expectedRevision:state.directory?.revision,name:state.newName,pipeline:state.newPipeline};
+  if(kind==='competition-rename')body.name=state.names.get('competition:'+c.id)??c.name;
+  if(kind==='track-add'){body.name=state.trackName;body.pipeline=state.trackPipeline||c?.tracks.find(t=>!t.removed)?.pipeline||'L1';}
+  if(['track-rename','track-remove','track-restore'].includes(kind))body.track=el.dataset.track;
+  if(kind==='track-rename')body.name=state.names.get('track:'+c.id+':'+body.track)??c.tracks.find(t=>t.track===body.track)?.name;
+  if(kind==='undo'){if(!state.lastRemoval)return true;body={...state.lastRemoval,expectedRevision:state.directory?.revision};}
+  state.busy=true;state.error=null;render();
+  try{
+   const result=await request('competition/directory/change',body);let preferred=state.selected;
+   if(kind==='competition-add'){preferred=result.competitionId;state.newName='';}
+   if(kind==='track-add')state.trackName='';
+   if(kind==='competition-rename')state.names.delete('competition:'+c.id);if(kind==='track-rename')state.names.delete('track:'+c.id+':'+body.track);
+   if(kind==='competition-remove'){state.lastRemoval={action:'competition-restore',competitionId:c.id};preferred=result.directory.competitions.find(row=>!row.removed)?.id;}
+   if(kind==='track-remove')state.lastRemoval={action:'track-restore',competitionId:c.id,track:body.track};
+   if(kind==='undo'||kind.endsWith('-restore'))state.lastRemoval=null;
+   accept(result.directory,preferred);state.notice=kind.endsWith('-remove')?'已从可选目录删除，历史项目和流程保留。':kind==='undo'||kind.endsWith('-restore')?'已恢复原条目。':'已保存目录修改。';
+   await onCatalog(result);
+  }catch(error){state.error=error.message;}finally{state.busy=false;render();}
+  return true;
+ }
+ return {load,markup,input:inputEvent,action};
+}

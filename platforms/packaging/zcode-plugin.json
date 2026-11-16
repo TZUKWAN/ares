@@ -1,0 +1,22 @@
+{
+  "name": "ares",
+  "version": "2.4.0",
+  "description": "按比赛赛道编排流程、推进项目、管理真实作品版本和金山协作。",
+  "author": { "name": "TZUKWAN" },
+  "skills": "skills",
+  "commands": "commands",
+  "mcpServers": {
+    "ares": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${ZCODE_PLUGIN_ROOT}/scripts/ares-mcp.mjs", "--host", "zcode", "--root", "${ZCODE_PROJECT_DIR}"],
+      "cwd": "${ZCODE_PROJECT_DIR}",
+      "env": { "ARES_HOME": "${ZCODE_PLUGIN_DATA}" }
+    }
+  },
+  "ui": {
+    "surfaces": [
+      { "id": "workbench", "title": { "en": "ARES", "zh-CN": "ARES 竞赛工作台" }, "server": "ares", "resourceUri": "ui://ares/workbench.html", "availability": "session" }
+    ]
+  }
+}

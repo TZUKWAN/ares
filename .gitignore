@@ -18,3 +18,31 @@ Thumbs.db
 
 # 调研子代理临时抓取缓存
 .tmp_search/
+
+# Local dependencies, assistant state and private working data
+node_modules/
+.claude/
+.codex/
+.dsh/
+.ares/
+CLAUDE_STATE.md
+work/
+outputs/
+reports/
+*.zstd
+*.bak
+*.tmp
+
+# Credentials stay in each host's own storage
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.credentials*
+
+# Local incident notes reference private sessions and evidence folders
+docs/ASSISTANT_SESSION_REPAIR_20261113.md
+docs/ASSISTANT_SESSION_REPAIR_RELEASE_20261113.md

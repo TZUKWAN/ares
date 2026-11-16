@@ -1,0 +1,21 @@
+{
+  "name": "ares",
+  "version": "2.4.0",
+  "description": "竞赛流程编排、项目推进、真实作品版本与金山协作；使用Codex原生助手。",
+  "author": { "name": "TZUKWAN" },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "requires_local_executor": true,
+  "interface": {
+    "displayName": "ARES",
+    "shortDescription": "竞赛流程与作品项目工作台",
+    "longDescription": "按比赛和赛道编排流程，推进项目与真实文件，保留负责人验收、固定版本和工具隔离。",
+    "developerName": "TZUKWAN",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": ["查看当前竞赛项目并梳理下一步", "为这个比赛和赛道调整工作流程"],
+    "brandColor": "#C2AD89",
+    "logo": "./assets/portable/ares-icon.svg",
+    "composerIcon": "./assets/portable/ares-icon.svg"
+  }
+}

@@ -1,20 +1,12 @@
-# 财务参数规则（L1 线，build_financials.py 参数依据）
+# 显式财务参数
 
-## 默认参数（与任务清单 8.1/8.4 一致）
+没有通用营收、增长率、利润和融资默认值，不用其他收支凑目标利润。
+在 facts.financials 或旧 financials 提供：
+- years、revenue_start_wan、growth_rates（n-1项比例）。
+- gross_margin_ratio、opex_ratio、tax_rate、depreciation_rate、receivable_ratio、inventory_ratio、payable_ratio、interest_rate。
+- capex_ratios、funding_by_year（各n项）；零融资也需明确提供零值。
+- opening_balance 的 cash、receivables、inventory、fixed_assets、payables、debt、equity，期初必须平衡。
+- assumption_sources 逐项说明来源或明确场景假设。
 
-| 参数 | 默认 | 取值范围 | 说明 |
-|---|---|---|---|
-| revenue_start_wan 起始年营收 | 200 | 185-255 万元 | 有真实流水按真实值，无则取区间 |
-| growth_rate_range 年增长率 | 25%-40% | 逐年合理上浮（线性从下限爬到上限） | 不得首年即高增长 |
-| industry_margin 行业平均净利率 | 12% | 按行业查询权威来源并注明年份 | 写入 xlsx 参数页 |
-| margin_ratio_vs_industry 利润率倍数 | 1.2 | ×1.13 - ×1.4 | 理由写进 8.1 正文 |
-| funding 融资金额 | 400 万元 | 按需 | — |
-| equity_stake 出让股权 | 15% | 10%-25% | 投前估值=融资/(股权%-融资比例换算) |
-| years 预测年数 | 6 | ≥3 | 创业赛默认 6 年 |
-
-## 勾稽与校验规则
-
-1. 三表由同一脚本按恒等式推导生成：净利→经营现金流→期末现金→资产负债表货币资金；留存收益=累计净利；借贷平衡差逐年末 ≤0.05 万元，超限即 FAIL。
-2. 首年净利率按目标值的 60% 起步逐年爬坡到 100%（规模效应），目标净利率=行业均值×倍数。
-3. 全部数据标 DEMO（表头注记），真实数据到位后重跑脚本替换。
-4. 参数改动后必须：重跑脚本 → 一致性扫描 → 受影响文档（计划书八章、PPT 财务页、讲稿数字）同步更新。
+金额为万元、比例为小数。模型保持债务本金不变，新增资本支出下年折旧，不自动确认补贴、借款、亏损结转或递延税。
+脚本实际计算三表并报告负现金缺口；预测不代表真实业绩。复杂口径需另建适合项目的测算。

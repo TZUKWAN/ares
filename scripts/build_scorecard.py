@@ -19,6 +19,7 @@ import re
 import sys
 
 from validate_profile import validate_evidence
+from workflow_contracts import check_deliverable
 
 
 def _load(path):
@@ -80,13 +81,7 @@ def _has_strong_claim(claims, source_by_id):
 
 
 def _deliverable_status(output_dir, item):
-    clean = re.sub(r"（.*?）|\(.*?\)", "", str(item)).strip()
-    if not clean:
-        return {"item": item, "required": False, "exists": True, "path": ""}
-    path = os.path.join(output_dir, clean)
-    exists = os.path.exists(path)
-    return {"item": item, "required": True, "exists": exists,
-            "path": clean, "status": "present" if exists else "missing"}
+    return check_deliverable(output_dir,item)
 
 
 def _output_ref_exists(ref, output_dir, profile_dir, root):
@@ -133,7 +128,9 @@ def build(profile_path, output_dir=None, strict=False, root=None):
     for dimension in rubric.get("judging_dimensions", []):
         name = dimension.get("dimension", "未命名维度")
         points = []
-        for point in dimension.get("scoring_points", []):
+        for raw_point in dimension.get("scoring_points", []):
+            point=raw_point.get('text','') if isinstance(raw_point,dict) else raw_point
+            mandatory=isinstance(raw_point,dict) and raw_point.get('requirement')=='mandatory'
             matches = _match_claims(claims, name, point)
             usable = [c for c in matches if c.get("status") in ("real", "estimated")]
             linked = [c for c in usable if c.get("output_refs")]
@@ -149,6 +146,7 @@ def build(profile_path, output_dir=None, strict=False, root=None):
                 uncovered.append("%s：%s（%s）" % (name, point, blocking_reason))
             points.append({
                 "point": point,
+                "requirement": "mandatory" if mandatory else "recommendation",
                 "status": status,
                 "strong_evidence_required": strong_required,
                 "blocking_reason": blocking_reason,
@@ -163,10 +161,13 @@ def build(profile_path, output_dir=None, strict=False, root=None):
         track = competition.get("track")
         candidates = [e for e in track_entries if e.get("competition_id") == cid and (not track or e.get("track") == track)]
         if candidates:
-            deliverables = [_deliverable_status(os.path.abspath(output_dir), x) for x in candidates[0].get("default_deliverables", [])]
+            items=candidates[0].get('default_deliverables',[])
+            parent=next((re.sub(r'（.*?）|\(.*?\)','',x).strip() for x in items if isinstance(x,str) and '.docx' in x),None)
+            deliverables=[check_deliverable(os.path.abspath(output_dir),x,parent) for x in items]
     total = sum(len(d["points"]) for d in dimensions)
     covered = sum(sum(p["status"] == "covered" for p in d["points"]) for d in dimensions)
-    coverage_ready = not uncovered and all(d.get("exists", True) for d in deliverables)
+    mandatory_gaps=[p['point'] for d in dimensions for p in d['points'] if p['requirement']=='mandatory' and p['status']!='covered']
+    coverage_ready = not mandatory_gaps and all(not d.get('required',True) or d.get('exists',False) for d in deliverables)
     result = {
         "schema_version": "1.0",
         "competition": competition,
@@ -179,10 +180,13 @@ def build(profile_path, output_dir=None, strict=False, root=None):
         # coverage, but it must never claim formal readiness before the strict
         # provenance gate has run.
         "coverage_ready": coverage_ready,
-        "formal_ready": bool(strict and coverage_ready),
+        "strict_checks_ready": bool(strict and coverage_ready),
+        "formal_ready": False,
+        "readiness_note": "旧评分矩阵仅为证据与结构检查；正式项目请迁移至 .ares/ 并核验当届规则及内容。评分建议不作为一律必过项。",
+        "mandatory_gaps": mandatory_gaps,
     }
-    if strict and not result["formal_ready"]:
-        raise ValueError("正式提交门禁失败：未覆盖评分点 %d 项或缺少交付物" % len(uncovered))
+    if strict and not result["strict_checks_ready"]:
+        raise ValueError("必需要求检查失败：硬性要求缺口 %d 项或必需产物缺失/无效" % len(mandatory_gaps))
     if strict:
         refs = sorted({str(ref) for c in claims for ref in (c.get("output_refs") or []) if str(ref).strip()})
         missing_refs = [ref for ref in refs if not _output_ref_exists(ref, os.path.abspath(output_dir or ""), profile_dir, root)]

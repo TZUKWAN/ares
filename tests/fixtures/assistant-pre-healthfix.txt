@@ -1,0 +1,3 @@
+/** Compatibility entry: DSH owns the conversation and model execution. */
+export {applyEdits} from './editor-operations.js';
+export {createEditorWorkspace as createAssistant} from './editor-workspace.js';

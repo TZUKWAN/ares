@@ -256,6 +256,13 @@ def is_empty(v):
 
 
 def validate(profile, data_dir=None, evidence_base_dir=None):
+    if profile.get('schema_version') == 2:
+        errors=[]
+        for key in ('name','definitionId','competition','facts','tasks'):
+            if key not in profile or profile[key] in (None,'',{}): errors.append(key+' 缺失')
+        if not isinstance(profile.get('facts'),dict): errors.append('facts 必须为对象')
+        if not re.fullmatch(r'[a-f0-9]{64}',str(profile.get('definitionId',''))): errors.append('definitionId 无效')
+        return errors,['仅核对档案结构；任务、产物和内容复核须运行 scripts/ares.mjs verify']
     missing, warnings = [], []
     for key, label in REQUIRED_SCALAR.items():
         if key not in profile or is_empty(profile.get(key)):
@@ -288,7 +295,7 @@ def validate(profile, data_dir=None, evidence_base_dir=None):
     if fin.get("years") not in (None, ""):
         try:
             if int(fin["years"]) < 3:
-                warnings.append("financials.years=%s 少于 3 年，创业赛默认 6 年" % fin["years"])
+                warnings.append("financials.years=%s；预测期须根据本项目说明依据" % fin["years"])
         except (TypeError, ValueError):
             missing.append("financials.years（须为整数）")
 
@@ -304,7 +311,8 @@ def validate(profile, data_dir=None, evidence_base_dir=None):
         comps_path = os.path.join(data_dir, "competitions.json")
         if os.path.exists(comps_path) and comp.get("id") is not None:
             try:
-                db = json.load(io.open(comps_path, encoding="utf-8"))
+                with io.open(comps_path, encoding='utf-8') as f:
+                    db=json.load(f)
                 ids = {c["id"] for c in db}
                 if comp["id"] not in ids:
                     missing.append("competition.id=%s 不在 competitions.json 中" % comp["id"])
@@ -318,14 +326,27 @@ def validate(profile, data_dir=None, evidence_base_dir=None):
         tracks_path = os.path.join(data_dir, "tracks.json")
         if os.path.exists(tracks_path) and comp.get("id") is not None and comp.get("track"):
             try:
-                tracks = json.load(io.open(tracks_path, encoding="utf-8"))["entries"]
+                with io.open(tracks_path,encoding='utf-8') as f:
+                    tracks=json.load(f)['entries']
                 valid = {e["track"] for e in tracks if e["competition_id"] == comp["id"]}
                 if valid and comp["track"] not in valid:
                     warnings.append("competition.track=%r 不在该赛事 tracks.json 赛道列表 %s 中"
                                     % (comp["track"], sorted(valid)))
             except (ValueError, KeyError) as e:
                 warnings.append("tracks.json 无法解析：%s" % e)
-    return missing, warnings
+    # Legacy non-venture profiles have domain-specific facts, not business fields.
+    pipeline=None
+    if data_dir:
+        try:
+            with io.open(os.path.join(data_dir,'tracks.json'),encoding='utf-8') as f: entries=json.load(f)['entries']
+            chosen=[e for e in entries if e['competition_id']==comp.get('id') and (not comp.get('track') or e['track']==comp['track'])]
+            pipeline=chosen[0]['pipeline'] if chosen else None
+        except (OSError,ValueError,KeyError): pass
+    irrelevant={'slogan'}
+    if pipeline and pipeline!='L1': irrelevant.update({'one_liner','pain_points','solution','market','business_model','financials','competitors','advantages','team','milestones','achievements','social_value','data_confidence'})
+    scoped=[m for m in missing if re.match(r'^[A-Za-z_]+',m) and re.match(r'^[A-Za-z_]+',m).group() in irrelevant and m not in evidence_errors]
+    if scoped: warnings.append('按作品领域排除无关旧档案必填项 %d 个'%len(scoped))
+    return [m for m in missing if m not in scoped], warnings
 
 
 def main(argv):

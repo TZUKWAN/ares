@@ -1,0 +1,3606 @@
+{
+  "schema_version": 2,
+  "workflows": [
+    {
+      "id": "venture",
+      "title": "创新创业 · 项目与路演",
+      "pipeline": "L1",
+      "description": "围绕项目事实、技术和市场证据形成商业叙事；按实际需求选择原型。",
+      "version": 1,
+      "verification": "configuration-only",
+      "ruleStatus": "needs-current-edition-verification",
+      "parameters": {
+        "language": "zh-CN",
+        "purpose": "preparation"
+      },
+      "steps": [
+        {
+          "id": "context",
+          "title": "目标与资料盘点",
+          "objective": "确定赛事届次、组别、作品和任务范围；盘点用户真实资料，建立缺口。",
+          "skills": [
+            "ares-intake"
+          ],
+          "inputs": [
+            "competition",
+            "facts.name",
+            "facts.materials"
+          ],
+          "outputs": [
+            {
+              "id": "inventory",
+              "title": "资料盘点",
+              "path": "inventory.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rules",
+          "title": "规则与提交要求",
+          "objective": "读取对应届次规则及命题；区分硬要求、评分建议与未知项，记录来源和适用范围。",
+          "skills": [
+            "ares-rules"
+          ],
+          "inputs": [
+            "competition"
+          ],
+          "outputs": [
+            {
+              "id": "requirements",
+              "title": "规则与提交清单",
+              "path": "requirements.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "context"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "validation",
+          "title": "技术与市场验证",
+          "objective": "梳理用户需求、技术指标、市场测算和已有成果；真实、估算与缺失分开。",
+          "skills": [
+            "ares-evidence",
+            "ares-entrepreneurship"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "validation",
+              "title": "技术与市场验证",
+              "path": "validation.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rules"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "business",
+          "title": "商业与财务模型",
+          "objective": "按业务假设建立收入、成本和现金流模型；所有参数说明依据，无通用营收默认值。",
+          "skills": [
+            "ares-finance"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "financials",
+              "title": "财务模型",
+              "path": "财务模型.xlsx",
+              "format": "xlsx",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "validation"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "report",
+          "title": "项目计划书",
+          "objective": "依据已验证事实和财务模型组织计划书，不将设想写成已实现。",
+          "skills": [
+            "ares-entrepreneurship",
+            "ares-docx"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "report",
+              "title": "项目计划书",
+              "path": "项目计划书.docx",
+              "format": "docx",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "business"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "pitch",
+          "title": "路演与答辩",
+          "objective": "根据答辩时长、规则与计划书组织演示和问题预案；需要原型时另加实现步骤。",
+          "skills": [
+            "ares-ppt",
+            "ares-pitch"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "deck",
+              "title": "路演演示",
+              "path": "路演演示.pptx",
+              "format": "pptx",
+              "kind": "file",
+              "requirement": "required"
+            },
+            {
+              "id": "qa",
+              "title": "答辩预案",
+              "path": "qa.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "report"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "review",
+          "title": "验收与修改",
+          "objective": "核对适用规则、事实来源、内容质量和实际文件；按问题定位修改。",
+          "skills": [
+            "ares-judge"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "review-report",
+              "title": "内容复核报告",
+              "path": "review-report.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "pitch"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "delivery",
+          "title": "成果归档",
+          "objective": "运行项目验收，整理已验证产物、未完成事项及提交前需人工确认的问题。",
+          "skills": [
+            "ares-delivery"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "delivery",
+              "title": "交付说明",
+              "path": "delivery.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "review"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "modeling",
+      "title": "数学建模 · 题目与求解",
+      "pipeline": "L2",
+      "description": "以题面、数据、求解代码及可复现结果为主线。",
+      "version": 1,
+      "verification": "configuration-only",
+      "ruleStatus": "needs-current-edition-verification",
+      "parameters": {
+        "language": "zh-CN",
+        "purpose": "preparation"
+      },
+      "steps": [
+        {
+          "id": "context",
+          "title": "目标与资料盘点",
+          "objective": "确定赛事届次、组别、作品和任务范围；盘点用户真实资料，建立缺口。",
+          "skills": [
+            "ares-intake"
+          ],
+          "inputs": [
+            "competition",
+            "facts.name",
+            "facts.materials"
+          ],
+          "outputs": [
+            {
+              "id": "inventory",
+              "title": "资料盘点",
+              "path": "inventory.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rules",
+          "title": "规则与提交要求",
+          "objective": "读取对应届次规则及命题；区分硬要求、评分建议与未知项，记录来源和适用范围。",
+          "skills": [
+            "ares-rules"
+          ],
+          "inputs": [
+            "competition"
+          ],
+          "outputs": [
+            {
+              "id": "requirements",
+              "title": "规则与提交清单",
+              "path": "requirements.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "context"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "problem",
+          "title": "题面拆解与数据诊断",
+          "objective": "将每个问题拆为输入、目标、约束和输出，核对附件与数据质量。",
+          "skills": [
+            "ares-problem",
+            "ares-data"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "problem",
+              "title": "题面与数据诊断",
+              "path": "problem.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rules"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "models",
+          "title": "模型比较与假设",
+          "objective": "结合问题比较适用模型；说明假设、识别条件、求解成本与检验方法。",
+          "skills": [
+            "ares-modeling"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "models",
+              "title": "模型与假设",
+              "path": "models.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "problem"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "solve",
+          "title": "实现、求解与复现",
+          "objective": "实现实际求解程序，保存运行命令、原始输出、误差和随机种子；不虚构数值。",
+          "skills": [
+            "ares-solve"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "code",
+              "title": "求解代码",
+              "path": "求解代码",
+              "format": "directory",
+              "kind": "directory",
+              "requirement": "required"
+            },
+            {
+              "id": "results",
+              "title": "求解结果",
+              "path": "求解结果.json",
+              "format": "json",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "models"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "validation",
+          "title": "结果检验与边界",
+          "objective": "选择适合模型的误差、稳健性、灵敏度或反例检验，不机械规定统一扰动幅度。",
+          "skills": [
+            "ares-validation"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "validation",
+              "title": "结果检验",
+              "path": "validation.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "solve"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "paper",
+          "title": "论文与格式适配",
+          "objective": "由实际求解结果组织论文；按本届规则确定语言、摘要、匿名和附件格式。",
+          "skills": [
+            "ares-modeling",
+            "ares-docx"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "paper",
+              "title": "建模论文",
+              "path": "建模论文.docx",
+              "format": "docx",
+              "kind": "file",
+              "requirement": "required"
+            },
+            {
+              "id": "sensitivity",
+              "title": "模型检验章节",
+              "path": "",
+              "format": "md",
+              "kind": "section",
+              "requirement": "required",
+              "parentId": "paper",
+              "heading": "结果检验"
+            }
+          ],
+          "dependsOn": [
+            "validation"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "review",
+          "title": "验收与修改",
+          "objective": "核对适用规则、事实来源、内容质量和实际文件；按问题定位修改。",
+          "skills": [
+            "ares-judge"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "review-report",
+              "title": "内容复核报告",
+              "path": "review-report.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "paper"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "delivery",
+          "title": "成果归档",
+          "objective": "运行项目验收，整理已验证产物、未完成事项及提交前需人工确认的问题。",
+          "skills": [
+            "ares-delivery"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "delivery",
+              "title": "交付说明",
+              "path": "delivery.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "review"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "survey",
+      "title": "市场调查 · 真实数据与分析",
+      "pipeline": "L4",
+      "description": "将问卷、抽样、真实采集与统计结论连成证据链。",
+      "version": 1,
+      "verification": "configuration-only",
+      "ruleStatus": "needs-current-edition-verification",
+      "parameters": {
+        "language": "zh-CN",
+        "purpose": "preparation"
+      },
+      "steps": [
+        {
+          "id": "context",
+          "title": "目标与资料盘点",
+          "objective": "确定赛事届次、组别、作品和任务范围；盘点用户真实资料，建立缺口。",
+          "skills": [
+            "ares-intake"
+          ],
+          "inputs": [
+            "competition",
+            "facts.name",
+            "facts.materials"
+          ],
+          "outputs": [
+            {
+              "id": "inventory",
+              "title": "资料盘点",
+              "path": "inventory.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rules",
+          "title": "规则与提交要求",
+          "objective": "读取对应届次规则及命题；区分硬要求、评分建议与未知项，记录来源和适用范围。",
+          "skills": [
+            "ares-rules"
+          ],
+          "inputs": [
+            "competition"
+          ],
+          "outputs": [
+            {
+              "id": "requirements",
+              "title": "规则与提交清单",
+              "path": "requirements.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "context"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "design",
+          "title": "选题、抽样与问卷",
+          "objective": "界定研究问题、总体、抽样方案、变量和题项，不预设必须使用的统计模型。",
+          "skills": [
+            "ares-survey"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "design",
+              "title": "调查设计",
+              "path": "design.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            },
+            {
+              "id": "questionnaire",
+              "title": "问卷",
+              "path": "调查问卷.docx",
+              "format": "docx",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rules"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "pilot",
+          "title": "预调查与修订",
+          "objective": "使用真实预调查资料检查理解偏差和测量质量，记录修改依据。",
+          "skills": [
+            "ares-survey"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "pilot",
+              "title": "预调查记录",
+              "path": "pilot.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "design"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "collection",
+          "title": "真实调查资料",
+          "objective": "由团队完成实际采集并提供匿名原始记录，合成数据只用于演练且不得替代此节点。",
+          "skills": [
+            "ares-evidence"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "raw-data",
+              "title": "原始调查数据",
+              "path": "原始调查数据.csv",
+              "format": "csv",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "pilot"
+          ],
+          "execution": "human",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "analysis",
+          "title": "清洗与统计分析",
+          "objective": "保存清洗规则、缺失处理、样本流失和分析脚本；方法适配样本及研究问题。",
+          "skills": [
+            "ares-analysis"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "analysis-code",
+              "title": "分析代码",
+              "path": "分析代码",
+              "format": "directory",
+              "kind": "directory",
+              "requirement": "required"
+            },
+            {
+              "id": "analysis",
+              "title": "分析结果",
+              "path": "analysis.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "collection"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "report",
+          "title": "调查报告与展示",
+          "objective": "只作数据可支持的推断，区分相关与因果，说明抽样与推广边界。",
+          "skills": [
+            "ares-business-case",
+            "ares-docx",
+            "ares-ppt"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "report",
+              "title": "调查报告",
+              "path": "调查报告.docx",
+              "format": "docx",
+              "kind": "file",
+              "requirement": "required"
+            },
+            {
+              "id": "deck",
+              "title": "答辩演示",
+              "path": "答辩演示.pptx",
+              "format": "pptx",
+              "kind": "file",
+              "requirement": "optional"
+            }
+          ],
+          "dependsOn": [
+            "analysis"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "review",
+          "title": "验收与修改",
+          "objective": "核对适用规则、事实来源、内容质量和实际文件；按问题定位修改。",
+          "skills": [
+            "ares-judge"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "review-report",
+              "title": "内容复核报告",
+              "path": "review-report.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "report"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "delivery",
+          "title": "成果归档",
+          "objective": "运行项目验收，整理已验证产物、未完成事项及提交前需人工确认的问题。",
+          "skills": [
+            "ares-delivery"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "delivery",
+              "title": "交付说明",
+              "path": "delivery.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "review"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "case-analysis",
+      "title": "商科案例 · 分析与决策",
+      "pipeline": "L4",
+      "description": "围绕实际案例、测算和可行决策组织报告。",
+      "version": 1,
+      "verification": "configuration-only",
+      "ruleStatus": "needs-current-edition-verification",
+      "parameters": {
+        "language": "zh-CN",
+        "purpose": "preparation"
+      },
+      "steps": [
+        {
+          "id": "context",
+          "title": "目标与资料盘点",
+          "objective": "确定赛事届次、组别、作品和任务范围；盘点用户真实资料，建立缺口。",
+          "skills": [
+            "ares-intake"
+          ],
+          "inputs": [
+            "competition",
+            "facts.name",
+            "facts.materials"
+          ],
+          "outputs": [
+            {
+              "id": "inventory",
+              "title": "资料盘点",
+              "path": "inventory.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rules",
+          "title": "规则与提交要求",
+          "objective": "读取对应届次规则及命题；区分硬要求、评分建议与未知项，记录来源和适用范围。",
+          "skills": [
+            "ares-rules"
+          ],
+          "inputs": [
+            "competition"
+          ],
+          "outputs": [
+            {
+              "id": "requirements",
+              "title": "规则与提交清单",
+              "path": "requirements.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "context"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "case",
+          "title": "案例问题与事实",
+          "objective": "整理案例原始事实、时间线、问题和待核实信息。",
+          "skills": [
+            "ares-evidence",
+            "ares-business-case"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "case",
+              "title": "案例事实",
+              "path": "case.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rules"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "analysis",
+          "title": "分析框架与测算",
+          "objective": "按问题选择框架并真实测算；记录数据、公式和适用边界。",
+          "skills": [
+            "ares-analysis"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "analysis",
+              "title": "案例分析",
+              "path": "analysis.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            },
+            {
+              "id": "calculations",
+              "title": "测算表",
+              "path": "测算表.xlsx",
+              "format": "xlsx",
+              "kind": "file",
+              "requirement": "optional"
+            }
+          ],
+          "dependsOn": [
+            "case"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "decision",
+          "title": "方案与决策",
+          "objective": "比较成本、收益、约束和风险，给出证据支持的执行建议。",
+          "skills": [
+            "ares-business-case"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "decision",
+              "title": "决策方案",
+              "path": "decision.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "analysis"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "report",
+          "title": "报告与呈现",
+          "objective": "将事实、分析和建议组织为赛事要求的成果。",
+          "skills": [
+            "ares-docx",
+            "ares-ppt"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "report",
+              "title": "案例报告",
+              "path": "案例报告.docx",
+              "format": "docx",
+              "kind": "file",
+              "requirement": "required"
+            },
+            {
+              "id": "deck",
+              "title": "展示演示",
+              "path": "展示演示.pptx",
+              "format": "pptx",
+              "kind": "file",
+              "requirement": "optional"
+            }
+          ],
+          "dependsOn": [
+            "decision"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "review",
+          "title": "验收与修改",
+          "objective": "核对适用规则、事实来源、内容质量和实际文件；按问题定位修改。",
+          "skills": [
+            "ares-judge"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "review-report",
+              "title": "内容复核报告",
+              "path": "review-report.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "report"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "delivery",
+          "title": "成果归档",
+          "objective": "运行项目验收，整理已验证产物、未完成事项及提交前需人工确认的问题。",
+          "skills": [
+            "ares-delivery"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "delivery",
+              "title": "交付说明",
+              "path": "delivery.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "review"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "software",
+      "title": "软件作品 · 实现与测试",
+      "pipeline": "L3",
+      "description": "交付可运行的软件系统，原型和实现分别记录。",
+      "version": 1,
+      "verification": "configuration-only",
+      "ruleStatus": "needs-current-edition-verification",
+      "parameters": {
+        "language": "zh-CN",
+        "purpose": "preparation"
+      },
+      "steps": [
+        {
+          "id": "context",
+          "title": "目标与资料盘点",
+          "objective": "确定赛事届次、组别、作品和任务范围；盘点用户真实资料，建立缺口。",
+          "skills": [
+            "ares-intake"
+          ],
+          "inputs": [
+            "competition",
+            "facts.name",
+            "facts.materials"
+          ],
+          "outputs": [
+            {
+              "id": "inventory",
+              "title": "资料盘点",
+              "path": "inventory.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rules",
+          "title": "规则与提交要求",
+          "objective": "读取对应届次规则及命题；区分硬要求、评分建议与未知项，记录来源和适用范围。",
+          "skills": [
+            "ares-rules"
+          ],
+          "inputs": [
+            "competition"
+          ],
+          "outputs": [
+            {
+              "id": "requirements",
+              "title": "规则与提交清单",
+              "path": "requirements.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "context"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "requirements",
+          "title": "需求与验收指标",
+          "objective": "拆解命题功能、用户流程、约束及对应验收行为。",
+          "skills": [
+            "ares-problem"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "spec",
+              "title": "需求与验收表",
+              "path": "spec.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rules"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "design",
+          "title": "系统与交互设计",
+          "objective": "明确数据、接口、模块、安全边界及关键交互。",
+          "skills": [
+            "ares-engineering",
+            "ares-prototype"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "design",
+              "title": "系统设计",
+              "path": "design.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "requirements"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "implementation",
+          "title": "软件实现",
+          "objective": "实现真实功能和数据流，记录启动方式；演示数据明确标识。",
+          "skills": [
+            "ares-prototype",
+            "ares-engineering"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "source",
+              "title": "源代码",
+              "path": "源代码",
+              "format": "directory",
+              "kind": "directory",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "design"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "test",
+          "title": "功能与性能验证",
+          "objective": "按验收表实际运行测试，记录命令、环境、结果和已知限制。",
+          "skills": [
+            "ares-validation"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "test",
+              "title": "测试记录",
+              "path": "test.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "implementation"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "presentation",
+          "title": "技术报告与演示",
+          "objective": "按已实现功能组织报告和操作演示；不将界面样稿称为完成系统。",
+          "skills": [
+            "ares-docx",
+            "ares-ppt"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "report",
+              "title": "技术报告",
+              "path": "技术报告.docx",
+              "format": "docx",
+              "kind": "file",
+              "requirement": "required"
+            },
+            {
+              "id": "deck",
+              "title": "作品演示",
+              "path": "作品演示.pptx",
+              "format": "pptx",
+              "kind": "file",
+              "requirement": "optional"
+            }
+          ],
+          "dependsOn": [
+            "test"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "review",
+          "title": "验收与修改",
+          "objective": "核对适用规则、事实来源、内容质量和实际文件；按问题定位修改。",
+          "skills": [
+            "ares-judge"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "review-report",
+              "title": "内容复核报告",
+              "path": "review-report.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "presentation"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "delivery",
+          "title": "成果归档",
+          "objective": "运行项目验收，整理已验证产物、未完成事项及提交前需人工确认的问题。",
+          "skills": [
+            "ares-delivery"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "delivery",
+              "title": "交付说明",
+              "path": "delivery.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "review"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hardware",
+      "title": "工程实物 · 设计与实测",
+      "pipeline": "L3",
+      "description": "区分设计、仿真、样机及实测，保留现场工作边界。",
+      "version": 1,
+      "verification": "configuration-only",
+      "ruleStatus": "needs-current-edition-verification",
+      "parameters": {
+        "language": "zh-CN",
+        "purpose": "preparation"
+      },
+      "steps": [
+        {
+          "id": "context",
+          "title": "目标与资料盘点",
+          "objective": "确定赛事届次、组别、作品和任务范围；盘点用户真实资料，建立缺口。",
+          "skills": [
+            "ares-intake"
+          ],
+          "inputs": [
+            "competition",
+            "facts.name",
+            "facts.materials"
+          ],
+          "outputs": [
+            {
+              "id": "inventory",
+              "title": "资料盘点",
+              "path": "inventory.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rules",
+          "title": "规则与提交要求",
+          "objective": "读取对应届次规则及命题；区分硬要求、评分建议与未知项，记录来源和适用范围。",
+          "skills": [
+            "ares-rules"
+          ],
+          "inputs": [
+            "competition"
+          ],
+          "outputs": [
+            {
+              "id": "requirements",
+              "title": "规则与提交清单",
+              "path": "requirements.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "context"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "requirements",
+          "title": "指标与约束",
+          "objective": "整理功能、精度、功耗、尺寸、材料和现场要求，形成验收指标。",
+          "skills": [
+            "ares-problem"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "spec",
+              "title": "工程验收指标",
+              "path": "spec.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rules"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "design",
+          "title": "方案与详细设计",
+          "objective": "比较技术方案并按作品类型完成机械、电路或控制设计，记录计算和BOM依据。",
+          "skills": [
+            "ares-engineering"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "design",
+              "title": "工程设计",
+              "path": "design.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            },
+            {
+              "id": "design-files",
+              "title": "工程源文件",
+              "path": "工程源文件",
+              "format": "directory",
+              "kind": "directory",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "requirements"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "simulation",
+          "title": "仿真与设计验证",
+          "objective": "使用实际可用工具完成适用的仿真，区分仿真结果与实测。",
+          "skills": [
+            "ares-validation"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "simulation",
+              "title": "仿真验证",
+              "path": "simulation.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "design"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "measurement",
+          "title": "样机与实测记录",
+          "objective": "由团队完成实物制作和实际测试，保留仪器、条件、原始记录与误差。",
+          "skills": [
+            "ares-lab-skills",
+            "ares-evidence"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "measurement",
+              "title": "样机实测记录",
+              "path": "measurement.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "simulation"
+          ],
+          "execution": "human",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "report",
+          "title": "工程报告与展示",
+          "objective": "围绕可证明的指标组织技术报告，说明尚未完成的制作或测试。",
+          "skills": [
+            "ares-docx",
+            "ares-ppt"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "report",
+              "title": "工程报告",
+              "path": "工程报告.docx",
+              "format": "docx",
+              "kind": "file",
+              "requirement": "required"
+            },
+            {
+              "id": "deck",
+              "title": "展示演示",
+              "path": "展示演示.pptx",
+              "format": "pptx",
+              "kind": "file",
+              "requirement": "optional"
+            }
+          ],
+          "dependsOn": [
+            "measurement"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "review",
+          "title": "验收与修改",
+          "objective": "核对适用规则、事实来源、内容质量和实际文件；按问题定位修改。",
+          "skills": [
+            "ares-judge"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "review-report",
+              "title": "内容复核报告",
+              "path": "review-report.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "report"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "delivery",
+          "title": "成果归档",
+          "objective": "运行项目验收，整理已验证产物、未完成事项及提交前需人工确认的问题。",
+          "skills": [
+            "ares-delivery"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "delivery",
+              "title": "交付说明",
+              "path": "delivery.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "review"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "design",
+      "title": "视觉设计 · 创意与作品",
+      "pipeline": "L5",
+      "description": "围绕命题、创意表达、制作过程及实际作品规格。",
+      "version": 1,
+      "verification": "configuration-only",
+      "ruleStatus": "needs-current-edition-verification",
+      "parameters": {
+        "language": "zh-CN",
+        "purpose": "preparation"
+      },
+      "steps": [
+        {
+          "id": "context",
+          "title": "目标与资料盘点",
+          "objective": "确定赛事届次、组别、作品和任务范围；盘点用户真实资料，建立缺口。",
+          "skills": [
+            "ares-intake"
+          ],
+          "inputs": [
+            "competition",
+            "facts.name",
+            "facts.materials"
+          ],
+          "outputs": [
+            {
+              "id": "inventory",
+              "title": "资料盘点",
+              "path": "inventory.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rules",
+          "title": "规则与提交要求",
+          "objective": "读取对应届次规则及命题；区分硬要求、评分建议与未知项，记录来源和适用范围。",
+          "skills": [
+            "ares-rules"
+          ],
+          "inputs": [
+            "competition"
+          ],
+          "outputs": [
+            {
+              "id": "requirements",
+              "title": "规则与提交清单",
+              "path": "requirements.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "context"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "brief",
+          "title": "命题与创意方向",
+          "objective": "分析品牌或主题、受众、传播目标和硬性规格，记录创意来源。",
+          "skills": [
+            "ares-art-design"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "brief",
+              "title": "命题与创意方向",
+              "path": "brief.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rules"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "concept",
+          "title": "方案探索与比较",
+          "objective": "形成有依据的视觉方案并比较表达、识别、可实现性。",
+          "skills": [
+            "ares-design-review"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "concept",
+              "title": "创意过程",
+              "path": "concept.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "brief"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "production",
+          "title": "作品制作",
+          "objective": "调用实际可用设计能力制作作品和可编辑源文件，记录素材来源与AI使用。",
+          "skills": [
+            "ares-art-design"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "artwork",
+              "title": "参赛作品与源文件",
+              "path": "参赛作品",
+              "format": "directory",
+              "kind": "directory",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "concept"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "specification",
+          "title": "作品规格与设计说明",
+          "objective": "检查尺寸、分辨率、格式、文字、字体和素材权利；按作品实际情况写设计说明。",
+          "skills": [
+            "ares-design-review"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "design-notes",
+              "title": "设计说明与规格检查",
+              "path": "design-notes.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "production"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "review",
+          "title": "验收与修改",
+          "objective": "核对适用规则、事实来源、内容质量和实际文件；按问题定位修改。",
+          "skills": [
+            "ares-judge"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "review-report",
+              "title": "内容复核报告",
+              "path": "review-report.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "specification"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "delivery",
+          "title": "成果归档",
+          "objective": "运行项目验收，整理已验证产物、未完成事项及提交前需人工确认的问题。",
+          "skills": [
+            "ares-delivery"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "delivery",
+              "title": "交付说明",
+              "path": "delivery.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "review"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "video",
+      "title": "影像设计 · 分镜与成片",
+      "pipeline": "L5",
+      "description": "将脚本、素材、制作、成片与输出规格分别验收。",
+      "version": 1,
+      "verification": "configuration-only",
+      "ruleStatus": "needs-current-edition-verification",
+      "parameters": {
+        "language": "zh-CN",
+        "purpose": "preparation"
+      },
+      "steps": [
+        {
+          "id": "context",
+          "title": "目标与资料盘点",
+          "objective": "确定赛事届次、组别、作品和任务范围；盘点用户真实资料，建立缺口。",
+          "skills": [
+            "ares-intake"
+          ],
+          "inputs": [
+            "competition",
+            "facts.name",
+            "facts.materials"
+          ],
+          "outputs": [
+            {
+              "id": "inventory",
+              "title": "资料盘点",
+              "path": "inventory.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rules",
+          "title": "规则与提交要求",
+          "objective": "读取对应届次规则及命题；区分硬要求、评分建议与未知项，记录来源和适用范围。",
+          "skills": [
+            "ares-rules"
+          ],
+          "inputs": [
+            "competition"
+          ],
+          "outputs": [
+            {
+              "id": "requirements",
+              "title": "规则与提交清单",
+              "path": "requirements.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "context"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "script",
+          "title": "创意脚本与分镜",
+          "objective": "根据命题、时长和传播目标组织叙事与分镜。",
+          "skills": [
+            "ares-art-design"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "storyboard",
+              "title": "脚本与分镜",
+              "path": "storyboard.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rules"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "assets",
+          "title": "素材与授权",
+          "objective": "确认实际拍摄、配音、音乐和图像来源，缺素材时记录缺口。",
+          "skills": [
+            "ares-evidence"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "assets",
+              "title": "素材与授权记录",
+              "path": "assets.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "script"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "production",
+          "title": "制作与成片",
+          "objective": "使用可用制作工具完成实际成片和工程，不能将视频脚本当成成片。",
+          "skills": [
+            "ares-art-design"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "film",
+              "title": "成片",
+              "path": "成片.mp4",
+              "format": "mp4",
+              "kind": "file",
+              "requirement": "required"
+            },
+            {
+              "id": "source",
+              "title": "制作工程",
+              "path": "制作工程",
+              "format": "directory",
+              "kind": "directory",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "assets"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "specification",
+          "title": "播放与规格检查",
+          "objective": "实际检查时长、分辨率、音画、字幕、片尾和赛事输出要求。",
+          "skills": [
+            "ares-design-review"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "specification",
+              "title": "成片检查",
+              "path": "specification.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "production"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "review",
+          "title": "验收与修改",
+          "objective": "核对适用规则、事实来源、内容质量和实际文件；按问题定位修改。",
+          "skills": [
+            "ares-judge"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "review-report",
+              "title": "内容复核报告",
+              "path": "review-report.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "specification"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "delivery",
+          "title": "成果归档",
+          "objective": "运行项目验收，整理已验证产物、未完成事项及提交前需人工确认的问题。",
+          "skills": [
+            "ares-delivery"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "delivery",
+              "title": "交付说明",
+              "path": "delivery.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "review"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "coding",
+      "title": "算法竞赛 · 训练与复盘",
+      "pipeline": "L6",
+      "description": "训练辅助与离线练习，按实际测例验证正确性与复杂度。",
+      "version": 1,
+      "verification": "configuration-only",
+      "ruleStatus": "needs-current-edition-verification",
+      "parameters": {
+        "language": "zh-CN",
+        "purpose": "preparation"
+      },
+      "steps": [
+        {
+          "id": "context",
+          "title": "目标与资料盘点",
+          "objective": "确定赛事届次、组别、作品和任务范围；盘点用户真实资料，建立缺口。",
+          "skills": [
+            "ares-intake"
+          ],
+          "inputs": [
+            "competition",
+            "facts.name",
+            "facts.materials"
+          ],
+          "outputs": [
+            {
+              "id": "inventory",
+              "title": "资料盘点",
+              "path": "inventory.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rules",
+          "title": "规则与提交要求",
+          "objective": "读取对应届次规则及命题；区分硬要求、评分建议与未知项，记录来源和适用范围。",
+          "skills": [
+            "ares-rules"
+          ],
+          "inputs": [
+            "competition"
+          ],
+          "outputs": [
+            {
+              "id": "requirements",
+              "title": "规则与提交清单",
+              "path": "requirements.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "context"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "diagnosis",
+          "title": "能力诊断与训练计划",
+          "objective": "根据已有题目表现定位知识与实现短板，安排训练目标。",
+          "skills": [
+            "ares-coding-contest"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "training",
+              "title": "训练计划",
+              "path": "training.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rules"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "practice",
+          "title": "专题训练与实现",
+          "objective": "讲解思路并实现练习题，标注题目来源与使用限制。",
+          "skills": [
+            "ares-coding-contest"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "code",
+              "title": "练习代码",
+              "path": "练习代码",
+              "format": "directory",
+              "kind": "directory",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "diagnosis"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "validation",
+          "title": "正确性与复杂度",
+          "objective": "执行边界、反例和规模测试，分析时间与空间复杂度。",
+          "skills": [
+            "ares-validation"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "tests",
+              "title": "测试与复杂度记录",
+              "path": "tests.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "practice"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "retrospective",
+          "title": "错题与复盘",
+          "objective": "保存错误原因、反例、修复和复测结果，更新训练重点。",
+          "skills": [
+            "ares-coding-contest"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "retrospective",
+              "title": "训练复盘",
+              "path": "retrospective.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "validation"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "review",
+          "title": "验收与修改",
+          "objective": "核对适用规则、事实来源、内容质量和实际文件；按问题定位修改。",
+          "skills": [
+            "ares-judge"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "review-report",
+              "title": "内容复核报告",
+              "path": "review-report.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "retrospective"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "delivery",
+          "title": "成果归档",
+          "objective": "运行项目验收，整理已验证产物、未完成事项及提交前需人工确认的问题。",
+          "skills": [
+            "ares-delivery"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "delivery",
+              "title": "交付说明",
+              "path": "delivery.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "review"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "humanities",
+      "title": "人文语言 · 文本与表达",
+      "pipeline": "E1",
+      "description": "按演讲、翻译或写作任务调整语言、结构和评阅依据。",
+      "version": 1,
+      "verification": "configuration-only",
+      "ruleStatus": "needs-current-edition-verification",
+      "parameters": {
+        "language": "zh-CN",
+        "purpose": "preparation"
+      },
+      "steps": [
+        {
+          "id": "context",
+          "title": "目标与资料盘点",
+          "objective": "确定赛事届次、组别、作品和任务范围；盘点用户真实资料，建立缺口。",
+          "skills": [
+            "ares-intake"
+          ],
+          "inputs": [
+            "competition",
+            "facts.name",
+            "facts.materials"
+          ],
+          "outputs": [
+            {
+              "id": "inventory",
+              "title": "资料盘点",
+              "path": "inventory.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rules",
+          "title": "规则与提交要求",
+          "objective": "读取对应届次规则及命题；区分硬要求、评分建议与未知项，记录来源和适用范围。",
+          "skills": [
+            "ares-rules"
+          ],
+          "inputs": [
+            "competition"
+          ],
+          "outputs": [
+            {
+              "id": "requirements",
+              "title": "规则与提交清单",
+              "path": "requirements.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "context"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "analysis",
+          "title": "材料与表达任务",
+          "objective": "明确对象、体裁、语域、语言及文本来源，拆解表达目标。",
+          "skills": [
+            "ares-humanities"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "analysis",
+              "title": "文本与任务分析",
+              "path": "analysis.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rules"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "draft",
+          "title": "作品撰写与修订",
+          "objective": "形成真实文本，核对语义、论证、语言与体裁约束。",
+          "skills": [
+            "ares-humanities"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "work",
+              "title": "参赛文本",
+              "path": "参赛文本.docx",
+              "format": "docx",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "analysis"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "practice",
+          "title": "评阅与表达训练",
+          "objective": "按作品类型核对译文准确性、表达逻辑或口头呈现，记录具体修改。",
+          "skills": [
+            "ares-humanities"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "practice",
+              "title": "评阅与训练记录",
+              "path": "practice.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "draft"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "review",
+          "title": "验收与修改",
+          "objective": "核对适用规则、事实来源、内容质量和实际文件；按问题定位修改。",
+          "skills": [
+            "ares-judge"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "review-report",
+              "title": "内容复核报告",
+              "path": "review-report.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "practice"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "delivery",
+          "title": "成果归档",
+          "objective": "运行项目验收，整理已验证产物、未完成事项及提交前需人工确认的问题。",
+          "skills": [
+            "ares-delivery"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "delivery",
+              "title": "交付说明",
+              "path": "delivery.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "review"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab",
+      "title": "实验技能 · 操作与记录",
+      "pipeline": "E2",
+      "description": "用于训练与记录，实际操作、观察和测量由团队完成。",
+      "version": 1,
+      "verification": "configuration-only",
+      "ruleStatus": "needs-current-edition-verification",
+      "parameters": {
+        "language": "zh-CN",
+        "purpose": "preparation"
+      },
+      "steps": [
+        {
+          "id": "context",
+          "title": "目标与资料盘点",
+          "objective": "确定赛事届次、组别、作品和任务范围；盘点用户真实资料，建立缺口。",
+          "skills": [
+            "ares-intake"
+          ],
+          "inputs": [
+            "competition",
+            "facts.name",
+            "facts.materials"
+          ],
+          "outputs": [
+            {
+              "id": "inventory",
+              "title": "资料盘点",
+              "path": "inventory.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rules",
+          "title": "规则与提交要求",
+          "objective": "读取对应届次规则及命题；区分硬要求、评分建议与未知项，记录来源和适用范围。",
+          "skills": [
+            "ares-rules"
+          ],
+          "inputs": [
+            "competition"
+          ],
+          "outputs": [
+            {
+              "id": "requirements",
+              "title": "规则与提交清单",
+              "path": "requirements.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "context"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "protocol",
+          "title": "操作规范与训练方案",
+          "objective": "依据真实规程确定器材、操作步骤、风险和记录字段。",
+          "skills": [
+            "ares-lab-skills"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "protocol",
+              "title": "训练与操作方案",
+              "path": "protocol.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rules"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "operation",
+          "title": "实际操作与原始记录",
+          "objective": "团队完成实际操作、观察与测量，保存原始凭证。",
+          "skills": [
+            "ares-lab-skills"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "raw-records",
+              "title": "实际操作记录",
+              "path": "raw-records.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "protocol"
+          ],
+          "execution": "human",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "analysis",
+          "title": "误差分析与技能复盘",
+          "objective": "基于实际记录分析误差、操作缺陷和改进；不补造缺失实验。",
+          "skills": [
+            "ares-analysis"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "analysis",
+              "title": "实验技能复盘",
+              "path": "analysis.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "operation"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "review",
+          "title": "验收与修改",
+          "objective": "核对适用规则、事实来源、内容质量和实际文件；按问题定位修改。",
+          "skills": [
+            "ares-judge"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "review-report",
+              "title": "内容复核报告",
+              "path": "review-report.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "analysis"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "delivery",
+          "title": "成果归档",
+          "objective": "运行项目验收，整理已验证产物、未完成事项及提交前需人工确认的问题。",
+          "skills": [
+            "ares-delivery"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "delivery",
+              "title": "交付说明",
+              "path": "delivery.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "review"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simulation",
+      "title": "模拟经营 · 决策与复盘",
+      "pipeline": "E3",
+      "description": "按真实平台规则、各期状态与实际反馈检验经营策略。",
+      "version": 1,
+      "verification": "configuration-only",
+      "ruleStatus": "needs-current-edition-verification",
+      "parameters": {
+        "language": "zh-CN",
+        "purpose": "preparation"
+      },
+      "steps": [
+        {
+          "id": "context",
+          "title": "目标与资料盘点",
+          "objective": "确定赛事届次、组别、作品和任务范围；盘点用户真实资料，建立缺口。",
+          "skills": [
+            "ares-intake"
+          ],
+          "inputs": [
+            "competition",
+            "facts.name",
+            "facts.materials"
+          ],
+          "outputs": [
+            {
+              "id": "inventory",
+              "title": "资料盘点",
+              "path": "inventory.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rules",
+          "title": "规则与提交要求",
+          "objective": "读取对应届次规则及命题；区分硬要求、评分建议与未知项，记录来源和适用范围。",
+          "skills": [
+            "ares-rules"
+          ],
+          "inputs": [
+            "competition"
+          ],
+          "outputs": [
+            {
+              "id": "requirements",
+              "title": "规则与提交清单",
+              "path": "requirements.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "context"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "ruleset",
+          "title": "经营规则与初始状态",
+          "objective": "读取平台规则、变量、约束与初始状态，记录版本。",
+          "skills": [
+            "ares-simulation"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "ruleset",
+              "title": "经营规则与初始状态",
+              "path": "ruleset.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rules"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "decision",
+          "title": "策略与决策测算",
+          "objective": "比较经营策略、现金流和资源约束，明确假设与预测。",
+          "skills": [
+            "ares-simulation",
+            "ares-finance"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "decisions",
+              "title": "决策与测算",
+              "path": "decisions.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "ruleset"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "rounds",
+          "title": "真实轮次结果",
+          "objective": "团队执行平台决策并提供每轮实际反馈，预测不能代替平台结果。",
+          "skills": [
+            "ares-simulation"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "rounds",
+              "title": "平台轮次记录",
+              "path": "rounds.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "decision"
+          ],
+          "execution": "human",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "retrospective",
+          "title": "策略评估与复盘",
+          "objective": "比较预测与实际，解释偏差并形成下期策略。",
+          "skills": [
+            "ares-analysis"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "retrospective",
+              "title": "经营复盘",
+              "path": "retrospective.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "rounds"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "review",
+          "title": "验收与修改",
+          "objective": "核对适用规则、事实来源、内容质量和实际文件；按问题定位修改。",
+          "skills": [
+            "ares-judge"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "review-report",
+              "title": "内容复核报告",
+              "path": "review-report.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "retrospective"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        },
+        {
+          "id": "delivery",
+          "title": "成果归档",
+          "objective": "运行项目验收，整理已验证产物、未完成事项及提交前需人工确认的问题。",
+          "skills": [
+            "ares-delivery"
+          ],
+          "inputs": [
+            "competition",
+            "facts"
+          ],
+          "outputs": [
+            {
+              "id": "delivery",
+              "title": "交付说明",
+              "path": "delivery.md",
+              "format": "md",
+              "kind": "file",
+              "requirement": "required"
+            }
+          ],
+          "dependsOn": [
+            "review"
+          ],
+          "execution": "agent",
+          "prompts": {
+            "role": "根据当前赛事与材料处理本步，遵守用户指令和证据边界。",
+            "execute": "先检查输入和前置产物，执行真实工作；缺原始资料时记录阻断，保存实际结果。",
+            "review": "逐项核对本步目标、来源、结果与产物。结论必须指向实际文件；记录未解决问题。"
+          },
+          "parameters": {
+            "language": "zh-CN"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "repository": "https://github.com/luoluo-121/neural-creator-dashboard",
+  "commit": "769d690fa1c06d985926d8f16772d15514b718e1",
+  "license": "PolyForm-Noncommercial-1.0.0; prior-license exceptions in NOTICE.md",
+  "media": [
+    {
+      "path": "public/media/jellyfish.jpg",
+      "sha": "49d3a7e661e0a752d207ea580ad698fbe4624b67",
+      "size": 25289,
+      "url": "https://raw.githubusercontent.com/luoluo-121/neural-creator-dashboard/769d690fa1c06d985926d8f16772d15514b718e1/public/media/jellyfish.jpg"
+    },
+    {
+      "path": "public/media/jellyfish.mp4",
+      "sha": "32ef6a4762f77e02726bbc96be5714e0564e5fe2",
+      "size": 724052,
+      "url": "https://raw.githubusercontent.com/luoluo-121/neural-creator-dashboard/769d690fa1c06d985926d8f16772d15514b718e1/public/media/jellyfish.mp4"
+    },
+    {
+      "path": "public/media/orb.jpg",
+      "sha": "a26dbcca85f3e131a07601d075065ee0dda7e9aa",
+      "size": 35428,
+      "url": "https://raw.githubusercontent.com/luoluo-121/neural-creator-dashboard/769d690fa1c06d985926d8f16772d15514b718e1/public/media/orb.jpg"
+    },
+    {
+      "path": "public/media/orb.mp4",
+      "sha": "506e3652114ff8a787bf351729f11e6cb328de1d",
+      "size": 8334089,
+      "url": "https://raw.githubusercontent.com/luoluo-121/neural-creator-dashboard/769d690fa1c06d985926d8f16772d15514b718e1/public/media/orb.mp4"
+    }
+  ],
+  "adaptedSources": [
+    {
+      "path": "src/neural/Home.jsx",
+      "sha": "686dc2889487ddf43ab45450269e0d1b4b9d2e47"
+    },
+    {
+      "path": "src/neural/NetworkCanvas.jsx",
+      "sha": "24622ff28b10a0329601f3591821fa8dee92a160"
+    },
+    {
+      "path": "src/neural/theme.js",
+      "sha": "13c7eaf7c9dd8a89b67abdc4b36d3c65aa59c064"
+    },
+    {
+      "path": "src/neural/neural.css",
+      "sha": "98bdbd3992504c59c30724e07b300b33b2b97326"
+    },
+    {
+      "path": "src/neural/main.jsx",
+      "sha": "e5316d7ee8cf55ed052827aa547e8384e34f7244"
+    },
+    {
+      "path": "src/neural/graph.js",
+      "sha": "c593c5baa84e4c87566b918de15b79377ee88c80"
+    }
+  ]
+}

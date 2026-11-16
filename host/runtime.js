@@ -1,0 +1,21 @@
+import {registerProjectChatContextRuntime} from './project-chat-context.js';
+import {registerRuntimeLibrary} from './runtime-library.js?v=2.3.0-directory1';
+import {registerRuntimeWorkbench} from './runtime-workbench.js?v=2.3.0-directory1';
+import {readFileSync, existsSync} from 'node:fs';
+import {join} from 'node:path';
+import {loadVersion,competitionCatalog,ROOT} from './catalog.js?v=2.3.0-directory1';
+import {hash,home,AresError,safePath} from './storage.js';
+import {readProject,initializeProject,taskAction,taskChecks,updateFacts,verifyProject,recordRules,roots,linkRoot} from './projects.js?v=2.3.0-directory1';
+
+export const name='ares-runtime';
+export const inject=['tools','skills'];
+export function apply(ctx,config){
+ const v=loadVersion(config.definitionId);
+ registerProjectChatContextRuntime(ctx,v.id);
+ if(config.frozenSteps&&v.workflow.steps.some(step=>typeof config.frozenSteps[step.id]!=='string'||!config.frozenSteps[step.id].trim()))throw new AresError('完整版本缺少已编译分步指令',409);
+ function register(tool){const off=ctx.tools.register({...tool,output:{schema:{type:'string'},render:(_a,value)=>[{type:'text',text:value}]},presentCall:tool.presentCall|| (args=>({card:'generic',title:'ARES · '+args.action,kind:['catalog','workflow','status','check','verify','list','read','files','resource','open','prepare'].includes(args.action)?'read':'write',rawInput:JSON.stringify(args)})),isConcurrencySafe:tool.isConcurrencySafe|| (args=>['catalog','workflow','status','check','verify','list','read','files','resource','prepare'].includes(args.action))});ctx.effect(()=>off,'ares: '+tool.name);}
+ const rootFor=exec=>{const root=exec.agent?.session?.header?.cwd;if(!root)throw new AresError('无法读取真实会话工作目录');return root;};
+ register({name:'ares_project',description:'ARES固定流程项目状态与任务。catalog查询真实赛事ID/赛道，workflow读固定流程，status恢复，init建档，start领取本步，check检查实际产物，complete需要绑定当前产物哈希的复核JSON路径。人工节点只能由用户在工作台登记。facts更新事实，rules登记原文快照，verify检查缺口。',parameters:{type:'object',additionalProperties:false,required:['action'],properties:{action:{type:'string',enum:['catalog','workflow','status','init','start','check','complete','block','facts','rules','verify']},expectedRevision:{type:'integer',minimum:0},query:{type:'string'},stepId:{type:'string'},name:{type:'string'},competitionId:{type:'integer'},track:{type:'string'},edition:{type:'string'},group:{type:'string'},reviewPath:{type:'string'},reason:{type:'string'},facts:{type:'object'},sourceUrl:{type:'string'},snapshotPath:{type:'string'},quote:{type:'string'},scope:{type:'string'}}},async execute(args,exec){exec.signal?.throwIfAborted();if(args.action==='catalog'){const q=String(args.query||'').trim().toLowerCase(),rows=competitionCatalog().filter(c=>!q||[c.name,...(c.aliases||[])].some(name=>name.toLowerCase().includes(q)));return JSON.stringify({total:rows.length,records:rows.map(c=>({id:c.id,name:c.name,tracks:c.tracks.map(t=>({track:t.track,name:t.name||t.track,pipeline:t.pipeline,suggestedWorkflow:t.suggestedWorkflow})),ruleStatus:c.ruleStatus})),policy:'目录信息不是当届规则核验；精确选择真实赛道。'});}if(args.action==='workflow')return JSON.stringify({workflow:v.workflow,toolkitRoot:ROOT,definitionId:v.id});if(config.execution==='native-on-demand-v1'&&['start','complete','block','facts','rules'].includes(args.action)&&(!Number.isInteger(args.expectedRevision)||args.expectedRevision<0))throw new AresError('项目写入需要status返回的最新expectedRevision，避免覆盖队员修改',409);const root=rootFor(exec);if(args.action==='init')linkRoot(root);let p;try{p=readProject(root);}catch(error){if(error.status!==403)throw error;p={kind:'unlinked',root,message:'当前会话目录尚未关联；先读取真实赛事目录，再init建档。'};}if(p.kind==='v2'&&p.definitionId!==v.id)throw new AresError('当前会话版本与项目版本不同，请从该项目打开会话',409);let result;if(args.action==='status')result=p;else if(args.action==='init')result=initializeProject({...args,root,definitionId:v.id});else if(args.action==='check')result=taskChecks(root,args.stepId);else if(args.action==='verify')result=verifyProject(root);else if(args.action==='facts')result=updateFacts({...args,root});else if(args.action==='rules')result=recordRules({...args,root});else result=taskAction({...args,root},'agent',{id:exec.agent.id});return JSON.stringify(result);}});
+ registerRuntimeLibrary(ctx,config,v,register);
+ registerRuntimeWorkbench(ctx,v,register);
+}

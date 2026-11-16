@@ -168,7 +168,8 @@
         "11-数据真实性清单.md"
       ],
       "output_dir_layout": "输出/{项目名}/（按上列编号命名文件与目录）",
-      "notes": ""
+      "notes": "",
+      "legacy": true
     },
     {
       "track_id": "T009",
@@ -2902,6 +2903,94 @@
       ],
       "output_dir_layout": "输出/{项目名}/（问卷、数据、代码、报告、PPT分目录）",
       "notes": "研究生队，单独排名评奖，流程同本科组"
+    },
+    {
+      "track_id": "T008-2026-1",
+      "competition_id": 3,
+      "competition_name": "“挑战杯”创业计划大赛",
+      "track": "先进制造",
+      "pipeline": "L1",
+      "default_deliverables": [],
+      "notes": "第十五届主体赛事赛道；具体报名组别、格式及补充清单须按本届通知核对。",
+      "source": "https://gaoxiao.tiaozhanbei.net/d1204/article/49690/",
+      "edition": "2026"
+    },
+    {
+      "track_id": "T008-2026-2",
+      "competition_id": 3,
+      "competition_name": "“挑战杯”创业计划大赛",
+      "track": "新一代信息技术",
+      "pipeline": "L1",
+      "default_deliverables": [],
+      "notes": "第十五届主体赛事赛道；具体报名组别、格式及补充清单须按本届通知核对。",
+      "source": "https://gaoxiao.tiaozhanbei.net/d1204/article/49690/",
+      "edition": "2026"
+    },
+    {
+      "track_id": "T008-2026-3",
+      "competition_id": 3,
+      "competition_name": "“挑战杯”创业计划大赛",
+      "track": "生物医药与健康科技",
+      "pipeline": "L1",
+      "default_deliverables": [],
+      "notes": "第十五届主体赛事赛道；具体报名组别、格式及补充清单须按本届通知核对。",
+      "source": "https://gaoxiao.tiaozhanbei.net/d1204/article/49690/",
+      "edition": "2026"
+    },
+    {
+      "track_id": "T008-2026-4",
+      "competition_id": 3,
+      "competition_name": "“挑战杯”创业计划大赛",
+      "track": "新能源新材料",
+      "pipeline": "L1",
+      "default_deliverables": [],
+      "notes": "第十五届主体赛事赛道；具体报名组别、格式及补充清单须按本届通知核对。",
+      "source": "https://gaoxiao.tiaozhanbei.net/d1204/article/49690/",
+      "edition": "2026"
+    },
+    {
+      "track_id": "T008-2026-5",
+      "competition_id": 3,
+      "competition_name": "“挑战杯”创业计划大赛",
+      "track": "现代农业与食品科技",
+      "pipeline": "L1",
+      "default_deliverables": [],
+      "notes": "第十五届主体赛事赛道；具体报名组别、格式及补充清单须按本届通知核对。",
+      "source": "https://gaoxiao.tiaozhanbei.net/d1204/article/49690/",
+      "edition": "2026"
+    },
+    {
+      "track_id": "T008-2026-6",
+      "competition_id": 3,
+      "competition_name": "“挑战杯”创业计划大赛",
+      "track": "新消费与文化创意",
+      "pipeline": "L1",
+      "default_deliverables": [],
+      "notes": "第十五届主体赛事赛道；具体报名组别、格式及补充清单须按本届通知核对。",
+      "source": "https://gaoxiao.tiaozhanbei.net/d1204/article/49690/",
+      "edition": "2026"
+    },
+    {
+      "track_id": "T008-2026-7",
+      "competition_id": 3,
+      "competition_name": "“挑战杯”创业计划大赛",
+      "track": "现代服务与社会治理",
+      "pipeline": "L1",
+      "default_deliverables": [],
+      "notes": "第十五届主体赛事赛道；具体报名组别、格式及补充清单须按本届通知核对。",
+      "source": "https://gaoxiao.tiaozhanbei.net/d1204/article/49690/",
+      "edition": "2026"
+    },
+    {
+      "track_id": "T008-2026-8",
+      "competition_id": 3,
+      "competition_name": "“挑战杯”创业计划大赛",
+      "track": "国际交流合作",
+      "pipeline": "L1",
+      "default_deliverables": [],
+      "notes": "第十五届主体赛事赛道；具体报名组别、格式及补充清单须按本届通知核对。",
+      "source": "https://gaoxiao.tiaozhanbei.net/d1204/article/49690/",
+      "edition": "2026"
     }
   ]
 }

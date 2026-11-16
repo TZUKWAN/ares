@@ -41,6 +41,13 @@ def main(argv=None):
     ap.add_argument("--report", default=None)
     ap.add_argument("--no-visual", action="store_true", help="仅适用于没有 Word/PPT/Demo 的竞赛线")
     args = ap.parse_args(argv)
+    with io.open(args.profile,encoding='utf-8') as f:
+        profile=json.load(f)
+    if profile.get('schema_version')==2:
+        project_root=os.path.dirname(os.path.dirname(os.path.abspath(args.profile)))
+        p=subprocess.run(['node',os.path.join(ROOT,'scripts','ares.mjs'),'verify','--root',project_root],capture_output=True,text=True,encoding='utf-8',errors='replace')
+        print(p.stdout or p.stderr)
+        return p.returncode
     output_dir = os.path.abspath(args.output_dir)
     steps = []
     steps.append(_run("profile", "scripts/validate_profile.py", [os.path.abspath(args.profile), "--quiet"]))
@@ -67,7 +74,9 @@ def main(argv=None):
         "checked_at": datetime.now(timezone.utc).isoformat(),
         "profile": os.path.abspath(args.profile),
         "output_dir": output_dir,
-        "formal_ready": all(step.get("passed") for step in steps),
+        "checks_passed": all(step.get("passed") for step in steps),
+        "formal_ready": False,
+        "readiness_note": "旧档案检查不包含新版当届规则与逐项内容复核，请通过工作台保留原档案并建立新版项目。",
         "steps": steps,
     }
     report_path = os.path.abspath(args.report or os.path.join(output_dir, "最终门禁报告.json"))

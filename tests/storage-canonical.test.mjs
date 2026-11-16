@@ -1,0 +1,10 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {mkdtempSync} from 'node:fs';
+import {join} from 'node:path';
+import {tmpdir} from 'node:os';
+import {stable,hash} from '../host/storage.js';
+import {putProjectRecord,readProjectRecord} from '../host/project-objects.js';
+test('canonical hashes match the real persisted JSON when optional fields are undefined',()=>{const value={nativeTool:'pwsh',error:undefined,value:{exitCode:0,optional:undefined},array:[undefined,1]};const persisted=JSON.parse(JSON.stringify(value));assert.equal(stable(value),stable(persisted));const root=mkdtempSync(join(process.env.ARES_TEST_ROOT||tmpdir(),'ares-canonical-'));const record=putProjectRecord(root,'extension-runs',value);assert.deepEqual(readProjectRecord(root,'extension-runs',record.id).payload,persisted);});
+test('existing valid JSON and raw-byte hashes retain their exact original canonical form',()=>{const canonical='{"a":{"b":1},"z":2}';assert.equal(stable({z:2,a:{b:1}}),canonical);assert.equal(hash({z:2,a:{b:1}}),createHash('sha256').update(canonical).digest('hex'));assert.equal(hash(Buffer.from('abc')),'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');});

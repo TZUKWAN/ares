@@ -1,0 +1,501 @@
+/* ARES Neural: original interface finish, inspired by the reference's neutral
+ * light/material hierarchy. No reference code, assets, network fonts or runtime
+ * dependencies. This is the final theme layer; layout and business stay owned
+ * by the existing workspaces, native DSH components and scene controller. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] {
+  --neural-void: #121212;
+  --neural-surface: #1d1d1d;
+  --neural-raised: #272727;
+  --neural-field: #171717;
+  --neural-text: #eaeaea;
+  --neural-secondary: #b7b7b7;
+  --neural-muted: #969696;
+  --neural-gold: #dfcba2;
+  --neural-line: #e3e3e315;
+  --neural-line-strong: #e3e3e32e;
+  --neural-glass: linear-gradient(145deg, #39393970, #1c1c1cb8);
+  --neural-shadow: inset 0 1px #fbfbfb08, 0 18px 50px #00000025;
+  --ui-bg: var(--neural-void);
+  --ui-surface: var(--neural-surface);
+  --ui-raised: var(--neural-raised);
+  --ui-border: var(--neural-line);
+  --ui-border-hover: #e0d2b84f;
+  --ui-text: var(--neural-text);
+  --ui-muted: var(--neural-muted);
+  --ui-accent: var(--neural-gold);
+  --ui-mint: #abd3b9;
+  --ui-amber: #dfcba2;
+  --ui-radius: 10px;
+  --ui-ease: cubic-bezier(.22, .72, .22, 1);
+  --ui-fast: 170ms;
+  --ui-normal: 270ms;
+  --a-bg: var(--neural-void);
+  --a-paper: var(--neural-surface);
+  --a-ink: var(--neural-text);
+  --a-text: var(--neural-text);
+  --a-muted: var(--neural-muted);
+  --a-line: var(--neural-line);
+  --a-green: var(--neural-gold);
+  --a-soft: #3c3c3c2d;
+  --a-gold: var(--neural-gold);
+  --a-danger: #e2a5a0;
+  --a-code: #161616;
+  --sys-font: 'Segoe UI', 'Microsoft YaHei UI', 'Microsoft YaHei', sans-serif;
+  --sys-mono: 'ARES Forge Mono', Consolas, monospace;
+  --sys-panel: var(--neural-glass);
+  --ff-cjk: var(--sys-font);
+  --w-shell: var(--neural-void);
+  --w-stage: #141414;
+  --w-orange: var(--neural-gold);
+  --w-mint: #abd3b9;
+  --w-grid: #e3e3e30e;
+  color-scheme: dark;
+  background: radial-gradient(ellipse at 48% 44%, #b8b8b80a, transparent 66%), var(--neural-void);
+  color: var(--neural-text);
+  font: 16px/1.75 var(--sys-font);
+  letter-spacing: .012em;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'tnum';
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] * {
+  scrollbar-width: thin;
+  scrollbar-color: #b4b4b43d transparent;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] ::selection { color: #f8f8f8; background: #d9c69d36; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(button, input, select, textarea, summary, a):focus-visible {
+  outline: 2px solid #e2cfa5b3;
+  outline-offset: 3px;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] a { color: #dfd1b4; text-underline-offset: 4px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] a:hover { color: #f3e5c8; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-layout {
+  background: radial-gradient(ellipse at 50% 22%, #bebebe08, transparent 64%), #121212;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-help, .ares-subtitle) { color: var(--neural-muted); line-height: 1.85; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-help { font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-subtitle { font-size: 15px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-label, .ares-eyebrow, .ares-section-label) { color: #c2c2c2; font-size: 13px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-eyebrow { color: #cdbd9c; letter-spacing: .13em; }
+
+/* Controls use light, rather than saturated colour, for hierarchy. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-btn, .ff-tools button,
+  .nebula-artifact-context>button, .document-toolbar button, .document-footer button) {
+  color: #cecece;
+  background: linear-gradient(145deg, #f5f5f50a, #f5f5f503);
+  border-color: #e3e3e31d;
+  border-radius: 10px;
+  box-shadow: inset 0 1px #fcfcfc05, 0 2px 5px #00000010;
+  font: 500 14px/1.5 var(--sys-font);
+  letter-spacing: .015em;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-btn, .ff-tools button,
+  .nebula-artifact-context>button, .document-toolbar button, .document-footer button):hover:not(:disabled) {
+  color: #f2f2f2;
+  background: linear-gradient(145deg, #f5f5f512, #f5f5f507);
+  border-color: #e5dcc642;
+  box-shadow: inset 0 1px #fbfbfb0a, 0 5px 18px #00000020;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-btn, .ff-tools button,
+  .nebula-artifact-context>button, .document-toolbar button, .document-footer button):active:not(:disabled) {
+  box-shadow: inset 0 1px 5px #00000028;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.primary {
+  color: #272727;
+  background: linear-gradient(145deg, #efefef, #d1d1d1);
+  border-color: #f3f3f38c;
+  box-shadow: inset 0 1px #ffffff70, 0 5px 20px #dfdfdf12;
+  font-weight: 600;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.primary:hover:not(:disabled) {
+  color: #232323;
+  background: linear-gradient(145deg, #fafafa, #e1e1e1);
+  border-color: #f9f9f9;
+  box-shadow: inset 0 1px #ffffff80, 0 6px 24px #e2d5b91a;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.quiet { color: #c5c5c5; border-color: #e3e3e317; background: #f2f2f205; box-shadow: none; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.danger { color: #e1b1a9; border-color: #dcaea327; background: #dcaea306; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-btn, .ff-tools button):disabled { color: #919191; border-color: #e3e3e310; background: #f2f2f203; opacity: .5; box-shadow: none; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.primary:disabled { color: #979797; border-color: #e3e3e310; background: #f2f2f208; opacity: .6; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-composer-heading, .galaxy-chat-heading, .galaxy-console-heading,
+  .ares-modal-footer, .ares-flow-map-head, .nebula-node-outputs) .ares-btn { font: 500 14px/1.5 var(--sys-font); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-btn.primary::before { background: linear-gradient(110deg, transparent 36%, #ffffff60 49%, transparent 62%); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-btn, .ff-tools button, .nebula-artifact-context>button,
+  .document-toolbar button, .document-footer button)[data-ui-pressable]::after {
+  background: radial-gradient(110px circle at var(--ui-pointer-x, 50%) var(--ui-pointer-y, 50%), #f4e7ca12, transparent);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-press-wave { background: radial-gradient(circle, #e9e8d721, #dfd1af08 62%, transparent 72%); }
+
+/* Fields and validation retain all existing HTML/native semantics. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-input, .ares-workflow-select, .ares-project-facts,
+  .nebula-artifact-context select, .nebula-cloud-toolbar select, .document-toolbar select) {
+  background: #141414c2;
+  border-color: #e3e3e31c;
+  border-radius: 10px;
+  color: #e3e3e3;
+  box-shadow: inset 0 1px 4px #00000012;
+  font: 15px/1.75 var(--sys-font);
+  caret-color: #e3d0a6;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-input, .ares-workflow-select,
+  .nebula-artifact-context select, .nebula-cloud-toolbar select):hover:not(:disabled) { border-color: #e3e3e337; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(input.ares-input, textarea.ares-input,
+  select.ares-input, .ares-workflow-select, .nebula-artifact-context select, .nebula-cloud-toolbar select):focus {
+  color: #efefef;
+  background-color: #1f1f1f;
+  border-color: #ddcaa369;
+  box-shadow: 0 0 0 3px #dfcba20b, inset 0 1px 3px #00000012;
+  outline: none;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-input::placeholder { color: #8b8b8b; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-input:disabled { color: #8e8e8e; background: #151515; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-input:user-invalid { border-color: #d9a49c; box-shadow: 0 0 0 3px #d5a2960c; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-field { margin-bottom: 23px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-label { color: #c3c3c3; margin-bottom: 9px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-option { color: #cacaca; border-color: #e3e3e315; background: #f2f2f205; border-radius: 10px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-option:has(:checked) { border-color: #ddcaa33b; background: #dfcba20c; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] input[type=checkbox] { accent-color: #d8c59d; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-search>svg { color: #a1a1a1; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-code, .ares-editor-code) { color: #cacaca; background-color: #161616; font-size: 14px !important; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] summary { color: #bdbdbd; font-size: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] summary:hover { color: #e8dec4; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(details, .ares-advanced) { border-color: #e3e3e315; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-pill { color: #c8c8c8; background: #f2f2f207; border-color: #e3e3e31d; border-radius: 999px; font-size: 12px; padding: 4px 9px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-pill.green { color: #bdd7c2; background: #a9c8ad0a; border-color: #a9c8ad24; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-pill.gold { color: #dfcba2; background: #dfcba20a; border-color: #dfcba226; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-pill.danger { color: #dfb4aa; background: #d8a79b0b; border-color: #d8a79b24; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-inline-note, .ares-alert) { color: #c6c6c6; background: #dfcba208; border-color: #dfcba221; border-radius: 11px; font-size: 14px; line-height: 1.8; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-alert { color: #e0beb3; border-color: #d9aaa022; background: #d9aaa008; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-dot { background: #b2c7a9; box-shadow: 0 0 6px #b2c7a922; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-dot.changed { background: #d9c49c; box-shadow: 0 0 6px #d9c49c22; }
+
+/* Composing: competition taxonomy remains visible and keeps its proportions. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-composer-heading, .ares-competition-browser,
+  .ares-composer-editor, .ares-project-switcher) {
+  background: var(--neural-glass);
+  border-color: #e3e3e314;
+  border-radius: 16px;
+  box-shadow: var(--neural-shadow);
+  backdrop-filter: blur(18px) saturate(.8);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading h1,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading h2 { color: #efefef; font-size: 24px; font-weight: 500; letter-spacing: .015em; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading>div:first-child>span { color: #b9b49e; letter-spacing: .11em; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading p { color: #a4a4a4; font-size: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading [data-save-state] { color: #b8b8b8; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser :is(h2, h3) { color: #d5d5d5; font-size: 16px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser .ares-label { color: #bababa; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser .ares-help { color: #969696; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-competition-list, .ares-track-list)>button { color: #c0c0c0; background: transparent; border-radius: 11px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-competition-list, .ares-track-list)>button:hover { color: #eeeeee; border-color: #e3e3e325; background: #f2f2f207; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-competition-list, .ares-track-list)>button:is([aria-current], [aria-selected=true], .is-selected) {
+  color: #e5dfcb;
+  background: linear-gradient(120deg, #dfcba215, #f2f2f205);
+  border-color: #dfcba22f;
+  box-shadow: inset 2px 0 #d9c49c80;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-competition-list, .ares-track-list)>button small { color: #969696; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading { border-bottom-color: #e3e3e312; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading h3 { color: #dcdcdc; font-size: 18px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading p { color: #9f9f9f; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-composer-scope, .ares-composer-status, .competition-studio-head) { color: #a7a7a7; border-color: #e3e3e315; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-studio-head h2 { color: #e7e7e7; font-size: 25px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-studio-head :is(p, span) { color: #a5a5a5; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-suggestion { color: #d3d1b7; background: #dfcba20b; border-color: #dfcba228; border-radius: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.competition-basis, .competition-custom-flow, .competition-project-method) { color: #a1a1a1; }
+
+/* Editor cards preserve their absolute positions, drag handles and dependency
+ * graph; only their surfaces, typography and actual selected state are themed. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-flow-map,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-map { background: #171717d6; border-color: #e3e3e316; border-radius: 14px; box-shadow: inset 0 1px #fcfcfc05; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-flow-map-head, .ares-flow-toolbar, .ares-flow-map-footer) { background: #f2f2f204; border-color: #e3e3e312; color: #adadad; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-map-head strong { color: #d6d6d6; font-size: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-map-head small { color: #989898; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-viewport { background-color: #161616; background-image: radial-gradient(#cacaca1c .7px, transparent .7px); background-size: 24px 24px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-wires path { stroke: #bfbfbf38; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-wires path.is-selected { stroke: #dfcba285; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-step { background: linear-gradient(145deg, #3b3b3b80, #242424df); border-color: #e3e3e322; border-radius: 12px; color: #d2d2d2; box-shadow: inset 0 1px #fbfbfb0a, 0 5px 16px #00000018; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-step:hover { border-color: #d8d1b447; background: linear-gradient(145deg, #4040409c, #282828e8); box-shadow: inset 0 1px #fbfbfb0c, 0 7px 20px #00000024; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-step.active { border-color: #dfcba24f; background: linear-gradient(145deg, #6b65423a, #363636b8); box-shadow: inset 0 1px #fff6dd13, 0 0 0 3px #dfcba206, 0 6px 20px #00000024; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-step-number { color: #c0c0c0; background: #171717; border-color: #c3c3c326; border-radius: 7px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-step.active .ares-step-number { color: #e1d3ab; background: #4a4a4a47; border-color: #dfcba245; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-step-title { color: #e1e1e1; font-size: 15px; line-height: 1.65; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-step-caption, .ares-flow-node-foot) { color: #a1a1a1; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-editor,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-editor { background: #1f1f1fad; border-color: #e3e3e314; border-radius: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-editor-head { border-color: #e3e3e312; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-editor-head h2 { color: #e4e4e4; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-editor-head :is(p, span) { color: #a8a8a8; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-tabs { border-color: #e3e3e312; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-tabs>button, .ares-capability-tabs>button) { color: #a2a2a2; background: transparent; border-color: transparent; font-size: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-tab.active, .ares-tabs>button[aria-selected=true], .ares-capability-tabs>button[aria-selected=true]) { color: #e0d2ae; background-color: #dfcba208; border-color: #dfcba22e; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-tab.active::after { background: #dfcba2a6; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-capability-tabs { background: #161616a8; border-color: #e3e3e314; border-radius: 999px; }
+
+/* Project surfaces and artifacts. Documents retain their own page formatting. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .work-header { border-bottom-color: #e3e3e312; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .ff-title { color: #e5e5e5; text-shadow: none; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .work-project-heading>button { color: #dbdbdb; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .work-project-heading>button:hover { color: #f1f1f1; text-shadow: 0 0 22px #dfcba21c; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .work-project-heading>small { color: #9a9a9a; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-now { color: #a4a4a4; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-now strong { color: #d9d9d9; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-scene .ff-right.work-artifact { background: linear-gradient(155deg, #3636368c, #1c1c1cd9); border-color: #e3e3e317; border-top-color: #e3e3e31f; border-radius: 16px; box-shadow: var(--neural-shadow); backdrop-filter: blur(18px) saturate(.8); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-heading { border-bottom-color: #e3e3e312; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-heading span { color: #e1e1e1; font-size: 16px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-heading strong { color: #a7a7a7; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-heading>button { color: #c5c4a8; border-radius: 999px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-artifact-heading>button:hover { color: #ece3c8; background: #dfcba20a; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-source-tabs { border-bottom-color: #e3e3e312; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-source-tabs button { color: #a2a2a2; font-size: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-source-tabs button[aria-selected=true] { color: #dfd2af; border-bottom-color: #dfcba2a1; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.nebula-artifact-context label, .nebula-cloud-toolbar label) { color: #a1a1a1; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.nebula-cloud-meta, .nebula-cloud-footnote) { color: #989898; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-cloud-message { color: #d3ba9b; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-cloud-anchor { background: #1b1b1b; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-cloud-empty { color: #a7a7a7; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-cloud-empty :is(i, h3) { color: #d3d3d3; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-compare-grid { background: #e3e3e315; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-compare-grid>section { background: #1c1c1c; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-compare-grid>section>header { color: #cdcdcd; border-color: #e3e3e312; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.document-topline, .document-toolbar, .document-footer, .document-statebar) { border-color: #e3e3e312; background-color: #2121218c; color: #adadad; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-topline strong { color: #dfdfdf; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-file-type { color: #d1c7a3; background: #dfcba20b; border-color: #dfcba21e; border-radius: 6px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-statebar { font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-statebar code { color: #9d9d9d; font-size: 11px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-live-dot { background: #b0c995; box-shadow: 0 0 6px #b0c99524; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-live-dot.has-warning { background: #d8bd91; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-format-label { color: #9b9b9b; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.document-text, .document-editor) { color: #e0e0e0; background: #181818; border-color: #e3e3e31d; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-editor { font-size: 16px !important; line-height: 1.85; caret-color: #dfcba2; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-empty { color: #a4a4a4; font-size: 15px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-empty h3 { color: #d6d6d6; font-size: 20px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .work-document-changes { background: #ededed03; border-top-color: #e3e3e312; color: #9e9e9e; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .work-document-changes strong { color: #d1d1d1; }
+
+/* General project/capability panels, lists and readable tables. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console:is(.is-studio, .is-workpiece) { background: linear-gradient(145deg, #2e2e2ef5, #1c1c1cf5); border-color: #e3e3e31c; border-radius: 18px; box-shadow: var(--neural-shadow), 0 24px 70px #00000035; backdrop-filter: blur(22px) saturate(.8); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading { background: linear-gradient(100deg, #ececec05, transparent 70%); border-bottom-color: #e3e3e314; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading h2 { color: #eaeaea; font-size: 23px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading>div:first-child>span { color: #ababab; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-body { color: #d9d9d9; font-size: 16px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-heading h1 { color: #e9e9e9; font-size: 28px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-board-card, .ares-node, .ares-skill-card, .ares-library-card,
+  .ares-milestone, .ares-extension-card, .ares-catalog-card, .competition-product-files article, .process-activity) {
+  background: linear-gradient(145deg, #272727, #222222);
+  border-color: #e3e3e317;
+  border-radius: 14px;
+  box-shadow: inset 0 1px #fbfbfb05;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-skill-card, .ares-library-card, .ares-extension-card,
+  .ares-catalog-card, .competition-product-files article):hover { background-color: #efefef04; border-color: #d8cfad34; box-shadow: inset 0 1px #fbfbfb09, 0 8px 20px #00000018; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-library-card h3, .ares-node>header h3, .competition-product-files strong) { color: #dfdfdf; font-size: 18px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-library-card p, .ares-node>p, .ares-piece small) { color: #b0b0b0; font-size: 14px; line-height: 1.85; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-skill-code { color: #a6a6a6; font-size: 11px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-piece { color: #cccccc; background: #202020; border-color: #e3e3e315; border-radius: 11px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-toolbar { background: #efefef04; border-color: #e3e3e314; border-radius: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table-wrap { border-color: #e3e3e317; border-radius: 13px; background: #1a1a1a30; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table { color: #d0d0d0; font-size: 15px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table th { color: #b2b2b2; background: #efefef05; font-size: 13px; border-color: #e3e3e314; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table td { border-color: #e3e3e30e; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table tbody tr:hover td { background: #efefef05; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice { background: #efefef04; border-color: #e3e3e316; border-radius: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice:hover { background: #efefef08; border-color: #d9caa236; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice:has(.is-selected) { background: linear-gradient(120deg, #dfcba213, #efefef04); border-color: #dfcba22f; box-shadow: inset 2px 0 #dfcba288; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice .galaxy-project-choice { color: #d4d4d4; background: transparent; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice .galaxy-project-choice strong { color: #e6e6e6; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-choice .galaxy-project-choice span { color: #a7a7a7; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-project-import { color: #a1a1a1; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-product>header { border-color: #e3e3e315; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .competition-product>header :is(h2, p, span) { color: #d1d1d1; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .progress-kpis>div { background: linear-gradient(145deg, #efefef09, #efefef02); border-color: #e3e3e316; border-radius: 14px; box-shadow: inset 0 1px #fbfbfb06; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .progress-kpis span { color: #afafaf; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .progress-kpis strong { color: #dcdcdc; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .progress-kpis p { color: #a0a0a0; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .progress-kpis .primary strong { color: #bfdbb7; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .progress-kpis .primary>i { background: #d3c89f; box-shadow: 0 0 10px #d3c89f15; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .process-progress-table button[data-action=workshop-step] { color: #d9d9d9; font-size: 15px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .process-activity :is(p, strong) { color: #c7c7c7; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .process-activity :is(time, small) { color: #a1a1a1; }
+
+/* Dialogs feel like the same material, with readable content and quiet dividers. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-backdrop,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-backdrop.is-nebula-detail { background: #0b0b0b96; backdrop-filter: blur(12px) saturate(.7); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .is-nebula-detail .ares-modal { color: #dadada; background: linear-gradient(145deg, #343434f7, #242424fa); border-color: #e3e3e322; border-radius: 18px; box-shadow: inset 0 1px #fbfbfb0a, 0 28px 90px #00000050; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-head { border-bottom-color: #e3e3e314; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-head h2,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .is-nebula-detail .ares-modal-head h2 { color: #eaeaea; font-size: 24px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-head p { color: #adadad; font-size: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-footer,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .is-nebula-detail .ares-modal-footer { background: #282828f2; border-top-color: #e3e3e314; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-facts { border-color: #e3e3e314; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-facts span { color: #a2a2a2; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-facts strong { color: #d9d9d9; font-size: 15px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-section h3 { color: #d9d9d9; font-size: 17px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-section>p { color: #c6c6c6; font-size: 16px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-outputs article { background: #f2f2f204; border-color: #e3e3e315; border-radius: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-outputs strong { color: #dadada; font-size: 15px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-outputs small { color: #a5a5a5; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-dependency { color: #c8c8c8; border-color: #e3e3e312; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-dependency:hover { color: #e7e4c3; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .nebula-node-advanced { color: #a6a6a6; }
+
+/* The native DSH portal remains intact. Only public component hooks receive the
+ * material/font treatment; tool menus, models and send/stop behavior are owned
+ * by DSH and retain their original DOM and handlers. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat {
+  --a-bg: #161616;
+  --a-paper: #252525;
+  --a-soft: #ffffff07;
+  --a-ink: #e6e6e6;
+  --a-text: #e0e0e0;
+  --a-muted: #989898;
+  --a-green: var(--neural-gold);
+  --a-line: #e3e3e318;
+  background: linear-gradient(165deg, #2f2f2fde, #1c1c1cf2 65%, #262626ed);
+  border-left-color: #e3e3e318;
+  box-shadow: inset 1px 0 #fbfbfb04, -12px 0 38px #00000015;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading { border-bottom-color: #e3e3e314; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading span { color: #aeaeae; letter-spacing: .13em; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading strong { color: #e8e8e8; font-size: 20px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-context { color: #bbbbbb; border-left-color: #d8c69c70; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-tabs { border-color: #e3e3e314; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-tabs [aria-selected=true] { color: #e2d5af; background: #dfcba20d; border-color: #dfcba236; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-assistant-status { color: #b2b2b2; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-status { color: #b5b5b5; border-color: #e3e3e314; background: #f2f2f203; font-size: 14px; line-height: 1.85; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-empty-code { color: #baa97f; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-empty h3 { color: #e6e6e6; font-size: 25px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-empty p { color: #b1b1b1; font-size: 15px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] [data-ares-chat-shortcut] { color: #cfcfcf; background: linear-gradient(145deg, #f2f2f207, #f2f2f203); border-color: #e3e3e317; border-radius: 12px; box-shadow: inset 0 1px #fbfbfb03; font-size: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] [data-ares-chat-shortcut]:hover { color: #ebebeb; background: #dfcba20c; border-color: #dfcba23a; box-shadow: 0 5px 18px #00000015; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-shortcut-number { color: #b4b4b4; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-shortcut-arrow { color: #c7c69a; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] [data-ares-chat-shortcut]:hover .ares-native-shortcut-arrow { color: #eee0b8; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-conversation-content] { color: #e1e1e1; font: 16px/1.8 var(--sys-font); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-composer-card] { color: #e5e5e5; background: linear-gradient(150deg, #3e3e3eaf, #262626d6) !important; border-color: #e2e2e22a !important; border-radius: 14px !important; box-shadow: inset 0 1px #fbfbfb09, 0 7px 24px #00000020 !important; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-composer-card]:focus-within { border-color: #dfcba267 !important; box-shadow: 0 0 0 3px #dfcba208, 0 7px 26px #00000024 !important; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat :is([data-composer-input], [data-composer-placeholder]) { font-family: var(--sys-font) !important; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-composer-input] { color: #e7e7e7 !important; caret-color: #dfcba2; font-size: 16px !important; line-height: 1.75 !important; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-composer-placeholder] { color: #9d9d9d !important; font-size: 14px !important; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-composer-card] button { color: #c7c7c7; background-color: transparent; border-color: #e3e3e31b; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-composer-card] :is(button, select) { border-radius: 8px !important; font-size: 13px !important; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-composer-card] button:hover:not(:disabled) { color: #e8e5c5; background-color: #f2f2f208; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat [data-composer-card] :is(button[aria-label*="发送"], button[aria-label=Send], button[type=submit]):not(:disabled) { color: #333333; background: linear-gradient(140deg, #ededed, #d0d0d0); border-color: #f2f2f25c; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-resize::after { background: #e3e3e328; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-resize:hover::after { background: #dfcba29c; box-shadow: 0 0 12px #dfcba22b; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-chat-reopen { color: #d5d5d5; background: #262626e8; border-color: #dfcba22a; }
+
+/* Navigation and small feedback borrow the same silver light. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar { background: linear-gradient(transparent, #181818ba 60%); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-instruments { background: linear-gradient(145deg, #4545458c, #272727c9); border-color: #e3e3e31d; border-radius: 999px; box-shadow: inset 0 1px #fbfbfb08, 0 12px 32px #00000028; backdrop-filter: blur(20px) saturate(.7); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button { color: #b1b1b1; border-radius: 999px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button:hover { color: #e4e4e4; background: #f2f2f209; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button[aria-current] { color: #e5e5e5; background: linear-gradient(145deg, #f2f2f218, #f2f2f208); border-color: #e3e3e32e; box-shadow: inset 0 1px #fbfbfb11, 0 2px 12px #00000015; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button[aria-current]::after { background: #dfcba299; box-shadow: 0 0 8px #dfcba230; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-ui-pending { background: #dfcba208; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-ui-pending::before { background: linear-gradient(90deg, transparent, #e4d3aa, transparent); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-toast { color: #e6e6e6; background: #343434eb; border-color: #e3e3e326; border-radius: 13px; box-shadow: 0 10px 35px #00000028; backdrop-filter: blur(18px) saturate(.7); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-toast.error { color: #e2beb1; background: #362c1fe8; border-color: #d4a39336; }
+
+/* Complete the material treatment on nested viewer/flow surfaces whose legacy
+ * colours were local rather than token based. Office pages and web frames keep
+ * their own content formatting; only Markdown and native viewer chrome change. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-map-head>div>span { color: #b9b9b9; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-map>footer { color: #9c9c9c; background: #202020; border-color: var(--neural-line); font: 12px/1.6 var(--sys-font); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-node-foot i { color: #b4b4b4; font-style: normal; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-step.active .ares-flow-node-foot i { color: var(--neural-gold); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-editor-head .ares-eyebrow { color: #c9bb9e; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-artifact-viewer { background: #1c1c1c; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.document-topline, .document-toolbar, .document-footer, .document-statebar) { border-color: #e3e3e312; background: #242424; color: #adadad; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-scroll { background: radial-gradient(ellipse at top, #2d2d2d, #1b1b1b 75%); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-paper.document-prose { color: #333330; background: #f3f3f0; border-color: #d4d4cf; font: 16px/1.85 var(--sys-font); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-paper.document-prose :is(h1,h2,h3,h4,p,li,blockquote) { color: inherit; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-paper.document-prose :is(pre,code) { color: #42423e; background: #e6e6e1; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-paper.document-prose blockquote { background: #eaeae4; border-color: #b4a88b; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-paper.document-prose a { color: #716041; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-paper.document-prose a:hover { color: #4d432d; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .work-live-preview .document-paper.document-prose { color: #d0d0cd; background: transparent; border: 0; font-size: 16px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .work-live-preview .document-prose :is(h1,h2,h3) { color: #e4e4df; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .work-live-preview .document-prose :is(pre,code) { color: #d5d2c8; background: #eeeeee07; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .work-live-preview .document-paper.document-prose a { color: #dfd1b4; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .document-notice { color: #dac8a7; border-color: #dfcba22c; background: #dfcba20c; }
+
+/* Read-only functional pages share the same material as the main workspaces.
+ * Explicit child rules replace legacy local colours and tiny captions. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-body { background: #1c1c1c; backdrop-filter: none; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-editor-head>div>span,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-editor-head>div>span { color: #b8b09d; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-flow-map>footer>span { color: #a0a0a0; font: 12px/1.8 var(--sys-font); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-skill-item { color: #d1d1cd; background: #222222; border-color: var(--neural-line); border-radius: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-skill-item.bound { background: linear-gradient(130deg, #343128, #252525); border-color: #dfcba23b; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-skill-item h3 { color: #e2e2dc; font-size: 15px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-skill-item p { color: #a9a9a5; font-size: 13px; line-height: 1.85; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-artifact { background: #ffffff03; border-color: var(--neural-line); border-radius: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-artifact-head { color: #d8d8d2; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-artifact-head strong { font-size: 15px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-library .ares-library-card { background: linear-gradient(145deg, #282828, #222222); border-color: #deded817; isolation: isolate; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-library .ares-library-card:hover { background: linear-gradient(145deg, #2c2c2c, #242424); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-plain-note { color: #a5a5a1; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .project-continuum { background: linear-gradient(130deg, #2a2a2a, #222222); border-color: var(--neural-line); border-radius: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .project-continuum>header { color: #a5a5a0; font: 12px/1.7 var(--sys-font); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .project-continuum>header strong { color: #d9d9d2; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .continuum-step { color: #bdbdb8; background: #1e1e1e; border-color: #e3e3e31b; border-radius: 9px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .continuum-step>span { color: #a5a5a0; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .continuum-step b { font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .continuum-step small { color: #969690; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .continuum-step:hover,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .continuum-step.is-selected { background: #dfcba20e; color: #e6ddc8; border-color: #dfcba24d; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .continuum-step.is-selected::after { background: #dfcba2a6; box-shadow: 0 0 10px #dfcba21a; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .continuum-step.status-done { color: #bdd7c2; border-color: #a9c8ad40; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.continuum-step.status-stale, .continuum-step.status-blocked) { color: #dfcba2; border-color: #dfcba245; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .continuum-versions { color: #9f9f98; border-top-color: var(--neural-line); font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .continuum-version { color: #c9c9c2; background: #ffffff05; border-color: var(--neural-line); border-radius: 8px; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .continuum-version small { color: #9c9c94; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .continuum-version:hover { color: #e5dcc4; border-color: #dfcba24d; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-board-card h3, .ares-milestone strong) { color: #d8d8d1; font-size: 16px; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-node-index { color: #bcbcb6; background: #ffffff06; border-color: var(--neural-line); border-radius: 8px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-node::before { background: #d6d2c440; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-team-list>span { color: #cecec7; background: #ffffff05; border-color: var(--neural-line); border-radius: 9px; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-team-list small, .ares-milestone small, .ares-event-list small) { color: #999993; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-event-list { color: #b8b8b0; font-size: 14px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table td { color: #c4c4bd; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-table small { color: #979790; font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .progress-kpis small { color: #a5a59c; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .process-progress h3 { color: #d2d2ca; font-size: 17px; }
+
+/* Keep the existing native bottom dock on small screens. Compact typography
+ * leaves room for the real input, competition controls and scrollable editor. */
+@media (max-width: 1000px) {
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat { border-left: 0; border-top-color: #e3e3e31c; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading strong { font-size: 17px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-context { font-size: 12px; }
+}
+@media (max-width: 760px) {
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading { border-radius: 13px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading h1,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading h2 { font-size: 18px; line-height: 1.5; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading .ares-btn { font-size: 11px; line-height: 1.5; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading [data-save-state] { font-size: 11px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser { border-radius: 13px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser :is(input, select) { font-size: 13px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor { border-radius: 13px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading h3 { font-size: 15px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading p { font-size: 12px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading .ares-btn { font-size: 12px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading h2 { font-size: 20px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console-heading .ares-btn { font-size: 12px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-modal-head h2,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .is-nebula-detail .ares-modal-head h2 { font-size: 22px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-chat-heading .ares-btn { font-size: 12px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-native-empty h3 { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] *,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] *::before,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy][data-ares-motion=off] *,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy][data-ares-motion=off] *::before,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy][data-ares-motion=off] *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }

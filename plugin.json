@@ -1,78 +1,339 @@
 {
   "name": "ares",
-  "display_name": "Ares 超级竞赛插件",
-  "version": "1.0.0",
-  "description": "一句话生成大学生竞赛全套参赛材料：商业计划书/财务三表/路演PPT/多页HTML原型/讲稿/答辩预案/模拟评审，内置132项赛事主库与专属评审标准档案。",
+  "display_name": "ARES 竞赛项目工作台",
+  "version": "2.3.0",
+  "description": "围绕真实作品的竞赛工坊；Office/PDF实时预览、DSH原生项目助手、版本与验收、金山链接共编和可扩展子插件。保留人工与模拟数据门禁、MCP隔离。",
   "author": "TZUKWAN",
   "license": "MIT",
-  "min_platform": "任意支持 Skills 或自然语言技能触发的 Agent 平台",
+  "min_platform": "DSH原生工作台；Codex/ZCode通过本地技能与MCP适配包使用同一业务核心，Node.js>=20；可视面板依宿主MCP Apps支持。",
   "skills": [
-    {"name": "ares", "path": "skills/ares/SKILL.md", "role": "总控路由"},
-    {"name": "ares-writing-style", "path": "skills/ares-writing-style/SKILL.md", "role": "共享写作纪律"},
-    {"name": "ares-docx", "path": "skills/ares-docx/SKILL.md", "role": "Word 生产"},
-    {"name": "ares-ppt", "path": "skills/ares-ppt/SKILL.md", "role": "PPTX 程序化生成"},
-    {"name": "ares-data", "path": "skills/ares-data/SKILL.md", "role": "数据与实验数据"},
-    {"name": "ares-prototype", "path": "skills/ares-prototype/SKILL.md", "role": "多页HTML原型"},
-    {"name": "ares-judge", "path": "skills/ares-judge/SKILL.md", "role": "模拟评审与质检"},
-    {"name": "ares-entrepreneurship", "path": "skills/ares-entrepreneurship/SKILL.md", "role": "L1 创业竞赛线"},
-    {"name": "ares-modeling", "path": "skills/ares-modeling/SKILL.md", "role": "L2 理科建模线"},
-    {"name": "ares-engineering", "path": "skills/ares-engineering/SKILL.md", "role": "L3 工科作品线"},
-    {"name": "ares-business-case", "path": "skills/ares-business-case/SKILL.md", "role": "L4 商科分析线"},
-    {"name": "ares-art-design", "path": "skills/ares-art-design/SKILL.md", "role": "L5 艺术设计线"},
-    {"name": "ares-coding-contest", "path": "skills/ares-coding-contest/SKILL.md", "role": "L6 程序算法线"},
-    {"name": "ares-humanities", "path": "skills/ares-humanities/SKILL.md", "role": "E1 人文语言模块"},
-    {"name": "ares-lab-skills", "path": "skills/ares-lab-skills/SKILL.md", "role": "E2 实验技能模块"},
-    {"name": "ares-simulation", "path": "skills/ares-simulation/SKILL.md", "role": "E3 模拟经营模块"}
+    {
+      "name": "ares",
+      "path": "skills/ares/SKILL.md",
+      "role": "总控路由"
+    },
+    {
+      "name": "ares-writing-style",
+      "path": "skills/ares-writing-style/SKILL.md",
+      "role": "共享写作纪律"
+    },
+    {
+      "name": "ares-docx",
+      "path": "skills/ares-docx/SKILL.md",
+      "role": "Word 生产"
+    },
+    {
+      "name": "ares-ppt",
+      "path": "skills/ares-ppt/SKILL.md",
+      "role": "PPTX 程序化生成"
+    },
+    {
+      "name": "ares-data",
+      "path": "skills/ares-data/SKILL.md",
+      "role": "数据与实验数据"
+    },
+    {
+      "name": "ares-prototype",
+      "path": "skills/ares-prototype/SKILL.md",
+      "role": "多页HTML原型"
+    },
+    {
+      "name": "ares-judge",
+      "path": "skills/ares-judge/SKILL.md",
+      "role": "模拟评审与质检"
+    },
+    {
+      "name": "ares-entrepreneurship",
+      "path": "skills/ares-entrepreneurship/SKILL.md",
+      "role": "L1 创业竞赛线"
+    },
+    {
+      "name": "ares-modeling",
+      "path": "skills/ares-modeling/SKILL.md",
+      "role": "L2 理科建模线"
+    },
+    {
+      "name": "ares-engineering",
+      "path": "skills/ares-engineering/SKILL.md",
+      "role": "L3 工科作品线"
+    },
+    {
+      "name": "ares-business-case",
+      "path": "skills/ares-business-case/SKILL.md",
+      "role": "L4 商科分析线"
+    },
+    {
+      "name": "ares-art-design",
+      "path": "skills/ares-art-design/SKILL.md",
+      "role": "L5 艺术设计线"
+    },
+    {
+      "name": "ares-coding-contest",
+      "path": "skills/ares-coding-contest/SKILL.md",
+      "role": "L6 程序算法线"
+    },
+    {
+      "name": "ares-humanities",
+      "path": "skills/ares-humanities/SKILL.md",
+      "role": "E1 人文语言模块"
+    },
+    {
+      "name": "ares-lab-skills",
+      "path": "skills/ares-lab-skills/SKILL.md",
+      "role": "E2 实验技能模块"
+    },
+    {
+      "name": "ares-simulation",
+      "path": "skills/ares-simulation/SKILL.md",
+      "role": "E3 模拟经营模块"
+    },
+    {
+      "name": "ares-analysis",
+      "path": "skills/ares-analysis/SKILL.md",
+      "role": "按步骤加载的专业能力"
+    },
+    {
+      "name": "ares-delivery",
+      "path": "skills/ares-delivery/SKILL.md",
+      "role": "按步骤加载的专业能力"
+    },
+    {
+      "name": "ares-design-review",
+      "path": "skills/ares-design-review/SKILL.md",
+      "role": "按步骤加载的专业能力"
+    },
+    {
+      "name": "ares-evidence",
+      "path": "skills/ares-evidence/SKILL.md",
+      "role": "按步骤加载的专业能力"
+    },
+    {
+      "name": "ares-finance",
+      "path": "skills/ares-finance/SKILL.md",
+      "role": "按步骤加载的专业能力"
+    },
+    {
+      "name": "ares-intake",
+      "path": "skills/ares-intake/SKILL.md",
+      "role": "按步骤加载的专业能力"
+    },
+    {
+      "name": "ares-pitch",
+      "path": "skills/ares-pitch/SKILL.md",
+      "role": "按步骤加载的专业能力"
+    },
+    {
+      "name": "ares-problem",
+      "path": "skills/ares-problem/SKILL.md",
+      "role": "按步骤加载的专业能力"
+    },
+    {
+      "name": "ares-rules",
+      "path": "skills/ares-rules/SKILL.md",
+      "role": "按步骤加载的专业能力"
+    },
+    {
+      "name": "ares-solve",
+      "path": "skills/ares-solve/SKILL.md",
+      "role": "按步骤加载的专业能力"
+    },
+    {
+      "name": "ares-survey",
+      "path": "skills/ares-survey/SKILL.md",
+      "role": "按步骤加载的专业能力"
+    },
+    {
+      "name": "ares-validation",
+      "path": "skills/ares-validation/SKILL.md",
+      "role": "按步骤加载的专业能力"
+    }
   ],
   "commands": [
-    {"name": "ares", "path": "commands/ares.md", "role": "低上下文稳定总入口"},
-    {"name": "ares-start", "path": "commands/ares-start.md", "role": "全流程启动"},
-    {"name": "ares-bp", "path": "commands/ares-bp.md", "role": "只出商业计划书含三表"},
-    {"name": "ares-ppt", "path": "commands/ares-ppt.md", "role": "只出路演PPT"},
-    {"name": "ares-prototype", "path": "commands/ares-prototype.md", "role": "只出原型"},
-    {"name": "ares-review", "path": "commands/ares-review.md", "role": "模拟评审"},
-    {"name": "ares-sync", "path": "commands/ares-sync.md", "role": "档案变更全量同步"}
+    {
+      "name": "ares",
+      "path": "commands/ares.md",
+      "role": "低上下文稳定总入口"
+    },
+    {
+      "name": "ares-start",
+      "path": "commands/ares-start.md",
+      "role": "全流程启动"
+    },
+    {
+      "name": "ares-bp",
+      "path": "commands/ares-bp.md",
+      "role": "只出商业计划书含三表"
+    },
+    {
+      "name": "ares-ppt",
+      "path": "commands/ares-ppt.md",
+      "role": "只出路演PPT"
+    },
+    {
+      "name": "ares-prototype",
+      "path": "commands/ares-prototype.md",
+      "role": "只出原型"
+    },
+    {
+      "name": "ares-review",
+      "path": "commands/ares-review.md",
+      "role": "模拟评审"
+    },
+    {
+      "name": "ares-sync",
+      "path": "commands/ares-sync.md",
+      "role": "档案变更全量同步"
+    }
   ],
   "agents": [
-    {"name": "researcher", "path": "agents/researcher.md", "role": "调研"},
-    {"name": "writer", "path": "agents/writer.md", "role": "写作"},
-    {"name": "engineer", "path": "agents/engineer.md", "role": "开发"},
-    {"name": "analyst", "path": "agents/analyst.md", "role": "分析"},
-    {"name": "reviewer", "path": "agents/reviewer.md", "role": "评审"}
+    {
+      "name": "researcher",
+      "path": "agents/researcher.md",
+      "role": "调研"
+    },
+    {
+      "name": "writer",
+      "path": "agents/writer.md",
+      "role": "写作"
+    },
+    {
+      "name": "engineer",
+      "path": "agents/engineer.md",
+      "role": "开发"
+    },
+    {
+      "name": "analyst",
+      "path": "agents/analyst.md",
+      "role": "分析"
+    },
+    {
+      "name": "reviewer",
+      "path": "agents/reviewer.md",
+      "role": "评审"
+    }
   ],
   "hooks": [
-    {"name": "on-project-init", "path": "hooks/on-project-init.md", "role": "项目初始化建档"}
+    {
+      "name": "on-project-init",
+      "path": "hooks/on-project-init.md",
+      "role": "项目初始化建档"
+    }
   ],
   "data": [
-    {"path": "data/competitions.json", "role": "132项赛事主库"},
-    {"path": "data/tracks.json", "role": "赛道→生产线→产出物映射"},
-    {"path": "data/rubrics/", "role": "132份专属评审标准档案"}
+    {
+      "path": "data/competitions.json",
+      "role": "132项赛事主库"
+    },
+    {
+      "path": "data/tracks.json",
+      "role": "赛道→生产线→产出物映射"
+    },
+    {
+      "path": "data/rubrics/",
+      "role": "132份专属评审标准档案"
+    }
   ],
   "scripts": [
-    {"path": "scripts/validate_profile.py", "role": "project.json 完整性校验"},
-    {"path": "scripts/validate_evidence.py", "role": "来源与字段级证据校验"},
-    {"path": "skills/ares-ppt/scripts/capture_prototype.py", "role": "原型页面离线截图"},
-    {"path": "skills/ares-ppt/scripts/render_ppt.py", "role": "PowerPoint 独立渲染验收"},
-    {"path": "scripts/consistency_check.py", "role": "跨文件关键数字一致性扫描"},
-    {"path": "scripts/build_financials.py", "role": "财务三表参数化生成"},
-    {"path": "scripts/validate_rubrics.py", "role": "rubric 档案校验"},
-    {"path": "scripts/run_state.py", "role": "低上下文运行状态与断点续跑"},
-    {"path": "scripts/doctor.py", "role": "本机必需/可选能力自检"},
-    {"path": "scripts/match_competition.py", "role": "确定性赛事匹配"},
-    {"path": "scripts/smoke_low_context.py", "role": "低上下文入口与断点协议 smoke"},
-    {"path": "scripts/migrate_profile.py", "role": "旧 project.json 非破坏性迁移缺口报告"},
-    {"path": "scripts/build_evidence_request.py", "role": "评分缺口到原始材料的补交清单"},
-    {"path": "scripts/final_gate.py", "role": "交付前统一质量总闸门"},
-    {"path": "scripts/build_scorecard.py", "role": "评分点覆盖矩阵"},
-    {"path": "scripts/audit_visuals.py", "role": "Word/PPT/原型视觉覆盖审计"},
-    {"path": "scripts/ingest_material.py", "role": "本地资料导入与来源哈希"},
-    {"path": "skills/ares-docx/scripts/render_docx.py", "role": "Word 独立渲染验收"},
-    {"path": "skills/ares-prototype/scripts/smoke_prototype.py", "role": "Playwright 原型运行时冒烟"}
+    {
+      "path": "scripts/validate_profile.py",
+      "role": "project.json 完整性校验"
+    },
+    {
+      "path": "scripts/validate_evidence.py",
+      "role": "来源与字段级证据校验"
+    },
+    {
+      "path": "skills/ares-ppt/scripts/capture_prototype.py",
+      "role": "原型页面离线截图"
+    },
+    {
+      "path": "skills/ares-ppt/scripts/render_ppt.py",
+      "role": "PowerPoint 独立渲染验收"
+    },
+    {
+      "path": "scripts/consistency_check.py",
+      "role": "跨文件关键数字一致性扫描"
+    },
+    {
+      "path": "scripts/build_financials.py",
+      "role": "财务三表参数化生成"
+    },
+    {
+      "path": "scripts/validate_rubrics.py",
+      "role": "rubric 档案校验"
+    },
+    {
+      "path": "scripts/run_state.py",
+      "role": "低上下文运行状态与断点续跑"
+    },
+    {
+      "path": "scripts/doctor.py",
+      "role": "本机必需/可选能力自检"
+    },
+    {
+      "path": "scripts/match_competition.py",
+      "role": "确定性赛事匹配"
+    },
+    {
+      "path": "scripts/smoke_low_context.py",
+      "role": "低上下文入口与断点协议 smoke"
+    },
+    {
+      "path": "scripts/migrate_profile.py",
+      "role": "旧 project.json 非破坏性迁移缺口报告"
+    },
+    {
+      "path": "scripts/build_evidence_request.py",
+      "role": "评分缺口到原始材料的补交清单"
+    },
+    {
+      "path": "scripts/final_gate.py",
+      "role": "交付前统一质量总闸门"
+    },
+    {
+      "path": "scripts/build_scorecard.py",
+      "role": "评分点覆盖矩阵"
+    },
+    {
+      "path": "scripts/audit_visuals.py",
+      "role": "Word/PPT/原型视觉覆盖审计"
+    },
+    {
+      "path": "scripts/ingest_material.py",
+      "role": "本地资料导入与来源哈希"
+    },
+    {
+      "path": "skills/ares-docx/scripts/render_docx.py",
+      "role": "Word 独立渲染验收"
+    },
+    {
+      "path": "skills/ares-prototype/scripts/smoke_prototype.py",
+      "role": "Playwright 原型运行时冒烟"
+    }
   ],
   "dependencies": {
-    "python": ">=3.10",
-    "packages": ["python-docx", "python-pptx", "openpyxl", "numpy", "matplotlib"],
-    "optional_packages": ["playwright (原型运行时冒烟；需本机已有 Chrome/Edge 或 Playwright 浏览器)", "markitdown (外部 DOCX/PPTX/PDF/XLSX 资料导入增强)"],
-    "optional_mcp": ["官方 MCP Registry/Fetch 仅作为人工配置选项；默认不自动启用，需配置 URL allowlist 以避免访问内网地址"]
+    "node": ">=20",
+    "python": ">=3.10（按实际产物类型需要）",
+    "packages": [
+      "python-docx（DOCX）",
+      "python-pptx（PPTX）",
+      "openpyxl（XLSX）"
+    ],
+    "optional_packages": [
+      "playwright（交互验收）",
+      "Pillow（图像）",
+      "pypdf（PDF）",
+      "ffprobe（媒体）"
+    ],
+    "mcp": "DSH版不注册额外MCP；Codex/ZCode适配包自带项目作用域受限的ARES工具服务，模型与原生工具由当前宿主提供。"
+  },
+  "runtime": {
+    "cli": "scripts/ares.mjs",
+    "workflows": "data/workflows.json",
+    "project_state": ".ares/project.json",
+    "configuration": "<DSH_HOME>/ares-workflows.json",
+    "versions": "<DSH_HOME>/ares-versions/",
+    "default_agent_execution": "single-agent",
+    "configuration_assistant": "DSH原生专用编辑会话，无工作区选择，无自写模型请求循环"
   }
 }

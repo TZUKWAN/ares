@@ -1,0 +1,5 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';import {verifyStorageChecksum} from '../host/cloud-integrity.js';
+const bytes=Buffer.from('Actual owned software checksum fixture bytes'),digest=algorithm=>createHash(algorithm).update(bytes).digest('hex');
+test('provider checksums are matched to actual bytes and never described as downloaded bytes',()=>{const value=verifyStorageChecksum(bytes,[{type:'sha1',sum:digest('sha1')}]);assert.equal(value.verified,true);assert.equal(value.expected,digest('sha1'));assert.equal(value.rawCloudBytesDownloaded,false);});
+test('a stronger mismatched hash cannot fall back to a matching weaker hash',()=>{assert.throws(()=>verifyStorageChecksum(bytes,[{type:'sha256',sum:'0'.repeat(64)},{type:'sha1',sum:digest('sha1')}]),/不符/);});
+test('unknown, malformed or duplicate checksums cannot pass',()=>{for(const value of [[],[{type:'s2s',sum:'unknown'}],[{type:'sha1',sum:'invalid'}],[{type:'sha1',sum:digest('sha1')},{type:'sha1',sum:digest('sha1')}]])assert.throws(()=>verifyStorageChecksum(bytes,value));});

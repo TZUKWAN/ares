@@ -1,17 +1,21 @@
 {
   "name": "ares",
-  "version": "1.1.0",
+  "version": "2.3.0",
   "private": true,
-  "description": "Ares 超级竞赛插件 —— 大学生竞赛全套参赛材料生成（132项赛事主库 + 评审标准档案 + 六线三模块生产线）DeepSeek Harness bundle：16 个 runtime skill，纯 Skills + 脚本 + 数据文件，无 MCP 依赖",
+  "description": "ARES竞赛作品工坊：真实流程、实时作品预览、DSH原生助手、版本验收与金山共编",
   "type": "module",
   "main": "./index.js",
   "exports": {
     ".": "./index.js",
     "./package.json": "./package.json",
-    "./client": "./client/client.js"
+    "./client": "./client/client.js",
+    "./runtime": "./host/runtime.js",
+    "./editor-runtime": "./host/editor-runtime.js",
+    "./runtime-directory": "./host/runtime-directory.js"
   },
   "engines": {
-    "dsh": ">=0.2"
+    "dsh": ">=0.2",
+    "node": ">=20"
   },
   "license": "MIT",
   "author": "TZUKWAN",
@@ -29,12 +33,29 @@
   },
   "files": [
     "index.js",
+    "host/",
     "client/",
     "skills/",
     "data/",
     "scripts/",
+    "platforms/",
+    "docs/",
     "cordis.patch.yml",
     "locale/",
-    "assets/"
-  ]
+    "assets/",
+    "commands/",
+    "agents/",
+    "hooks/",
+    "plugin.json"
+  ],
+  "scripts": {
+    "build:forge": "node scripts/build_forge.mjs",
+    "test": "node --test tests/core.test.mjs tests/api.test.mjs",
+    "test:quality": "python -m unittest discover -s tests -p test_*.py",
+    "test:editor": "node --test tests/editor.test.mjs tests/editor-client.test.mjs",
+    "test:tools:native": "node --test tests/dsh-native-tools.integration.mjs",
+    "test:workbench": "node --test tests/project-workbench.test.mjs tests/project-extensions.test.mjs tests/recovery.test.mjs",
+    "test:client": "node --test tests/client-workbench.test.mjs",
+    "test:workshop": "node --test tests/artifact-viewer.test.mjs tests/native-session.test.mjs tests/project-session.test.mjs tests/cloud-working-draft.test.mjs tests/workshop-client.test.mjs"
+  }
 }

@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "checkedAt": "2026-11-05",
+  "profiles": [
+    {
+      "id": "innovation-main-2026",
+      "competitionId": 1,
+      "title": "创新大赛高教主赛道 · 2026参考",
+      "edition": "2026",
+      "track": "高教主赛道",
+      "workflows": [
+        "venture"
+      ],
+      "verification": "official-source-read-reference-only",
+      "sources": [
+        {
+          "id": "notice",
+          "title": "教育部2026年大赛通知",
+          "url": "https://hudong.moe.gov.cn/srcsite/A08/s5672/202607/t20260731_1445670.html",
+          "status": "read"
+        },
+        {
+          "id": "main-track",
+          "title": "2026高教主赛道方案",
+          "url": "https://hudong.moe.gov.cn/srcsite/A08/s5672/202607/W020260731408855761133.pdf",
+          "status": "read"
+        }
+      ],
+      "requirements": [
+        {
+          "id": "actual-team",
+          "label": "核对真实核心成员、项目权属与成员实质性贡献",
+          "sourceId": "notice"
+        },
+        {
+          "id": "team-size",
+          "label": "高教主赛道团队为3至15名实际核心成员",
+          "sourceId": "main-track"
+        },
+        {
+          "id": "group-eligibility",
+          "label": "按本科生或研究生、创意或创业组核对资格；创业组另核对注册、法人及持股要求",
+          "sourceId": "main-track"
+        }
+      ],
+      "unverified": [
+        "所选组别最新评审细则与分值",
+        "学校和省级提交要求"
+      ],
+      "phases": {
+        "rules": "先确定高教主赛道及具体组别，保存本届资格、权属、贡献和评审来源；不把其他赛道要求套入本组。",
+        "validation": "保留技术、需求与使用反馈的真实证据，模拟问卷只能作为预测试。",
+        "business": "区分创意与已注册创业阶段，不编造运营、营收、融资或权属事实。",
+        "pitch": "展示和计划书引用同一组已核对数据及证据，核对校省赛具体提交要求。"
+      }
+    },
+    {
+      "id": "cumcm-2026",
+      "competitionId": 5,
+      "title": "全国大学生数学建模 · 2026规范参考",
+      "edition": "2026",
+      "workflows": [
+        "modeling"
+      ],
+      "verification": "official-source-read-reference-only",
+      "sources": [
+        {
+          "id": "format",
+          "title": "2026年论文格式规范",
+          "url": "https://www.mcm.edu.cn/html_cn/node/4cd596519c9eb9fbd866398f6df0caa3.html",
+          "status": "read"
+        },
+        {
+          "id": "ai",
+          "title": "2026年AI工具使用规定",
+          "url": "https://www.mcm.edu.cn/html_cn/node/fef94648f2836ab6cc81586f4c38512b.html",
+          "status": "read"
+        }
+      ],
+      "requirements": [
+        {
+          "id": "anonymous",
+          "label": "摘要、正文、附录和支撑材料均核对身份匿名要求",
+          "sourceId": "format"
+        },
+        {
+          "id": "paper-format",
+          "label": "A4及至少2.5cm页边距；摘要原则上一页；正文不设目录且不超过30页；附录保留完整可运行程序及文件清单",
+          "sourceId": "format"
+        },
+        {
+          "id": "submission-files",
+          "label": "论文电子文件为PDF或Word且不超过20MB，电子论文从摘要开始；支撑材料单独ZIP/RAR且不超过20MB，不放承诺书及编号页；确无支撑材料时按官方规范在附录说明",
+          "sourceId": "format"
+        },
+        {
+          "id": "ai-disclosure",
+          "label": "按真实使用情况设置AI工具使用声明；使用AI时提供AI工具使用详情.pdf，核心建模与分析由参赛队主导并逐项人工核查",
+          "sourceId": "ai"
+        }
+      ],
+      "unverified": [
+        "所在赛区补充要求",
+        "本届题面及提交系统要求"
+      ],
+      "phases": {
+        "rules": "核对2026格式、AI规定、题面与所在赛区补充要求，建立本届规则快照。",
+        "solve": "完整保留可运行程序、运行参数、数据来源和实际结果，附录及支撑材料与正文一致。",
+        "paper": "按选中年份核对摘要、正文页数、匿名、页边距、引用和电子文件范围。",
+        "delivery": "核对论文与支撑包、体积、可复现程序清单及真实AI使用声明和详情；不自动代替参赛队人工核验。"
+      }
+    },
+    {
+      "id": "fwwb-2026",
+      "competitionId": 23,
+      "title": "服务外包创新创业 · 第17届参考",
+      "edition": "2026",
+      "workflows": [
+        "venture",
+        "software"
+      ],
+      "verification": "official-source-read-reference-only",
+      "sources": [
+        {
+          "id": "notice",
+          "title": "第十七届大赛组委会通知",
+          "url": "https://www.fwwb.org.cn/attached/file/20260211/20260211154941_13.pdf",
+          "status": "read"
+        },
+        {
+          "id": "manuals",
+          "title": "第17届参赛手册与赛题材料入口",
+          "url": "https://www.fwwb.org.cn/news/show/598",
+          "status": "read"
+        }
+      ],
+      "requirements": [
+        {
+          "id": "category",
+          "label": "先确认A企业命题、B创业实践、C OPC创客或D人工智能专项，按该类别和具体赛题核对提交要求",
+          "sourceId": "notice"
+        },
+        {
+          "id": "team-size",
+          "label": "团队队员最多5人、指导教师最多2人；核对团队及成员参赛资格",
+          "sourceId": "notice"
+        },
+        {
+          "id": "originality",
+          "label": "核对真实性、知识产权及往届全国赛获奖项目限制",
+          "sourceId": "notice"
+        }
+      ],
+      "unverified": [
+        "所选赛题的实际交付清单与评分细则",
+        "区域赛或决赛补充材料"
+      ],
+      "phases": {
+        "rules": "从本届官网材料入口选定真实类别、题目、企业数据及交付标准，不能把统一创业材料当作所有类别要求。",
+        "requirements": "把具体赛题要求映射为可验证功能、数据和交付项；只把官方明确要求标为必需。",
+        "test": "保存实际运行、测试与性能环境和结果，演示指标可追溯，不用模拟测试冒充实测。",
+        "presentation": "演示、技术或商业材料随所选类别适配，并与当前作品版本一起交付。"
+      }
+    },
+    {
+      "id": "software-cup-reference",
+      "competitionId": 33,
+      "title": "中国软件杯 · 当届细则待核对",
+      "edition": null,
+      "workflows": [
+        "software"
+      ],
+      "verification": "template-only-source-unreachable",
+      "sources": [
+        {
+          "id": "portal",
+          "title": "软件杯官网通知入口（本轮访问超时）",
+          "url": "https://www.cnsoftbei.com/content-74-1250-1.html",
+          "status": "unreachable"
+        }
+      ],
+      "requirements": [],
+      "unverified": [
+        "当届赛题",
+        "官方交付清单",
+        "评分与视频时长要求"
+      ],
+      "phases": {
+        "rules": "官网本轮无法读取：先取得本届赛题和提交要求原文，不把二手摘要或通用建议标成官方硬要求。",
+        "test": "通用建议：保留真实可运行代码、依赖、启动说明与测试结果；具体赛题指标仍须核对。"
+      }
+    }
+  ]
+}

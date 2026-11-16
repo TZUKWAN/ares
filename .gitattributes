@@ -1,0 +1,9 @@
+# Preserve upstream license copies and their recorded hashes on every platform.
+# Upstream trailing spaces are retained; whitespace checks still apply to code.
+assets/forge-fonts/*-LICENSE.txt -text -whitespace
+assets/neural-reference/LICENSE -text -whitespace
+assets/neural-reference/NOTICE.md -text -whitespace
+assets/neural-reference/licenses/* -text -whitespace
+platforms/shared/vendor/licenses/* -text -whitespace
+platforms/shared/vendor/*.LEGAL.txt -text -whitespace
+platforms/ui/licenses/* -text -whitespace

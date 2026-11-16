@@ -1,0 +1,31 @@
+/* Scoped management surface. The reference scene and native chat stay intact. */
+.ares-directory-manager{min-width:0;--directory-line:rgba(227,220,205,.12)}
+.directory-toolbar{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+.directory-toolbar>.ares-input{flex:1;min-width:0}
+.directory-show-removed{display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:14px;color:var(--ui-muted,#aaa79e)}
+.directory-layout{display:grid;grid-template-columns:minmax(210px,280px) minmax(0,1fr);gap:28px;min-width:0}
+.directory-competitions{display:flex;flex-direction:column;gap:20px;min-width:0;border-right:1px solid var(--directory-line);padding-right:22px}
+.directory-list{display:grid;align-content:start;gap:6px;max-height:330px;overflow:auto;scrollbar-width:thin;overscroll-behavior:contain;padding:2px}
+.directory-choice{display:grid;gap:5px;min-width:0;width:100%;padding:12px 14px;border:1px solid transparent;background:transparent;color:inherit;text-align:left;border-radius:12px;cursor:pointer;transition:background .18s,border-color .18s}
+.directory-choice span{font-size:15px;line-height:1.5;overflow-wrap:anywhere}.directory-choice small{font-size:12px;color:var(--ui-muted,#aaa79e)}
+.directory-choice:hover{background:rgba(230,222,207,.05)}.directory-choice.is-selected{border-color:rgba(194,173,137,.42);background:rgba(194,173,137,.09)}
+.directory-choice:focus-visible{outline:2px solid #c2ad89;outline-offset:2px}
+.directory-add-competition,.directory-add-track{display:grid;gap:12px;padding-top:18px;border-top:1px solid var(--directory-line)}
+.directory-add-competition h3,.directory-add-track h3,.directory-track-heading h3{margin:0;font-size:16px;line-height:1.6}
+.directory-detail{min-width:0}.directory-detail>header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px}
+.directory-detail>header h3{margin:7px 0 0;font-size:21px;line-height:1.4;overflow-wrap:anywhere}.directory-detail>header .ares-btn{flex-shrink:0}
+.directory-rename{display:flex;gap:10px;margin-bottom:28px}.directory-rename>.ares-input{flex:1;min-width:0}
+.directory-track-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}.directory-track-heading>span{color:var(--ui-muted,#aaa79e);font-size:13px}
+.directory-tracks{display:grid;gap:12px;max-height:360px;overflow:auto;scrollbar-width:thin;overscroll-behavior:contain;padding:2px 3px 16px}
+.directory-track{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:13px;background:rgba(10,10,9,.16);border:1px solid var(--directory-line);border-radius:14px}
+.directory-track>div{min-width:0}.directory-track small{display:block;margin:8px 2px 0;color:var(--ui-muted,#aaa79e);font-size:12px}.directory-track .ares-actions{flex-wrap:nowrap}.directory-track .ares-btn{min-width:48px;padding:8px 10px}
+.directory-track.is-removed{opacity:.7}.directory-add-track{margin-top:10px}.directory-add-track>div{display:flex;gap:10px}.directory-add-track select{flex:1;min-width:0}
+.directory-empty{padding:24px 12px;color:var(--ui-muted,#aaa79e);font-size:15px;line-height:1.8}
+.directory-notice{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid rgba(194,173,137,.23);background:rgba(194,173,137,.06);color:var(--ui-text,#dedbd2);padding:12px 16px;border-radius:12px;margin-bottom:16px;font-size:14px}
+.directory-footnote{font-size:13px;color:var(--ui-muted,#aaa79e);line-height:1.8;margin:22px 0 0}.ares-directory-manager[aria-busy=true]{cursor:progress}
+.ares-app.ares-system .ares-directory-manager h3{color:var(--ui-text,#e4e0d7)}
+.ares-app.ares-system .directory-detail>header h3{font-size:21px;line-height:1.45}
+.ares-app.ares-system .directory-notice{color:var(--ui-text,#e4e0d7)}
+.ares-competition-browser>.directory-manage-entry{width:100%;justify-content:center;margin:14px 0 4px}
+@media(max-width:700px){.directory-layout{grid-template-columns:minmax(0,1fr);gap:24px}.directory-competitions{border-right:0;padding-right:0}.directory-list{max-height:190px}.directory-add-competition{grid-template-columns:minmax(0,1fr) auto}.directory-add-competition h3,.directory-add-competition>.ares-label{grid-column:1/-1}.directory-add-competition>select{grid-column:1/-1}.directory-toolbar{gap:10px}.directory-show-removed{font-size:12px}.directory-detail>header h3{font-size:19px}.directory-track{gap:8px;padding:10px}.directory-track .ares-actions{gap:4px}.directory-track .ares-btn{min-width:42px;padding:8px}.directory-rename .ares-btn{padding:9px}.directory-notice{align-items:flex-start;flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){.directory-choice{transition:none}}

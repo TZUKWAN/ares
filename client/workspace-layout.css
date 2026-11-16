@@ -1,0 +1,338 @@
+/* Two clear workspaces share the existing ARES visual vocabulary.
+ * Compiled into workshop.css. Competition/track controls stay part of composing. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] {
+  --workspace-gap: 16px;
+  --workspace-rail: 248px;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button[data-action=workspace] {
+  width: 136px;
+  gap: 10px;
+  padding-inline: 18px;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-workspace {
+  position: absolute;
+  z-index: 32;
+  top: 18px;
+  left: 20px;
+  right: calc(var(--resident-chat-space) + 20px);
+  bottom: calc(var(--resident-chat-height) + var(--work-command-height) + 5px);
+  display: grid;
+  grid-template-columns: var(--workspace-rail) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--workspace-gap);
+  min-height: 0;
+  min-width: 0;
+  color: var(--ui-text);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  min-height: 80px;
+  padding: 18px 22px;
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  background: linear-gradient(125deg, #172d3c8c, #0a1520df);
+  box-shadow: inset 0 1px #dbf2ff08, 0 8px 30px #0002;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading>div:first-child {
+  flex: 1;
+  min-width: 160px;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading h1,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading h2 {
+  margin: 0;
+  color: #dcecf7;
+  font: 500 23px/1.5 var(--sys-font);
+  letter-spacing: .035em;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading p {
+  margin: 5px 0 0;
+  color: #8eabc0;
+  font-size: 13px;
+  line-height: 1.75;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading>div:first-child>span {
+  color: #85a8c0;
+  font: 10px/1.7 var(--sys-mono);
+  letter-spacing: .08em;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading>.ares-actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading [data-save-state] {
+  color: #a8c1d2;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-body {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: var(--workspace-rail) minmax(0, 1fr);
+  gap: var(--workspace-gap);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser {
+  grid-column: 1;
+  grid-row: 2;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding: 18px 16px;
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  background: linear-gradient(160deg, #11212de8, #09131fe8);
+  box-shadow: inset 0 1px #c5e8ff05;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding: 22px;
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  background: linear-gradient(145deg, #101e2af2, #09131df5);
+  box-shadow: inset 0 1px #d8efff05, 0 12px 35px #0002;
+  container-type: inline-size;
+  container-name: ares-composer;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-body>.ares-competition-browser,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-body>.ares-composer-editor {
+  grid-row: 1;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser :is(h2, h3) {
+  margin: 0 0 16px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #c7e1f0;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser .ares-field { margin-bottom: 18px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser .ares-label { font-size: 12px; margin-bottom: 8px; color: #94b0c4; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser :is(select, input) { width: 100%; min-width: 0; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser .ares-help { font-size: 12px; line-height: 1.85; color: #819fb5; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-list,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-track-list { display: grid; gap: 7px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-list>button,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-track-list>button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-height: 46px;
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #9ab8cd;
+  font: 13px/1.7 var(--sys-font);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--ui-normal), background var(--ui-normal), color var(--ui-fast);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-competition-list, .ares-track-list)>button:hover {
+  color: #d8edf9;
+  border-color: #9fc9e336;
+  background: #31536c24;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-competition-list, .ares-track-list)>button:is([aria-current], [aria-selected=true], .is-selected) {
+  border-color: #a6d6eb55;
+  background: linear-gradient(120deg, #345d745c, #17304355);
+  color: #daeffb;
+  box-shadow: inset 2px 0 #a5def1;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] :is(.ares-competition-list, .ares-track-list)>button small {
+  color: #81a1b7;
+  font-size: 11px;
+  line-height: 1.7;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-scope,
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-status {
+  padding: 0 0 18px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--ui-border);
+  font-size: 13px;
+  line-height: 1.85;
+  color: #91aec1;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-scope strong { color: #d2e6f2; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-studio {
+  display: grid;
+  grid-template-columns: minmax(300px, .95fr) minmax(340px, 1.15fr);
+  align-items: start;
+  gap: 16px;
+  min-width: 0;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-flow-map {
+  width: 100%;
+  min-width: 0;
+  height: 560px;
+  min-height: 320px;
+  max-height: calc(100dvh - 280px);
+  margin: 0;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-flow-viewport { min-height: 0; height: 100%; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-editor {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  background: #0d1924a3;
+  border: 1px solid var(--ui-border);
+  border-radius: 10px;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-editor-head {
+  padding: 17px 18px;
+  gap: 12px;
+  border-bottom: 1px solid var(--ui-border);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-editor-head h2 { font-size: 20px; line-height: 1.55; font-weight: 500; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-editor-head span { font-size: 12px; color: #8ea9bd; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-tabs { padding-inline: 18px; gap: 16px; border-bottom-color: var(--ui-border); }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-tabs>button { padding: 13px 0; font-size: 13px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-editor-body { padding: 20px 18px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-step-list { border-radius: 10px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 18px;
+  margin-bottom: 17px;
+  border-bottom: 1px solid var(--ui-border);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading h3 { margin: 0; font-size: 17px; font-weight: 500; line-height: 1.7; color: #cae3f2; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading p { margin: 5px 0 0; font-size: 12px; line-height: 1.8; color: #8eabc0; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading>.ares-actions { display: flex; gap: 7px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-empty {
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 30px;
+  color: #8eacc1;
+  font-size: 14px;
+  line-height: 1.9;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-empty h2 { color: #d2e7f4; font-size: 22px; font-weight: 500; margin: 0; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-catalog-toggle { display: none; }
+
+/* A lightweight project picker follows the project identity rather than a third
+ * primary workspace. Its button and content remain ordinary native controls. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-project-switcher {
+  position: absolute;
+  z-index: 45;
+  top: 84px;
+  left: 24px;
+  width: min(470px, calc(100% - var(--resident-chat-space) - 48px));
+  max-height: calc(100% - var(--resident-chat-height) - var(--work-command-height) - 110px);
+  overflow: auto;
+  padding: 18px;
+  border: 1px solid #a0cfe844;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #152838f7, #0a1521fa);
+  box-shadow: 0 18px 60px #0006, inset 0 1px #d6efff09;
+  backdrop-filter: blur(18px);
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-project-switcher .competition-project-search { margin-bottom: 14px; flex-wrap: wrap; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-project-switcher .competition-project-search>.ares-input { flex-basis: 100%; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-project-switcher .galaxy-project-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-project-switcher .competition-project-choice { margin-bottom: 0; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-project-switcher .competition-project-choice .galaxy-project-choice { padding: 12px 8px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-project-switcher .competition-project-choice .galaxy-project-choice strong { font-size: 15px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-project-switcher .competition-project-choice .galaxy-project-choice span { font-size: 12px; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-project-switcher .competition-project-import { margin-top: 16px; }
+
+@container ares-composer (max-width: 820px) {
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-studio { grid-template-columns: minmax(0, 1fr); }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-flow-map { grid-column: 1 !important; grid-row: 1 !important; height: 330px !important; max-height: none !important; min-height: 280px !important; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-editor { grid-column: 1 !important; grid-row: 2 !important; }
+}
+@media (max-width: 1400px) {
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] { --workspace-rail: 218px; --workspace-gap: 12px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-workspace { left: 16px; right: calc(var(--resident-chat-space) + 16px); top: 16px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading { padding: 16px 18px; gap: 12px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor { padding: 17px; }
+}
+@media (max-width: 1000px) {
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] { --workspace-rail: 210px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-workspace { top: 12px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading { min-height: 67px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading h1,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading h2 { font-size: 21px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading p { font-size: 12px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-flow-map { height: 300px !important; min-height: 260px !important; }
+}
+@media (max-width: 760px) {
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] { --workspace-gap: 10px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-workspace {
+    top: 9px; left: 9px; right: 9px;
+    bottom: calc(var(--resident-chat-height) + var(--work-command-height) + 2px);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr);
+  }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading { grid-column: 1; grid-row: 1; padding: 14px; gap: 10px; border-radius: 10px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading>div:first-child { min-width: 0; flex-basis: 100%; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading>div:first-child>span { display: none; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading p { display: none; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading>.ares-actions { flex-wrap: wrap; gap: 6px; width: 100%; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading [data-save-state] { width: 100%; font-size: 11px; line-height: 1.6; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading h1,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading h2 { font-size: 17px; line-height: 1.55; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-heading .ares-btn { font-size: 11px; min-height: 33px; padding: 8px 7px; gap: 5px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser { grid-column: 1; grid-row: 2; max-height: 152px; padding: 10px; border-radius: 10px; display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 8px; align-items: center; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser :is(h2, h3) { margin-bottom: 10px; font-size: 14px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser .ares-field { margin-bottom: 10px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser .ares-field:last-child { margin-bottom: 0; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser>label:first-child { display: none; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser>[data-search=composer] { grid-column: 1 / -1; grid-row: 1; min-height: 35px; padding: 7px 10px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser>label[for=ares-composer-competition] { grid-column: 1; grid-row: 2; margin: 0; font-size: 11px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser>[data-composer-competition] { grid-column: 2; grid-row: 2; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser>label[for=ares-composer-track] { grid-column: 1; grid-row: 3; margin: 0; font-size: 11px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser>[data-composer-track] { grid-column: 2; grid-row: 3; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser>details,
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser>.ares-help { grid-column: 1 / -1; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-competition-browser select { min-height: 35px; padding: 7px 10px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor { grid-column: 1; grid-row: 3; padding: 12px; border-radius: 10px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-body { grid-column: 1; grid-row: 2 / 4; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-body>.ares-composer-editor { grid-row: 2; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-flow-map { height: 250px !important; min-height: 240px !important; max-height: none !important; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-editor-head { padding: 14px; flex-wrap: wrap; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-editor-head h2 { font-size: 18px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-editor-body { padding: 16px 14px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-editor .ares-tabs { padding-inline: 14px; gap: 14px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading { padding-bottom: 12px; margin-bottom: 13px; gap: 8px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading h3 { font-size: 14px; line-height: 1.7; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading p { font-size: 11px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-flow-heading .ares-btn { font-size: 12px; min-height: 31px; padding: 7px 9px; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-composer-catalog-toggle { display: inline-flex; }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-project-switcher { left: 10px; right: 10px; width: auto; top: 100px; padding: 14px; max-height: calc(100% - var(--resident-chat-height) - var(--work-command-height) - 120px); }
+  .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-commandbar .galaxy-nav>button[data-action=workspace] { width: 132px; padding-inline: 12px; font-size: 14px; }
+}
