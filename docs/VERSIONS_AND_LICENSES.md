@@ -6,6 +6,7 @@
 | 便携包和 MCP 适配器 | `2.4.0` | `platforms/packaging/`、MCP server 的跨平台适配发布线；共用当前主产品源码 |
 | FORGE 客户端 | 构建输入 SHA256 | 当前 20 模块、3 字体、4 份原媒体；由 `build_forge.mjs` 输出 SHA256 |
 | 便携页面 | `platforms/ui/build-receipt.json` | 固定输入、SDK、实际 HTML 与四份外置媒体 SHA256 |
+| 新版内部验收报告 | `schema_version: 3.0` / `verificationRevision: 2` | 结构版本和门禁实现修订分别核对；旧实现不作为新验收依据 |
 | 每份安装包 | `PACKAGE_FILES.json` 和 ZIP SHA256 | 包中每个实际文件的指纹；不能只用 `2.4.0` 判定两个工作分支包内容相同 |
 | 参考动画 | 固定提交 `769d690fa1c06d985926d8f16772d15514b718e1` | 原来源、许可与旧版本例外分别保留；本轮没有替换原媒体或重写动画引擎 |
 
