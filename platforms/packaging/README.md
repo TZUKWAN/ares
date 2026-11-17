@@ -15,7 +15,7 @@ codex plugin add ares@ares-local-codex
 
 ZCode：解压对应ZIP，在“设置→插件→创建→添加插件市场”中选择解压的`ares`目录或其中`.zcode-plugin/marketplace.json`，安装ARES。本地桌面工作区可打开ARES侧栏面板。
 
-新会话中使用ARES技能或直接说明竞赛目标。Codex以技能和真实工具为稳定入口；自定义MCP Apps页面依宿主支持，不能把协议验证理解为Codex已具备DSH的嵌入会话界面。插件不替换宿主的原生聊天窗口。
+新会话中使用ARES技能或直接说明竞赛目标。本轮实际 Codex CLI 0.154.0 在任务专属配置目录完成安装，真实 app-server 初始化发现 10 个工具和 22 个资源，并读回工作台资源及技能；未创建聊天或调用模型。ZCode 本机未安装，真实桌面使用仍待验收。Codex以技能和真实工具为稳定入口；自定义MCP Apps页面依宿主支持，不能把协议验证理解为Codex已具备DSH的嵌入会话界面。插件不替换宿主的原生聊天窗口。
 
 ## 开始使用
 
@@ -40,3 +40,10 @@ node scripts/ares-local.mjs --host codex --root "已授权项目绝对路径" --
 `PACKAGE_FILES.json`记录包内真实文件SHA。`PORTABLE_NOTICES.md`与`assets/neural-reference/`保留动画素材许可；`platforms/shared/vendor/`、`platforms/ui/licenses/`保留官方SDK和依赖许可。原神经动画媒体保持原字节，经固定分片资源传入页面，页面不连接外部资源域名。
 
 本包用于本地私有安装；没有公开发布。参考媒体含非商用许可及记录的旧版MIT例外，不能把整个组合包描述为无条件商用MIT。
+
+
+## 本轮启动兼容性修复
+
+Codex MCP 配置使用 `cwd: "."` 和 `scripts/ares-mcp.mjs`。宿主会把相对 cwd 解析为安装根目录；不要改成 `${PLUGIN_ROOT}`，当前实测 MCP 读取器不会替换它，会报目录名称无效。Hook 环境变量的支持不等于 MCP 配置支持相同替换。源码依据和实际失败/修复记录见 [系统审查报告](../../docs/SYSTEM_AUDIT_20261118.md)。
+
+两套包的版本 2.4.0 是便携适配发布线，共用根产品 2.3.0 业务代码；具体工作分支内容按 `PACKAGE_FILES.json`、构建收据和 ZIP SHA256 核对，不以版本字符串代替逐文件一致性。

@@ -1,4 +1,4 @@
-import './helpers/environment.mjs';
+import {sceneBrowserArgs} from './helpers/environment.mjs';
 /** Regression for already-running hosts whose route table predates FORGE. */
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
@@ -15,7 +15,7 @@ process.env.ARES_HOME=join(base,'owned-home');const projectRoot=join(base,'proje
 initializeProject({root:projectRoot,name:'模块加载软件回归（非竞赛成果）',competitionId:5,track:competitionCatalog().find(row=>row.id===5).tracks[0].track,workflowId:'modeling'});
 const api=directRoutes(),origin='http://127.0.0.1:64324',errors=[],unexpected=[],resources=[];
 const {chromium}=createRequire(import.meta.url)(process.env.ARES_PLAYWRIGHT_PACKAGE);let browser;
-before(async()=>{browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});});
+before(async()=>{browser=await chromium.launch({headless:true,args:sceneBrowserArgs});});
 after(async()=>{api.dispose();await browser?.close();});
 
 test('full ARES starts using only the already-registered routes, with new renderer, font and media routes absent',async()=>{

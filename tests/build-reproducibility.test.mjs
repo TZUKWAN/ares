@@ -31,3 +31,14 @@ test('portable page, dependency notices and build receipt verify from an unrelat
  assert.equal(result.error,undefined);assert.equal(result.status,0,(result.stderr||result.stdout).slice(-2000));
  const receipt=JSON.parse(result.stdout);assert.equal(receipt.mode,'verified');assert.equal(receipt.mediaAreSeparateBoundedResources,true);
 });
+
+test('a broken separately served application entry fails the real builder before overwriting any generated resource',()=>{
+ const base=mkdtempSync(join(process.env.ARES_TEST_ROOT||tmpdir(),'ares-build-syntax-'));mkdirSync(join(base,'scripts'));mkdirSync(join(base,'client'));
+ copyFileSync(join(root,'scripts/build_forge.mjs'),join(base,'scripts/build_forge.mjs'));
+ writeFileSync(join(base,'client/app.js'),'export function intentionallyBroken(');
+ const previous='Explicit pre-existing output marker, not a generated build.';
+ for(const name of ['workshop-scene.js','workshop.css'])writeFileSync(join(base,'client',name),previous);
+ const result=spawnSync(process.execPath,[join(base,'scripts/build_forge.mjs')],{encoding:'utf8',windowsHide:true,timeout:10000,maxBuffer:65536});
+ assert.notEqual(result.status,0);assert.match(result.stderr,/Client JS syntax check failed: app\.js/);
+ for(const name of ['workshop-scene.js','workshop.css'])assert.equal(readFileSync(join(base,'client',name),'utf8'),previous);
+});

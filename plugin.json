@@ -4,7 +4,7 @@
   "version": "2.3.0",
   "description": "围绕真实作品的竞赛工坊；Office/PDF实时预览、DSH原生项目助手、版本与验收、金山链接共编和可扩展子插件。保留人工与模拟数据门禁、MCP隔离。",
   "author": "TZUKWAN",
-  "license": "MIT",
+  "license": "SEE LICENSE IN THIRD_PARTY_NOTICES.md",
   "min_platform": "DSH原生工作台；Codex/ZCode通过本地技能与MCP适配包使用同一业务核心，Node.js>=20；可视面板依宿主MCP Apps支持。",
   "skills": [
     {

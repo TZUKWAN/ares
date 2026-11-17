@@ -1,4 +1,4 @@
-import './helpers/environment.mjs';
+import {sceneBrowserArgs} from './helpers/environment.mjs';
 /** Actual client/client.js, React portals, app.js, editor-session.js and real
  * production editor routes/storage. DSH create/retain/provider/input services are
  * explicit metadata/transport boundary fixtures. No model prompt is sent. */
@@ -56,7 +56,7 @@ const editor=createEditorWorkspace(ctx,native),server=createRoutes(ctx,native,ed
 const origin='http://127.0.0.1:64351',errors=[],external=[],requests=[];
 const runtime=reactBrowserRuntime(process.env.ARES_REACT_TEST_MODULES),surface=nativeThemeSurface(process.env.ARES_NATIVE_CONVERSATION_SOURCE);
 const {chromium}=createRequire(import.meta.url)(process.env.ARES_PLAYWRIGHT_PACKAGE);let browser;
-before(async()=>browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']}));
+before(async()=>browser=await chromium.launch({headless:true,args:sceneBrowserArgs}));
 after(async()=>{server.dispose();nodeService.dispose();editor.dispose();await browser?.close();});
 
 async function productionRequest(path,data,headers){

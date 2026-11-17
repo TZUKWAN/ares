@@ -1,4 +1,4 @@
-import './helpers/environment.mjs';
+import {sceneBrowserArgs} from './helpers/environment.mjs';
 /** Actual ARES UI, project binding and handlers. A browser lease/webview adapter
  * and remote document are explicit protocol fixtures, not an online cloud test. */
 import {test, before, after} from 'node:test';
@@ -24,7 +24,7 @@ const original=readFileSync(join(root,'.ares/project.json'));
 const api=directRoutes(),origin='http://127.0.0.1:64349';
 const {chromium}=createRequire(import.meta.url)(process.env.ARES_PLAYWRIGHT_PACKAGE);
 let browser;
-before(async()=>browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']}));
+before(async()=>browser=await chromium.launch({headless:true,args:sceneBrowserArgs}));
 after(async()=>{api.dispose();await browser?.close();});
 
 // Same DSH approved lease contract as cloud-viewport.test.mjs. Chromium has no

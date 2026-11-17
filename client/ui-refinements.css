@@ -258,3 +258,9 @@
   max-width: 100%;
   white-space: normal;
 }
+/* The report groups actual blockers by step; detailed hashes remain optional. */
+.ares-verification .ares-verification-issues{list-style:none;padding:0;margin:14px 0}
+.ares-verification .ares-check-row{gap:14px;align-items:center}.ares-verification .ares-check-row>div{flex:1;min-width:0}
+.ares-verification .ares-check-row p{margin:6px 0 0;overflow-wrap:anywhere}.ares-verification .ares-check-row>.ares-btn{flex:none}
+.ares-verification h3{font-size:16px;color:#dedbd0}.ares-verification .ares-milestone strong{font-size:17px}
+.ares-verification code,.ares-verification pre{overflow-wrap:anywhere;white-space:pre-wrap;word-break:break-word}

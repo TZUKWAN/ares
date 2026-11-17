@@ -69,10 +69,12 @@ function manifestLaunch(packageRoot,host,projectRoot,dataHome){
  const manifest=readJson(join(packageRoot,'.'+host+'-plugin','plugin.json'));
  const servers=typeof manifest.mcpServers==='string'?readJson(resolve(packageRoot,manifest.mcpServers)).mcpServers:manifest.mcpServers;
  assert.ok(servers?.ares);const config=servers.ares;
- const variables={PLUGIN_ROOT:packageRoot,ZCODE_PLUGIN_ROOT:packageRoot,ZCODE_PROJECT_DIR:projectRoot,ZCODE_PLUGIN_DATA:dataHome};
+ const variables={ZCODE_PLUGIN_ROOT:packageRoot,ZCODE_PROJECT_DIR:projectRoot,ZCODE_PLUGIN_DATA:dataHome};
  function expand(value){assert.equal(typeof value,'string');const result=value.replace(/\$\{([^}]+)\}/g,(_match,key)=>{assert.ok(Object.hasOwn(variables,key),'Unknown manifest placeholder '+key);return variables[key];});assert.equal(/\$\{/.test(result),false);return result;}
- const launch={command:expand(config.command),args:config.args.map(expand),cwd:expand(config.cwd),env:Object.fromEntries(Object.entries(config.env||{}).map(([key,value])=>[key,expand(value)]))};
- assert.equal(canonical(launch.args[0]),canonical(join(packageRoot,'scripts/ares-mcp.mjs')));
+ // Codex resolves a relative configured cwd against the installed plugin root.
+ // Do not invent a PLUGIN_ROOT expansion that the actual MCP loader never does.
+ const launch={command:expand(config.command),args:config.args.map(expand),cwd:resolve(packageRoot,expand(config.cwd)),env:Object.fromEntries(Object.entries(config.env||{}).map(([key,value])=>[key,expand(value)]))};
+ assert.equal(canonical(resolve(launch.cwd,launch.args[0])),canonical(join(packageRoot,'scripts/ares-mcp.mjs')));
  assert.equal(canonical(launch.cwd),canonical(host==='codex'?packageRoot:projectRoot));
  return {manifest,launch};
 }

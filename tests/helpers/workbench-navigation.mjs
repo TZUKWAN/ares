@@ -42,6 +42,7 @@ export async function refresh(page){
 }
 export async function selectStage(page,id){
  await workspace(page,'projects');
+ await page.locator('.ares-ui-pending').waitFor({state:'hidden'});
  const label=page.locator('.reference-stage-actors .process-step[data-id="'+id+'"]');
  if(!await label.isVisible()){
   const previous=page.getByRole('button',{name:'上一组阶段',exact:true});
@@ -51,7 +52,7 @@ export async function selectStage(page,id){
  }
  // The reference nodes keep moving. Keyboard activation exercises the real
  // accessible button without bypassing hit-testing or waiting for a still node.
- await label.focus();await page.keyboard.press('Enter');
+ await label.press('Enter');
  await page.locator('[data-neural-focus]').waitFor({state:'visible'});
 }
 export async function nodeDetails(page,id){
@@ -61,6 +62,6 @@ export async function nodeDetails(page,id){
 }
 export async function selectArtifact(page,stepId,artifactId){
  await selectStage(page,stepId);
- await page.locator('.neural-output[data-id="'+artifactId+'"]').filter({visible:true}).focus();await page.keyboard.press('Enter');
+ await page.locator('.neural-output[data-id="'+artifactId+'"]').filter({visible:true}).press('Enter');
  await page.locator('.work-artifact').waitFor({state:'visible'});
 }

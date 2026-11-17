@@ -16,7 +16,7 @@ function descendants(directory){const values=[];for(const row of readdirSync(dir
 const common=new Map();
 for(const directory of ['host','client','assets','data','skills','scripts','platforms/shared','platforms/ui','platforms/ui-tools','platforms/packaging','platforms/skills'])for(const path of descendants(join(source,directory))){const name=relative(source,path).replaceAll('\\','/');if(name.endsWith('.test.mjs'))continue;common.set(name,readFileSync(path));}
 for(const path of ['platforms/ui-server.mjs'])common.set(path,readFileSync(join(source,path)));
-for(const path of ['LICENSE','LICENSE.md','LICENSE.txt'])if(existsSync(join(source,path)))common.set(path,readFileSync(join(source,path)));
+for(const path of ['LICENSE','LICENSE.md','LICENSE.txt','THIRD_PARTY_NOTICES.md'])if(existsSync(join(source,path)))common.set(path,readFileSync(join(source,path)));
 common.set('skills/ares/SKILL.md',readFileSync(join(source,'platforms/skills/ares/SKILL.md')));
 common.set('README.md',readFileSync(join(source,'platforms/packaging/README.md')));
 common.set('package.json',Buffer.from(JSON.stringify({name:'ares-portable',version:'2.4.0',private:true,type:'module',engines:{node:'>=20'}},null,2)+'\n'));

@@ -17,7 +17,7 @@
     "dsh": ">=0.2",
     "node": ">=20"
   },
-  "license": "MIT",
+  "license": "SEE LICENSE IN THIRD_PARTY_NOTICES.md",
   "author": "TZUKWAN",
   "dsh": {
     "bundle": {
@@ -46,7 +46,9 @@
     "commands/",
     "agents/",
     "hooks/",
-    "plugin.json"
+    "plugin.json",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
   ],
   "scripts": {
     "build:forge": "node scripts/build_forge.mjs",

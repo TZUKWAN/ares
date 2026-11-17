@@ -1218,6 +1218,14 @@ body[data-ds-dark-theme] .ares-app,.ares-app[data-theme=dark]{--a-bg:#15191d;--a
 .reference-project-dock { position:absolute; z-index:4; bottom:42px; left:50%; transform:translateX(-50%); width:min(560px,90%); padding:15px 20px 13px; display:grid; grid-template-columns:repeat(4,1fr); gap:12px; border:1px solid #d5d7c31c; border-radius:18px; background:linear-gradient(135deg,#30332d55,#171b16bb); box-shadow:0 10px 50px #0003,inset 0 1px #fff1; backdrop-filter:blur(16px); }
 .reference-project-dock div { display:grid; gap:4px; padding-left:12px; border-left:1px solid #e3dcc51b; }.reference-project-dock div:first-child{padding-left:0;border:0}
 .reference-project-dock span { font-size:11px; color:#90998a; }.reference-project-dock strong{font:400 21px var(--ff-mono);color:#e2e3d3}.reference-project-dock p{grid-column:1/-1;margin:2px 0 0;color:#979f8d;font-size:12px;text-align:center}
+/* The reference orbit remains unchanged. The ARES progress summary fits the
+ * clear central gap instead of covering the two lower phase labels. */
+@container ares-work-scene (min-width:761px) and (max-width:1000px) {
+ .reference-project-dock{width:320px;padding:12px 14px;gap:8px}
+ .reference-project-dock span{font-size:10px;white-space:nowrap}
+ .reference-project-dock div{padding-left:8px}
+ .reference-project-dock p{font-size:11px}
+}
 .neural-roster { position:absolute; z-index:4; bottom:2px; left:0; right:0; display:flex; justify-content:center; gap:7px; overflow:auto; pointer-events:none; }
 .neural-person { display:flex; align-items:center; gap:6px; padding:4px 8px 4px 4px; border:1px solid #d5d8be1a; border-radius:40px; background:#262d1e50; font:11px var(--sys-font); color:#aab297; cursor:pointer; white-space:nowrap; }
 .neural-person i{font-style:normal;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#acbb8117;color:#cdd4bd}
@@ -2017,6 +2025,12 @@ body[data-ds-dark-theme] .ares-app,.ares-app[data-theme=dark]{--a-bg:#15191d;--a
   max-width: 100%;
   white-space: normal;
 }
+/* The report groups actual blockers by step; detailed hashes remain optional. */
+.ares-verification .ares-verification-issues{list-style:none;padding:0;margin:14px 0}
+.ares-verification .ares-check-row{gap:14px;align-items:center}.ares-verification .ares-check-row>div{flex:1;min-width:0}
+.ares-verification .ares-check-row p{margin:6px 0 0;overflow-wrap:anywhere}.ares-verification .ares-check-row>.ares-btn{flex:none}
+.ares-verification h3{font-size:16px;color:#dedbd0}.ares-verification .ares-milestone strong{font-size:17px}
+.ares-verification code,.ares-verification pre{overflow-wrap:anywhere;white-space:pre-wrap;word-break:break-word}
 
 /* Container-responsive editing surface only; the reference scene is untouched. */
 .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-studio[data-flow-layout] {

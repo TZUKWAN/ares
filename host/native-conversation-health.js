@@ -1,3 +1,4 @@
+import {samePath} from './path-identity.js';
 /** Auto approval must see a genuine DSH-owned conversation and pending action.
  * This module submits one bounded owner request through SessionController. It
  * never writes request headers, assistant messages, steps or tool-call events.
@@ -12,7 +13,7 @@ export const healthJobSucceeded=job=>job?.status==='completed'&&/^exit code: 0(?
 export function healthJobSnapshot(value,id){if(!value||value.id!==id||!['running','stopping','completed','failed','killed'].includes(value.status))throw new AresError('原生任务观察未返回对应的实际任务，未猜测完成状态',502);return value;}
 const texts=value=>(value?.content||[]).filter(row=>row.type==='text').map(row=>row.text).join('\n');
 const args=value=>{try{return typeof value==='string'?JSON.parse(value):value;}catch{return null;}};
-const samePath=(left,right)=>typeof left==='string'&&resolve(left).toLowerCase()===resolve(right).toLowerCase();
+
 
 export function healthConversationPlan(root,id=randomUUID()){
  const nonce='ARES_HEALTH_'+id,challenge='ARES_READ_'+randomUUID(),marker='ARES_SUM_'+randomUUID()+'|',values=[7,11,17],sum=values.reduce((a,b)=>a+b,0),file=safePath(root,'.ares-healthcheck/'+id+'/marker.txt'),content=challenge+'\n';
