@@ -162,7 +162,517 @@
       "authority": "C"
     }
   ],
-  "confidence": "medium",
+  "confidence": "low",
   "last_updated": "2026-09-28",
-  "notes": "赛事全称'全国大学生化学实验邀请赛'，由教育部高等学校化学教育研究中心主办、高水平高校轮流承办，1998年创办、每两年一届（一般在7月），被称为我国高等学校化学学科最高级别赛事之一。选手经组委会网上抽签产生（每校3名化学类三年级学生），赛制为实验理论笔试+实验操作竞赛（无机、有机综合实验）。官方未公开笔试与操作的总分合成比例，各维度权重为依据赛程环节及历届单项实验评分表（实验A满分50分，含纯度、折光率指标）所作推断并已标注【推断】；定性安全维度不计入百分比权重，其余权重加总约100%。"
+  "notes": "赛事全称'全国大学生化学实验邀请赛'，由教育部高等学校化学教育研究中心主办、高水平高校轮流承办，1998年创办、每两年一届（一般在7月），被称为我国高等学校化学学科最高级别赛事之一。选手经组委会网上抽签产生（每校3名化学类三年级学生），赛制为实验理论笔试+实验操作竞赛（无机、有机综合实验）。官方未公开笔试与操作的总分合成比例，各维度权重为依据赛程环节及历届单项实验评分表（实验A满分50分，含纯度、折光率指标）所作推断并已标注【推断】；定性安全维度不计入百分比权重，其余权重加总约100%。",
+  "provenance": {
+    "schemaVersion": 1,
+    "assessedAt": "2026-11-18",
+    "method": "field-inventory-and-source-status-audit; no original-clause verification",
+    "legacyConfidence": "medium",
+    "scope": {
+      "competitionId": 113,
+      "edition": null,
+      "tracks": [],
+      "groups": []
+    },
+    "ruleVersion": "2026-09-28",
+    "sourceChecks": [
+      {
+        "id": "source-1",
+        "urlSha256": "4718bfe1aaa4fd3aad940bf670081531be5366a25eb2a07eb72cc1a4c5e832f7",
+        "locatorKind": "document",
+        "state": "unverified"
+      },
+      {
+        "id": "source-2",
+        "urlSha256": "b24c587dace22e1b0f6eafc481ee516b5ec9b368f10727e93a23216c79505b0e",
+        "locatorKind": "document",
+        "state": "unverified"
+      },
+      {
+        "id": "source-3",
+        "urlSha256": "beb0bedcbe9760a390a674d7d962a1d2234ce0fc83044c112a593859f8459607",
+        "locatorKind": "homepage",
+        "state": "unverified"
+      },
+      {
+        "id": "source-4",
+        "urlSha256": "49a2b6a3ca59dca898f4321e65d3af64b83ef0901ecaa2769bc4e98dd339e7c6",
+        "locatorKind": "homepage",
+        "state": "unverified"
+      },
+      {
+        "id": "source-5",
+        "urlSha256": "960746672f311f4d2dec6a238bd85503b17c676519fa31044e6d4b2a3d948307",
+        "locatorKind": "document",
+        "state": "unverified"
+      },
+      {
+        "id": "source-6",
+        "urlSha256": "cf6265d1eed91c560d9252cfebbf1076db539cf35bdea38f98b87873252824d7",
+        "locatorKind": "document",
+        "state": "unverified"
+      }
+    ],
+    "fields": {
+      "/competition_name": {
+        "sha256": "cace707e17c929e85b7cc459ed7366b2f917fd499508715239fb4dcbb8ff8097",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/dimension": {
+        "sha256": "e1a9a1274e89357afe56996f47fd6e0c67f05f46e402f73690650d894c54470f",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/weight": {
+        "sha256": "ec05e59be204962028b973bb22e937bed901537b01bc905f25f438e8b0a06df5",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/official_wording": {
+        "sha256": "616425ee0e8b4c5e53d03ec1d712fad619979a6cb305ec2eed3b54d458402cef",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/0": {
+        "sha256": "66b85bcbd410445d93034ca7570ad24c2fe538afb840679ca715559d47f96a5a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/1": {
+        "sha256": "d724905d317ea3c1d3b254ac4c49aa8b18fceb7529dff35baa42a5a3c37a27b2",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/2": {
+        "sha256": "a2462ef731f71ee3ab6f87db4487082fac74b8dbe6886f00e5d9db1c3135c174",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/3": {
+        "sha256": "8c3ebb60d5a8cb926d7e323130a3cbd8a203ac80865dff51e9177f0ac0108df7",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/0": {
+        "sha256": "58d386c8390991a60c7c1a8691ff418789ada44f7f71d212c5a202009f461b8f",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/1": {
+        "sha256": "3811a6795f1fbc00267674f07d7b10e55c66571ecfb6a24acde2cf88d86dd0ec",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/2": {
+        "sha256": "6678d83169b9801edbb35ed7e3a1bc6bacf4aa029499b14aafe1eadf3638fba4",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/dimension": {
+        "sha256": "3f0c0f8a5cf46fb9ee29abedd950415c546bc1c08367c966d573bc13fbc33067",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/weight": {
+        "sha256": "158b1ba82bec230f72313330c94b0eecb166ae8937d372d1337deac155ed591e",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/official_wording": {
+        "sha256": "2b7859fd989773ac6a008f42556683ec326f6bfce264129c4abd2ca0e4dd56e2",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/0": {
+        "sha256": "2c684a83fa9bc3a5135e3d482407ec2ed0d213b985b6b66aa022f8eeead21df5",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/1": {
+        "sha256": "bbee504aca9624e5b2426cc43f0b28f059855def427be9f8e3b4189eca88cddd",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/2": {
+        "sha256": "8247489bb1b8d094671d5337211798e65163056163b0b195fe39346e39db2feb",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/3": {
+        "sha256": "3d767d334209bc1fc0bcec8a5435dc0504492e070e37bd449f551db6430d80e5",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/0": {
+        "sha256": "67bcdb9383430daebc36904c2facd550b7235b4fa93f269f2a2f6f65576aa99b",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/1": {
+        "sha256": "3294e65ad8da7fa6afb20cdb56819907af169e258eeb4f9c5736cda65d53ec51",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/2": {
+        "sha256": "4cad1a5c742f6907e1760b30a11c65a7fdb9a0a6c1111f19eabfcf593b90fc04",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/dimension": {
+        "sha256": "970c99d5b7dadd7a0bae23fb20d4d3f309e3c2032e4d12c3614b49b921ce230a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/weight": {
+        "sha256": "ed8cb9301f12abca60871ee293165b9e9ae42bb98fb112e82ced94aa374fba7c",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/official_wording": {
+        "sha256": "ce3f8bbf89dd0882a1b12bed9268dfde49a40210ac94462de487a57949e357dd",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/0": {
+        "sha256": "1c3dbc645adb708171622a6a626a1f91a51ebd69e366b54a186be1bcbe335048",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/1": {
+        "sha256": "1132bfe2fe87ad44101baec2645f732bd651b7982e1687800c2e56fb83ad5fab",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/2": {
+        "sha256": "20f74fd045c3b0b51e01626ccb5f81540898a9119bb63cb33c780b5b38bdec7c",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/3": {
+        "sha256": "871d494c0bb553dbb2d402f0066ad7e865132ab29926d902ed66c3d87c69e6e7",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/0": {
+        "sha256": "05be69601d1ea734c92fed32d5b03c6b0fd8c42c068bf783544ee094c4433cde",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/1": {
+        "sha256": "991e745c95d562caec9e482b7fabdafcbcfd69d3c7c514215c4a67ba89fb557b",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/2": {
+        "sha256": "6fef80c4cc14550fdc189b98a0dea53316b46218c476d7ead467484fc0931148",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/dimension": {
+        "sha256": "fe48dfa74b70d1f430a609bec4d141f1170fc9bf05737dce667791d875869c5f",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/weight": {
+        "sha256": "c07a8937cb2d981d45cb7ad6620f7031d52126e8315afd5ecbb4db06f166f0d9",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/official_wording": {
+        "sha256": "9236e55e3f0877a120dee391dfbb603b5bfb0ac1aa3718a2606bf2515210438c",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/0": {
+        "sha256": "bc4e45e19fac3d4904b428323f0fe3f4c282c5b3167c5ac1f348b18ff1901cfc",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/1": {
+        "sha256": "b69bdb476ddbd7cc801647edcc60d718b34894953c04f4603aafdfda3fef9cc2",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/2": {
+        "sha256": "0018a341f2d889527b812fc1f39d763ea9785088ad621a98d88c0cbc07e791c2",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/0": {
+        "sha256": "da2e679f2ba8c515e380813dbce8bb0a9ffdc6c938caf7987ef0d101fd9828c2",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/1": {
+        "sha256": "7ec7d43afc8d03d38c4c23c4fab3646d0d1e40079abcdeba0d039d217db40db0",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/2": {
+        "sha256": "4235d86140f37a4cf9349ddbbf9ca64ddff747a3a605da46cb597a129153ec7b",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/item": {
+        "sha256": "b42ebdd1d56e3bf6bb194883ceb21841ce40ed61328089949de10442881be58b",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/format": {
+        "sha256": "c29cda672ae9f7fa9863fd553fbd60c42ea5ad7ba3788d22077741e9d1f083c4",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/page_limit": {
+        "sha256": "b40ca4d5dda791fc8d94ff0edb09215aea4ca0e3dde6e1c825fdea7cb97a414a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/deadline_note": {
+        "sha256": "fad07c41c02e6c85389a51f6f83c4b49cac9603c9603f8c26c4df3520d38abf7",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/item": {
+        "sha256": "3575e67efcdd997a3cb4c63b72bb6bb5b0a75f940532ad323dff7ed4d0f6a015",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/format": {
+        "sha256": "0064662c845140c32b571f440dd4046ce6f2114d4fe44fe6c00d1dd66529fdcf",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/page_limit": {
+        "sha256": "b40ca4d5dda791fc8d94ff0edb09215aea4ca0e3dde6e1c825fdea7cb97a414a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/deadline_note": {
+        "sha256": "70c08f0db0ba652f11a8b037bd9b55a4bff7d7d19952f49ebb6eeefdb3b1d724",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/item": {
+        "sha256": "43b3021cffe36d68764b91baec482c95dd3137ef69847a9de2777883d470f47b",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/format": {
+        "sha256": "e851ca738236e777da72ee5be60cb32903e52829fa04efa6e2acf66bf85b344d",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/page_limit": {
+        "sha256": "b40ca4d5dda791fc8d94ff0edb09215aea4ca0e3dde6e1c825fdea7cb97a414a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/deadline_note": {
+        "sha256": "e458934e6d7771ce611d2b58758853ee9cc8a315946875b813e7c57f1d3b95ac",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/stage": {
+        "sha256": "63d0e7f5e4000028ca1617f815cc5422c408dbb7937a84f689b125cc5eba758f",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/format": {
+        "sha256": "40ed23ed2df8e50d23f4d9846cc8bcd192ded2ef9eae8145beb06e1ba183f06d",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/notes": {
+        "sha256": "eefe3cd35458bef3d7fe9ad0aff422fdd34f60d5a6de2e33b4ce5037088d13ca",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/stage": {
+        "sha256": "e1a9a1274e89357afe56996f47fd6e0c67f05f46e402f73690650d894c54470f",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/format": {
+        "sha256": "b8be3973f2b091f38bfa77935418f879ae22ad9ad39bd1f0caf3b78a8ab6f778",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/notes": {
+        "sha256": "bcc2219072c3de0384c5fdb29317c527477ee125307d7702534a11568cc900b5",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/stage": {
+        "sha256": "31a3b075d3e46a948dfd083ac8c798ebae591f789b90e91466f7e11a1b6fa685",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/format": {
+        "sha256": "a31d88c56f8c4eb99240fbf4239e1dd574c4a915815fef5bcbb12aeba257d10b",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/notes": {
+        "sha256": "aeb94c61ea35a681c089dde267a21e423097556f5baef13677519f7899a0c54f",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/3/stage": {
+        "sha256": "b84eafc6ac41d10bb0c847297dbc0835430e06a2968d81fd85294a6b3f2d7ec2",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/3/format": {
+        "sha256": "4dc5ae232cd67cc09e666a831e65334349250230e919f6dfc383a2c97da90be6",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/3/notes": {
+        "sha256": "add7ffe8b194c64665e84f708b82901b0d60654cf01be42cd779f701bfeedf02",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/review_format": {
+        "sha256": "e0d7033e3ebbac437c510e64bd0a3167864ee642eb70f8dabec1974ce6a99117",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/0": {
+        "sha256": "1815b285d13e9d4802b92786bbd37e8204ee2772657700019b045d45fa14f78f",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/1": {
+        "sha256": "179dcf664c7a24e288b3f87af28c45ea227bb85750a8bc9fa434a6545b99e722",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/2": {
+        "sha256": "961a287dfa8df18b9bbfe4509790c2ff490de4d66140cab8461d23703f3c63ea",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/3": {
+        "sha256": "6d237b9385ca72e71f7b9ffa870e8b2ed2e756d51250f11fc40c1474bda2200a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/4": {
+        "sha256": "8b05fdf8f1e8c0a2a0c9ee9735a54ddbd834747a30822f04ca736ab373ee227a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/0": {
+        "sha256": "14bac1f8b3073d8d38a4a0c4b92555712fc382f88f9a621b670129989d4c2568",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/1": {
+        "sha256": "709022247234f8e37b2a86bb075567132cc6966685a4c104471eaf6b9eb32279",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/2": {
+        "sha256": "9f62ef269ef1bce5a8249127a4c27ba489aaecc3074c0af58faa3b6f57d997b4",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/3": {
+        "sha256": "36106dddf9a093ed38bc7429b97fb3a0885f2581dbca2b366afdbcddf49363ff",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/4": {
+        "sha256": "c443d9b658a43c5f2aa759209e04f423aecc5510fc0d6061ac5ab579046e2db1",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/notes": {
+        "sha256": "22eba2b3518b684706c86d544351272fbc6cf7e77008cbc0982a570384c0bd9a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      }
+    },
+    "note": "来源候选尚未逐条对应原文；历届说明、推断权重和建议不能作为已确认的当届官方标准。空届次、赛道和组别表示未确定适用范围，不表示通用。"
+  }
 }

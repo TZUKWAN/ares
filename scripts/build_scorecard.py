@@ -20,6 +20,7 @@ import sys
 
 from validate_profile import validate_evidence
 from workflow_contracts import check_deliverable
+from rubric_evidence import evidence_summary, validate_provenance, field_status
 
 
 def _load(path):
@@ -120,12 +121,18 @@ def build(profile_path, output_dir=None, strict=False, root=None):
     if not os.path.isfile(rubric_path):
         raise FileNotFoundError("rubric 不存在：%s" % rubric_path)
     rubric = _load(rubric_path)
+    source_errors = validate_provenance(rubric, root)
+    if source_errors and (strict or "provenance" in rubric):
+        raise ValueError("规则档案来源状态无效；" + "；".join(source_errors))
+    rule_evidence = evidence_summary(rubric, competition)
+    if source_errors:
+        rule_evidence.update(status="unverified", issues=source_errors)
     claims = [c for c in ((profile.get("evidence") or {}).get("claims") or []) if isinstance(c, dict)]
     source_by_id = {str(s.get("id")): s for s in ((profile.get("evidence") or {}).get("sources") or [])
                     if isinstance(s, dict) and s.get("id")}
     dimensions = []
     uncovered = []
-    for dimension in rubric.get("judging_dimensions", []):
+    for dimension_index, dimension in enumerate(rubric.get("judging_dimensions", [])):
         name = dimension.get("dimension", "未命名维度")
         points = []
         for raw_point in dimension.get("scoring_points", []):
@@ -154,7 +161,12 @@ def build(profile_path, output_dir=None, strict=False, root=None):
                 "usable_claim_ids": [str(c.get("id")) for c in usable if c.get("id")],
                 "output_refs": sorted({str(ref) for c in linked for ref in (c.get("output_refs") or [])}),
             })
-        dimensions.append({"dimension": name, "weight": dimension.get("weight", ""), "points": points})
+        weight_path = "/judging_dimensions/%d/weight" % dimension_index
+        weight_state = field_status(rubric, weight_path, competition)
+        weight_evidence = rubric.get("provenance", {}).get("fields", {}).get(weight_path, {})
+        official_weight = weight_evidence.get("officialWeight") if weight_state == "verified" and weight_evidence.get("category") == "official-rule" else None
+        dimensions.append({"dimension": name, "weight": dimension.get("weight", ""),
+                           "weightStatus": weight_state, "officialWeight": official_weight, "points": points})
     deliverables = []
     if output_dir:
         track_entries = _load(os.path.join(root, "data", "tracks.json")).get("entries", [])
@@ -173,6 +185,9 @@ def build(profile_path, output_dir=None, strict=False, root=None):
         "competition": competition,
         "rubric_path": os.path.relpath(rubric_path, root).replace("\\", "/"),
         "dimensions": dimensions,
+        "ruleEvidence": rule_evidence,
+        "officialScore": None,
+        "scoreNote": "本表只检查证据覆盖，不计算官方得分。历史权重未逐条核验，不能生成当届正式评分结论。",
         "deliverables": deliverables,
         "coverage": {"covered_points": covered, "total_points": total, "ratio": covered / total if total else 0},
         "uncovered_points": uncovered,
@@ -206,7 +221,8 @@ def write_outputs(result, output_dir):
              "覆盖率：%d/%d（%.1f%%）" % (result["coverage"]["covered_points"], result["coverage"]["total_points"], result["coverage"]["ratio"] * 100),
              "正式提交就绪：%s" % ("是" if result["formal_ready"] else "否"), ""]
     for dimension in result["dimensions"]:
-        lines.append("## %s（%s）" % (dimension["dimension"], dimension["weight"]))
+        lines.append("## %s" % dimension["dimension"])
+        lines.append("权重依据（%s）：%s" % ("已核验本范围官方条款" if dimension["weightStatus"] == "verified" else "历史参考，未确认本范围官方分值", dimension["weight"]))
         for point in dimension["points"]:
             marker = "✅" if point["status"] == "covered" else ("⚠️" if point["status"] == "blocked" else "❌")
             claims = ", ".join(point["claim_ids"]) or "无"
