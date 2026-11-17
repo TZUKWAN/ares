@@ -235,3 +235,26 @@
 .ares-app .ares-connection-indicator[data-native-connection-state=connected] { color: #aec1af; }
 .ares-app .ares-connection-indicator[data-native-connection-state=error] { color: #d0a493; }
 .ares-app .ares-connection-indicator[data-native-connection-state=warning] { color: #c9b788; }
+/* Advanced template controls wrap within their actual panel width. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console .ares-workflow-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console .ares-workflow-bar > div {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console .ares-workflow-bar .ares-spacer { display: none; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console .ares-workflow-select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console .ares-workflow-bar > button {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+}
