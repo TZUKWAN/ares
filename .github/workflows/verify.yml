@@ -28,8 +28,6 @@ jobs:
     env:
       NODE_OPTIONS: --max-old-space-size=1536
       PYTHONIOENCODING: utf-8
-      ARES_TEST_ROOT: ${{ runner.temp }}/ares-evidence
-      PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/ares-browsers
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
@@ -48,7 +46,12 @@ jobs:
           cache: pip
           cache-dependency-path: tests/requirements.txt
       - name: Prepare owned evidence folder
-        run: New-Item -ItemType Directory -Path $env:ARES_TEST_ROOT -Force | Out-Null
+        run: |
+          $testRoot=Join-Path $env:RUNNER_TEMP 'ares-evidence'
+          $browserRoot=Join-Path $env:RUNNER_TEMP 'ares-browsers'
+          "ARES_TEST_ROOT=$testRoot" >> $env:GITHUB_ENV
+          "PLAYWRIGHT_BROWSERS_PATH=$browserRoot" >> $env:GITHUB_ENV
+          New-Item -ItemType Directory -Path $testRoot -Force | Out-Null
       - name: Install pinned JavaScript dependencies
         run: |
           npm ci --ignore-scripts --no-audit --no-fund
