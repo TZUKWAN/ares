@@ -104,5 +104,12 @@ jobs:
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
         with:
           name: ares-evidence-${{ matrix.os }}
-          path: ${{ runner.temp }}/ares-evidence
+          # Keep test homes, owner keys and raw project stores out of artifacts.
+          path: |
+            ${{ runner.temp }}/ares-evidence/node-tests.tap
+            ${{ runner.temp }}/ares-evidence/rule-source-status.json
+            ${{ runner.temp }}/ares-evidence/**/evidence.json
+            ${{ runner.temp }}/ares-evidence/**/*-evidence.json
+            ${{ runner.temp }}/ares-evidence/**/*.png
+            ${{ runner.temp }}/ares-evidence/**/*.capture.json
           retention-days: 7

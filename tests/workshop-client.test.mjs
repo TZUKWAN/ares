@@ -1,4 +1,5 @@
-import './helpers/environment.mjs';
+import {projectTab,refresh,motion,nodeDetails,home} from './helpers/workbench-navigation.mjs';
+import {sceneBrowserArgs} from './helpers/environment.mjs';
 /** Owned headless browser + real production routes/files. No DSH or user windows. */
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
@@ -21,20 +22,21 @@ writeFileSync(join(output,'inventory.md'),'# 实际文件的第一稿\n\n这里�
 const makePdf=text=>{const result=spawnSync('python',['-c','import fitz,sys; d=fitz.open(); p=d.new_page(); p.insert_text((72,72),sys.argv[2]); p=d.new_page(); p.insert_text((72,72),"Actual page TWO"); d.save(sys.argv[1])',join(output,'preview.pdf'),text],{encoding:'utf8',windowsHide:true});assert.equal(result.status,0,result.stderr);};makePdf('Actual page ONE');
 const {chromium}=createRequire(import.meta.url)(process.env.ARES_PLAYWRIGHT_PACKAGE),api=directRoutes(),origin='http://127.0.0.1:64031';let browser,page;const errors=[],unexpected=[];
 before(async()=>{
- browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});page=await browser.newPage({viewport:{width:1600,height:1100},reducedMotion:'reduce'});page.setDefaultTimeout(12000);page.on('pageerror',error=>errors.push(error.message));
+ browser=await chromium.launch({headless:true,args:sceneBrowserArgs});page=await browser.newPage({viewport:{width:1600,height:1100},reducedMotion:'reduce'});page.setDefaultTimeout(12000);page.on('pageerror',error=>errors.push(error.message));
  await page.route('**/*',async route=>{const request=route.request(),url=new URL(request.url());if(request.url()===origin+'/'){await route.fulfill({status:200,contentType:'text/html',body:'<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="stylesheet" href="/ares/api/v2/style.css"><style>html,body,#root{height:100%;margin:0}</style></head><body><div id="root"></div><script type="module">import {mountAres} from "/ares/api/v2/app.js";window.ownedView=mountAres(document.getElementById("root"));</script></body></html>'});return;}if(url.pathname==='/ares/api/host/extension-form.js')url.pathname='/ares/api/v2/extension-form.js';if(url.origin!==origin||!url.pathname.startsWith('/ares/api/v2/')){unexpected.push(request.url());await route.abort();return;}try{const result=await api.request(url.pathname.slice('/ares/api/v2/'.length)+url.search,request.postData()?JSON.parse(request.postData()):undefined,{raw:true,host:url.host,headers:request.headers()});await route.fulfill({status:result.status,headers:result.headers,body:result.body});}catch(error){errors.push('route: '+error.message);await route.abort();}});
  await page.goto(origin+'/');try{await page.locator('.ares-workshop-scene').waitFor();}catch(error){console.error('WORKSHOP_BOOT_DIAGNOSTIC',JSON.stringify({errors,unexpected,text:await page.locator('body').textContent()}));throw error;}
 });
 after(async()=>{api.dispose();await browser?.close();});
 const clickView=action=>page.locator('.galaxy-console [data-view-action="'+action+'"]').click();
-async function clickGlobal(action,id){const selector='.galaxy-commandbar [data-action="'+action+'"]'+(id?'[data-id="'+id+'"]':'');let target=page.locator(selector);if(!await target.isVisible()){const menu=page.locator('.galaxy-more');if(await menu.getAttribute('open')===null)await menu.locator('summary').click();}await target.click();}
-async function showFiles(){if(!await page.locator('.galaxy-console[data-galaxy-panel=files]').count())await page.locator('.galaxy-context-nav [data-action=project-tab][data-id=files]').filter({visible:true}).first().click();}
+async function clickGlobal(action,id){if(action==='project-tab')return projectTab(page,id);if(action==='refresh')return refresh(page);if(action==='motion-toggle')return motion(page);throw new Error('Unmapped visible UI action '+action);}
+async function showFiles(){if(!await page.locator('.galaxy-console[data-galaxy-panel=files]').count())await projectTab(page,'files');}
+
 async function openArtifact(id){await showFiles();await page.locator('.galaxy-file[data-id="'+id+'"]').click();}
 
 
 test('full accretion galaxy is the default project view and keeps real nodes and file access',async()=>{
- await page.locator('.ff-scene[data-renderer=webgl]').waitFor();assert.equal(await page.locator('.process-step').count(),workflow.steps.length);assert.equal(await page.locator('.ff-scene').getAttribute('data-executing'),'0');assert.equal(await page.locator('.work-artifact').count(),1);assert.equal(await page.locator('.ff-bottom,.ff-telemetry').count(),0);assert.equal(await page.locator('.workshop-station,.workshop-floor').count(),0);
- await page.locator('.process-step[data-id=rules]').click();assert.match(await page.locator('.work-execution h2').textContent(),/规则/);await clickGlobal('motion-toggle');
+ await page.locator('.ff-scene[data-renderer=reference-video-canvas]').waitFor();assert.equal(await page.locator('.process-step').count(),workflow.steps.length);assert.equal((await page.evaluate(()=>window.ownedView.inspectGalaxy())).facts.calls,0);assert.equal(readProject(root).progress.done,0);assert.equal(await page.locator('.work-artifact').count(),1);assert.equal(await page.locator('.ff-bottom,.ff-telemetry').count(),0);assert.equal(await page.locator('.workshop-station,.workshop-floor').count(),0);
+ await nodeDetails(page,'rules');assert.match(await page.getByRole('dialog').textContent(),/规则/);await page.getByRole('button',{name:'关闭对话框',exact:true}).click();await clickGlobal('motion-toggle');
  await page.locator('.ff-scene').screenshot({path:join(base,'forge-scene.png')});await page.screenshot({path:join(base,'workshop-light.png'),fullPage:true});await page.evaluate(()=>document.body.setAttribute('data-ds-dark-theme',''));await page.screenshot({path:join(base,'workshop-dark.png'),fullPage:true});await page.evaluate(()=>document.body.removeAttribute('data-ds-dark-theme'));console.log('WORKSHOP_UI_EVIDENCE',base);
 });
 
@@ -64,9 +66,13 @@ test('current artifact uploads through actual production logic, enables one edit
  try{await clickView('cloud');await page.getByRole('heading',{name:'金山队员协作',exact:true}).waitFor();await page.getByLabel('要上传的作品').selectOption('inventory');await page.locator('[data-action=board-cloud-upload-working]').click();await page.locator('[data-cloud-document=new-ui-cloud-file]').waitFor();assert.equal(uploads,1);assert.equal(readProject(root).workbench.collaboration.documents[0].collaborativeLink,undefined);await page.getByRole('button',{name:'开启链接共同编辑',exact:true}).click();await page.getByRole('button',{name:'重新核对编辑权限',exact:true}).waitFor();assert.equal(share.scope,'anyone');assert.equal(readProject(root).tasks.context.status,'pending');await page.screenshot({path:join(base,'kdocs-working-flow.png'),fullPage:true});await page.getByLabel('关闭对话框').click();await page.locator('.galaxy-console [data-view-cloud-controls] a[href="https://www.kdocs.cn/l/ownedUiWorkingDraft"]').waitFor();assert.deepEqual(errors,[]);}finally{await page.unroute(pattern);}
 });
 
-test('FORGE handles actual WebGL context loss and a browser without WebGL, keeping node selection and document viewing usable',async()=>{
- await page.setViewportSize({width:1600,height:1100});await page.locator('.galaxy-console [data-view-action=close]').click();await page.locator('.ff-scene[data-renderer=webgl]').waitFor();
- const lost=await page.locator('.forge-field').evaluate(canvas=>{const extension=canvas.getContext('webgl').getExtension('WEBGL_lose_context');if(!extension)return false;extension.loseContext();return true;});assert.equal(lost,true);await page.locator('.ff-scene[data-renderer="canvas-2d"]').waitFor();assert.match(await page.locator('.ff-compatibility').textContent(),/兼容点云视图/);
- await page.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(kind,...args){return kind==='webgl'||kind==='webgl2'?null:original.call(this,kind,...args);};});await page.reload();await page.locator('.ff-scene[data-renderer="canvas-2d"]').waitFor();assert.equal(await page.locator('.ff-scene').getAttribute('data-motion'),'reduced');await page.locator('.process-step[data-id=rules]').click();assert.match(await page.locator('.work-execution h2').textContent(),/规则/);
+test('reference media failure and unavailable WebGL retain real node details and protected file viewing',async()=>{
+ await page.setViewportSize({width:1600,height:1100});await home(page);
+ await page.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(kind,...args){return kind==='webgl'||kind==='webgl2'?null:original.call(this,kind,...args);};});
+ await page.reload();await page.locator('.ff-scene[data-renderer=reference-video-canvas]').waitFor();assert.equal(await page.locator('.ff-scene').getAttribute('data-motion'),'reduced');
+ // Explicit failing media request; no invented replacement or GPU-success claim.
+ await page.route('**/__ares_media_failure__',route=>route.abort());await page.locator('.orb video').evaluate(video=>{video.src='/__ares_media_failure__';video.load();});await page.locator('.orb[data-media-error=true]').waitFor();
+ await nodeDetails(page,'rules');assert.match(await page.getByRole('dialog').textContent(),/规则/);await page.getByRole('button',{name:'关闭对话框',exact:true}).click();
+ assert.equal((await page.evaluate(()=>window.ownedView.inspectGalaxy())).renderStats.glError,null);
  await page.locator('.ff-scene').screenshot({path:join(base,'forge-compatible.png')});await openArtifact('inventory');await page.locator('.galaxy-console .document-prose').waitFor();assert.match(await page.locator('.galaxy-console .document-prose').textContent(),/合并我的修改/);assert.deepEqual(errors,[]);
 });

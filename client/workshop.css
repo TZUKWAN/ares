@@ -1249,6 +1249,11 @@ body[data-ds-dark-theme] .ares-app,.ares-app[data-theme=dark]{--a-bg:#15191d;--a
 
 .reference-history{position:absolute;z-index:24;left:50%;bottom:36px;transform:translateX(-50%);width:min(560px,90%);padding:14px 40px 14px 18px;border:1px solid #e6cf9840;border-radius:14px;background:#25291fea;backdrop-filter:blur(14px);color:#c7c9b6;font:12px/1.7 var(--sys-font);pointer-events:auto}
 .reference-history strong{color:#e2cf9e;font-weight:500}.reference-history p{margin:5px 0 0}.reference-history button{position:absolute;right:9px;top:9px;border:0;background:none;color:#bfc2aa;font-size:20px;cursor:pointer}.is-history{box-shadow:0 0 24px #e6cf9840!important;border-color:#e6cf98aa!important}
+.reference-history.process-activity-caption{transition:opacity .2s ease,transform .2s ease;box-sizing:border-box;max-height:28%;overflow:auto}
+.reference-history button:focus-visible{outline:2px solid #e2cf9e;outline-offset:2px;border-radius:4px}
+@starting-style{.reference-history:not([hidden]){opacity:0;transform:translate(-50%,6px)}}
+@media(prefers-reduced-motion:reduce){.reference-history.process-activity-caption{transition:none}}
+[data-motion=reduced] .reference-history.process-activity-caption,[data-motion=paused] .reference-history.process-activity-caption{transition:none}
 
 /* ARES Neural: original interface finish, inspired by the reference's neutral
  * light/material hierarchy. No reference code, assets, network fonts or runtime

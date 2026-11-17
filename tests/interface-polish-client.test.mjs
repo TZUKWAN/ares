@@ -1,4 +1,5 @@
-import './helpers/environment.mjs';
+import {selectArtifact,nodeDetails,projectPicker,projectFlow,capabilities,competitionDirectory,workspace} from './helpers/workbench-navigation.mjs';
+import {sceneBrowserArgs} from './helpers/environment.mjs';
 /** Real ARES routes/files and rendering. Native HTML/CSS is explicitly a
  * structural fixture from the actual component; no model or cloud execution. */
 import {test, before, after} from 'node:test';
@@ -25,7 +26,7 @@ const surface = nativeThemeSurface(process.env.ARES_NATIVE_CONVERSATION_SOURCE);
 const {chromium} = createRequire(import.meta.url)(process.env.ARES_PLAYWRIGHT_PACKAGE);
 let browser;
 before(async () => browser = await chromium.launch({headless: true,
-  args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader']}));
+  args: sceneBrowserArgs}));
 after(async () => { api.dispose(); await browser?.close(); });
 
 async function ownedPage({width = 1920, height = 1080, motion = 'reduce', record = false} = {}) {
@@ -52,7 +53,7 @@ async function ownedPage({width = 1920, height = 1080, motion = 'reduce', record
   });
   await page.goto(origin);
   await page.locator('#root[data-galaxy-ready=true]').waitFor();
-  await page.locator('.work-live-preview h1').waitFor();
+  await selectArtifact(page,'context','inventory');await page.locator('.work-live-preview h1').waitFor();
   await page.evaluate(() => document.fonts.ready);
   return {page, errors, external, controller, recording};
 }
@@ -77,16 +78,16 @@ test('button light/press, panel and modal animations actually run; reduced motio
     const stopped = await dialog.evaluate(node => ({matches:matchMedia('(prefers-reduced-motion: reduce)').matches, css:getComputedStyle(node).animationName, running:node.getAnimations().map(a=>({name:a.animationName,id:a.id,state:a.playState,frames:a.effect.getKeyframes()}))})); writeFileSync(join(base,'reduced-motion-debug.json'),JSON.stringify(stopped,null,2));
     assert.equal(stopped.running.length, 0);
     await closeModal(page);
-    await page.locator('.galaxy-nav [data-id=projects]').focus(); await page.keyboard.press('Enter');
+    await page.locator('[data-action=galaxy-projects]').filter({visible:true}).first().focus(); await page.keyboard.press('Enter');
     assert.equal(await page.locator('.galaxy-console').evaluate(node => node.getAnimations().length), 0);
     await home(page); await page.emulateMedia({reducedMotion: 'no-preference'});
-    await page.locator('.galaxy-nav [data-id=projects]').click();
+    await projectPicker(page);
     const started = await page.locator('.galaxy-console').evaluate(node => node.getAnimations().map(a => ({duration:a.effect.getTiming().duration, frames:a.effect.getKeyframes()})));
     assert.ok(started.some(animation => animation.duration >= 200 && animation.frames[0].opacity === '0'));
     await page.locator('.galaxy-console').evaluate(node => Promise.all(node.getAnimations().map(animation=>animation.finished.catch(()=>{}))));
     assert.equal(await page.locator('.galaxy-console').evaluate(node => node.getAnimations().length), 0);
     await page.screenshot({path: join(base, 'projects.png')});
-    await home(page); await page.locator('.process-step[data-id=context]').click();
+    await home(page); await nodeDetails(page,'context');
     await page.getByRole('dialog').evaluate(node => Promise.all(node.getAnimations().map(animation=>animation.finished.catch(()=>{}))));
     await page.getByRole('dialog').getByRole('heading',{name:'目标与资料盘点',exact:true}).waitFor();
     writeFileSync(join(base,'dialog-evidence.json'),JSON.stringify(await page.getByRole('dialog').evaluate(node=>({rect:node.getBoundingClientRect().toJSON(),opacity:getComputedStyle(node).opacity,css:getComputedStyle(node).animationName})),null,2));
@@ -96,11 +97,11 @@ test('button light/press, panel and modal animations actually run; reduced motio
     if(recording){
       const start=(Date.now()-recording.born)/1000;
       await page.waitForTimeout(400);
-      await page.locator('.galaxy-nav [data-id=projects]').hover();await page.waitForTimeout(250);
-      await page.locator('.galaxy-nav [data-id=projects]').click();await page.waitForTimeout(650);
-      await page.locator('.galaxy-nav [data-id=skills]').click();await page.waitForTimeout(750);
+      await page.locator('[data-action=galaxy-projects]').filter({visible:true}).first().hover();await page.waitForTimeout(250);
+      await projectPicker(page);await page.waitForTimeout(650);
+      await capabilities(page);await page.waitForTimeout(750);
       await home(page);await page.waitForTimeout(450);
-      await page.locator('.process-step[data-id=context]').click();
+      await nodeDetails(page,'context');
       await page.getByRole('dialog').evaluate(node=>Promise.all(node.getAnimations().map(a=>a.finished.catch(()=>{}))));
       await page.waitForTimeout(650);await closeModal(page);await page.waitForTimeout(350);
       recording.clip={start,duration:(Date.now()-recording.born)/1000-start};
@@ -110,7 +111,7 @@ test('button light/press, panel and modal animations actually run; reduced motio
     await page.getByRole('button',{name:'减少动态效果',exact:true}).click();
     assert.equal(await page.locator('#root').getAttribute('data-ares-motion'),'off');
     assert.equal(await page.getByRole('dialog').evaluate(node=>node.getAnimations().length),0);
-    await closeModal(page);await page.locator('.galaxy-nav [data-id=projects]').click();
+    await closeModal(page);await projectPicker(page);
     assert.equal(await page.locator('.galaxy-console').evaluate(node=>node.getAnimations().length),0);
     console.log('INTERFACE_POLISH_EVIDENCE', base);
   } finally { await page.close();if(recording?.clip)writeFileSync(join(base,'video-evidence.json'),JSON.stringify({...recording.clip,path:await recording.video.path(),mode:'Actual owned ARES browser; native structure fixture, no live model'},null,2)); }
@@ -122,7 +123,7 @@ test('a real pending flow request shows activity without replaying the panel; na
   try {
     await page.getByLabel('原生输入结构验证').fill('保留的助手输入，不发送。');
     await page.evaluate(() => window.keptInput = document.querySelector('[data-composer-input]'));
-    await page.locator('.galaxy-nav [data-id=studio]').click();
+    await projectFlow(page);
     await page.getByLabel('本步目标', {exact: true}).waitFor();
     await page.locator('.galaxy-console').evaluate(node=>Promise.all(node.getAnimations().map(a=>a.finished.catch(()=>{}))));
     const flip=await page.evaluate(async()=>{
@@ -130,14 +131,14 @@ test('a real pending flow request shows activity without replaying the panel; na
       document.querySelector('[data-action=flow-zoom][data-direction="1"]').click();
       for(let i=0;i<12&&old.isConnected;i++)await Promise.resolve();
       const next=[...document.querySelectorAll('.ares-flow-plane .ares-step')].find(node=>node.dataset.id===id);
-      const animation=next.getAnimations().find(a=>a.id==='ares-ui-feedback');
+      const animation=document.querySelector('.ares-flow-plane').getAnimations().find(a=>a.id==='ares-flow-zoom');
       if(!animation)return {animated:false};
       animation.pause();animation.currentTime=0;const start=next.getBoundingClientRect();animation.play();
       return {animated:true,before:{x:before.x,y:before.y},start:{x:start.x,y:start.y}};
     });
     assert.equal(flip.animated,true);assert.ok(Math.abs(flip.before.x-flip.start.x)<1,JSON.stringify(flip));assert.ok(Math.abs(flip.before.y-flip.start.y)<1,JSON.stringify(flip));
     writeFileSync(join(base,'flow-motion-evidence.json'),JSON.stringify(flip,null,2));
-    await page.locator('.ares-flow-plane').evaluate(node=>Promise.all(node.getAnimations({subtree:true}).filter(a=>a.id==='ares-ui-feedback').map(a=>a.finished.catch(()=>{}))));
+    await page.locator('.ares-flow-plane').evaluate(node=>Promise.all(node.getAnimations({subtree:true}).filter(a=>a.id==='ares-flow-zoom').map(a=>a.finished.catch(()=>{}))));
     await page.getByLabel('本步目标', {exact: true}).fill('界面验证的流程草稿，尚未应用。');
     await page.waitForTimeout(500);
     release = controller.hold('project/flow/draft-status');
@@ -164,12 +165,8 @@ test('all functional surfaces and native composer remain readable and clickable 
   const sizes = [];
   try {
     await page.screenshot({path: join(base, 'workspace-1920.png')});
-    for (const id of ['catalog', 'skills']) {
-      await page.locator('.galaxy-nav [data-id=' + id + ']').click();
-      if (id === 'skills') await page.getByRole('status').filter({hasText: /项候选/}).waitFor();
-      await page.screenshot({path: join(base, id + '.png')});
-      await home(page);
-    }
+    await competitionDirectory(page);await page.screenshot({path:join(base,'catalog.png')});await closeModal(page);await workspace(page,'projects');
+    await capabilities(page);await page.getByRole('status').filter({hasText:/项候选/}).waitFor();await page.screenshot({path:join(base,'skills.png')});await home(page);
     await page.locator('.ff-tools [data-action=project-tab][data-id=progress]').click();
     await page.screenshot({path: join(base, 'progress.png')}); await home(page);
     for (const id of ['materials', 'facts', 'tasks']) {
@@ -177,7 +174,7 @@ test('all functional surfaces and native composer remain readable and clickable 
       await page.getByRole('dialog').locator('[data-action=project-tab][data-id=' + id + ']').click();
       await page.screenshot({path: join(base, id + '.png')}); await home(page);
     }
-    await page.locator('.work-artifact [data-action=work-preview-expand]').click();
+    await selectArtifact(page,'context','inventory');await page.locator('.work-artifact [data-action=work-preview-expand]').click();
     await page.locator('.galaxy-console [data-view-action=edit]').click();
     await page.getByLabel('作品编辑草稿').fill('# 仅保留界面草稿\n\n没有保存到文件。');
     await page.screenshot({path: join(base, 'work-editor.png')}); await home(page);
@@ -188,10 +185,10 @@ test('all functional surfaces and native composer remain readable and clickable 
       assert.equal(await page.getByLabel('原生输入结构验证').isVisible(), true);
       const composer = await page.getByLabel('原生输入结构验证').boundingBox();
       assert.ok(composer.height >= 20 && composer.y + composer.height <= 1001, JSON.stringify({width, composer}));
-      assert.equal(await page.locator('.galaxy-nav>button').count(), 4);
+      assert.equal(await page.locator('.galaxy-nav>button').count(), 2);
       sizes.push({width, composer});
       await page.screenshot({path: join(base, 'workspace-' + width + '.png')});
-      await page.locator('.galaxy-nav [data-id=projects]').click();
+      await projectPicker(page);
       const font = await page.getByLabel('找项目').evaluate(node => parseFloat(getComputedStyle(node).fontSize));
       assert.ok(font >= 14);
       await page.screenshot({path: join(base, 'projects-' + width + '.png')}); await home(page);

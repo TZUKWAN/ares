@@ -1,4 +1,4 @@
-import './helpers/environment.mjs';
+import {sceneBrowserArgs} from './helpers/environment.mjs';
 /** Actual ARES source, production routes and local files in owned Chromium.
  * Native session/composer slots are explicit protocol fixtures, no online model. */
 import {test, before, after} from 'node:test';
@@ -18,7 +18,7 @@ const origin = 'http://127.0.0.1:64348';
 const {chromium} = createRequire(import.meta.url)(process.env.ARES_PLAYWRIGHT_PACKAGE);
 let browser;
 before(async () => browser = await chromium.launch({headless: true,
-  args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader']}));
+  args:sceneBrowserArgs}));
 after(async () => browser?.close());
 
 function actualRoutes() {
