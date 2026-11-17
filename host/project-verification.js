@@ -3,18 +3,19 @@ import {readFileSync,statSync} from 'node:fs';
 import {join} from 'node:path';
 import {hash,safePath,now} from './storage.js';
 import {artifactVersion,completeDirectory} from './project-artifacts.js';
-import {readProjectObject} from './project-objects.js';
+import {readProjectObject,readProjectRecord} from './project-objects.js';
 import {verifyFrozenResources} from './native-versions.js';
 import {ruleItems,ruleItemState} from './rule-checklist-model.js';
 import {readNodeRunRecord} from './node-run-records.js';
 
 function executionReport(project,block,warnings){
  const runs=[];
+ const ended=new Set(['awaiting-review','awaiting-review-with-warnings','failed','cancelled']);
  for(const id of project.workbench?.nodeRunIds||[]){try{
-  const record=readNodeRunRecord(project,id),calls=(record.calls||[]).map(row=>({name:row.name,status:row.status,callSeq:row.callSeq??null,resultSeq:row.resultSeq??null})),jobs=(record.jobs||[]).map(row=>({status:row.status,exitCode:/^exit code: (-?\d+)(?:;|$)/.exec(row.detail||'')?.[1]??null}));
+  const record=readNodeRunRecord(project,id),calls=(record.calls||[]).map(row=>({name:row.name,status:row.status,callSeq:row.callSeq??null,resultSeq:row.resultSeq??null})),jobs=(record.jobs||[]).map(row=>({status:row.status,terminalExitReported:typeof row.detail==='string'&&row.detail.startsWith('exit code:'),exitCode:/^exit code: (-?\d+)(?:;|$)/.exec(row.detail||'')?.[1]??null}));
   runs.push({id,stepId:record.stepId,definitionId:record.definitionId,sessionId:record.sessionId,status:record.status,calls,jobs,finishedAt:record.finishedAt||null});
-  if(['preparing','running','stopping','unknown','damaged'].includes(record.status)||calls.some(row=>row.status==='unknown')||jobs.some(row=>!['completed','failed','killed'].includes(row.status)))block({code:'node-execution-unresolved',stepId:record.stepId,runId:id,reason:'节点执行或工具结果尚未核对完成'});
-  else if(['failed','cancelled','awaiting-review-with-warnings'].includes(record.status)||calls.some(row=>row.status==='failed')||jobs.some(row=>row.exitCode!==null&&row.exitCode!=='0'))warnings.push({code:'execution-history-warning',stepId:record.stepId,runId:id,reason:'执行历史包含失败或取消记录；负责人验收不把这些调用改记为成功'});
+  if(!ended.has(record.status)||record.status.startsWith('awaiting-review')&&!calls.some(row=>row.status==='succeeded')||calls.some(row=>!['succeeded','failed'].includes(row.status))||jobs.some(row=>!['completed','failed','killed'].includes(row.status)||row.terminalExitReported&&row.exitCode===null))block({code:'node-execution-unresolved',stepId:record.stepId,runId:id,reason:'节点执行或工具结果尚未核对完成'});
+  else if(['failed','cancelled','awaiting-review-with-warnings'].includes(record.status)||calls.some(row=>row.status==='failed')||jobs.some(row=>row.status!=='completed'||row.exitCode!==null&&row.exitCode!=='0'))warnings.push({code:'execution-history-warning',stepId:record.stepId,runId:id,reason:'执行历史包含失败或取消记录；负责人验收不把这些调用改记为成功'});
  }catch{block({code:'node-execution-damaged',runId:id,reason:'节点执行记录缺失、损坏或不属于此项目'});}}
  return {runs,verification:'stored-node-run-records-only',note:'列出项目实际保存的执行和工具回执；本次检查没有启动模型，也未重新查询运行中的宿主任务。手工提供作品不虚构执行记录。'};
 }
@@ -35,6 +36,10 @@ function cloudReport(project,block){
 
 export function buildProjectVerification(project,{definition,checkStep,ruleEvidence,ruleIssues}){
  const blocking=[],warnings=[],steps=[],files=new Map(),block=row=>blocking.push(row);
+ const acceptances=new Map();
+ // Actor identity belongs to the immutable task.accepted event, not the
+ // content-addressed artifact payload (the same bytes can have several reviews).
+ for(const id of project.workbench?.eventIds||[]){try{const event=readProjectRecord(project.root,'events',id).payload;if(event.projectId!==project.id)throw new Error('Foreign event');if(event.type==='task.accepted'){if(typeof event.detail?.stepId!=='string'||!Array.isArray(event.detail.artifactVersionIds)||typeof event.detail.reviewHash!=='string')throw new Error('Invalid acceptance');acceptances.set(event.detail.stepId,event);}}catch{block({code:'acceptance-history-damaged',reason:'验收事件历史缺失、损坏或不属于此项目'});}}
  const workflow={definitionId:definition.id,workflowId:definition.workflow.id,state:'verified',steps:definition.workflow.steps.length,skills:definition.skills.map(skill=>({id:skill.id,sha256:hash(skill.content),resources:skill.resources.length}))};
  try{verifyFrozenResources(definition);}catch{workflow.state='invalid';block({code:'fixed-resources-invalid',reason:'固定流程的技能或资源缺失、损坏，请恢复对应固定版本后再检查'});}
  function addFile(row){const key=row.path.replaceAll('\\','/'),previous=files.get(key);files.set(key,{...previous,...row,path:key,stepIds:[...new Set([...(previous?.stepIds||[]),row.stepId])],accepted:previous?.accepted===true||row.accepted===true});}
@@ -52,6 +57,8 @@ export function buildProjectVerification(project,{definition,checkStep,ruleEvide
     review.state=task.review?.reviewer==='user'&&value.reviewer==='user'?'owner-reviewed':'agent-reviewed';
     if(review.state!=='owner-reviewed')block({code:'owner-review-required',stepId:step.id,reason:'此步骤仍需负责人复核；助手的内容报告不能替代负责人验收'});
    }catch{review.state='invalid';block({code:'content-review-invalid',stepId:step.id,reason:'实际内容复核文件或固定复核对象缺失、损坏或不匹配'});}
+   const accepted=acceptances.get(step.id);
+   if(accepted?.actor?.kind!=='user'||accepted?.actor?.id!=='owner'||accepted.detail.reviewHash!==task.reviewHash||hash(accepted.detail.artifactVersionIds)!==hash(task.acceptedVersionIds||[])){review.state='non-owner-reviewed';block({code:'owner-review-required',stepId:step.id,reason:'当前固定作品及复核记录尚无匹配的负责人验收事件'});}
   }
   const acceptedVersionIds=task.acceptedVersionIds||[],acceptedArtifacts=new Set();
   for(const id of acceptedVersionIds){try{

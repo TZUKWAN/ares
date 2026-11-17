@@ -12,7 +12,7 @@ import {configureRuleChecklist,confirmRuleItem} from '../host/rule-checklist.js'
 import {hash} from '../host/storage.js';
 import {randomUUID} from 'node:crypto';
 
-function setup({owner=true,checklist=true}={}){
+function setup({owner=true,checklist=true,reviewActor}={}){
  const base=mkdtempSync(join(process.env.ARES_TEST_ROOT||tmpdir(),'ares-delivery-gate-')),root=join(base,'project'),home=join(base,'home');process.env.ARES_HOME=home;mkdirSync(root);linkRoot(root);
  const config=defaults(),flow=structuredClone(config.workflows.find(row=>row.id==='modeling'));flow.id='delivery-software-fixture';flow.steps=[{...flow.steps[0],outputs:[{id:'actual-file',title:'真实软件验证文件',kind:'file',format:'md',path:'actual.md',requirement:'required'}]}];config.workflows.push(flow);saveConfiguration(config,0);
  let p=initializeProject({root,name:'内部交付门禁软件验证（非竞赛成果）',competitionId:5,track:competitionCatalog(config).find(row=>row.id===5).tracks[0].track,workflowId:flow.id,edition:'SOFTWARE-QA'});
@@ -22,7 +22,7 @@ function setup({owner=true,checklist=true}={}){
  const body={root,expectedRevision:p.revision,stepId:flow.steps[0].id,action:'complete'};
  if(owner)body.review={summary:'Only this real software QA document was inspected, no actual contest content is certified.',findings:[]};
  else{const path='agent-review.json';writeFileSync(join(root,path),JSON.stringify({passed:true,summary:'Explicit agent-authored QA review.',findings:[],artifactHashes:taskChecks(root,flow.steps[0].id).artifactHashes}));body.reviewPath=path;}
- p=taskAction(body,owner?'user':'agent');
+ p=taskAction(body,owner?'user':'agent',reviewActor);
  if(checklist){p=configureRuleChecklist({root,expectedRevision:p.revision,items:[{id:'scope-check',label:'Software QA scope explicitly checked against the actual scope file',kind:'mandatory'}]});p=confirmRuleItem({root,expectedRevision:p.revision,ruleId:'scope-check',confirmChecked:true,evidencePath:'scope.txt',summary:'Explicit owner API contract confirmation of the software QA scope.'});}
  return {base,root,home,p,artifact};
 }
@@ -55,6 +55,20 @@ test('unknown or foreign stored execution cannot be declared successful by a man
  const f=setup(),id=randomUUID();changeProject({root:f.root,expectedRevision:f.p.revision},p=>{p.workbench.nodeRunIds=[id];});mkdirSync(join(f.root,'.ares/node-runs'),{recursive:true});const path=join(f.root,'.ares/node-runs',id+'.json');
  writeFileSync(path,JSON.stringify({id,projectId:f.p.id,definitionId:f.p.definitionId,stepId:'context',status:'unknown',calls:[],jobs:[]}));const report=verifyProject(f.root);assert.equal(report.checksPassed,false);assert.ok(report.blocking.some(row=>row.code==='node-execution-unresolved'));assert.equal(report.execution.runs[0].status,'unknown');
  writeFileSync(path,JSON.stringify({id,projectId:'different-explicit-fixture',status:'awaiting-review',calls:[],jobs:[]}));const foreign=verifyProject(f.root);assert.equal(foreign.checksPassed,false);assert.ok(foreign.blocking.some(row=>row.code==='node-execution-damaged'));assert.equal(foreign.execution.runs.length,0);
+});
+
+test('unrecognized run/call states and malformed terminal exit results remain unresolved',()=>{
+ const f=setup(),id=randomUUID();changeProject({root:f.root,expectedRevision:f.p.revision},p=>{p.workbench.nodeRunIds=[id];});mkdirSync(join(f.root,'.ares/node-runs'),{recursive:true});
+ const file=join(f.root,'.ares/node-runs',id+'.json'),base={id,projectId:f.p.id,definitionId:f.p.definitionId,stepId:'context',status:'awaiting-review',calls:[{name:'read',status:'succeeded',callSeq:1,resultSeq:2}],jobs:[]};
+ writeFileSync(file,JSON.stringify(base));assert.equal(verifyProject(f.root).checksPassed,true,'An explicit valid stored-record contract is accepted; no real tool execution is claimed by this fixture.');
+ for(const altered of [{status:'unrecognized-state'},{status:null},{calls:[]},{calls:[{name:'read',status:'unrecognized-result'}]},{jobs:[{status:'completed',detail:'exit code: unknown'}]}]){
+  writeFileSync(file,JSON.stringify({...base,...altered}));const report=verifyProject(f.root);assert.equal(report.checksPassed,false,JSON.stringify(altered));assert.ok(report.blocking.some(row=>row.code==='node-execution-unresolved'));
+ }
+});
+
+test('stored team confirmations do not become formal owner review',()=>{
+ const team=setup({reviewActor:{id:'team-member'}}),report=verifyProject(team.root);assert.equal(report.checksPassed,false);assert.equal(report.contentReview.ownerReviewed,0);assert.ok(report.blocking.some(row=>row.code==='owner-review-required'));
+ const rule=setup();changeProject({root:rule.root,expectedRevision:rule.p.revision},p=>{for(const row of Object.values(p.competition.ruleChecklist.checks))row.reviewer='team-member';});const rules=verifyProject(rule.root);assert.equal(rules.checksPassed,false);assert.equal(rules.rules.confirmed,0);
 });
 const gate=fileURLToPath(new URL('../scripts/final_gate.py',import.meta.url));
 function cli(f,report){return spawnSync('python',[gate,'--profile',join(f.root,'.ares/project.json'),'--output-dir',join(f.base,'reports'),'--report',report],{encoding:'utf8',windowsHide:true,timeout:120000,env:{...process.env,PYTHONIOENCODING:'utf-8'}});}
