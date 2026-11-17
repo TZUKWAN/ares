@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Actual ARES UI/handlers/files. The resident chat is an explicit slot fixture, no model call. */
 import {test,before,after} from 'node:test';import assert from 'node:assert/strict';import {mkdtempSync,mkdirSync,writeFileSync,readFileSync} from 'node:fs';import {join} from 'node:path';import {tmpdir} from 'node:os';import {createRequire} from 'node:module';
 import {directRoutes} from './helpers/direct-routes.mjs';import {initializeProject,linkRoot,readProject,changeProject} from '../host/projects.js';import {competitionCatalog,configPath} from '../host/catalog.js';

@@ -51,11 +51,18 @@
   "scripts": {
     "build:forge": "node scripts/build_forge.mjs",
     "test": "node --test tests/core.test.mjs tests/api.test.mjs",
+    "test:all": "node --test --test-concurrency=1 tests/*.test.mjs",
+    "test:browser:install": "playwright install chromium",
     "test:quality": "python -m unittest discover -s tests -p test_*.py",
     "test:editor": "node --test tests/editor.test.mjs tests/editor-client.test.mjs",
     "test:tools:native": "node --test tests/dsh-native-tools.integration.mjs",
     "test:workbench": "node --test tests/project-workbench.test.mjs tests/project-extensions.test.mjs tests/recovery.test.mjs",
     "test:client": "node --test tests/client-workbench.test.mjs",
     "test:workshop": "node --test tests/artifact-viewer.test.mjs tests/native-session.test.mjs tests/project-session.test.mjs tests/cloud-working-draft.test.mjs tests/workshop-client.test.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.65.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   }
 }

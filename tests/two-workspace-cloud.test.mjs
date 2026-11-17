@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Actual ARES UI, project binding and handlers. A browser lease/webview adapter
  * and remote document are explicit protocol fixtures, not an online cloud test. */
 import {test, before, after} from 'node:test';

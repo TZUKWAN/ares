@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Fullscreen galaxy and real in-scene operations, on owned headless surfaces only. */
 import {test,before,after} from 'node:test';import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {mkdtempSync,mkdirSync,readFileSync,writeFileSync} from 'node:fs';import {join} from 'node:path';import {tmpdir} from 'node:os';import {directRoutes} from './helpers/direct-routes.mjs';import {readProject} from '../host/projects.js';import {captureDraft,freezeProjectRelease} from '../host/project-workbench.js';
 const base=mkdtempSync(join(process.env.ARES_TEST_ROOT||tmpdir(),'ares-galaxy-ui-'));process.env.ARES_HOME=join(base,'home');const projectRoot=join(base,'project');mkdirSync(projectRoot);const api=directRoutes(),origin='http://127.0.0.1:64328',errors=[],unexpected=[],requests=[],{chromium}=createRequire(import.meta.url)(process.env.ARES_PLAYWRIGHT_PACKAGE);let browser;

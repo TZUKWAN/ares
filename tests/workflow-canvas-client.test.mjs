@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Actual production app/routes/storage in owned headless Chromium. The native
  * session and composer seat are explicitly labeled protocol fixtures; no model,
  * tool execution, cloud write, DSH instance or user's window is involved. */

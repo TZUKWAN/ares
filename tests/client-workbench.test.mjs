@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Direct installed-source DOM unit checks. No DSH host/server/model or user window is opened. */
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';

@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Actual ARES source, production routes and local files in owned Chromium.
  * Native session/composer slots are explicit protocol fixtures, no online model. */
 import {test, before, after} from 'node:test';

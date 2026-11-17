@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Production modules/routes/files in owned headless pages; no DSH/model/cloud execution. */
 import {test,before,after} from 'node:test';import assert from 'node:assert/strict';import {createRequire} from 'node:module';
 import {mkdtempSync,mkdirSync,writeFileSync,readFileSync} from 'node:fs';import {join} from 'node:path';import {tmpdir} from 'node:os';

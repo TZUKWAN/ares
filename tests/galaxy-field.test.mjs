@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Only accretion, with real records and a truthful no-project visual state. */
 import {test,before,after} from 'node:test';import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {mkdtempSync,mkdirSync,readFileSync,writeFileSync} from 'node:fs';import {join} from 'node:path';import {tmpdir} from 'node:os';
 import {PHASES,animationAt,actualAnimation,phaseStart} from '../client/forge-timeline.js';import {forgeModel} from '../client/forge-data.js';import {forgeSceneHtml} from '../client/forge-view.js';import {directRoutes} from './helpers/direct-routes.mjs';import {linkRoot,initializeProject,readProject} from '../host/projects.js';import {competitionCatalog} from '../host/catalog.js';

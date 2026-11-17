@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Real React portals and actual client/client.js, explicit native-service/slot protocol fixtures.
  * No real model, cloud call, workspace creation or user's DSH window is involved.
  */

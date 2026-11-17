@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Neural UI integration using actual client/client.js, React DOM portals,
  * actual ARES assets and production routes/editor/storage. Native session
  * create/retain/provider/input and tool metadata are explicit ABI fixtures.
@@ -317,6 +318,7 @@ test('flow assistant retries only after a failed native lease and keeps the same
 });
 
 test('project assistant shows one retry for metadata or native-lease failure and only status when actually connected',async()=>{
+ const initialProjectCreates=projectCreated.length;
  const page=await browser.newPage({viewport:{width:1280,height:950},reducedMotion:'reduce'}),caseErrors=[],caseExternal=[],stages=[];let metadataCalls=0;page.setDefaultTimeout(10000);
  await page.addInitScript(()=>{window.failNextAresProjectRetain=true;});page.on('pageerror',error=>caseErrors.push(error.message));
  await page.route('**/*',async route=>{
@@ -337,7 +339,7 @@ test('project assistant shows one retry for metadata or native-lease failure and
   await retry.click();await chat.getByRole('alert').filter({hasText:'Explicit native lease recovery fixture'}).waitFor();assert.equal(await retry.count(),1);await chat.locator('[data-native-connection-state=error]').waitFor();stages.push({phase:'native-lease-error',retryButtons:await retry.count()});await page.screenshot({path:join(base,'project-connection-failed.png')});
   const before=await page.evaluate(()=>window.portalProof);await retry.click();const input=page.getByLabel('项目原生协议输入',{exact:true});await input.waitFor({state:'visible'});await chat.locator('[data-native-connection-state=connected]').waitFor();assert.equal(await retry.count(),0);assert.equal(await chat.getByRole('button',{name:'重新连接',exact:true}).count(),0);assert.equal(await chat.getByRole('alert').count(),0);stages.push({phase:'connected',retryButtons:0});
   await input.fill('项目助手未发送草稿，连接状态变化仍保留。');await page.evaluate(()=>window.projectConnectionDraft=document.querySelector('[aria-label="项目原生协议输入"]'));await page.evaluate(()=>window.ownedAresManagers.project.reconnect());await chat.locator('[data-native-connection-state=connected]').waitFor();assert.equal(await input.inputValue(),'项目助手未发送草稿，连接状态变化仍保留。');assert.equal(await page.evaluate(()=>window.projectConnectionDraft===document.querySelector('[aria-label="项目原生协议输入"]')),true);
-  const after=await page.evaluate(()=>window.portalProof);assert.equal(after.retains.filter(id=>id===projectSession).length,before.retains.filter(id=>id===projectSession).length+1);assert.equal(after.creates.length,before.creates.length);assert.equal(after.prompts,0);assert.equal(after.attempts,0);assert.equal(projectCreated.length,0);assert.deepEqual(readFileSync(join(root,'.ares/project.json')),projectBytes);assert.deepEqual(caseErrors,[]);assert.deepEqual(caseExternal,[]);
+  const after=await page.evaluate(()=>window.portalProof);assert.equal(after.retains.filter(id=>id===projectSession).length,before.retains.filter(id=>id===projectSession).length+1);assert.equal(after.creates.length,before.creates.length);assert.equal(after.prompts,0);assert.equal(after.attempts,0);assert.equal(projectCreated.length,initialProjectCreates);assert.deepEqual(readFileSync(join(root,'.ares/project.json')),projectBytes);assert.deepEqual(caseErrors,[]);assert.deepEqual(caseExternal,[]);
   await page.screenshot({path:join(base,'project-connection-ready.png')});writeFileSync(join(base,'project-connection-evidence.json'),JSON.stringify({mode:'Actual production client, React Portal, routes, metadata managers and owned project. One metadata fault and one native-lease fault are explicit ABI fixtures. No model/cloud/desktop.',sourceHashes:assetHashes(),sessionId:projectSession,stages,before,after,sameDraftAndInput:true,projectBytesUnchanged:true,errors:caseErrors,external:caseExternal},null,2));console.log('ARES_PROJECT_CONNECTION_EVIDENCE',base);
  }catch(error){writeFileSync(join(base,'project-connection-failure.json'),JSON.stringify({message:error.message,body:await page.locator('body').textContent(),errors:caseErrors,stages},null,2));await page.screenshot({path:join(base,'project-connection-failure.png')});throw error;}finally{await page.close();}
 });

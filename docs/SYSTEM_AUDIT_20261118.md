@@ -50,4 +50,15 @@
 - 验证：真实 43 个客户端输入分别变成 LF 与 CRLF，四次构建/检查输出 SHA 相同；工作目录在仓库外也通过。FORGE 与 portable 构建 check 均退出 0。Windows/Linux 的远端 CI 结果将在 T1 记录。
 - 测试环境修复：首次新增测试在本机 Node 25.6.0 的目录复制阶段原生异常退出（3221226505）。改用逐项 `copyFileSync` 复制自有测试输入后通过，不改产品能力、不忽略退出码，也未扩大宿主权限。
 
+### B1 / T1：完整基线与测试环境（整改中）
+
+- 基线命令全部执行：`npm test` 29 项通过；`npm run test:quality` 12 项通过；`npm run test:workbench` 17 通过/1 失败；串行 `node --test --test-concurrency=1 --test-reporter=tap tests/*.test.mjs` 434 项中 366 通过/68 失败，0 跳过、0 取消，退出 1。FORGE/portable 在原运行目录 check 均退出 0；基线 LF 归档的 FORGE check 退出 1。132 份旧结构检查通过。完整回归耗时 1,541,947ms。未把环境或旧测试失败计为通过。
+- 依赖：按两个既有 lockfile 执行 `npm ci --prefix ... --ignore-scripts` 均退出 0。新根 lockfile 固定官方 Playwright 1.65.1 与测试 React/React DOM 19.2.0；浏览器位于本项目忽略的 `.cache`。CI 明确安装 Python 解析器、ffprobe 和无头浏览器，不依赖开发机路径。
+- ABI 边界：常规 CI 使用 ARES 自编的 DOM/样式协议夹具，绝非真实 DSH、模型调用或审批。提供 `ARES_NATIVE_CONVERSATION_SOURCE` 时仍验证给定的安装版样式源，不会在合同变化时悄悄降级成夹具。
+- 已修：旧云测试错误要求已开放的分享命令“未开放”，会意外触发本机 CLI。改查真正禁用的命令并保留项目未连接和权限边界检查；8 项比赛目录/扩展回归通过。可移植包测试现在从当前源码现建两套包，不再默认读某开发机的旧 ZIP；真实 ZIP 重定位、无开发依赖、清单、官方 SDK、文件和 MCP 页面验证 1 项通过。
+- 已修真实解析故障：`inspect_artifact.py` 原来按 Windows 本地编码读取 ffprobe 的 UTF-8 JSON，中文文件名导致 stdout 解码失败并变为 None。改为解析实际 JSON 字节。4 项格式检查通过；视频项目完整生命周期 1 项通过，含真实文件、复核、快照、恢复与再次复核。
+- 已修测试状态泄漏：原生助手重试用例把其他用例已创建的会话计入自身，误判为本次创建。改为比较当前用例前后新增量；3 项安装版样式源 + 真实 React Portal 的边界集成均通过，无在线模型或实际宿主会话调用。
+- 已修跨系统故障测试：权限撤销后的保存失败改为在真实原子写入点注入明确 EACCES，5 项通过；不再假设 POSIX 的只读文件一定禁止父目录重命名。
+- CI 已编写 Windows/Linux 的核心、Python/档案、构建、全量浏览器/MCP/包/安全/恢复检查，Action 版本以官方提交 SHA 固定；尚未取得远端运行结果。其余旧界面测试契约仍在逐项迁移和复测。
+
 其他任务继续执行中。最终矩阵与实际宿主结果尚未完成。

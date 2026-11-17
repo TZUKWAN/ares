@@ -1,12 +1,14 @@
-/** Structural style fixture: actual ARES NativeEditorBody + installed DSH InputBar CSS.
+/** Structural style fixture: actual ARES NativeEditorBody + explicit DOM ABI.
  * Hook/provider state and composer DOM are explicit fixtures, not a real DSH session.
  */
 import {readFileSync} from 'node:fs';import {runInNewContext} from 'node:vm';import {createHash} from 'node:crypto';
 export function nativeThemeSurface(sourcePath){
- if(!sourcePath)throw new Error('ARES_NATIVE_CONVERSATION_SOURCE must identify the locally inspected DSH lib/client.js for this style integration check');
- const source=readFileSync(sourcePath,'utf8'),region=source.slice(source.indexOf('InputBar.module.css.mjs')),cssMatch=/const css\$\d+ = ("(?:[^"\\]|\\.)*");/.exec(region),mapMatch=/var InputBar_module_css_default = (\{[\s\S]*?\n\s*\});/.exec(region);
- if(!cssMatch||!mapMatch||!source.includes('"data-composer-card"')||!source.includes('"data-composer-input"'))throw new Error('Installed DSH input style contract changed; inspect the actual source');
- const css=JSON.parse(cssMatch[1]),classes=JSON.parse(mapMatch[1]),registrations=new Map(),hints=[];
+ let css,classes,source=null;
+ if(sourcePath){source=readFileSync(sourcePath,'utf8');const region=source.slice(source.indexOf('InputBar.module.css.mjs')),cssMatch=/const css\$\d+ = ("(?:[^"\\]|\\.)*");/.exec(region),mapMatch=/var InputBar_module_css_default = (\{[\s\S]*?\n\s*\});/.exec(region);
+  if(!cssMatch||!mapMatch||!source.includes('"data-composer-card"')||!source.includes('"data-composer-input"'))throw new Error('Installed DSH input style contract changed; inspect the actual source');
+  css=JSON.parse(cssMatch[1]);classes=JSON.parse(mapMatch[1]);
+ }else{const contract=JSON.parse(readFileSync(new URL('../fixtures/native-composer-contract.json',import.meta.url),'utf8'));css=contract.css;classes=contract.classes;}
+ const registrations=new Map(),hints=[];
  const h=(tag,props,...children)=>({tag,props:props||{},children}),React={createElement:h,useRef:()=>({current:null}),useEffect(){}};
  const ctx={inject(){},slots:{inject(_name,register){register();},register(descriptor,view){registrations.set(descriptor.name,view);return()=>{};}}};
  const loader={load(descriptor){const plugin=descriptor.factory(name=>{if(name==='react')return React;if(name==='react-dom')return {createPortal(){throw new Error('No actual native portal is mounted in a structural fixture');}};if(name==='@deepseek-ai/dsh-client-ui-conversation')return {conversationPhase:()=> 'blank'};throw new Error('Unexpected dependency '+name);});plugin.apply(ctx);}};
@@ -17,5 +19,5 @@ export function nativeThemeSurface(sourcePath){
  const shortcuts=[];function visit(node){if(!node||typeof node!=='object')return;if(Array.isArray(node)){node.forEach(visit);return;}if(node.props?.['data-ares-chat-shortcut'])shortcuts.push(node);node.children?.forEach(visit);}visit(tree);shortcuts.forEach(node=>node.props.onClick());
  const escape=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
  function html(node){if(node===null||node===undefined||node===false)return '';if(Array.isArray(node))return node.map(html).join('');if(typeof node!=='object')return escape(node);const attrs=Object.entries(node.props).filter(([key,value])=>!['key','ref','children'].includes(key)&&!key.startsWith('on')&&value!==false&&value!==null&&value!==undefined).map(([key,value])=>' '+(key==='className'?'class':key)+(value===true?'':`="${escape(value)}"`)).join('');return '<'+node.tag+attrs+'>'+node.children.map(html).join('')+'</'+node.tag+'>';}
- return {html:html(tree),css,hints,shortcutCount:shortcuts.length,provenance:{mode:'Actual ARES view function and installed native CSS with explicit hook/session/composer structure fixtures, not an online DSH run',sourceSha256:createHash('sha256').update(source).digest('hex'),cssSha256:createHash('sha256').update(css).digest('hex')}};
+ return {html:html(tree),css,hints,shortcutCount:shortcuts.length,provenance:{mode:source?'Actual ARES view and installed DSH CSS; explicit hook/session/composer ABI fixtures, not an online DSH run':'Actual ARES view and ARES-authored DOM/style ABI fixture; no installed host or online session',sourceKind:source?'installed-host-css':'owned-abi-fixture',sourceSha256:source?createHash('sha256').update(source).digest('hex'):null,cssSha256:createHash('sha256').update(css).digest('hex')}};
 }

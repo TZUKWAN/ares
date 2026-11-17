@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Actual files/handlers and owned headless UI. Native events are explicit protocol fixtures. */
 import {test,before,after} from 'node:test';import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {mkdtempSync,mkdirSync,readFileSync,writeFileSync} from 'node:fs';import {join} from 'node:path';import {tmpdir} from 'node:os';
 import {directRoutes} from './helpers/direct-routes.mjs';import {initializeProject,linkRoot,readProject,changeProject} from '../host/projects.js';import {competitionCatalog} from '../host/catalog.js';

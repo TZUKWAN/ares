@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Regression for already-running hosts whose route table predates FORGE. */
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';

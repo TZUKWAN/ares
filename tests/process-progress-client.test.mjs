@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Owned headless UI against actual production handlers/files; no DSH window or cloud calls. */
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';

@@ -6,13 +6,13 @@ import assert from 'node:assert/strict';
 import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,existsSync,realpathSync} from 'node:fs';
 import {join,resolve,basename,dirname,sep} from 'node:path';
 import {tmpdir} from 'node:os';
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {Client} from '../platforms/shared/node_modules/@modelcontextprotocol/client/dist/index.mjs';
 import {StdioClientTransport} from '../platforms/shared/node_modules/@modelcontextprotocol/client/dist/stdio.mjs';
 
-const output=process.env.ARES_PACKAGE_OUTPUT||'C:/Users/lauze/Documents/Codex/2026-11-02/c/outputs/ARES-跨平台插件-20261113';
+const output=process.env.ARES_PACKAGE_OUTPUT||mkdtempSync(join(process.env.ARES_TEST_ROOT||tmpdir(),'ares-current-packages-'));
 const evidence=mkdtempSync(join(process.env.ARES_TEST_ROOT||tmpdir(),'ares-包重定位 验证-'));
 const sha=value=>createHash('sha256').update(value).digest('hex'),canonical=path=>resolve(path).toLowerCase();
 const readJson=path=>JSON.parse(readFileSync(path,'utf8'));
@@ -97,6 +97,7 @@ async function runtime(packageRoot,host,projectRoot,dataHome,auditRoot){
 }
 
 test('both final ZIPs run from their actual relocated manifests without node_modules and use the extracted checker and UI resources',{timeout:120000},async()=>{
+ if(!process.env.ARES_PACKAGE_OUTPUT)execFileSync(process.execPath,[fileURLToPath(new URL('../scripts/package_plugins.mjs',import.meta.url)),'--out',output],{encoding:'utf8',timeout:60000,windowsHide:true,maxBuffer:65536});
  const metadata=readJson(join(output,'packages.json')),receipts=[];
  try{
   for(const host of ['codex','zcode']){

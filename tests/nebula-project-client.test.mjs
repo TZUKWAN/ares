@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Real project/preview handlers and files; remote frame and chat are explicit UI protocol fixtures. */
 import {test,before,after} from 'node:test';import assert from 'node:assert/strict';import {mkdtempSync,mkdirSync,writeFileSync,readFileSync} from 'node:fs';import {join} from 'node:path';import {tmpdir} from 'node:os';import {createRequire} from 'node:module';
 import {directRoutes} from './helpers/direct-routes.mjs';import {initializeProject,linkRoot,changeProject,readProject} from '../host/projects.js';import {competitionCatalog} from '../host/catalog.js';

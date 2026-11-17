@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Owned headless browser + real production routes/files. No DSH or user windows. */
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';

@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Production app, routes, catalogue and files in owned hidden Chromium.
  * Native composer seats are explicit fixtures; no model, cloud or user window.
  */

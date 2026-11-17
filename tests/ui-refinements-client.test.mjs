@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Actual app, files and production routes. ARES's actual native empty-state
  * view is evaluated with explicit blank-session hooks and input-slot markup.
  * This is a style/interaction fixture, not an online model or native Portal. */

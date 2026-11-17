@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Production drawing/UI and real files in an owned headless browser.
  * Native slots are explicit fixtures; no online model or cloud calls. */
 import {test,before,after} from 'node:test';

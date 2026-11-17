@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Actual official MCP Apps AppBridge + PostMessageTransport, the real portable
  * HTML, and a real official SDK stdio client/server process. Only the host chat
  * and updateModelContext are explicit capture-only fixtures. No model, cloud

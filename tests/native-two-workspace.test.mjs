@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Actual client/client.js, React portals, app.js, editor-session.js and real
  * production editor routes/storage. DSH create/retain/provider/input services are
  * explicit metadata/transport boundary fixtures. No model prompt is sent. */

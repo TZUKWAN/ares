@@ -98,8 +98,11 @@ def inspect(path, fmt=None):
         elif fmt in ('mp4','mov','webm','mp3','wav'):
             probe=shutil.which('ffprobe')
             if not probe: raise ValueError('没有可用 ffprobe，媒体播放/规格尚未验证')
-            p=subprocess.run([probe,'-v','error','-show_streams','-show_format','-of','json',path],capture_output=True,text=True,timeout=30)
-            if p.returncode: raise ValueError('媒体解析失败：'+p.stderr[-300:])
+            # ffprobe emits UTF-8 JSON, independent of Windows' active codepage.
+            # Parse bytes directly; locale text decoding can fail in a reader
+            # thread and leave stdout=None for a perfectly valid Unicode path.
+            p=subprocess.run([probe,'-v','error','-show_streams','-show_format','-of','json',path],capture_output=True,timeout=30)
+            if p.returncode: raise ValueError('媒体解析失败：'+p.stderr.decode('utf-8',errors='replace')[-300:])
             media=json.loads(p.stdout)
             if not media.get('streams'): raise ValueError('媒体没有有效流')
             result['details']=media

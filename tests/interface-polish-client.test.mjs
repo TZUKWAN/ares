@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Real ARES routes/files and rendering. Native HTML/CSS is explicitly a
  * structural fixture from the actual component; no model or cloud execution. */
 import {test, before, after} from 'node:test';

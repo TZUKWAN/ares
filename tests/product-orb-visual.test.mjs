@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Actual rendering and files in owned headless pages; chat is a named protocol fixture. */
 import {test,before,after} from 'node:test';import assert from 'node:assert/strict';import {mkdtempSync,mkdirSync,writeFileSync,readFileSync} from 'node:fs';import {join} from 'node:path';import {tmpdir} from 'node:os';import {createRequire} from 'node:module';
 import {defaults,freezeWorkflow,competitionCatalog} from '../host/catalog.js';import {initializeProject,linkRoot,readProject} from '../host/projects.js';import {directRoutes} from './helpers/direct-routes.mjs';

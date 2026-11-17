@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Explicit native-slot protocol fixtures in owned headless pages; no real DSH/model execution. */
 import {test,before,after} from 'node:test';import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';import {mkdtempSync,mkdirSync,readFileSync,writeFileSync} from 'node:fs';import {join} from 'node:path';import {tmpdir} from 'node:os';
