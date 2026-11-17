@@ -1,3 +1,14 @@
+* text=auto
+*.js text eol=lf
+*.mjs text eol=lf
+*.css text eol=lf
+*.json text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.html text eol=lf
+
 # Preserve upstream license copies and their recorded hashes on every platform.
 # Upstream trailing spaces are retained; whitespace checks still apply to code.
 assets/forge-fonts/*-LICENSE.txt -text -whitespace
