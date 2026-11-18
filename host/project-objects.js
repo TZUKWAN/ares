@@ -3,7 +3,7 @@ import {join,dirname,relative} from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {AresError,hash,readJson,atomicJson,safePath,now} from './storage.js';
 
-const CATEGORIES=new Set(['artifact-versions','releases','events','extension-runs','cloud-candidates']);
+const CATEGORIES=new Set(['artifact-versions','releases','events','extension-runs','cloud-candidates','research-versions','research-catalog']);
 const digest=value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value);
 export function objectPath(root,sha){if(!digest(sha))throw new AresError('作品内容指纹无效');return safePath(root,'.ares/objects/'+sha.slice(0,2)+'/'+sha);}
 export function putProjectObject(root,bytes){

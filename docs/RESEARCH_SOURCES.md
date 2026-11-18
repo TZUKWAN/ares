@@ -1,0 +1,21 @@
+# 研究工具开源来源与许可证
+
+核对位置包括各仓库的固定提交、README、许可原文和相关源码。实现沿用 ARES 的项目权限、扩展审批、事件与对象存储。表中所列参考用法可用于定位设计依据；运行时依赖和模型见下方。
+
+| 仓库与查阅提交 | 上游许可原文 | 查阅内容与采用方式 |
+| --- | --- | --- |
+| [SurveyJS Form Library · 598c0b1](https://github.com/surveyjs/survey-library/tree/598c0b174c63e788956d935970c907535f8d1cac) | [MIT](https://github.com/surveyjs/survey-library/blob/598c0b174c63e788956d935970c907535f8d1cac/LICENSE) | 读 `packages/survey-core/src/{survey,question,page}.ts`，参考状态、条件和模型验证。原生 JavaScript 可接 SurveyJS 渲染层，仍需问卷结构适配与第二套渲染一致性测试。本版用 ARES 自有 JSON 和共享执行引擎，包无 SurveyJS 依赖。 |
+| [SurveyJS Creator · 0841d9b](https://github.com/surveyjs/survey-creator/tree/0841d9bb3ed0db5eeb5f3889cd98efe60d0a8d35) | [商业开发者许可](https://github.com/surveyjs/survey-creator/blob/0841d9bb3ed0db5eeb5f3889cd98efe60d0a8d35/LICENSE) | 读主页和设计器标签、状态、JSON 校验组织。三栏编辑、分页和撤销由 ARES 独立实现。包无 Creator 代码或依赖。 |
+| [Formbricks · d205177](https://github.com/formbricks/formbricks/tree/d20517710f04d00380f571826eb1ed54a96c0669) | [AGPLv3 及目录级例外](https://github.com/formbricks/formbricks/blob/d20517710f04d00380f571826eb1ed54a96c0669/LICENSE) | 参考创建、版本状态与 `apps/web/modules/survey/lib/response.ts` 的答卷边界。交互和生命周期参考，包无 AGPL、企业版或其他 Formbricks 源码。 |
+| [React JSON Schema Form · 627aa9b](https://github.com/rjsf-team/react-jsonschema-form/tree/627aa9b278d92f76a1474ed6d959021344acf79c) | [Apache-2.0](https://github.com/rjsf-team/react-jsonschema-form/blob/627aa9b278d92f76a1474ed6d959021344acf79c/LICENSE.md) | 参考 `Form.tsx` 与 `fields/SchemaField.tsx` 的字段渲染、验证和错误区分。ARES 保持原生 DOM，包无 RJSF 依赖。 |
+| [Buzz · 9eb089a](https://github.com/chidiwilliams/buzz/tree/9eb089a5f0f720a35bf1664c6e38f80fad6e3986) | [MIT](https://github.com/chidiwilliams/buzz/blob/9eb089a5f0f720a35bf1664c6e38f80fad6e3986/LICENSE) | 参考转写和片段 DAO、`buzz/file_transcriber_queue_worker.py` 与主界面的播放器/编辑方式。ARES 自建媒体字段、分段定位及任务回执。 |
+| [faster-whisper · 6cb639e](https://github.com/SYSTRAN/faster-whisper/tree/6cb639e70786aea42b9233006ae60eaf07190bdb) | [MIT](https://github.com/SYSTRAN/faster-whisper/blob/6cb639e70786aea42b9233006ae60eaf07190bdb/LICENSE) | 查 `faster_whisper/transcribe.py`、`utils.py`。可选本机 Python 包，实际验收 1.2.1，发布包不封装权重或 Python 包。 |
+| [WhisperX · b904f02](https://github.com/m-bain/whisperX/tree/b904f02b7e1f26fd10fb04840d655ff27e88e464) | [BSD-2-Clause](https://github.com/m-bain/whisperX/blob/b904f02b7e1f26fd10fb04840d655ff27e88e464/LICENSE) | 核对 `whisperx/alignment.py` 与 `whisperx/diarize.py`。可选本机词级对齐和说话人管线，模型许可单独处理。真实对齐和分离待有许可的本机环境。 |
+| [QualCoder · 58d011f](https://github.com/ccbogel/QualCoder/tree/58d011f1418cc00fbd028c61775b87f4c82347b3) | [LGPL-3.0](https://github.com/ccbogel/QualCoder/blob/58d011f1418cc00fbd028c61775b87f4c82347b3/LICENSE.txt) | 读 `src/qualcoder/codebook.py`、`code_text.py`、`report_codes.py`。参考分层编码、原文证据与报告。ARES 独立实现编码记录、版本与矩阵。 |
+| [doccano · ab6b765](https://github.com/doccano/doccano/tree/ab6b765ea326d07b2b806a4280cd097565e62321) | [MIT](https://github.com/doccano/doccano/blob/ab6b765ea326d07b2b806a4280cd097565e62321/LICENSE) | 阅读 `backend/examples/models.py`、标签与数据导出代码。参考有位置的标注、人工确认和可追溯导出。 |
+| [huggingface_hub · e0362b9](https://github.com/huggingface/huggingface_hub/tree/e0362b934eb8b73149db5cdaf528093c3eac4de4) | [Apache-2.0](https://github.com/huggingface/huggingface_hub/blob/e0362b934eb8b73149db5cdaf528093c3eac4de4/LICENSE) | 查 `hf_api.py`、`file_download.py` 的检索、提交树和下载。ARES 通过官方 HTTPS 请求结构自行发起流式传输，包无 HF SDK。 |
+| [kagglehub · 03c1f54](https://github.com/Kaggle/kagglehub/tree/03c1f544fb5e87019f5d77e4fc129455aa573278) | [Apache-2.0](https://github.com/Kaggle/kagglehub/blob/03c1f544fb5e87019f5d77e4fc129455aa573278/LICENSE) | 查 `datasets.py`、`http_resolver.py`、`auth.py` 与上游下载端点测试。另核对 [Kaggle 官方 SDK · 46efde2](https://github.com/Kaggle/kaggle-sdk-python/tree/46efde203816039e34205bb6cd62ad57d946c25a) 的 `DatasetApiService`、JSON 字段和主机。ARES 按版本下载选定文件，无 Kaggle SDK 运行依赖。 |
+
+参考仓库的源码和权重没有随 ARES 再分发。单独分发可选的 faster-whisper 或 WhisperX，应随对应的软件附上许可原文与版权声明。依赖的 FFmpeg、Python 库、模型和数据集各按其发布者的实际许可证和使用条件安装和使用。Whisper small 模型声明 MIT。WhisperX 示例用的 pyannote 社区模型声明 CC BY 4.0，访问时还需接受提供方条件。不同语种对齐模型以其各自模型卡为准。[Whisper small 模型卡](https://huggingface.co/Systran/faster-whisper-small) · [pyannote 模型卡](https://huggingface.co/pyannote/speaker-diarization-community-1)
+
+研究工具的前端不加载上述服务的远程脚本。相应搜索与下载由用户明确授权，通过后台使用各提供方 API。其他原有媒体、字体和 MCP 运行时的许可见 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。

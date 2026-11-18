@@ -11,3 +11,7 @@ ARES 原创代码的许可见根目录 [LICENSE](LICENSE)。这个许可不替�
 | MCP Apps 页面 SDK 与依赖 | [页面清单](platforms/ui/THIRD_PARTY.json)、`platforms/ui/licenses/` | 许可清单与正文随便携页面和两套插件包提供 |
 
 原许可证、版权行和媒体保持原字节。源码仓库公开可见不改变这些条款。本轮未取得额外商业授权，也未将本地验收包提交到公共插件市场。
+
+## Research tool references
+
+The research center's source review, licenses, optional Python tools, model terms and provider APIs are recorded in [Research source notes](docs/RESEARCH_SOURCES.md). No survey designer, qualitative-analysis code or model weights from these references are included in this package.

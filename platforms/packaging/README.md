@@ -2,6 +2,10 @@
 
 与DSH运行版共用竞赛目录、流程、项目、作品和版本业务核心。Codex/ZCode使用各自原生助手与工具，插件不另接模型API、不自动安装其他MCP，也不默认写入DSH的数据目录。
 
+## 研究设计建议
+
+在项目范围内用 `ares_project` 的 `research` 读取问卷、提纲与编码建议结构，用 `research-proposal` 保存待审版本。完整研究编辑、转写和数据资源操作在 DSH 项目内的研究工具工作台。参见[研究工具手册](docs/RESEARCH_TOOLS.md)。
+
 ## 安装
 
 需要Node.js 20或以上；本轮实测环境为Windows、Node.js v25.6.0。Office/PDF等检查仍按原ARES文档需要对应Python工具。服务器与页面SDK已随包自包含，无须为了运行再执行npm install。

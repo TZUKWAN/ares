@@ -15,7 +15,7 @@ const excluded=new Set(['node_modules','.git','.claude','__pycache__']);
 function descendants(directory){const values=[];for(const row of readdirSync(directory,{withFileTypes:true})){if(excluded.has(row.name))continue;const path=join(directory,row.name);if(row.isSymbolicLink())throw Error('Refusing package symlink: '+path);if(row.isDirectory())values.push(...descendants(path));else if(row.isFile())values.push(path);}return values;}
 const common=new Map();
 for(const directory of ['host','client','assets','data','skills','scripts','platforms/shared','platforms/ui','platforms/ui-tools','platforms/packaging','platforms/skills'])for(const path of descendants(join(source,directory))){const name=relative(source,path).replaceAll('\\','/');if(name.endsWith('.test.mjs'))continue;common.set(name,readFileSync(path));}
-for(const path of ['platforms/ui-server.mjs'])common.set(path,readFileSync(join(source,path)));
+for(const path of ['platforms/ui-server.mjs','docs/RESEARCH_TOOLS.md','docs/RESEARCH_SOURCES.md'])common.set(path,readFileSync(join(source,path)));
 for(const path of ['LICENSE','LICENSE.md','LICENSE.txt','THIRD_PARTY_NOTICES.md'])if(existsSync(join(source,path)))common.set(path,readFileSync(join(source,path)));
 common.set('skills/ares/SKILL.md',readFileSync(join(source,'platforms/skills/ares/SKILL.md')));
 common.set('README.md',readFileSync(join(source,'platforms/packaging/README.md')));
