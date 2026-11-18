@@ -1,3 +1,19 @@
+.ares-app.ares-system .work-header > .ares-project-research {
+  flex: none;
+  white-space: nowrap;
+  min-height: 34px;
+  padding: 7px 11px;
+  font-size: 13px;
+}
+@container ares-work-scene (max-width: 640px) {
+  .ares-app.ares-system .work-header > .ares-project-research {
+    align-self: flex-start;
+    margin-top: 2px;
+    padding-inline: 7px;
+  }
+  .ares-app.ares-system .work-header > .ares-project-research svg { display: none; }
+}
+
 /* ARES research workspace. Keep the resident conversation in its own grid column. */
 .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console.is-research {
   left: 12px;
