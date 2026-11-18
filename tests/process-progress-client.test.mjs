@@ -1,3 +1,6 @@
+import {capture} from './helpers/capture.mjs';
+import {projectTab as currentProjectTab,projectFlow,refresh} from './helpers/workbench-navigation.mjs';
+import {sceneBrowserArgs} from './helpers/environment.mjs';
 /** Owned headless UI against actual production handlers/files; no DSH window or cloud calls. */
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
@@ -21,7 +24,7 @@ initial=captureDraft({root,expectedRevision:initial.revision,stepId:'context'});
 const versionId=initial.workbench.artifacts.inventory.currentVersionId;
 const api=directRoutes(),origin='http://127.0.0.1:64330',errors=[],unexpected=[];
 const {chromium}=createRequire(import.meta.url)(process.env.ARES_PLAYWRIGHT_PACKAGE);let browser;
-before(async()=>{browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});});
+before(async()=>{browser=await chromium.launch({headless:true,args:sceneBrowserArgs});});
 after(async()=>{api.dispose();await browser?.close();});
 
 async function pageFor({oldBackend=false}={}){
@@ -38,7 +41,7 @@ async function pageFor({oldBackend=false}={}){
  await page.goto(origin);await page.locator('#root[data-galaxy-ready=true]').waitFor();await page.evaluate(()=>document.fonts.ready);return page;
 }
 const noDialog=page=>page.getByRole('dialog').waitFor({state:'hidden'});
-async function projectTab(page,id){const menu=page.locator(".galaxy-more");if(await menu.getAttribute("open")===null)await menu.locator("summary").click();await menu.locator("[data-action=project-tab][data-id="+id+"]").click();}
+async function projectTab(page,id){await currentProjectTab(page,id);}
 async function click(page,action){let target=page.getByRole('dialog').locator('[data-action="'+action+'"]').filter({visible:true});if(!await target.count())target=page.locator('.galaxy-console [data-action="'+action+'"]').filter({visible:true});if(!await target.count())target=page.locator('[data-action="'+action+'"]').filter({visible:true});await target.first().click();}
 
 test('real progress UI saves a member, assignment, deadlines, sourced work and evidence without accepting the step',async()=>{
@@ -73,16 +76,16 @@ test('real progress UI saves a member, assignment, deadlines, sourced work and e
   assert.match(await page.locator('.process-activity').filter({hasText:summary}).textContent(),/软件队员甲.*负责人登记/s);
   assert.match(await page.locator('[data-progress-step=context]').textContent(),/已登记待检查/);
   const effectsAfter=await page.evaluate(()=>window.app.inspectGalaxy().effects);assert.equal(effectsAfter.seen,effectsBefore.seen+1);assert.equal(effectsAfter.queued,effectsBefore.queued+1);
-  await page.locator('.galaxy-more>summary').click();await page.locator('.galaxy-commandbar [data-action=refresh]').click();await page.locator('.process-progress').waitFor();
+  await refresh(page);await page.locator('.process-progress').waitFor();
   assert.deepEqual(await page.evaluate(()=>window.app.inspectGalaxy().effects),effectsAfter);
-  await page.screenshot({path:join(base,'progress.png')});
-  await page.getByRole('button',{name:'返回星河',exact:true}).click();
+  await capture(page,join(base,'progress.png'));
+  await page.getByRole('button',{name:'返回项目',exact:true}).click();
   await page.mouse.move(4,980);await page.emulateMedia({reducedMotion:'no-preference'});
   await page.locator('.process-activity-caption').waitFor({state:'visible'});assert.match(await page.locator('.process-activity-caption').textContent(),/软件队员甲.*负责人登记.*整理了测试目录/s);
-  await page.screenshot({path:join(base,'actual-activity.png')});await page.emulateMedia({reducedMotion:'reduce'});
+  await capture(page,join(base,'actual-activity.png'));await page.emulateMedia({reducedMotion:'reduce'});
   await page.locator('.process-member[data-id="'+member.id+'"]').click();
   await page.getByRole('dialog').locator('[data-action=work-participant-details]').click();await page.locator('.process-member-detail').waitFor();assert.match(await page.locator('.process-member-detail').textContent(),/软件队员甲.*负责人登记.*整理了测试目录/s);
-  await page.screenshot({path:join(base,'member.png')});
+  await capture(page,join(base,'member.png'));
   const bytes=readFileSync(join(root,'.ares/project.json'));
   await page.locator('.process-member-detail [data-action=scene-activity-replay]').click();
   assert.equal(await page.locator('.ff-scene').getAttribute('data-activity-mode'),'history-replay');
@@ -90,14 +93,14 @@ test('real progress UI saves a member, assignment, deadlines, sourced work and e
   assert.equal((await page.evaluate(()=>window.app.inspectGalaxy().effects)).replay,true);
   await page.mouse.move(4,980);await page.emulateMedia({reducedMotion:'no-preference'});await page.waitForTimeout(350);
   assert.match(await page.locator('.process-activity-caption').textContent(),/历史回放/);
-  const moving=await page.evaluate(()=>window.app.inspectGalaxy());assert.equal(moving.renderStats.glError,0);assert.ok(moving.orbitTime>0);assert.equal(moving.renderStats.memberNodes,2);
-  await page.screenshot({path:join(base,'activity-replay.png')});
+  const moving=await page.evaluate(()=>window.app.inspectGalaxy());assert.equal(moving.renderer,'reference-video-canvas');assert.equal(moving.renderStats.glError,null);assert.ok(moving.orbitTime>0);assert.equal(moving.renderStats.memberNodes,2);
+  await capture(page,join(base,'activity-replay.png'));
   await page.emulateMedia({reducedMotion:'reduce'});
   assert.deepEqual(readFileSync(join(root,'.ares/project.json')),bytes);
   await page.setViewportSize({width:390,height:844});
   await projectTab(page,'progress');await page.locator('.process-progress').waitFor();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
-  await page.screenshot({path:join(base,'progress-mobile.png')});
+  writeFileSync(join(base,'mobile-render-state.json'),JSON.stringify(await page.evaluate(()=>({scene:window.app.inspectGalaxy(),canvases:[...document.querySelectorAll('canvas')].map(n=>({w:n.width,h:n.height,box:n.getBoundingClientRect().toJSON()})),animations:document.getAnimations().map(a=>({id:a.id,state:a.playState}))})),null,2));await capture(page,join(base,'progress-mobile.png'));
   assert.deepEqual(errors,[]);assert.deepEqual(unexpected,[]);
   writeFileSync(join(base,'evidence.json'),JSON.stringify({root,record,plannedRevision:planned.revision,finalRevision:after.revision,effectsBefore,effectsAfter,moving,accepted:after.progress.done},null,2));
   console.log('PROCESS_PROGRESS_UI_EVIDENCE',base);
@@ -119,7 +122,7 @@ test('an old host without the new progress route still opens real steps and prog
 
 test('progress polling resumes after another in-scene editor, and discovers a real later owner record once',async()=>{
  const page=await pageFor();try{
-  await page.locator('.galaxy-nav [data-action=page][data-id=studio]').click();
+  await projectFlow(page);
   await page.waitForTimeout(5200);
   const current=readProject(root),member=current.workbench.team.find(row=>row.name==='软件队员甲'),summary='后台读回验证：负责人登记的后续说明，不代表云端实时身份。';
   const response=await api.request('project/progress/work',{root,expectedRevision:current.revision,requestId:'poll-cycle-request-0001',memberId:member.id,stepId:'context',kind:'update',summary});assert.equal(response.status,200);

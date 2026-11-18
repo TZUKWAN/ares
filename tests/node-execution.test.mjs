@@ -10,6 +10,14 @@ test('native node instructions resolve the real output directory instead of the 
 
 test('recovered work with failed commands stays visibly flagged and unknown outcomes cannot be passed',()=>{const proof={completed:true,checksPassed:true,calls:[{status:'succeeded'}],jobs:[{status:'completed',detail:'exit code: 0'}]};assert.equal(nodeCompletionStatus(proof),'awaiting-review');assert.equal(nodeCompletionStatus({...proof,jobs:[{status:'completed',detail:'exit code: 1'}]}),'awaiting-review-with-warnings');assert.equal(nodeCompletionStatus({...proof,calls:[{status:'succeeded'},{status:'failed'}]}),'awaiting-review-with-warnings');assert.equal(nodeCompletionStatus({...proof,calls:[{status:'succeeded'},{status:'unknown'}]}),'failed');assert.equal(nodeCompletionStatus({...proof,checksPassed:false}),'failed');});
 
+test('unexpected call states and a terminal exit with no number cannot become a completed run',()=>{
+ const proof={completed:true,checksPassed:true,calls:[{status:'succeeded'}],jobs:[]};
+ for(const status of [undefined,'running','unrecognized-result'])assert.equal(nodeCompletionStatus({...proof,calls:[...proof.calls,{status}]}),'failed');
+ assert.equal(nodeCompletionStatus({...proof,jobs:[{status:'completed',detail:'exit code: unknown'}]}),'failed');
+ // A non-terminal job's native completed status does not invent a process exit.
+ assert.equal(nodeCompletionStatus({...proof,jobs:[{status:'completed',detail:'Non-terminal task completed'}]}),'awaiting-review');
+});
+
 test('the requested native extension input matches actual immutable JSON despite key ordering, and refuses altered input',()=>{const f=fixture(),stored=putProjectObject(f.root,Buffer.from(JSON.stringify({limit:12,file_path:'owned-software-file.md'})));assert.equal(nodeExtensionInputMatches(f.root,stored.sha256,{file_path:'owned-software-file.md',limit:12}),true);assert.equal(nodeExtensionInputMatches(f.root,stored.sha256,{file_path:'other.md',limit:12}),false);});
 
 test('a pending native-service protocol request can be cancelled once, refuses duplicate launch and preserves another user request',async()=>{

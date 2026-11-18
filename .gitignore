@@ -21,6 +21,7 @@ Thumbs.db
 
 # Local dependencies, assistant state and private working data
 node_modules/
+.cache/
 .claude/
 .codex/
 .dsh/

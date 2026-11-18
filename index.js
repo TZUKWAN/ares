@@ -1,6 +1,6 @@
 import {builtInSkills} from './host/catalog.js?v=2.3.0-directory1';
 import {createNativeCatalog} from './host/native.js?v=2.3.0-directory1';
-import {createRoutes} from './host/routes.js?v=2.3.0-directory1';
+import {createRoutes} from './host/routes.js?v=2.3.0-research1';
 import {createAssistant} from './host/assistant.js?v=2.3.0-directory1';
 import {startHealthRequest} from './host/health-request.js?v=2.3.0-directory1';
 import {createNodeExecution} from './host/node-execution.js?v=2.3.0-directory1';

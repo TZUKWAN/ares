@@ -1,182 +1,758 @@
 {
- "competition_id": 83,
- "competition_name": "美国大学生数学建模竞赛",
- "judging_dimensions": [
-  {
-   "dimension": "Summary Sheet（摘要页质量）",
-   "weight": "初评决定性维度（约25%，triage主要依据）【推断】",
-   "official_wording": "COMAP官方MCM竞赛说明原文：'The summary is an essential part of your MCM/ICM paper and should appear as the first page of your solution report. The judges place considerable weight on the summary, and winning papers are often distinguished from other papers based on the quality of the summary.'初评分档权重为【推断：由'triage轮评委每篇仅数分钟、主要读摘要'的评审惯例（COMAP评委培训及UMAP Journal评委评语）推定】。",
-   "scoring_points": [
-    "一页以内：重述问题并澄清模糊概念、给出关键假设、建模思路、主要结果（带具体数字）、敏感性分析结论、优缺点自评",
-    "让评委不读全文即可复述你的模型与结论",
-    "逻辑链完整（问题-假设-模型-结果-结论），使用逻辑词衔接而非整段加粗",
-    "摘要必须最后写；照抄问题重述或与正文脱节是典型弱摘要"
-   ],
-   "common_deductions": [
-    "摘要只复述题目、无方法与定量结果（triage直接出局的最常见原因）",
-    "摘要超一页",
-    "摘要结论与正文结果不一致"
-   ]
-  },
-  {
-   "dimension": "假设与建模（Assumptions & Justification / Model）",
-   "weight": "约35%（模型合理性约30%+创造性约5%）【推断】",
-   "official_wording": "官方说明原文：'MCM/ICM judges are primarily interested in the team's thought processes, analysis of the problem, modeling approaches, and mathematical methods'，并要求'State and justify reasonable assumptions that bear on the problem'。中文圈通行'假设的合理性、建模的创造性'两维来自全国大学生数学建模竞赛评审原则的同构迁移（mcmicm.org.cn给出'模型合理性30%'等口径，属第三方转述）；百分比归并为【推断：参照AMS JMM 2021 MCM总监报告公开评分表（Executive Summary/Assumptions & Justification/Model-Value Added等栏）与UMAP Journal评委评语推定】。",
-   "scoring_points": [
-    "假设必要、合理、逐条给出依据，并说明其对模型的影响",
-    "模型选择有motivation：为何适用、与问题结构匹配",
-    "方法灵活开放、不限于单一套路；O奖常体现多模型互补或递进（从简单基准到改进模型）",
-    "MCM A题偏连续/微分方程、B题偏离散/运筹、C题偏数据分析，方法须与题型匹配"
-   ],
-   "common_deductions": [
-    "假设无依据清单式罗列、假设与模型脱节",
-    "直接套模板模型（如万能用神经网络/层次分析法）无针对性",
-    "模型与数据错配：C题不清洗数据、乱用黑箱模型不可解释"
-   ]
-  },
-  {
-   "dimension": "结果、检验与敏感性分析",
-   "weight": "约25%【推断】",
-   "official_wording": "官方说明要求'Present an analysis of the problem, motivating or justifying the model being used'并提交'analysis of your findings'；'Solutions are judged as varying degrees of successfully completing the contest'。UMAP Journal评委评语反复强调'better submissions explicitly discussed why key assumptions were made and how assumptions affected the model...stronger submissions presented...'敏感性检验；权重为【推断】。",
-   "scoring_points": [
-    "回答题目全部要求的问题（完整响应所有子问题）",
-    "结果给出定量答案并做合理性讨论",
-    "敏感性分析/误差分析/稳定性检验：说明结论对关键参数的依赖",
-    "给出模型优缺点（strengths and weaknesses）与改进方向"
-   ],
-   "common_deductions": [
-    "漏答子问题、只解第一问",
-    "结果无检验、数字来源不可复现",
-    "敏感性分析流于形式（只改一步画一张图）"
-   ]
-  },
-  {
-   "dimension": "表述清晰度（Exposition）与规范",
-   "weight": "约15%【推断】",
-   "official_wording": "官方要求全英文、至少12号可读字体、每页页眉含队号与页码、不出现任何身份信息；'MCM/ICM judges are primarily interested in the team's thought processes...'暗示表述承载思维展示。权重为【推断：参照评委评语'清晰完整回应所有要求'的重要程度推定】。",
-   "scoring_points": [
-    "结构规范：Summary Sheet、目录、问题重述、假设、符号说明、模型、求解、检验、优缺点、结论、参考文献、附录",
-    "图表专业自明：编号、标题、轴标签齐全，图优于表、表优于大段文字",
-    "全文无学校/姓名信息，仅以控制号（Control Number）标识",
-    "如实申报AI使用：文末附Report on Use of AI（不计入25页）"
-   ],
-   "common_deductions": [
-    "全文排版混乱、图表无编号或模糊",
-    "论文中出现姓名/学校等身份信息（违规划入Disqualified风险）",
-    "使用AI未申报，或整段AI生成内容被查重判抄袭"
-   ]
+  "competition_id": 83,
+  "competition_name": "美国大学生数学建模竞赛",
+  "judging_dimensions": [
+    {
+      "dimension": "Summary Sheet（摘要页质量）",
+      "weight": "初评决定性维度（约25%，triage主要依据）【推断】",
+      "official_wording": "COMAP官方MCM竞赛说明原文：'The summary is an essential part of your MCM/ICM paper and should appear as the first page of your solution report. The judges place considerable weight on the summary, and winning papers are often distinguished from other papers based on the quality of the summary.'初评分档权重为【推断：由'triage轮评委每篇仅数分钟、主要读摘要'的评审惯例（COMAP评委培训及UMAP Journal评委评语）推定】。",
+      "scoring_points": [
+        "一页以内：重述问题并澄清模糊概念、给出关键假设、建模思路、主要结果（带具体数字）、敏感性分析结论、优缺点自评",
+        "让评委不读全文即可复述你的模型与结论",
+        "逻辑链完整（问题-假设-模型-结果-结论），使用逻辑词衔接而非整段加粗",
+        "摘要必须最后写；照抄问题重述或与正文脱节是典型弱摘要"
+      ],
+      "common_deductions": [
+        "摘要只复述题目、无方法与定量结果（triage直接出局的最常见原因）",
+        "摘要超一页",
+        "摘要结论与正文结果不一致"
+      ]
+    },
+    {
+      "dimension": "假设与建模（Assumptions & Justification / Model）",
+      "weight": "约35%（模型合理性约30%+创造性约5%）【推断】",
+      "official_wording": "官方说明原文：'MCM/ICM judges are primarily interested in the team's thought processes, analysis of the problem, modeling approaches, and mathematical methods'，并要求'State and justify reasonable assumptions that bear on the problem'。中文圈通行'假设的合理性、建模的创造性'两维来自全国大学生数学建模竞赛评审原则的同构迁移（mcmicm.org.cn给出'模型合理性30%'等口径，属第三方转述）；百分比归并为【推断：参照AMS JMM 2021 MCM总监报告公开评分表（Executive Summary/Assumptions & Justification/Model-Value Added等栏）与UMAP Journal评委评语推定】。",
+      "scoring_points": [
+        "假设必要、合理、逐条给出依据，并说明其对模型的影响",
+        "模型选择有motivation：为何适用、与问题结构匹配",
+        "方法灵活开放、不限于单一套路；O奖常体现多模型互补或递进（从简单基准到改进模型）",
+        "MCM A题偏连续/微分方程、B题偏离散/运筹、C题偏数据分析，方法须与题型匹配"
+      ],
+      "common_deductions": [
+        "假设无依据清单式罗列、假设与模型脱节",
+        "直接套模板模型（如万能用神经网络/层次分析法）无针对性",
+        "模型与数据错配：C题不清洗数据、乱用黑箱模型不可解释"
+      ]
+    },
+    {
+      "dimension": "结果、检验与敏感性分析",
+      "weight": "约25%【推断】",
+      "official_wording": "官方说明要求'Present an analysis of the problem, motivating or justifying the model being used'并提交'analysis of your findings'；'Solutions are judged as varying degrees of successfully completing the contest'。UMAP Journal评委评语反复强调'better submissions explicitly discussed why key assumptions were made and how assumptions affected the model...stronger submissions presented...'敏感性检验；权重为【推断】。",
+      "scoring_points": [
+        "回答题目全部要求的问题（完整响应所有子问题）",
+        "结果给出定量答案并做合理性讨论",
+        "敏感性分析/误差分析/稳定性检验：说明结论对关键参数的依赖",
+        "给出模型优缺点（strengths and weaknesses）与改进方向"
+      ],
+      "common_deductions": [
+        "漏答子问题、只解第一问",
+        "结果无检验、数字来源不可复现",
+        "敏感性分析流于形式（只改一步画一张图）"
+      ]
+    },
+    {
+      "dimension": "表述清晰度（Exposition）与规范",
+      "weight": "约15%【推断】",
+      "official_wording": "官方要求全英文、至少12号可读字体、每页页眉含队号与页码、不出现任何身份信息；'MCM/ICM judges are primarily interested in the team's thought processes...'暗示表述承载思维展示。权重为【推断：参照评委评语'清晰完整回应所有要求'的重要程度推定】。",
+      "scoring_points": [
+        "结构规范：Summary Sheet、目录、问题重述、假设、符号说明、模型、求解、检验、优缺点、结论、参考文献、附录",
+        "图表专业自明：编号、标题、轴标签齐全，图优于表、表优于大段文字",
+        "全文无学校/姓名信息，仅以控制号（Control Number）标识",
+        "如实申报AI使用：文末附Report on Use of AI（不计入25页）"
+      ],
+      "common_deductions": [
+        "全文排版混乱、图表无编号或模糊",
+        "论文中出现姓名/学校等身份信息（违规划入Disqualified风险）",
+        "使用AI未申报，或整段AI生成内容被查重判抄袭"
+      ]
+    }
+  ],
+  "deliverable_requirements": [
+    {
+      "item": "完整论文（含Summary Sheet）",
+      "format": "Adobe PDF电子文件，英文，≥12号可读字体，全文≤25页（摘要、正文、附录、代码、参考文献全部计入），文件以队号命名（如0000000.pdf），≤25MB",
+      "page_limit": "25页（含一切）；AI使用报告附后不计页数",
+      "deadline_note": "赛期约4天（2026年为2月9-13日）；美东时间截止日晚9点前经官网提交"
+    },
+    {
+      "item": "Summary Sheet",
+      "format": "论文第一页，一页摘要，含队号、题号、摘要全文",
+      "page_limit": "1页",
+      "deadline_note": "随论文同时提交"
+    },
+    {
+      "item": "Report on Use of AI",
+      "format": "列于参考文献后的AI使用申报章节",
+      "page_limit": "不计入25页",
+      "deadline_note": "随论文同时提交"
+    },
+    {
+      "item": "提交确认",
+      "format": "官网在线提交系统",
+      "page_limit": "未明确",
+      "deadline_note": "逾期不受理；提交后不可更改"
+    }
+  ],
+  "process_stages": [
+    {
+      "stage": "报名组队",
+      "format": "指导教师经官网注册，团队1-3人同校组队，缴费后获取控制号",
+      "notes": "赛前数周截止；MCM/ICM合并称'美赛'，按题分组：MCM为A/B/C题，ICM为D/E/F题"
+    },
+    {
+      "stage": "比赛期（约96小时）",
+      "format": "线上自主选题作答，任选A-F一题，期间可查资料但队内独立完成",
+      "notes": "2月上旬举行；下载赛题、建模、写作、提交一体完成"
+    },
+    {
+      "stage": "评审（多轮triage）",
+      "format": "初审triage评委快速分档（重点读摘要与结构）→ 复评细读打分 → 终审：O奖须经全体评委、竞赛总监与执行总监一致认可",
+      "notes": "数轮'持续评审'；COMAP不提供复议（no rejudge）"
+    },
+    {
+      "stage": "放榜与发表",
+      "format": "官网公布各题Outstanding名单及特设奖（SIAM、INFORMS、ASA、Frank Giordano等），O奖论文收录于UMAP Journal'专家评语'",
+      "notes": "约赛后2-3个月（2026届结果5月8-9日公布）"
+    }
+  ],
+  "review_format": "全球统一英文论文盲评：多轮triage筛选按Successful Participant→Honorable Mention→Meritorious→Finalist→Outstanding分档，O奖需评审层全票一致认可。",
+  "judge_preferences": [
+    "摘要是生死线：评委每篇初评时间极短（常≤10分钟），摘要须自含完整方法与定量结论",
+    "偏爱完整、自洽、可复现的工作而非炫技：回答全部子问题+敏感性分析+优缺点反思",
+    "假设要给出理由并讨论其影响，模型选择要有动机",
+    "图表达专业、论文结构清晰；OM奖论文常被作为范文展示图表叙事",
+    "方法与题型匹配：C题重数据清洗、可视化与统计/机器学习合理性，A/B题重机理建模与优化"
+  ],
+  "past_winning_patterns": [
+    "O奖率仅约0.1%-0.2%（业内常引0.14%-0.16%），F奖紧随其后；O奖论文均为'摘要-建模-检验-写作'四强俱佳的全面型，无短板",
+    "近三年O奖选题分布：2024年A题'资源可得性与海七鳃鳗性别比'（生态机理+微分方程/概率模型）、B题'搜寻失联潜艇'（贝叶斯搜索/最优化）、C题'网球动量'（温网数据+序列分析），2025年C题'奥运奖牌表建模'（外推2028洛杉矶：分层/贝叶斯/组合预测），以O奖夺冠的论文普遍给出多模型对比+敏感性检验+清晰可视化",
+    "O奖论文普遍结构完整：一页强摘要（含具体数字结论）、假设逐条论证、模型递进（简单基准→改进模型）、敏感性分析、明确的Strengths & Weaknesses一节",
+    "C题（数据洞察）O奖极重视数据清洗透明度与图表质量；A/B题O奖重视机理推导与求解方法论证；F/E等ICM政策题O奖重视政策建议的可操作性与模型支撑",
+    "近年O奖中中国队占比高，且特设奖（SIAM/INFORMS/ASA/Frank Giordano）常与O奖同队产生；获奖论文全部公开于COMAP与UMAP Journal，备赛可精读近三年各题O奖范文提炼图表与摘要写法",
+    "合规成为硬门槛：2024年起强制AI使用报告，查重趋严，O奖论文均规范申报AI辅助且正文原创性高"
+  ],
+  "forbidden_or_risky": [
+    "不得在论文任何位置出现姓名、学校等身份信息，仅以控制号标识",
+    "与他人讨论赛题、求助校外人员代做、购买论文属违规，可判Disqualified/Unsuccessful",
+    "使用AI必须如实申报（Report on Use of AI），未申报或全文AI生成按学术不端处理",
+    "超过25页限制、摘要超1页、非PDF或超25MB可能影响评审或被判不合格",
+    "COMAP不接受改判申请（no rejudge），违规认定以官方终裁为准"
+  ],
+  "sources": [
+    {
+      "title": "COMAP官方——MCM: The Mathematical Contest in Modeling（竞赛说明：摘要页、25页限制、评审口径、奖项等级）",
+      "url": "https://www.contest.comap.com/undergraduate/contests/mcm/instructions.php",
+      "accessed": "2026-09-28",
+      "authority": "A"
+    },
+    {
+      "title": "COMAP——MCM/ICM Info Session Recording, Resources & FAQs（多轮评审、不改判）",
+      "url": "https://www.comap.org/blog/item/mcm-icm-info-session-recording-resources-faqs",
+      "accessed": "2026-09-28",
+      "authority": "A"
+    },
+    {
+      "title": "AMS JMM 2021——MCM Director's Overview（公开评分表：Executive Summary/Assumptions & Justification/Model-Value Added等）",
+      "url": "https://meetings.ams.org",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    },
+    {
+      "title": "The UMAP Journal Vol.33 No.3（2012 O奖论文与评委评语：假设论证与敏感性分析的评委标准）",
+      "url": "https://www.scribd.com/document/332/Umap-journal-vol33",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    },
+    {
+      "title": "知乎专栏——美赛的O/F/M奖都是怎么评出来的？评审到底看什么？",
+      "url": "https://zhuanlan.zhihu.com",
+      "accessed": "2026-09-28",
+      "authority": "C"
+    },
+    {
+      "title": "mcmicm.org.cn——美赛获奖价值与2026规则变化（四维度权重口径，第三方转述）",
+      "url": "https://mcmicm.org.cn",
+      "accessed": "2026-09-28",
+      "authority": "C"
+    }
+  ],
+  "confidence": "low",
+  "last_updated": "2026-09-28",
+  "notes": "官方（COMAP instructions/FAQ）明确：摘要页权重'considerable weight'、25页上限、五级奖项、评委关注思维过程/问题分析/建模方法/数学方法、AI申报要求、多轮评审不改判。四维惯例（假设合理性/建模创造性/结果正确性/表述清晰度）源自全国大学生数学建模竞赛评审原则的通行迁移，为业界共识但非COMAP明文；各维度百分比除摘要页定性地位外均为【推断】，其中mcmicm.org.cn'模型合理性30%'为第三方口径仅作参照。O奖率0.1%-0.2%为多来源（CSDN、知乎、高校新闻）一致数字。近三年赛题中2024 A/B/C与2025 C经英文文献（ResearchGate、Scribd）核实，2026届（2月9-13日比赛、5月8-9日放榜）以COMAP官网结果页为准。",
+  "provenance": {
+    "schemaVersion": 1,
+    "assessedAt": "2026-11-18",
+    "method": "field-inventory-and-source-status-audit; no original-clause verification",
+    "legacyConfidence": "high",
+    "scope": {
+      "competitionId": 83,
+      "edition": null,
+      "tracks": [],
+      "groups": []
+    },
+    "ruleVersion": "2026-09-28",
+    "sourceChecks": [
+      {
+        "id": "source-1",
+        "urlSha256": "ddcf1da9f4305bc61eaf2700e242c1d9ec63804c502aeb028013257afab34dba",
+        "locatorKind": "document",
+        "state": "unverified"
+      },
+      {
+        "id": "source-2",
+        "urlSha256": "9123473fb80aab8d53d06a60ca8f90e39b8b801af75b26847c9e1285c9e77232",
+        "locatorKind": "document",
+        "state": "unverified"
+      },
+      {
+        "id": "source-3",
+        "urlSha256": "0ab4763aca4f69a6b136f7c465adb63bee2a1c6061284187ebcfedb8f2f82625",
+        "locatorKind": "homepage",
+        "state": "unverified"
+      },
+      {
+        "id": "source-4",
+        "urlSha256": "c744a7d65a41e657ee407d539e61328f487875d88be926f3b1bdc54ff84e8bea",
+        "locatorKind": "document",
+        "state": "unverified"
+      },
+      {
+        "id": "source-5",
+        "urlSha256": "c663939e8e8170567e2dea53aeea1b5158a1d6306a19a7d5134ad5f8c6a954a1",
+        "locatorKind": "homepage",
+        "state": "unverified"
+      },
+      {
+        "id": "source-6",
+        "urlSha256": "6804a483439fbb05d329ee31430f292a356049c1dc08023d94b779b9f3d98b0d",
+        "locatorKind": "homepage",
+        "state": "unverified"
+      }
+    ],
+    "fields": {
+      "/competition_name": {
+        "sha256": "2fcbfe30ad924b740747984d838a7ccf6061ca7c2e18af2325898960d44d0178",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/dimension": {
+        "sha256": "2af051f265bcb4dc58692768387e4f2d0949027b813c63e86e71c6961c0fdf7d",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/weight": {
+        "sha256": "24f8ec43e1e0cd12c0f32dfc9631b34fc14802b2225d9892e3b3447cd33ad2e6",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/official_wording": {
+        "sha256": "a7bfbae67fde86bbd68c46bf650e454805b4070e76bcb00fa7f8ac3218507ef7",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/0": {
+        "sha256": "e8b5caf65b850ca4989fbde2085a49fc70946274b793a353c4ef435dfa9658d5",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/1": {
+        "sha256": "27e8e97703a3c2b95eecabaf88195da54023d67fad161a5359e6bed8441d753d",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/2": {
+        "sha256": "b5007854e9de94f1e2551149775e9097196faee9b7b81238e38fb4932d4308d8",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/3": {
+        "sha256": "fde36930de06b7f4a805123b8966dd963a8541d0df775bddee2eb3c9eb228e0b",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/0": {
+        "sha256": "a66170d2913c04fe1b017476ffd892c75b08bd5a3dff2192b23cf3743b66a603",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/1": {
+        "sha256": "624b7895c6eda58a22cee9f54be083b91bdb87d97f3f6d50f20a1b4d6dc64718",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/2": {
+        "sha256": "91919588965145ef2dfba2e52ca94acdc8d648dcce67b88e2bd6aafbd9edaf82",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/dimension": {
+        "sha256": "479310b9994dc11bb4c4675e63d399a96a620d82144e06b074f2c718c18c850a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/weight": {
+        "sha256": "72b99fe5c7e00a47861cb71ffc6b89505ff646c765c92d2164f090788d33922b",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/official_wording": {
+        "sha256": "043e3a5e933dbd20e7e3a72fad96bce2988bcac77005ca21e34ae8468cbc63a0",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/0": {
+        "sha256": "c42dfdb4675702161409b2a1cdebb5d20346e31bff9cd7cdc8e0f1189848d0b8",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/1": {
+        "sha256": "312a276a31d84aa9594777237e53332f3e77aa6ad163a1c423c751111bdb8fde",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/2": {
+        "sha256": "b1cc7e21423a7e5154a3a45f9c4d1fae64b6578bfb299744711e89d13bf84161",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/3": {
+        "sha256": "98416ef00452729f02eb6f502db20bde4a2251c21d966e8ec269f93dc03e629d",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/0": {
+        "sha256": "6d5d09b7050f8b0a4a6f605f190ff7dff64f690504ef3fad9813013f056c0bcb",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/1": {
+        "sha256": "e72221dd8a22009fa1fc7174664c07fa09026514788a794b7aef57beb3168f24",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/2": {
+        "sha256": "defb57f7c5b6dd97e1d655fe36b8a9e64f586b4c81bd21c32c4823558ae35de5",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/dimension": {
+        "sha256": "6f46601b1bc7a55bdfb0b6cbaa944771750315dd8d48febfcc2ab029d6056d06",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/weight": {
+        "sha256": "178ecbf7574d0e6c8e1905d246a9958ccf724f0397952bd498b6539d2557841e",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/official_wording": {
+        "sha256": "7b3166fa21b0bcc8b22391aa3ea6f1496b5de1ccc0f80fdf5aa1bd0705f35f49",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/0": {
+        "sha256": "bd210678045cf64e131de02d19e00bec97e9e703a62b2859109c79012cdbffee",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/1": {
+        "sha256": "8e08d95a8be61fdeae2b9737b288885496b0676ff08ae80a02090f2001c050b4",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/2": {
+        "sha256": "bcb824862a0aff07b17a0aa85d98854fb977bb1783462cc7b793f875ea0ca3d9",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/3": {
+        "sha256": "db59fb78cf34885fc34562a5eeaf449f38dc03f717e410ef98df20fb1132199b",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/0": {
+        "sha256": "33353ea709d4256270180ee6fb1547cadc339323cdbd22c28f58738b8b8818c7",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/1": {
+        "sha256": "bd09f592318e7a3936c018b4e5f616a08e188133f739c4f2bfee7cc2ebe64061",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/2": {
+        "sha256": "c7ab551e425faeb7e8ea539f0e14c5bcc9fcdd2a8597cf987079f065ed4c67b0",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/dimension": {
+        "sha256": "fc121f4d84cd38f9645cd98057f7bc296e7d725b0d4bffa5a11178a26ded6433",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/weight": {
+        "sha256": "16de5dabffbf86f2aa2d20c3ce577f5df09e6fac99789728fb4cc76bfdc030a1",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/official_wording": {
+        "sha256": "40e06cceee59745bdaa6cac44568133821d6ee705ae320d06ee1fa7663f02355",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/0": {
+        "sha256": "865b8b786c51f43f75319a43f595bb3ae34fc56f0def66ae51250bb5d7bd540a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/1": {
+        "sha256": "fe342030f0f5e7ca3b05152140b981dcb9a718c5ed84a6326d7ba6b221d4bcc8",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/2": {
+        "sha256": "1dbf8365885125bfeb26c3bf725cb1158fbb9d6b5781425649159113d3adf14a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/3": {
+        "sha256": "b0c3ed38ba4068e86d94e16517aedbb0aeb7fe7c8112dc64b7fb1fa0dfbd29a0",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/0": {
+        "sha256": "ef3526c5cb32e033de3f4af1ac7ebd9d00ea66519cfe187b2d6dda56aca58235",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/1": {
+        "sha256": "023afdaf6a77804a73b8b09d1dfdaa9a2ea9364d71b66563c0722a26db4d4c83",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/2": {
+        "sha256": "39f2c32a2d1f8821baa3ff2b43410daeb0c3fd90a74638a17b081cf2c3713318",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/item": {
+        "sha256": "ecbef3a20e25ab1c7c2e75af5c426110c1e00bc8d9bde9e30f6ef1dcbed13d2e",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/format": {
+        "sha256": "eb183ec44932477aa4fadad6952bd036965497f1e011b77f9d5e51c1e02d5271",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/page_limit": {
+        "sha256": "b7b9579553ed9bd13c3903a7af406098df31f81b3ea7ddda3a2aa69463bd2f74",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/deadline_note": {
+        "sha256": "38e2541ffade3a3218098e2da41d5d16d522eabd17beadbcf444bc80fa6a8379",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/item": {
+        "sha256": "ce5a5f68dbe696971c65249b8538e20623c21a5c16db9aad8b268b8572ff60bb",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/format": {
+        "sha256": "75d535e312ab2f183a8785d3609758727757d75abdba0d708bbf89001fb017cc",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/page_limit": {
+        "sha256": "cdbf3d40f37b5428b02e92380706d2773040ba392175bb9628684af5cfb9a363",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/deadline_note": {
+        "sha256": "4f51a9d663dd8f6737f87316cdd112ed27391c691c8ae90c4e2ed9536eea0442",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/item": {
+        "sha256": "075e5d7e0de44332394b0b79ad4d0e71b1a37c90bab2867fcb87a2fb84f48085",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/format": {
+        "sha256": "e85674bfd7d74285bb262e4f9d36ab6f2b13fc6c916d751ce5bee8ce77531ee2",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/page_limit": {
+        "sha256": "35cda4a03e726d01b966f76ddcaf9f9c9a8e829d63d26715d51f9a76c8107c27",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/deadline_note": {
+        "sha256": "4f51a9d663dd8f6737f87316cdd112ed27391c691c8ae90c4e2ed9536eea0442",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/3/item": {
+        "sha256": "fc37bc6ce9c8df6165fe2841cba7856f4707a6cae9b1d04ca0106bf292d193a6",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/3/format": {
+        "sha256": "81696ff0c1ffa25d772afe07c2fd03ba1c492bd72554063985ec06eb6c44c0e3",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/3/page_limit": {
+        "sha256": "b40ca4d5dda791fc8d94ff0edb09215aea4ca0e3dde6e1c825fdea7cb97a414a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/3/deadline_note": {
+        "sha256": "70a9a5baa5e067075fdaa010b398003f6e8c738a9687d9256d706834de024c8b",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/stage": {
+        "sha256": "7ac7c1d223fc47d51f8743ae640f7061df494b65f697b8d28d1600733af9bedc",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/format": {
+        "sha256": "f1253b4098634cc18f00b2568fe46548e20e4f5ce94ed478a6b5b2e00d8fd70a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/notes": {
+        "sha256": "7dbd7700d34187861c5aa2270e806af91c3a67b6c0a3802f7c5bd5290ede55d6",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/stage": {
+        "sha256": "0e9fec212c69ce41750b5a51b08692a9e5d56a5185de3ca9e4e955f0c65a1e7d",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/format": {
+        "sha256": "6f734d734d3b125477fa6074276d0d7779d2bcfb53981e6ef4ac225d8c9bb263",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/notes": {
+        "sha256": "7ffc45f0a7826be1ac354877006743f72d0099691349fd7627fb2f78f0eda02c",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/stage": {
+        "sha256": "03ebce7964c37389ee501f36537edc599d738bef79115a003231e82750ff3ed8",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/format": {
+        "sha256": "15113794f1070638dbc93b958c81f2e5c9cf5dab89a83b41f0c53f333a1fe9ea",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/notes": {
+        "sha256": "c63b3c6a403e250f3bccbcb5e4e5ac4588876609e45bf92b75f2c2e38900dfb0",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/3/stage": {
+        "sha256": "e3b8e0f86b5d480fc1f12d069f6433e70ef07ba5c672a9add2d5d1a7f5ded128",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/3/format": {
+        "sha256": "13762ccd0fd2a5420e4fe0440edc65c36b5be6b18877efa00806a2c47910d377",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/3/notes": {
+        "sha256": "85e6e904b99a501d0a578403e468df0dc35cce30af475d9a99a47b78b5b96d6c",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/review_format": {
+        "sha256": "02ec34519d91387dcb8eeff52bfc489a76f03226235cbf92af195e3b16a73a27",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/0": {
+        "sha256": "b0cbdae0b9ee74a709550804ff3cc24eacaba5f5a3dcc3ba928a2dd797a0b8ff",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/1": {
+        "sha256": "6c3626c38c185a43cab0f72bcb157c06d8bfbeac117fa7beff668cb612e68d8a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/2": {
+        "sha256": "61e9cb25649e5e7f8b0bde87760fe4ce8d9b8496c801aa0602a56ff078a5f459",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/3": {
+        "sha256": "1fcc01917f8d63f04e7577780d03ce1bc4eb032e48c9a7cce1dc4f2071603434",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/4": {
+        "sha256": "270ec3cb486c708e0fa3e83488b0937f2b3687e04b24ce1c7457b363c5f09043",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/past_winning_patterns/0": {
+        "sha256": "56b0b8405ed01cdc7e477b33bcfc0b0797446c1390ec95be717f89ab2236f8f4",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/past_winning_patterns/1": {
+        "sha256": "c4797c556b78794b6a4e4bc6dbf20fc89b7b1ab4201f8be09ece1958e0be8fd0",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/past_winning_patterns/2": {
+        "sha256": "9abdf0232cb7534a259520c36034d180f1dc31fb8f209a97d95f6996f0e5c8da",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/past_winning_patterns/3": {
+        "sha256": "061a20919331dbbdfc1e562ac3bf57060ade854c7704f954d286be887eec9e92",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/past_winning_patterns/4": {
+        "sha256": "72a48eecae89631cbf36bfe00464da7f1c69ae5571d008ea043752ce88c89458",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/past_winning_patterns/5": {
+        "sha256": "c99cc1a4fe451b141ffed3044a1ea093aa098d1c6cc0b35d38b51309094fd2bc",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/0": {
+        "sha256": "9b23a7c8b0520e839eb2673bbec64a2ac7869b68ba68adba4c4819f5209bbf44",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/1": {
+        "sha256": "968a2e8dbddd713f83232f38ff0450a29fe86afa74641d350b13c2a64b104ff4",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/2": {
+        "sha256": "3b21280de580899cddea4e32145542a2878bf5ed0eada465d1ea52d49da19fdc",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/3": {
+        "sha256": "b7818484a91cb42e2da9e114a2d7cd9a92734e6a54eae5b83f411d0e44c6f5c5",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/4": {
+        "sha256": "8ceba43f5b5b5ab0d6204c21e80462a751c202895fe7a856f747c9a3d82c3c10",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/notes": {
+        "sha256": "64a69b050dad8505a6cf360409517b2284953791831c4c62fa031e917430d598",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      }
+    },
+    "note": "来源候选尚未逐条对应原文；历届说明、推断权重和建议不能作为已确认的当届官方标准。空届次、赛道和组别表示未确定适用范围，不表示通用。"
   }
- ],
- "deliverable_requirements": [
-  {
-   "item": "完整论文（含Summary Sheet）",
-   "format": "Adobe PDF电子文件，英文，≥12号可读字体，全文≤25页（摘要、正文、附录、代码、参考文献全部计入），文件以队号命名（如0000000.pdf），≤25MB",
-   "page_limit": "25页（含一切）；AI使用报告附后不计页数",
-   "deadline_note": "赛期约4天（2026年为2月9-13日）；美东时间截止日晚9点前经官网提交"
-  },
-  {
-   "item": "Summary Sheet",
-   "format": "论文第一页，一页摘要，含队号、题号、摘要全文",
-   "page_limit": "1页",
-   "deadline_note": "随论文同时提交"
-  },
-  {
-   "item": "Report on Use of AI",
-   "format": "列于参考文献后的AI使用申报章节",
-   "page_limit": "不计入25页",
-   "deadline_note": "随论文同时提交"
-  },
-  {
-   "item": "提交确认",
-   "format": "官网在线提交系统",
-   "page_limit": "未明确",
-   "deadline_note": "逾期不受理；提交后不可更改"
-  }
- ],
- "process_stages": [
-  {
-   "stage": "报名组队",
-   "format": "指导教师经官网注册，团队1-3人同校组队，缴费后获取控制号",
-   "notes": "赛前数周截止；MCM/ICM合并称'美赛'，按题分组：MCM为A/B/C题，ICM为D/E/F题"
-  },
-  {
-   "stage": "比赛期（约96小时）",
-   "format": "线上自主选题作答，任选A-F一题，期间可查资料但队内独立完成",
-   "notes": "2月上旬举行；下载赛题、建模、写作、提交一体完成"
-  },
-  {
-   "stage": "评审（多轮triage）",
-   "format": "初审triage评委快速分档（重点读摘要与结构）→ 复评细读打分 → 终审：O奖须经全体评委、竞赛总监与执行总监一致认可",
-   "notes": "数轮'持续评审'；COMAP不提供复议（no rejudge）"
-  },
-  {
-   "stage": "放榜与发表",
-   "format": "官网公布各题Outstanding名单及特设奖（SIAM、INFORMS、ASA、Frank Giordano等），O奖论文收录于UMAP Journal'专家评语'",
-   "notes": "约赛后2-3个月（2026届结果5月8-9日公布）"
-  }
- ],
- "review_format": "全球统一英文论文盲评：多轮triage筛选按Successful Participant→Honorable Mention→Meritorious→Finalist→Outstanding分档，O奖需评审层全票一致认可。",
- "judge_preferences": [
-  "摘要是生死线：评委每篇初评时间极短（常≤10分钟），摘要须自含完整方法与定量结论",
-  "偏爱完整、自洽、可复现的工作而非炫技：回答全部子问题+敏感性分析+优缺点反思",
-  "假设要给出理由并讨论其影响，模型选择要有动机",
-  "图表达专业、论文结构清晰；OM奖论文常被作为范文展示图表叙事",
-  "方法与题型匹配：C题重数据清洗、可视化与统计/机器学习合理性，A/B题重机理建模与优化"
- ],
- "past_winning_patterns": [
-  "O奖率仅约0.1%-0.2%（业内常引0.14%-0.16%），F奖紧随其后；O奖论文均为'摘要-建模-检验-写作'四强俱佳的全面型，无短板",
-  "近三年O奖选题分布：2024年A题'资源可得性与海七鳃鳗性别比'（生态机理+微分方程/概率模型）、B题'搜寻失联潜艇'（贝叶斯搜索/最优化）、C题'网球动量'（温网数据+序列分析），2025年C题'奥运奖牌表建模'（外推2028洛杉矶：分层/贝叶斯/组合预测），以O奖夺冠的论文普遍给出多模型对比+敏感性检验+清晰可视化",
-  "O奖论文普遍结构完整：一页强摘要（含具体数字结论）、假设逐条论证、模型递进（简单基准→改进模型）、敏感性分析、明确的Strengths & Weaknesses一节",
-  "C题（数据洞察）O奖极重视数据清洗透明度与图表质量；A/B题O奖重视机理推导与求解方法论证；F/E等ICM政策题O奖重视政策建议的可操作性与模型支撑",
-  "近年O奖中中国队占比高，且特设奖（SIAM/INFORMS/ASA/Frank Giordano）常与O奖同队产生；获奖论文全部公开于COMAP与UMAP Journal，备赛可精读近三年各题O奖范文提炼图表与摘要写法",
-  "合规成为硬门槛：2024年起强制AI使用报告，查重趋严，O奖论文均规范申报AI辅助且正文原创性高"
- ],
- "forbidden_or_risky": [
-  "不得在论文任何位置出现姓名、学校等身份信息，仅以控制号标识",
-  "与他人讨论赛题、求助校外人员代做、购买论文属违规，可判Disqualified/Unsuccessful",
-  "使用AI必须如实申报（Report on Use of AI），未申报或全文AI生成按学术不端处理",
-  "超过25页限制、摘要超1页、非PDF或超25MB可能影响评审或被判不合格",
-  "COMAP不接受改判申请（no rejudge），违规认定以官方终裁为准"
- ],
- "sources": [
-  {
-   "title": "COMAP官方——MCM: The Mathematical Contest in Modeling（竞赛说明：摘要页、25页限制、评审口径、奖项等级）",
-   "url": "https://www.contest.comap.com/undergraduate/contests/mcm/instructions.php",
-   "accessed": "2026-09-28",
-   "authority": "A"
-  },
-  {
-   "title": "COMAP——MCM/ICM Info Session Recording, Resources & FAQs（多轮评审、不改判）",
-   "url": "https://www.comap.org/blog/item/mcm-icm-info-session-recording-resources-faqs",
-   "accessed": "2026-09-28",
-   "authority": "A"
-  },
-  {
-   "title": "AMS JMM 2021——MCM Director's Overview（公开评分表：Executive Summary/Assumptions & Justification/Model-Value Added等）",
-   "url": "https://meetings.ams.org",
-   "accessed": "2026-09-28",
-   "authority": "B"
-  },
-  {
-   "title": "The UMAP Journal Vol.33 No.3（2012 O奖论文与评委评语：假设论证与敏感性分析的评委标准）",
-   "url": "https://www.scribd.com/document/332/Umap-journal-vol33",
-   "accessed": "2026-09-28",
-   "authority": "B"
-  },
-  {
-   "title": "知乎专栏——美赛的O/F/M奖都是怎么评出来的？评审到底看什么？",
-   "url": "https://zhuanlan.zhihu.com",
-   "accessed": "2026-09-28",
-   "authority": "C"
-  },
-  {
-   "title": "mcmicm.org.cn——美赛获奖价值与2026规则变化（四维度权重口径，第三方转述）",
-   "url": "https://mcmicm.org.cn",
-   "accessed": "2026-09-28",
-   "authority": "C"
-  }
- ],
- "confidence": "high",
- "last_updated": "2026-09-28",
- "notes": "官方（COMAP instructions/FAQ）明确：摘要页权重'considerable weight'、25页上限、五级奖项、评委关注思维过程/问题分析/建模方法/数学方法、AI申报要求、多轮评审不改判。四维惯例（假设合理性/建模创造性/结果正确性/表述清晰度）源自全国大学生数学建模竞赛评审原则的通行迁移，为业界共识但非COMAP明文；各维度百分比除摘要页定性地位外均为【推断】，其中mcmicm.org.cn'模型合理性30%'为第三方口径仅作参照。O奖率0.1%-0.2%为多来源（CSDN、知乎、高校新闻）一致数字。近三年赛题中2024 A/B/C与2025 C经英文文献（ResearchGate、Scribd）核实，2026届（2月9-13日比赛、5月8-9日放榜）以COMAP官网结果页为准。"
 }

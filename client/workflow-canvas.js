@@ -48,7 +48,7 @@ export function workflowCanvasMarkup(workflow,selected,{button}={}){
 export function createWorkflowCanvas(element,{workflow,selectedId,view={mode:'auto',zoom:1}}){
  const viewport=element.querySelector('.ares-flow-viewport'),space=element.querySelector('.ares-flow-space'),plane=element.querySelector('.ares-flow-plane'),svg=element.querySelector('.ares-flow-wires'),edgeGroup=element.querySelector('[data-flow-edges]'),studio=element.closest('.ares-studio');
  const nodes=new Map([...plane.querySelectorAll('.ares-step')].map(node=>[node.dataset.id,node])),media=matchMedia('(prefers-reduced-motion: reduce)');
- let disposed=false,frame=0,layout=null,scale=1,geometryKey='',lastWidth=0,lastHeight=0;
+ let disposed=false,frame=0,layout=null,scale=1,geometryKey='',lastWidth=0,lastHeight=0,zoomAnimation=null;
  view.mode=view.mode==='manual'?'manual':'auto';view.zoom=clamp(Number(view.zoom)||1,.9,1.6);
  const selectedChanged=view.selectedId!==selectedId;view.selectedId=selectedId;
  function reveal(id){
@@ -82,17 +82,28 @@ export function createWorkflowCanvas(element,{workflow,selectedId,view={mode:'au
   const focused=document.activeElement?.closest('.ares-step');if(focused&&element.contains(focused))reveal(focused.dataset.id);
  }
  function queue(){if(!disposed&&!frame)frame=requestAnimationFrame(()=>{frame=0;refresh();});}
+ function finishZoom(){zoomAnimation?.cancel();zoomAnimation=null;}
+ function animateZoom(before){
+  if(disposed||media.matches||document.hidden||element.closest('[data-ares-motion=off]')||typeof plane.animate!=='function')return;
+  const after=plane.getBoundingClientRect(),fromScale=before.width/plane.offsetWidth;
+  // Animate the entire plane so dependency wires and cards remain together.
+  // The measured translation also includes the user-centered scroll adjustment.
+  const animation=plane.animate([{transform:`translate(${before.x-after.x}px,${before.y-after.y}px) scale(${fromScale})`},{transform:plane.style.transform}],{id:'ares-flow-zoom',duration:220,easing:'cubic-bezier(.2,.75,.2,1)'});
+  zoomAnimation=animation;animation.finished.then(()=>{if(zoomAnimation===animation)zoomAnimation=null;},()=>{});
+ }
  function zoomBy(direction){
   if(!layout)refresh();if(!layout)return;
+  const before=plane.getBoundingClientRect();finishZoom();
   const left=Number.parseFloat(plane.style.left)||0,top=Number.parseFloat(plane.style.top)||0;
   const anchor={x:(viewport.scrollLeft+viewport.clientWidth/2-left)/scale,y:(viewport.scrollTop+viewport.clientHeight/2-top)/scale};
-  view.mode='manual';view.zoom=clamp(Math.round((scale+Number(direction)*.1)*10)/10,.9,1.6);geometryKey='';refresh(anchor);
+  view.mode='manual';view.zoom=clamp(Math.round((scale+Number(direction)*.1)*10)/10,.9,1.6);geometryKey='';refresh(anchor);animateZoom(before);
  }
- function fit(){view.mode='auto';view.zoom=1;geometryKey='';refresh();viewport.scrollLeft=0;reveal(selectedId);}
+ function fit(){const before=plane.getBoundingClientRect();finishZoom();view.mode='auto';view.zoom=1;geometryKey='';refresh();viewport.scrollLeft=0;reveal(selectedId);animateZoom(before);}
  function keydown(event){if(event.altKey||event.ctrlKey||event.metaKey||event.target.closest('input,textarea,select,[contenteditable=true]'))return;if(['+','=','-','0'].includes(event.key)){event.preventDefault();event.stopPropagation();if(event.key==='0')fit();else zoomBy(event.key==='-'?-1:1);}}
  function focus(event){const node=event.target.closest('.ares-step');if(node?.matches(':focus-visible'))reveal(node.dataset.id);}
  const observer=new ResizeObserver(queue);observer.observe(viewport);if(studio)observer.observe(studio);
- element.addEventListener('keydown',keydown);element.addEventListener('focusin',focus);media.addEventListener('change',queue);
+ function motionChanged(){if(media.matches||document.hidden)finishZoom();queue();}
+ element.addEventListener('keydown',keydown);element.addEventListener('focusin',focus);media.addEventListener('change',motionChanged);document.addEventListener('visibilitychange',motionChanged);
  refresh();if(selectedChanged)reveal(selectedId);document.fonts?.ready.then(queue);
- return {zoomBy,fit,reveal,inspect:()=>({mode:view.mode,zoom:scale,width:lastWidth,height:lastHeight,layout}),dispose(){disposed=true;observer.disconnect();cancelAnimationFrame(frame);element.removeEventListener('keydown',keydown);element.removeEventListener('focusin',focus);media.removeEventListener('change',queue);}};
+ return {zoomBy,fit,reveal,inspect:()=>({mode:view.mode,zoom:scale,width:lastWidth,height:lastHeight,layout}),dispose(){disposed=true;finishZoom();observer.disconnect();cancelAnimationFrame(frame);element.removeEventListener('keydown',keydown);element.removeEventListener('focusin',focus);media.removeEventListener('change',motionChanged);document.removeEventListener('visibilitychange',motionChanged);}};
 }

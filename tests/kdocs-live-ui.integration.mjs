@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Actual account read-only UI integration. No cloud write, DSH or user window. */
 import {test} from 'node:test';
 import assert from 'node:assert/strict';

@@ -1,155 +1,647 @@
 {
- "competition_id": 81,
- "competition_name": "智能农业装备创新大赛",
- "judging_dimensions": [
-  {
-   "dimension": "创新性",
-   "weight": "约30%-35%（A/C/D类核心维度）【推断】",
-   "official_wording": "章程将大赛定位为'智能农业装备发明制作/创新设计'（A类为'自由选题、科技发明制作'，D类要求'具超前性或颠覆性的创意设计'，西安交大城市学院转载章程+东北农业大学第十届通知）；官方《ACD类作品评审规则》分值表未公开，权重为【推断：按章程对'发明制作''超前性'的定位及同类装备创新赛权重模型推定】。",
-   "scoring_points": [
-    "原理、结构、功能有明确创新点，非市面产品的简单复制",
-    "选题契合智能农机装备前沿（导航、变量作业、传感、电驱动等）",
-    "D类作品须体现超前性/颠覆性，与A类'有样机'的作品拉开层次",
-    "有论文、专利等成果佐证创新水平"
-   ],
-   "common_deductions": [
-    "创新点雷同、与往届或市售产品重复",
-    "把本应交样机的A/C类作品包装成D类规避样机要求（通知明确严查）",
-    "创新描述与申报书论证脱节"
-   ]
-  },
-  {
-   "dimension": "科学性与技术方案可行性",
-   "weight": "约25%-30%【推断】",
-   "official_wording": "大赛章程规定评审委员会'负责对决赛入围的作品进行现场评审'，ACD类单独发布《ACD类作品评审规则》；科学性维度表述为【推断：依据工科装备类赛事通行评审框架与章程'科技含量高'要求推定】。",
-   "scoring_points": [
-    "总体方案与技术路线合理、参数设计有依据",
-    "关键计算、仿真、试验数据严谨可信",
-    "成果（论文/专利）须在通知规定的近两年时间窗口内取得"
-   ],
-   "common_deductions": [
-    "方案有明显工程原理错误",
-    "数据造假或引用与作品无关的成果充数",
-    "申报书论证空洞、只有效果图无实现路径"
-   ]
-  },
-  {
-   "dimension": "实用性与农业应用价值",
-   "weight": "约20%-25%【推断】",
-   "official_wording": "章程要求作品为'智能农业装备'并按耕作/种植/田间管理/节水灌溉/收获/产地初加工/基础零部件等领域设置A1-A8组别（东北农业大学转述第十届类别设置），指向对农业生产真实场景的服务；量化权重为【推断】。",
-   "scoring_points": [
-    "解决农业生产真实痛点，契合乡村振兴与农机装备补短板需求",
-    "有明确应用场景、成本与推广可行性分析",
-    "B/C类作品响应指定赛题或企业命题的技术指标"
-   ],
-   "common_deductions": [
-    "脱离农艺场景、纯展示性机器人",
-    "成本与可靠性论证缺失、无法落地",
-    "答不上应用对象与作业工况"
-   ]
-  },
-  {
-   "dimension": "作品完成度与现场答辩",
-   "weight": "约15%-20%（决赛现场评审+3分钟答辩）【推断】",
-   "official_wording": "章程原文：评审专家组'负责对决赛入围的作品进行现场评审，给出获奖作品的建议结果'；校赛通知要求AC类'须有样机或实物模型'、D类'须有概念视频或实物模型'，并'按3分钟答辩准备PPT'（东北农业大学第十届通知）。量化占比为【推断】。",
-   "scoring_points": [
-    "样机/实物模型能现场演示核心功能（AC类硬要求）",
-    "3分钟陈述重点突出、演示顺畅",
-    "答辩回答准确，团队分工与指导教师支持合理"
-   ],
-   "common_deductions": [
-    "无样机或演示失败（AC类直接失分）",
-    "陈述超时、答非所问",
-    "答辩口径与申报书矛盾"
-   ]
+  "competition_id": 81,
+  "competition_name": "智能农业装备创新大赛",
+  "judging_dimensions": [
+    {
+      "dimension": "创新性",
+      "weight": "约30%-35%（A/C/D类核心维度）【推断】",
+      "official_wording": "章程将大赛定位为'智能农业装备发明制作/创新设计'（A类为'自由选题、科技发明制作'，D类要求'具超前性或颠覆性的创意设计'，西安交大城市学院转载章程+东北农业大学第十届通知）；官方《ACD类作品评审规则》分值表未公开，权重为【推断：按章程对'发明制作''超前性'的定位及同类装备创新赛权重模型推定】。",
+      "scoring_points": [
+        "原理、结构、功能有明确创新点，非市面产品的简单复制",
+        "选题契合智能农机装备前沿（导航、变量作业、传感、电驱动等）",
+        "D类作品须体现超前性/颠覆性，与A类'有样机'的作品拉开层次",
+        "有论文、专利等成果佐证创新水平"
+      ],
+      "common_deductions": [
+        "创新点雷同、与往届或市售产品重复",
+        "把本应交样机的A/C类作品包装成D类规避样机要求（通知明确严查）",
+        "创新描述与申报书论证脱节"
+      ]
+    },
+    {
+      "dimension": "科学性与技术方案可行性",
+      "weight": "约25%-30%【推断】",
+      "official_wording": "大赛章程规定评审委员会'负责对决赛入围的作品进行现场评审'，ACD类单独发布《ACD类作品评审规则》；科学性维度表述为【推断：依据工科装备类赛事通行评审框架与章程'科技含量高'要求推定】。",
+      "scoring_points": [
+        "总体方案与技术路线合理、参数设计有依据",
+        "关键计算、仿真、试验数据严谨可信",
+        "成果（论文/专利）须在通知规定的近两年时间窗口内取得"
+      ],
+      "common_deductions": [
+        "方案有明显工程原理错误",
+        "数据造假或引用与作品无关的成果充数",
+        "申报书论证空洞、只有效果图无实现路径"
+      ]
+    },
+    {
+      "dimension": "实用性与农业应用价值",
+      "weight": "约20%-25%【推断】",
+      "official_wording": "章程要求作品为'智能农业装备'并按耕作/种植/田间管理/节水灌溉/收获/产地初加工/基础零部件等领域设置A1-A8组别（东北农业大学转述第十届类别设置），指向对农业生产真实场景的服务；量化权重为【推断】。",
+      "scoring_points": [
+        "解决农业生产真实痛点，契合乡村振兴与农机装备补短板需求",
+        "有明确应用场景、成本与推广可行性分析",
+        "B/C类作品响应指定赛题或企业命题的技术指标"
+      ],
+      "common_deductions": [
+        "脱离农艺场景、纯展示性机器人",
+        "成本与可靠性论证缺失、无法落地",
+        "答不上应用对象与作业工况"
+      ]
+    },
+    {
+      "dimension": "作品完成度与现场答辩",
+      "weight": "约15%-20%（决赛现场评审+3分钟答辩）【推断】",
+      "official_wording": "章程原文：评审专家组'负责对决赛入围的作品进行现场评审，给出获奖作品的建议结果'；校赛通知要求AC类'须有样机或实物模型'、D类'须有概念视频或实物模型'，并'按3分钟答辩准备PPT'（东北农业大学第十届通知）。量化占比为【推断】。",
+      "scoring_points": [
+        "样机/实物模型能现场演示核心功能（AC类硬要求）",
+        "3分钟陈述重点突出、演示顺畅",
+        "答辩回答准确，团队分工与指导教师支持合理"
+      ],
+      "common_deductions": [
+        "无样机或演示失败（AC类直接失分）",
+        "陈述超时、答非所问",
+        "答辩口径与申报书矛盾"
+      ]
+    }
+  ],
+  "deliverable_requirements": [
+    {
+      "item": "大赛申报书",
+      "format": "官方模板，Word/PDF",
+      "page_limit": "不超过30页",
+      "deadline_note": "校赛约9月报送（第十届2024年9月28日截稿）；国赛按当届通知"
+    },
+    {
+      "item": "样机/实物模型或概念视频",
+      "format": "实物（AC类必备）、概念视频或实物模型（D类）、软件、设计图录像等",
+      "page_limit": "未明确",
+      "deadline_note": "随申报书提交材料包，决赛现场演示"
+    },
+    {
+      "item": "答辩PPT",
+      "format": "PPT（按3分钟答辩准备）",
+      "page_limit": "未明确",
+      "deadline_note": "校赛/决赛答辩当日"
+    },
+    {
+      "item": "作品汇总表",
+      "format": "Excel汇总表，以项目名称命名压缩包提交",
+      "page_limit": "未明确",
+      "deadline_note": "校赛统一报送"
+    }
+  ],
+  "process_stages": [
+    {
+      "stage": "校内选拔赛",
+      "format": "现场答辩+评审（A/C/D类答辩，按类别限额推荐）",
+      "notes": "约9月；每校A类≤15件、B类≤8件、C类≤5件、D类≤5件"
+    },
+    {
+      "stage": "复赛（网评）",
+      "format": "网络评审，通过作品设5个工作日公示期",
+      "notes": "下半年；复赛通过作品入围终审决赛"
+    },
+    {
+      "stage": "终审决赛",
+      "format": "现场评审+答辩，B类另按比赛规则竞技评判",
+      "notes": "下半年举行；获奖作品设5个工作日实名质疑投诉期"
+    }
+  ],
+  "review_format": "ACD类作品经网络评审（复赛）筛选后进入终审决赛现场评审与答辩，B类机器人按指定赛题现场竞技评判，专家组给出获奖建议名单。",
+  "judge_preferences": [
+    "重视真机实证：A/C类必须携带样机或实物模型并现场演示",
+    "偏好解决真实农业生产痛点的智能装备（导航、变量施药、电驱传动等）",
+    "D类严把门槛，拒绝用概念设计规避样机要求",
+    "认可近两年内取得的论文、专利等佐证成果",
+    "强调原创性与真实性，指导教师须对作品原创负责"
+  ],
+  "past_winning_patterns": [],
+  "forbidden_or_risky": [
+    "不得使用已获国家级奖励的成果、导师课题成果或他人知识产权申报",
+    "不得与往届（前九届）作品重复",
+    "成果取得时间须在通知规定窗口内（第十届为2022年9月-2024年9月）",
+    "每人每类别限报1件；每件作品指导教师1-3人且至多指导A/C/D类各2件、B类1件",
+    "决赛期间关键信息（成员、作品名、类别）不得变更；获奖名单设实名质疑投诉期"
+  ],
+  "sources": [
+    {
+      "title": "国际/全国大学生智能农业装备创新大赛章程（西安交通大学城市学院转载，2017年审定版）",
+      "url": "https://jsjxy.xijing.edu.cn/info/1006/2627.htm",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    },
+    {
+      "title": "东北农业大学——关于举办第十届国际大学生智能农业装备创新大赛（校赛）的通知",
+      "url": "https://www.neau.edu.cn/info/1039/25312.htm",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    },
+    {
+      "title": "国际大学生智能农业装备创新大赛官网（第十一届通知）",
+      "url": "https://uiaec.ujs.edu.cn/news_show.php?id=224",
+      "accessed": "2026-09-28",
+      "authority": "A"
+    },
+    {
+      "title": "江苏大学研究生院——第七届江苏大学智能农业装备创新大赛拟获奖作品公示",
+      "url": "https://yjsy.ujs.edu.cn/info/1305/11896.htm",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    }
+  ],
+  "confidence": "low",
+  "last_updated": "2026-09-28",
+  "notes": "大赛由教育部农业工程类专业教指委、中国农业机械学会、中国农业工程学会等主办，秘书处挂靠江苏大学，已升级为'国际大学生智能农业装备创新大赛'并入选中国高等教育学会全国普通高校大学生竞赛分析报告目录。A/B/C/D四类设置、团队与申报书≤30页、3分钟答辩、AC类须有样机等来自东北农业大学校赛通知（转述官方附件），多校口径一致；官方《ACD类作品评审规则》分值表未公开，四个维度权重为按装备类创新赛事通行框架的【推断】，已逐条标注。",
+  "provenance": {
+    "schemaVersion": 1,
+    "assessedAt": "2026-11-18",
+    "method": "field-inventory-and-source-status-audit; no original-clause verification",
+    "legacyConfidence": "medium",
+    "scope": {
+      "competitionId": 81,
+      "edition": null,
+      "tracks": [],
+      "groups": []
+    },
+    "ruleVersion": "2026-09-28",
+    "sourceChecks": [
+      {
+        "id": "source-1",
+        "urlSha256": "1389e33465ddd14e0fbeea1d94f72311b93889347019b29a65fad3661206db7f",
+        "locatorKind": "document",
+        "state": "unverified"
+      },
+      {
+        "id": "source-2",
+        "urlSha256": "e22470fe785ec531830366739c52e6a58672f80abaf3b046306001f68ef73db4",
+        "locatorKind": "document",
+        "state": "unverified"
+      },
+      {
+        "id": "source-3",
+        "urlSha256": "44ac54cf615b998890be0f8bdde952cbab808c1fd1fd382b3ddd0b71cd972a4e",
+        "locatorKind": "document",
+        "state": "unverified"
+      },
+      {
+        "id": "source-4",
+        "urlSha256": "5088547f48f0fc1d9de8160746cf1940040a6b342e99163139a604b701d1eac2",
+        "locatorKind": "document",
+        "state": "unverified"
+      }
+    ],
+    "fields": {
+      "/competition_name": {
+        "sha256": "f1b4f27025fd25cacd960b61dabd1d2bd25ef0c89f176dce348330094f78bd5a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/dimension": {
+        "sha256": "cf6947a5cc32fea4987b97c1d81932def04e3697fd4cc4711da6c2207a650f51",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/weight": {
+        "sha256": "8d9d45a3cc04507f65adfa26951887e495a9c6274135cfc13da0377009654639",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/official_wording": {
+        "sha256": "9be5f61ff92137d19b263291b9aa7f528d39468168f15f3c50c7340f7812d0e1",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/0": {
+        "sha256": "d6f8ecbd85c76d790d2a894ab18cf2557064fd5ee6bd6cc88d44991c6f2373c8",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/1": {
+        "sha256": "e830610bca7955872d34b6504c054cc741ef500449406d61efd8c22280a22547",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/2": {
+        "sha256": "a6b3484c3deb74e479c8f63352e8f2109864c822dca3855c7e00c8306671c018",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/3": {
+        "sha256": "98745f90161ae88cfe7df1f607612543d2056fb2a00ec802d706e425e791667b",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/0": {
+        "sha256": "3a9570a6c6b2ddfe796a4baa82878c0e7cb056489ba35b5c8f2b6a5e20f4203c",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/1": {
+        "sha256": "6a4386df8dbc26bd7b89a058825c3bdbc3e83ee3a3cd91cafe087a4c470ed967",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/2": {
+        "sha256": "22e85bc758c16c69270105b5a62ea71f920ad4401cff0086ef8a0b2f5fd8b971",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/dimension": {
+        "sha256": "6eb463a816dc73e29e54f1dd5bd8e9a11cea87d7d87c804c7c7e7b536b019e2d",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/weight": {
+        "sha256": "e0f10364a1d0f782cbfe855f926b1f3663dc76f0ce8cfcc169b9b417ad3573cb",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/official_wording": {
+        "sha256": "b92f6a76e417c982f56b0f92f95a58d026dddfcec17f1708b123643a9b676de2",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/0": {
+        "sha256": "dffbea51cc580d4e5bcdc73dccae076b76dc42fa7a7b5d01260fd4faf4d6c8a2",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/1": {
+        "sha256": "d1cbc388c8bc25c6450ea75404bec1b4c372aa4454435e9f2d133ca74a9ea422",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/2": {
+        "sha256": "691ecafb2c81c59d048e30d184938eae957058f894ca23abfb1349d2417d8829",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/0": {
+        "sha256": "5bcb226f90d67d5a44e078f1355c69d6f8eae95c5197abad77ead18d31b099e9",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/1": {
+        "sha256": "0e9ce67cf84307c588ffc8ca49bf376e3d67594694363f59b7374bf63f054c77",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/2": {
+        "sha256": "2ad5ca3ed5b0fb7e5d1792676425cbe7e6f357d80be55e9e1ccaa01a0694063b",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/dimension": {
+        "sha256": "2cdf3fbd452b05475e712436de584b1ea8ec10d59da9b26181547c0f06259c23",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/weight": {
+        "sha256": "31508894f26d250023e356a4f880e9e960b5ceffee10c2bd333d4d770eea921e",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/official_wording": {
+        "sha256": "f3e5612eb53c66d0be5ed793b34fe5881f9c450dacda31b82606b3bcb8d6d95e",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/0": {
+        "sha256": "160392748d74336dd1905c7332fb5b1fba380ac31dd718581fb1bc673adffb64",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/1": {
+        "sha256": "c8c944f401d0102948ca5a0310cf33a523baf83d3736270f329656950ef3f147",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/2": {
+        "sha256": "5ee65fa7dbc151cc5330884ece1f07f18ed0178fe20042b181d682107ba638eb",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/0": {
+        "sha256": "411b617310d151bf9fa6b7f5bac8aaf3a208830147745431ac12da7d1becfc13",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/1": {
+        "sha256": "3be88c4a4ca0686c32412e3e95626fe579ed81a67127847b5839e2cfb22a60c1",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/2": {
+        "sha256": "2f4d49be69b5ff0bf2a4ce1512e9d8de4d666ee61746b38e849f97c8c2fb2750",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/dimension": {
+        "sha256": "e101d0faf019a265e296e96612ca0091e6530950bdf3f1d01b1c059b83f38aad",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/weight": {
+        "sha256": "44712228088e831175541723ee284845261b423012b26c9e5b90334ecf784472",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/official_wording": {
+        "sha256": "d7a46f3e6771ca8e1438298cb64b6badf951db412b370a025828b7662a972eee",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/0": {
+        "sha256": "1e9abef2c7251d7ef26aa8852d846b13d880cba6289ab0be9e09cc4b4835fb17",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/1": {
+        "sha256": "435e6afe3c9ef1f92f947bd43084e178ce0649ea132ad977c431f54bc354f235",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/2": {
+        "sha256": "991735e48561acdb09f8e4584cddf703555eb475d0eb2b4ac656840f2087c441",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/0": {
+        "sha256": "78319573a00e5bb615bd52fd5ffb272285b921e254c83d7bde7f5c3da1a1ff00",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/1": {
+        "sha256": "eda3570a88ad73ff92e544facd46998e23c357cf7e62e6787b46b13825ab0443",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/2": {
+        "sha256": "068db715dcffa005894d5f2696a345dbba0e834884c06ebbe49cba87da87c678",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/item": {
+        "sha256": "1acaaaf3dbe503589ffe54067ee984c7a7476c24db2775561a59ff1d411e5bef",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/format": {
+        "sha256": "2856b0a491694e46b6f72e29d54c85d2a8ee04cdaa58b2059a21116ebd74caf3",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/page_limit": {
+        "sha256": "5d3f75f7b47c44e79f57d56bf28f4ebba81e4cecb7ce7bcd92b41b3055c6171a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/deadline_note": {
+        "sha256": "6cf9908fa6045aa74e1797380883267c8870c79f93ccdc7201f10e46832d5cbb",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/item": {
+        "sha256": "761bf09fd484a484c90a995578f88c794d00f0f1b3c35404bbdb6e740ccc769e",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/format": {
+        "sha256": "8f5a9814058d2c6993253978680a2d5e2c5eccc82d31867f35a8fe15654a2b9d",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/page_limit": {
+        "sha256": "b40ca4d5dda791fc8d94ff0edb09215aea4ca0e3dde6e1c825fdea7cb97a414a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/deadline_note": {
+        "sha256": "feae3822589cd0f8be45b1c9de304059c313d219d945b6784716dd3ec0bd1c5f",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/item": {
+        "sha256": "d68e5c464770ee111053e075fd42fd4e1b7cdfb31d9bb888621b3f6639455aff",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/format": {
+        "sha256": "66859f8ab3d80e6c5c2fe8e6c7717394c870db93fc1cc784411d56dfdf8c014a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/page_limit": {
+        "sha256": "b40ca4d5dda791fc8d94ff0edb09215aea4ca0e3dde6e1c825fdea7cb97a414a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/deadline_note": {
+        "sha256": "d6c065bf14357c524b456768ea938ee0775b0b270a840c4a30eda93b4ccff716",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/3/item": {
+        "sha256": "183927e1cc45d33029e137fbb95bdfbe6bc92e4878ee064514f2cd55a5dcea16",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/3/format": {
+        "sha256": "37dd0c0c894ab94a0b17ed6ac5bb04ce5471f8390e8e46d91bf2fb0f41976e30",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/3/page_limit": {
+        "sha256": "b40ca4d5dda791fc8d94ff0edb09215aea4ca0e3dde6e1c825fdea7cb97a414a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/3/deadline_note": {
+        "sha256": "4f0072b21a8603a58b84df7a0bf614dd1e75609b2927bad364efe74f4b668937",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/stage": {
+        "sha256": "00f085c3fb63c80b35949ab0d625dde26a72cd676ca583af1eaca896cad97cca",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/format": {
+        "sha256": "1fc3562e9b7dd2ff82cce1e6e03edcabc96439ad7122132c8671e6df589a81aa",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/notes": {
+        "sha256": "0428d1b2aeabd4222c4b587331b26f5a9515e24a29eda1fb3ae8f1c51273f8c5",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/stage": {
+        "sha256": "4f524def0fb47cb32f703ee96ef17a1a2de56f2e34bd217121d67b7344864769",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/format": {
+        "sha256": "b528dd031b1f9b5a049277d48595856137115f9cc740881bb6723302578e81f9",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/notes": {
+        "sha256": "abba16866623c2a2c0f422ec740e3e10efee4e57107914ad96def63ceff890e9",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/stage": {
+        "sha256": "76629b30fc651a6adb02ae1df8c8fa7e1bb0173eda60c2a0762bf93fdcab065f",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/format": {
+        "sha256": "aa373438a99da079f857dcb16fecfbba339d8644d740bff4d5b6356d629e0eca",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/notes": {
+        "sha256": "c896bf6bf76d7359d7afb2a996d8b2d4d29f4e4bc3725f39619d7161a538efd9",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/review_format": {
+        "sha256": "5af8cb32d0bcc2ae3a1468d7868b5cbd25900e2203403de979ee57cdf0104990",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/0": {
+        "sha256": "3b40be3c19dcd77fd6b6390c539269f5a7a6ac46d9be16cef947d3088ce7d87c",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/1": {
+        "sha256": "f9d560630a13f6b728840ad641a91c0102cfedafa5911f11047c46e52961cc9b",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/2": {
+        "sha256": "f98d7ec90395621a4219d0ed375e477a0257562d173f9b63c0592d0bd9d41e1b",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/3": {
+        "sha256": "5bbe85bfbcd0e9640511d5278352ef8d651a004332047af13b0ee2c8f4051d18",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/4": {
+        "sha256": "f7e867e01901b97b693218cf9d8d0893e03b7edfc2ed75984b6884b2ff7055bb",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/0": {
+        "sha256": "f096aed2b800306c6600ee387dfd5902f3d91b1d63f8df1105f746d029cc2ab2",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/1": {
+        "sha256": "b8e43b8dc908c3b77822c4692e18d09a81a838222a4bd325f8a5793f3329a1d7",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/2": {
+        "sha256": "735c52160aa6f6e66bef33bd48d952906fcf1c5e0146acab0451bc82b4603920",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/3": {
+        "sha256": "5540f134560bd3588dfa7760143a8f2379872f4ddf0f88da72ee39c3d80779b3",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/4": {
+        "sha256": "a45500249b3f92d1fd9cf053cb03b1eb73933cdc9416ef1b8d14bf722b8a1f04",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/notes": {
+        "sha256": "0b27e821119d5ad8ee0534bf6bcc8f79a2ef6a6df56f557bbc0a572f21440a99",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      }
+    },
+    "note": "来源候选尚未逐条对应原文；历届说明、推断权重和建议不能作为已确认的当届官方标准。空届次、赛道和组别表示未确定适用范围，不表示通用。"
   }
- ],
- "deliverable_requirements": [
-  {
-   "item": "大赛申报书",
-   "format": "官方模板，Word/PDF",
-   "page_limit": "不超过30页",
-   "deadline_note": "校赛约9月报送（第十届2024年9月28日截稿）；国赛按当届通知"
-  },
-  {
-   "item": "样机/实物模型或概念视频",
-   "format": "实物（AC类必备）、概念视频或实物模型（D类）、软件、设计图录像等",
-   "page_limit": "未明确",
-   "deadline_note": "随申报书提交材料包，决赛现场演示"
-  },
-  {
-   "item": "答辩PPT",
-   "format": "PPT（按3分钟答辩准备）",
-   "page_limit": "未明确",
-   "deadline_note": "校赛/决赛答辩当日"
-  },
-  {
-   "item": "作品汇总表",
-   "format": "Excel汇总表，以项目名称命名压缩包提交",
-   "page_limit": "未明确",
-   "deadline_note": "校赛统一报送"
-  }
- ],
- "process_stages": [
-  {
-   "stage": "校内选拔赛",
-   "format": "现场答辩+评审（A/C/D类答辩，按类别限额推荐）",
-   "notes": "约9月；每校A类≤15件、B类≤8件、C类≤5件、D类≤5件"
-  },
-  {
-   "stage": "复赛（网评）",
-   "format": "网络评审，通过作品设5个工作日公示期",
-   "notes": "下半年；复赛通过作品入围终审决赛"
-  },
-  {
-   "stage": "终审决赛",
-   "format": "现场评审+答辩，B类另按比赛规则竞技评判",
-   "notes": "下半年举行；获奖作品设5个工作日实名质疑投诉期"
-  }
- ],
- "review_format": "ACD类作品经网络评审（复赛）筛选后进入终审决赛现场评审与答辩，B类机器人按指定赛题现场竞技评判，专家组给出获奖建议名单。",
- "judge_preferences": [
-  "重视真机实证：A/C类必须携带样机或实物模型并现场演示",
-  "偏好解决真实农业生产痛点的智能装备（导航、变量施药、电驱传动等）",
-  "D类严把门槛，拒绝用概念设计规避样机要求",
-  "认可近两年内取得的论文、专利等佐证成果",
-  "强调原创性与真实性，指导教师须对作品原创负责"
- ],
- "past_winning_patterns": [],
- "forbidden_or_risky": [
-  "不得使用已获国家级奖励的成果、导师课题成果或他人知识产权申报",
-  "不得与往届（前九届）作品重复",
-  "成果取得时间须在通知规定窗口内（第十届为2022年9月-2024年9月）",
-  "每人每类别限报1件；每件作品指导教师1-3人且至多指导A/C/D类各2件、B类1件",
-  "决赛期间关键信息（成员、作品名、类别）不得变更；获奖名单设实名质疑投诉期"
- ],
- "sources": [
-  {
-   "title": "国际/全国大学生智能农业装备创新大赛章程（西安交通大学城市学院转载，2017年审定版）",
-   "url": "https://jsjxy.xijing.edu.cn/info/1006/2627.htm",
-   "accessed": "2026-09-28",
-   "authority": "B"
-  },
-  {
-   "title": "东北农业大学——关于举办第十届国际大学生智能农业装备创新大赛（校赛）的通知",
-   "url": "https://www.neau.edu.cn/info/1039/25312.htm",
-   "accessed": "2026-09-28",
-   "authority": "B"
-  },
-  {
-   "title": "国际大学生智能农业装备创新大赛官网（第十一届通知）",
-   "url": "https://uiaec.ujs.edu.cn/news_show.php?id=224",
-   "accessed": "2026-09-28",
-   "authority": "A"
-  },
-  {
-   "title": "江苏大学研究生院——第七届江苏大学智能农业装备创新大赛拟获奖作品公示",
-   "url": "https://yjsy.ujs.edu.cn/info/1305/11896.htm",
-   "accessed": "2026-09-28",
-   "authority": "B"
-  }
- ],
- "confidence": "medium",
- "last_updated": "2026-09-28",
- "notes": "大赛由教育部农业工程类专业教指委、中国农业机械学会、中国农业工程学会等主办，秘书处挂靠江苏大学，已升级为'国际大学生智能农业装备创新大赛'并入选中国高等教育学会全国普通高校大学生竞赛分析报告目录。A/B/C/D四类设置、团队与申报书≤30页、3分钟答辩、AC类须有样机等来自东北农业大学校赛通知（转述官方附件），多校口径一致；官方《ACD类作品评审规则》分值表未公开，四个维度权重为按装备类创新赛事通行框架的【推断】，已逐条标注。"
 }

@@ -1,0 +1,11 @@
+{
+  "kind": "ares-owned-native-dom-abi-fixture",
+  "note": "ARES-authored DOM contract and styles for account-free CI. This is not an installed DSH client, live session, model, tool or approval result. Actual host stylesheet parity requires ARES_NATIVE_CONVERSATION_SOURCE.",
+  "classes": {
+    "root": "owned-native-root", "card": "owned-native-card", "scroll": "owned-native-scroll",
+    "grow": "owned-native-grow", "input": "owned-native-input", "placeholder": "owned-native-placeholder",
+    "row": "owned-native-row", "add": "owned-native-add", "trailing": "owned-native-trailing",
+    "select": "owned-native-select", "primary": "owned-native-primary"
+  },
+  "css": ".owned-native-root{width:100%;min-width:0;font:inherit}.owned-native-card{position:relative;display:flex;flex-direction:column;min-width:0;border:1px solid #ffffff24;border-radius:14px;background:#272727;color:#eaeaea;padding:12px}.owned-native-scroll{min-height:58px;max-height:240px;overflow:auto}.owned-native-grow{position:relative;min-width:0}.owned-native-input{position:relative;min-height:58px;outline:none;overflow-wrap:anywhere}.owned-native-input p{margin:0}.owned-native-placeholder{position:absolute;inset:0;pointer-events:none;color:#999}.owned-native-input:focus+.owned-native-placeholder{display:none}.owned-native-row{display:flex;align-items:center;gap:8px;min-width:0;padding-top:10px}.owned-native-trailing{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0;margin-left:auto}.owned-native-row button{font:inherit;color:inherit;background:#ffffff0a;border:1px solid #ffffff24;border-radius:8px;padding:8px}.owned-native-select{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px}.owned-native-primary{flex:none}"
+}

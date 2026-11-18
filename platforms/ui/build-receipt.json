@@ -1,8 +1,8 @@
 {
   "mode": "built",
-  "htmlBytes": 4825089,
-  "htmlSha256": "e88c2ebd1aceae5b5b2fb657933942c6076f0dfd573ec04dd389d7a54e51aecc",
-  "sceneInputSha256": "ffd7da7573f916748b009f12b163ee8b29cbbc3366a9f59adb52197f697adc7b",
+  "htmlBytes": 4833098,
+  "htmlSha256": "556c9e976e63b046816e671fe01dcb60417ff92170f7e838f41cfcc611b93fe1",
+  "sceneInputSha256": "0b853f88a9d9d30a0b692de9147765df43d0f1ea067ab086f9104b3368a804ec",
   "mediaAreSeparateBoundedResources": true,
   "media": [
     {

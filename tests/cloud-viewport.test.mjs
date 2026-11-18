@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Native browser lease protocol fixtures; these do not claim online DSH/cloud success. */
 import {test} from 'node:test';import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {cloudDocumentUrl,cloudBrowserAccount} from '../client/cloud-browser.js';
 test('document URLs are official bounded share links without credentials or arbitrary code targets',()=>{assert.equal(cloudDocumentUrl('https://www.kdocs.cn/l/fixtureDoc?anything=discarded'),'https://www.kdocs.cn/l/fixtureDoc');for(const value of ['javascript:alert(1)','file:///C:/secret','http://www.kdocs.cn/l/abc','https://evil.example/l/abc','https://u:p@www.kdocs.cn/l/abc','https://www.kdocs.cn:8443/l/abc','https://www.kdocs.cn/latest'])assert.equal(cloudDocumentUrl(value),null);});
