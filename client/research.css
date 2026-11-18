@@ -297,3 +297,6 @@
 .research-tool-list>div{border:1px solid var(--research-line);border-radius:6px;padding:10px}
 .research-center details > summary{cursor:pointer}
 .research-center :is(.research-properties,.research-section) > :first-child{margin-top:0}
+
+.research-section > [data-survey-job]:empty { display: none; }
+.research-shelf > [data-dataset-library] { display: grid; gap: 7px; }

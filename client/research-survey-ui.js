@@ -15,7 +15,7 @@ const pathValue=(root,path)=>path.split('.').reduce((value,key)=>value?.[key],ro
 const newDefinition=()=>({schemaVersion:1,title:'未命名问卷',description:'',completion:'感谢填写。',study:'',pages:[createPage()]});
 
 export function createSurveyWorkspace(ctx) {
-  let draft,loaded,pageIndex=0,questionId,undo=[],redo=[],lastInput='',mode='design',preview,settings='',dragged,diagnostics=[],job=null,pollTimer=null,historyRoot=null;
+  let draft,loaded,pageIndex=0,questionId,undo=[],redo=[],lastInput='',mode='design',preview,settings='',dragged,diagnostics=[],job=null,pollTimer=null,historyRoot=null,watching=false,pretestPending=false;
   const scratches=new Map();
   const rows=()=>ctx.index.items.filter(row=>row.kind==='survey');
   const page=()=>draft.pages[pageIndex];
@@ -28,19 +28,35 @@ export function createSurveyWorkspace(ctx) {
     pageIndex=0;questionId=draft.pages[0]?.questions[0]?.id;mode='design';settings='';preview=null;
     undo=[];redo=[];lastInput='';diagnostics=[];
   }
+  const jobSeat=()=>ctx.element.querySelector('[data-survey-job]');
+  function updateJobStatus() {
+    const target=jobSeat();
+    if(target)target.innerHTML=pretestStatus();
+  }
+  function watchPretest(){
+    if(!watching||job?.status!=='running'||pollTimer)return;
+    pollTimer=setInterval(pollPretest,1200);
+    void pollPretest();
+  }
   async function pollPretest() {
-    if(!job||job.status!=='running')return;
+    if(!job||job.status!=='running'||pretestPending)return;
     const current=job.id,root=ctx.root;
+    pretestPending=true;
     try {
       const state=(await ctx.get('job',{id:current})).job;
       if(ctx.root!==root||job?.id!==current)return;
       job=state;
+      updateJobStatus();
       if(state.status!=='running'){
-        clearInterval(pollTimer);pollTimer=null;await ctx.refresh();
-        if(state.status==='completed')ctx.report('预测试完成 · 实际样本 0。可查看实际诊断。');
-        else ctx.report(state.message||'预测试已停止。');
+        clearInterval(pollTimer);pollTimer=null;
+        await ctx.refresh({redraw:false});
       }
-    }catch(error){clearInterval(pollTimer);pollTimer=null;ctx.fail(error);}
+    }catch(error){
+      if(ctx.root!==root)return;
+      clearInterval(pollTimer);pollTimer=null;
+      const target=jobSeat();
+      if(target)target.textContent=error.message;
+    }finally {pretestPending=false;}
   }
   function pretestStatus() {
     if(!job)return '';
@@ -126,7 +142,7 @@ export function createSurveyWorkspace(ctx) {
       (disabled?button('adopt','采用为草稿',{primary:true,disabled:ctx.busy}):
         button('undo','撤销',{disabled:!undo.length})+button('redo','重做',{disabled:!redo.length})+
         button('save','保存草稿',{primary:true,disabled:ctx.busy})+button('settings','更多操作'))+exports+'</div>'+
-      (settings?settingsPanel(canPublish):'')+pretestStatus()+
+      (settings?settingsPanel(canPublish):'')+
       (diagnostics.length?'<ul class="research-diagnostics" aria-label="逻辑检查结果">'+diagnostics.map(row=>'<li data-severity="'+row.severity+'">'+html(row.message)+'</li>').join('')+'</ul>':'')+
       (mode==='preview'?renderPreview():design(pageTabs,disabled));
   }
@@ -304,19 +320,22 @@ export function createSurveyWorkspace(ctx) {
   return {
     open,
     afterRender(){
+      watching=true;
       if(historyRoot!==ctx.root){
         const root=ctx.root;historyRoot=root;
         ctx.get('jobs').then(result=>{
-          if(ctx.root===root&&!job){job=result.jobs.find(row=>row.kind==='survey-pretest')??null;ctx.draw();}
-        }).catch(error=>ctx.fail(error));
+          if(ctx.root!==root||job)return;
+          job=result.jobs.find(row=>row.kind==='survey-pretest')??null;
+          updateJobStatus();watchPretest();
+        }).catch(error=>{const target=jobSeat();if(target&&ctx.root===root)target.textContent=error.message;});
       }
-      if(job?.status==='running'&&!pollTimer){void pollPretest();pollTimer=setInterval(pollPretest,1200);}
+      watchPretest();
     },
-    pause(){clearInterval(pollTimer);pollTimer=null;},
+    pause(){watching=false;clearInterval(pollTimer);pollTimer=null;},
     reset(){this.pause();job=null;historyRoot=null;scratches.clear();draft=loaded=null;preview=null;pageIndex=0;diagnostics=[];settings='';mode='design';},
     render(){
       const huge=mode==='preview'||!draft;
-      return '<div class="research-workspace'+(huge?' is-wide':'')+'">'+library()+'<section class="research-section research-designer" aria-label="问卷设计">'+specs()+'</section>'+(!huge&&page()?propertyPanel():'')+'</div>';
+      return '<div class="research-workspace'+(huge?' is-wide':'')+'">'+library()+'<section class="research-section research-designer" aria-label="问卷设计"><div data-survey-job>'+pretestStatus()+'</div>'+specs()+'</section>'+(!huge&&page()?propertyPanel():'')+'</div>';
     },
     click(action,target) {
       const {id:key,index,path,source}=target.dataset;

@@ -79,7 +79,11 @@ export function createInterviewWorkspace(ctx) {
       if(!active||token!==generation)return;
       const completed=result.jobs.some(job=>job.status==='completed'&&jobs.some(previous=>previous.id===job.id&&previous.status==='running'));
       jobs=result.jobs.filter(job=>job.kind==='transcription');asr=engine.asr;
-      if(completed)await ctx.refresh();
+      if(completed){
+        await ctx.refresh({redraw:false});
+        const list=ctx.element.querySelector('[data-interview-shelf]');
+        if(active&&token===generation&&list)list.outerHTML=shelf();
+      }
       if(!active||token!==generation)return;
       const list=ctx.element.querySelector('[data-interview-jobs]');
       if(list)list.innerHTML=jobList();
@@ -96,7 +100,7 @@ export function createInterviewWorkspace(ctx) {
     const mock=kind==='interview'?group(kind).filter(item=>item.provenance==='synthetic'):[];
     const row=item=>'<button type="button" class="research-record" data-r="record-open" data-id="'+html(item.id)+'" aria-current="'+(id===item.id)+'"><span>'+html(item.title)+'</span><small>'+
       html(item.status==='proposal'?'助手建议 · 待采用':item.status==='media-ready'?'本地音视频':item.provenance==='synthetic'?'模拟资料':names[item.kind])+'</small></button>';
-    return '<aside class="research-shelf" aria-label="访谈文件和任务">'+heading(names[kind],'',button('interview-new','新建'))+
+    return '<aside class="research-shelf" aria-label="访谈文件和任务" data-interview-shelf>'+heading(names[kind],'',button('interview-new','新建'))+
       (items.length?items.map(row).join(''):empty('暂无记录。'))+
       (mock.length?'<h4>模拟资料</h4>'+mock.map(row).join(''):'')+
       (kind==='interview'?'<h4>本地转写</h4><div data-interview-jobs>'+jobList()+'</div>':'')+'</aside>';

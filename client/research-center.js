@@ -59,14 +59,14 @@ export function createResearchCenter({request,onProjectMutation,onPrompt}) {
     await onProjectMutation?.();
     return result;
   }
-  async function refresh() {
+  async function refresh({redraw=true}={}) {
     if (!root) return;
     const selected=root,requestId=++loadGeneration;
     try {
       const result=await request('research/index?'+new URLSearchParams({root:selected}));
-      if(root===selected&&requestId===loadGeneration&&!disposed){index=result;draw();}
+      if(root===selected&&requestId===loadGeneration&&!disposed){index=result;if(redraw)draw();}
     } catch(error) {
-      if(root===selected&&requestId===loadGeneration&&!disposed){problem=error.message;draw();}
+      if(root===selected&&requestId===loadGeneration&&!disposed){problem=error.message;if(redraw)draw();}
       throw error;
     }
   }

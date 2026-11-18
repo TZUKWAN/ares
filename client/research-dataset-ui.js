@@ -15,7 +15,11 @@ export function createDatasetWorkspace(ctx) {
       const next=data.jobs.filter(job=>job.kind==='dataset-download');
       const changed=next.some(job=>job.status==='completed'&&!ctx.index.items.some(row=>row.id===job.result?.itemId));
       jobs=next;
-      if(changed)await ctx.refresh();
+      if(changed){
+        await ctx.refresh({redraw:false});
+        const library=ctx.element.querySelector('[data-dataset-library]');
+        if(active&&now===epoch&&library)library.innerHTML=localFiles();
+      }
       if(active&&now===epoch){const seat=ctx.element.querySelector('[data-dataset-jobs]');if(seat)seat.innerHTML=jobList();}
     }catch(error){if(active&&now===epoch)ctx.element.querySelector('[data-dataset-jobs]')?.replaceChildren(document.createTextNode(error.message));}
     finally{polling=false;}
@@ -76,11 +80,14 @@ export function createDatasetWorkspace(ctx) {
       button('item','版本与流程绑定',{data:{id:entry.item.id}})+'</div>';
   }
   const rows=()=>ctx.index.items.filter(row=>row.kind==='dataset');
+  function localFiles(){
+    return rows().length?rows().map(row=>'<button type="button" class="research-record" data-r="dataset-open" data-id="'+html(row.id)+'" aria-current="'+(entry?.item.id===row.id)+'">'+html(row.title)+'</button>').join(''):empty('已登记文件会显示在这里。');
+  }
   async function open(id){entry=await ctx.entry(id);detail=null;ctx.draw();}
   return {
     render(){
       return '<div class="research-two"><aside class="research-shelf" aria-label="已下载的数据与任务">'+heading('本地数据资源')+
-        (rows().length?rows().map(row=>'<button type="button" class="research-record" data-r="dataset-open" data-id="'+html(row.id)+'" aria-current="'+(entry?.item.id===row.id)+'">'+html(row.title)+'</button>').join(''):empty('已登记文件会显示在这里。'))+
+        '<div data-dataset-library>'+localFiles()+'</div>'+
         '<h4>下载任务</h4><div data-dataset-jobs>'+jobList()+'</div></aside><section class="research-section">'+
         (entry?saved():detail?preview():chooser()+results())+'</section></div>';
     },

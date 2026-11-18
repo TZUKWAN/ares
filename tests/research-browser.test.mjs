@@ -44,11 +44,25 @@ test('ARES research panel executes the survey and interview workflows through re
   t.after(()=>browser.close());
   const page=await browser.newPage({viewport:{width:1640,height:1050},reducedMotion:'reduce'});
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
+  // Defer only the first real job-list response to exercise asynchronous form preservation.
+  let releaseJobs,firstJobs=true;
+  const deferJobs=new Promise(resolve=>{releaseJobs=resolve;});
+  await page.route(/\/ares\/api\/v2\/research\/jobs\?/,async route=>{
+    if(firstJobs){firstJobs=false;await deferJobs;}
+    await route.continue();
+  });
   await page.goto(origin+'/');
   await page.getByRole('button',{name:'研究工具',exact:true}).click();
   await page.getByRole('button',{name:'打开问卷设计'}).click();
   await page.getByRole('textbox',{name:'研究主题',exact:true}).fill('项目流程上手调研');
   await page.getByRole('textbox',{name:'测量维度（用逗号分隔）'}).fill('学习成本, 操作信心');
+  const jobsResponse=page.waitForResponse(response=>new URL(response.url()).pathname==='/ares/api/v2/research/jobs');
+  releaseJobs();
+  const jobSnapshot=await jobsResponse;
+  assert.equal(jobSnapshot.status(),200);
+  await jobSnapshot.finished();
+  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+  assert.equal(await page.getByRole('textbox',{name:'研究主题',exact:true}).inputValue(),'项目流程上手调研');
   await page.getByRole('button',{name:'使用本地模板'}).click();
   const workspace=page.getByLabel('研究工具中心',{exact:true});
   await workspace.getByRole('button',{name:'数值',exact:true}).click();
