@@ -12,4 +12,53 @@ const api=directRoutes(),origin='http://127.0.0.1:64329',errors=[],unexpected=[]
 before(async()=>{browser=await chromium.launch({headless:true,args:sceneBrowserArgs});});after(async()=>{api.dispose();await browser?.close();});
 async function pageFor(){const page=await browser.newPage({viewport:{width:1600,height:1000},reducedMotion:'reduce'});page.setDefaultTimeout(12000);page.on('pageerror',error=>errors.push(error.message));await page.route('**/*',async route=>{const request=route.request(),url=new URL(request.url());if(url.origin!==origin){unexpected.push(url.origin);await route.abort();return;}if(url.pathname==='/'){await route.fulfill({contentType:'text/html',body:'<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="stylesheet" href="/ares/api/v2/style.css"><style>html,body,#root{height:100%;width:100%;margin:0}</style></head><body><div id="root"></div><script type="module">import{mountAres}from"/ares/api/v2/app.js?v=2.3.0-polish1";window.app=mountAres(document.querySelector("#root"));</script></body></html>'});return;}if(url.pathname==='/ares/api/host/extension-form.js')url.pathname='/ares/api/v2/extension-form.js';const response=await api.request(url.pathname.slice('/ares/api/v2/'.length)+url.search,request.postData()?JSON.parse(request.postData()):undefined,{raw:true,host:url.host,headers:request.headers()});await route.fulfill({status:response.status,headers:response.headers,body:response.body});});await page.goto(origin);await page.locator('#root[data-galaxy-ready=true]').waitFor();await page.evaluate(()=>document.fonts.ready);return page;}
 test('actual reference scene retains all 1/9/40 steps, pages bounded media, and opens the clicked real step',async()=>{const page=await pageFor(),evidence=[];try{for(const fixture of projects){await projectPicker(page);await page.locator('.galaxy-project-choice').filter({hasText:fixture.project.name}).click();await page.waitForFunction(count=>window.app.inspectGalaxy()?.sceneGraph?.steps.length===count,fixture.count);const state=await page.evaluate(()=>window.app.inspectGalaxy());assert.equal(state.renderStats.processNodes,fixture.count);assert.equal(state.renderStats.memberNodes,fixture.project.workbench.team.length);assert.equal(state.renderer,'reference-video-canvas');assert.equal(state.renderStats.glError,null);assert.ok(state.renderStats.visibleSteps<=5);assert.ok(state.renderStats.media.length<=6);assert.equal(await page.locator('.process-step').count(),fixture.count);assert.equal(await page.locator('.process-member').count(),fixture.project.workbench.team.length);await page.screenshot({path:join(base,'steps-'+fixture.count+'.png')});evidence.push({count:fixture.count,stats:state.renderStats,graph:state.sceneGraph});await nodeDetails(page,'step-0');assert.match(await page.getByRole('dialog').textContent(),/真实步骤 01/);await page.getByRole('button',{name:'关闭对话框',exact:true}).click();assert.equal(readProject(fixture.root).progress.done,0);}assert.deepEqual(errors,[]);assert.deepEqual(unexpected,[]);writeFileSync(join(base,'renderer-evidence.json'),JSON.stringify(evidence,null,2));console.log('PROCESS_ORBITS_EVIDENCE',base);}finally{await page.close();}});
-test('slow orbit advances visually, freezes while inspecting a node, and never advances project acceptance',async()=>{const page=await pageFor(),fixture=projects[1];try{await projectPicker(page);await page.locator('.galaxy-project-choice').filter({hasText:fixture.project.name}).click();const bytes=readFileSync(join(fixture.root,'.ares/project.json'));await page.mouse.move(10,980);await page.emulateMedia({reducedMotion:'no-preference'});await page.waitForTimeout(220);const first=await page.evaluate(()=>window.app.inspectGalaxy());await page.waitForTimeout(220);const second=await page.evaluate(()=>window.app.inspectGalaxy());assert.ok(second.orbitTime>first.orbitTime);const label=await page.locator('.process-step[data-id=step-0]').boundingBox();await page.mouse.move(label.x+label.width/2,label.y+label.height/2);await page.waitForFunction(()=>window.app.inspectGalaxy().holding===true);const frozen=await page.evaluate(()=>window.app.inspectGalaxy().orbitTime);await page.waitForTimeout(180);assert.equal(await page.evaluate(()=>window.app.inspectGalaxy().orbitTime),frozen);assert.equal(await page.evaluate(()=>window.app.inspectGalaxy().phase),'hub');assert.deepEqual(readFileSync(join(fixture.root,'.ares/project.json')),bytes);assert.deepEqual(errors,[]);console.log('PROCESS_ORBITS_MOTION_EVIDENCE',base);}finally{await page.close();}});
+test('slow orbit advances visually, freezes while inspecting a node, and never advances project acceptance',async()=>{
+ const page=await pageFor(),fixture=projects[1];
+ const target='[data-process-step="step-0"]';
+ try{
+  await projectPicker(page);
+  await page.locator('.galaxy-project-choice').filter({hasText:fixture.project.name}).click();
+  await page.locator('.ares-ui-pending').waitFor({state:'hidden'});
+  await page.waitForFunction(count=>{
+   const scene=document.querySelector('[data-neural-scene]');
+   const state=window.app.inspectGalaxy();
+   return scene&&!scene.inert&&state?.phase==='hub'&&state.sceneGraph?.steps.length===count;
+  },fixture.count);
+  await page.evaluate(()=>document.fonts.ready);
+
+  const bytes=readFileSync(join(fixture.root,'.ares/project.json'));
+  await page.mouse.move(10,980);
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  const first=await page.evaluate(()=>window.app.inspectGalaxy().orbitTime);
+  const second=await (await page.waitForFunction(time=>{
+   const current=window.app.inspectGalaxy().orbitTime;
+   return current>time+.1&&current;
+  },first)).jsonValue();
+  assert.ok(second>first);
+
+  // The picker and introductory layout can move the label before it is ready for inspection.
+  const point=await (await page.waitForFunction(selector=>{
+   const node=document.querySelector(selector);
+   const scene=node?.closest('[data-neural-scene]');
+   if(scene?.dataset.neuralIntro!=='complete'||Number(getComputedStyle(node).opacity)<.98)return false;
+   const box=node.getBoundingClientRect(),x=box.x+box.width/2,y=box.y+box.height/2;
+   return node.contains(document.elementFromPoint(x,y))&&{x,y};
+  },target)).jsonValue();
+  await page.mouse.move(point.x,point.y);
+  await page.waitForFunction(()=>window.app.inspectGalaxy().holding===true);
+  const frozen=await page.evaluate(()=>window.app.inspectGalaxy().orbitTime);
+  await page.waitForTimeout(180);
+  const resting=await page.evaluate(({point,target})=>{
+   const state=window.app.inspectGalaxy();
+   return {time:state.orbitTime,phase:state.phase,holding:state.holding,
+    targetHit:!!document.elementFromPoint(point.x,point.y)?.closest(target)};
+  },{point,target});
+  assert.equal(resting.holding,true,'the scene still reports a hovered node');
+  assert.equal(resting.targetHit,true,'the pointer is still over the selected step label');
+  assert.equal(resting.time,frozen);
+  assert.equal(resting.phase,'hub');
+  assert.deepEqual(readFileSync(join(fixture.root,'.ares/project.json')),bytes);
+  assert.deepEqual(errors,[]);
+  console.log('PROCESS_ORBITS_MOTION_EVIDENCE',base);
+ }finally{await page.close();}
+});
