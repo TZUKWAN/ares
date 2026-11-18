@@ -2,7 +2,7 @@
 import {readFileSync,statSync} from 'node:fs';
 import {join} from 'node:path';
 import {hash,safePath,now} from './storage.js';
-import {artifactVersion,completeDirectory} from './project-artifacts.js';
+import {addReleaseFiles,artifactVersion,completeDirectory} from './project-artifacts.js';
 import {readProjectObject,readProjectRecord} from './project-objects.js';
 import {verifyFrozenResources} from './native-versions.js';
 import {ruleItems,ruleItemState} from './rule-checklist-model.js';
@@ -36,13 +36,14 @@ function cloudReport(project,block){
 
 export function buildProjectVerification(project,{definition,checkStep,ruleEvidence,ruleIssues}){
  const blocking=[],warnings=[],steps=[],files=new Map(),block=row=>blocking.push(row);
+ const submissionFiles=new Map(),submissionVersionIds=new Set();
  const acceptances=new Map();
  // Actor identity belongs to the immutable task.accepted event, not the
  // content-addressed artifact payload (the same bytes can have several reviews).
  for(const id of project.workbench?.eventIds||[]){try{const event=readProjectRecord(project.root,'events',id).payload;if(event.projectId!==project.id)throw new Error('Foreign event');if(event.type==='task.accepted'){if(typeof event.detail?.stepId!=='string'||!Array.isArray(event.detail.artifactVersionIds)||typeof event.detail.reviewHash!=='string')throw new Error('Invalid acceptance');acceptances.set(event.detail.stepId,event);}}catch{block({code:'acceptance-history-damaged',reason:'验收事件历史缺失、损坏或不属于此项目'});}}
  const workflow={definitionId:definition.id,workflowId:definition.workflow.id,state:'verified',steps:definition.workflow.steps.length,skills:definition.skills.map(skill=>({id:skill.id,sha256:hash(skill.content),resources:skill.resources.length}))};
  try{verifyFrozenResources(definition);}catch{workflow.state='invalid';block({code:'fixed-resources-invalid',reason:'固定流程的技能或资源缺失、损坏，请恢复对应固定版本后再检查'});}
- function addFile(row){const key=row.path.replaceAll('\\','/'),previous=files.get(key);files.set(key,{...previous,...row,path:key,stepIds:[...new Set([...(previous?.stepIds||[]),row.stepId])],accepted:previous?.accepted===true||row.accepted===true});}
+ function addFile(row){const key=row.path.replaceAll('\\','/'),previous=files.get(key);const display=previous?.accepted&&!row.accepted?previous:row;files.set(key,{...display,path:key,stepIds:[...new Set([...(previous?.stepIds||[]),row.stepId])]});}
  for(const step of project.workflow.steps){
   const task=project.tasks[step.id],dependencies=step.dependsOn.map(id=>({stepId:id,status:project.tasks[id]?.status||'missing'}));
   if(task.status!=='done')block({code:'task-not-accepted',stepId:step.id,title:step.title,status:task.status,reason:task.reason||'尚未验收'});
@@ -60,15 +61,22 @@ export function buildProjectVerification(project,{definition,checkStep,ruleEvide
    const accepted=acceptances.get(step.id);
    if(accepted?.actor?.kind!=='user'||accepted?.actor?.id!=='owner'||accepted.detail.reviewHash!==task.reviewHash||hash(accepted.detail.artifactVersionIds)!==hash(task.acceptedVersionIds||[])){review.state='non-owner-reviewed';block({code:'owner-review-required',stepId:step.id,reason:'当前固定作品及复核记录尚无匹配的负责人验收事件'});}
   }
-  const acceptedVersionIds=task.acceptedVersionIds||[],acceptedArtifacts=new Set();
+  const acceptedVersionIds=task.acceptedVersionIds||[],acceptedArtifacts=new Set(),expected=task.artifactHashes||{};
+  const ownerAccepted=task.status==='done'&&review.state==='owner-reviewed';
   for(const id of acceptedVersionIds){try{
    const record=artifactVersion(project.root,id),value=record.payload,check=checked.checks.find(row=>row.id===value.artifactId);
-   if(value.projectId!==project.id||value.inputHash!==task.inputHash||value.stepId!==step.id||!check?.valid||value.artifactHash!==check.sha256||task.artifactHashes?.[value.artifactId]!==check.sha256||value.provenance?.kind==='synthetic')throw new Error('Invalid accepted version');
+   const matchesStep=value.projectId===project.id&&value.inputHash===task.inputHash&&value.stepId===step.id;
+   const matchesWork=check?.valid&&value.artifactHash===check.sha256&&expected[value.artifactId]===check.sha256;
+   if(!matchesStep||!matchesWork||!value.provenance||value.provenance.kind==='synthetic'||!value.files.length||acceptedArtifacts.has(value.artifactId))throw new Error('Invalid accepted version');
+   if(ownerAccepted){
+    addReleaseFiles(submissionFiles,value.files);
+    submissionVersionIds.add(id);
+   }
    acceptedArtifacts.add(value.artifactId);
-   for(const file of value.files)addFile({path:file.workingPath,sha256:file.sha256,bytes:file.bytes,artifactId:value.artifactId,stepId:step.id,versionId:id,sourceDefinitionId:value.definitionId,accepted:task.status==='done'});
+   for(const file of value.files)addFile({path:file.workingPath,sha256:file.sha256,bytes:file.bytes,artifactId:value.artifactId,stepId:step.id,versionId:id,sourceDefinitionId:value.definitionId,accepted:ownerAccepted});
   }catch{block({code:'accepted-version-invalid',stepId:step.id,versionId:id,reason:'已验收作品版本的内容、来源或引用不匹配'});}}
   for(const check of checked.checks){
-   if(task.status==='done'&&check.required&&!acceptedArtifacts.has(check.id))block({code:'accepted-version-missing',stepId:step.id,artifactId:check.id,reason:'必需作品没有绑定当前实际文件的验收版本'});
+   if(task.status==='done'&&(check.required||Object.hasOwn(expected,check.id))&&!acceptedArtifacts.has(check.id))block({code:'accepted-version-missing',stepId:step.id,artifactId:check.id,reason:check.required?'必需作品没有绑定当前实际文件的验收版本':'复核记录中的可选作品没有匹配的验收版本'});
    if(!check.valid||acceptedArtifacts.has(check.id))continue;
    if(!check.required)warnings.push({code:'optional-draft-unreviewed',stepId:step.id,artifactId:check.id,reason:'此可选工作稿未包含在本次验收版本中'});
    if(check.kind==='directory'){for(const file of completeDirectory(safePath(project.root,check.path,{existing:true})))addFile({path:join(check.path,file.path),sha256:file.sha256,bytes:statSync(safePath(project.root,join(check.path,file.path),{existing:true})).size,artifactId:check.id,stepId:step.id,accepted:false});}
@@ -84,6 +92,10 @@ export function buildProjectVerification(project,{definition,checkStep,ruleEvide
  if(!mandatory.length)block({code:'rules-checklist-missing',reason:'尚未建立本届规则的必需条目，请先按原文逐项核对'});
  blocking.push(...ruleIssues);
  const rules={state:blocking.some(row=>row.code?.startsWith('rules-')||row.ruleId)?'pending':'verified',scope,baseline:baseline||null,mandatory:mandatory.length,confirmed:mandatory.filter(item=>item.state==='confirmed').length,items};
- const cloud=cloudReport(project,block),execution=executionReport(project,block,warnings),actualFiles=[...files.values()].sort((a,b)=>a.path.localeCompare(b.path)),checksPassed=blocking.length===0;
- return {schema_version:'3.0',verificationRevision:2,kind:'ares-project-verification',projectId:project.id,projectRevision:project.revision,checkedAt:now(),definitionId:project.definitionId,checksPassed,submissionReadiness:checksPassed?'project-checks-passed':'blocked',note:'这是固定流程、实际文件与负责人记录的内部提交检查，不表示主办方认可或官方评分结论。',blocking,warnings,progress:project.progress,workflow,steps,files:actualFiles,completeness:{requiredArtifacts:steps.reduce((n,row)=>n+row.checks.filter(c=>c.required).length,0),checkedRequiredArtifacts:steps.reduce((n,row)=>n+row.checks.filter(c=>c.required&&c.valid).length,0),files:actualFiles.length},contentReview:{required:steps.length,ownerReviewed:steps.filter(row=>row.review.state==='owner-reviewed').length},rules,ruleEvidence,execution,cloud};
+ const cloud=cloudReport(project,block),execution=executionReport(project,block,warnings);
+ if(!submissionFiles.size)block({code:'submission-artifacts-missing',reason:'没有可固定的已验收实际作品，请至少验收一份交付物'});
+ const actualFiles=[...files.values()].sort((a,b)=>a.path.localeCompare(b.path)),checksPassed=blocking.length===0;
+ const report={schema_version:'3.0',verificationRevision:3,kind:'ares-project-verification',projectId:project.id,projectRevision:project.revision,checkedAt:now(),definitionId:project.definitionId,checksPassed,submissionReadiness:checksPassed?'project-checks-passed':'blocked',note:'这是固定流程、实际文件与负责人记录的内部提交检查，不表示主办方认可或官方评分结论。',blocking,warnings,progress:project.progress,workflow,steps,files:actualFiles,completeness:{requiredArtifacts:steps.reduce((n,row)=>n+row.checks.filter(c=>c.required).length,0),checkedRequiredArtifacts:steps.reduce((n,row)=>n+row.checks.filter(c=>c.required&&c.valid).length,0),files:actualFiles.length,acceptedFiles:submissionFiles.size},contentReview:{required:steps.length,ownerReviewed:steps.filter(row=>row.review.state==='owner-reviewed').length},rules,ruleEvidence,execution,cloud};
+ const submission=checksPassed?{artifactVersionIds:[...submissionVersionIds],files:[...submissionFiles.values()]}:null;
+ return {report,submission};
 }

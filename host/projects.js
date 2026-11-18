@@ -84,7 +84,21 @@ export function taskAction(body,actor='agent',actorInfo){
  });
 }
 export function updateFacts(body){return mutate(body.root,body.expectedRevision,p=>{if(!body.facts||typeof body.facts!=='object'||Array.isArray(body.facts))throw new AresError('事实必须为对象');p.facts=clone(body.facts);});}
-export function verifyProject(root){const p=readProject(root);if(p.kind!=='v2')throw new AresError('请先建立新版项目');const report=buildProjectVerification(p,{definition:definition(root),checkStep:step=>checksFor(p,step),ruleEvidence:projectRubricEvidence(p),ruleIssues:ruleItemIssues(p)});if(report.checksPassed&&hash(readProject(root))!==hash(p)){report.checksPassed=false;report.submissionReadiness='blocked';report.blocking.push({code:'verification-stale',reason:'检查期间项目或实际作品发生变化，请稳定后重新检查'});}return report;}
+export function inspectProjectSubmission(project,version){
+ const result=buildProjectVerification(project,{definition:version,checkStep:step=>checksFor(project,step),ruleEvidence:projectRubricEvidence(project),ruleIssues:ruleItemIssues(project)});
+ if(result.submission&&hash(readProject(project.root))!==hash(project)){
+  result.submission=null;
+  result.report.checksPassed=false;
+  result.report.submissionReadiness='blocked';
+  result.report.blocking.push({code:'verification-stale',reason:'检查期间项目或实际作品发生变化，请稳定后重新检查'});
+ }
+ return result;
+}
+export function verifyProject(root){
+ const project=readProject(root);
+ if(project.kind!=='v2')throw new AresError('请先建立新版项目');
+ return inspectProjectSubmission(project,definition(project.root)).report;
+}
 export function recordRules(body,actor='agent'){return mutate(body.root,body.expectedRevision,p=>{text(body.edition,'适用届次',100);text(body.sourceUrl,'规则来源',2000);try{if(!['http:','https:'].includes(new URL(body.sourceUrl).protocol))throw 0;}catch{throw new AresError('规则来源须为公开网页 URL');}const path=text(body.snapshotPath,'原文快照相对路径',400),full=safePath(body.root,path,{existing:true}),quote=text(body.quote,'支持摘录',8000);if(sensitiveFile(path))throw new AresError('凭据文件不能登记为规则资料');const parsed=probe(full,full.split('.').pop().toLowerCase());if(!parsed.text.includes(quote))throw new AresError('原文快照中找不到所填摘录');p.competition.edition=body.edition;p.competition.ruleStatus='reviewed';p.competition.ruleBaseline={sourceUrl:body.sourceUrl,snapshotPath:path,sha256:hash(readFileSync(full)),quote,reviewer:actor,reviewedAt:now(),scope:body.scope||p.competition.track,scopeBinding:{competitionId:p.competition.id,edition:body.edition,track:p.competition.track,group:p.competition.group||''}};});}
 export function addMaterial(body){return mutate(body.root,body.expectedRevision,p=>{const path=text(body.path,'资料相对路径',400),full=safePath(body.root,path,{existing:true});if(sensitiveFile(path))throw new AresError('凭据文件不能登记为项目资料');if(!statSync(full).isFile()||statSync(full).size>64*1024*1024)throw new AresError('资料需要是64MiB以内的文件');if(syntheticEvidence(body.root,p,{valid:true,path,sha256:hash(readFileSync(full))},{kind:'file'},{sourceFiles}))throw new AresError('模拟预测试资料不能登记为正式调查或原始证据，请在扩展预测试区使用');const parsed=probe(full,full.split('.').pop().toLowerCase());const material={id:'material-'+hash(path).slice(0,12),title:text(body.title||path,'资料名称',200),path,sha256:hash(readFileSync(full)),registeredAt:now(),format:parsed.format,excerpt:parsed.text.slice(0,1200),verification:'structure-read-content-not-verified'};p.facts.materials=Array.isArray(p.facts.materials)?p.facts.materials.filter(m=>m.path!==path):[];p.facts.materials.push(material);});}
 export function artifactPreview(root,id){const p=readProject(root);if(p.kind!=='v2')throw new AresError('请先建立新版项目');const all=p.workflow.steps.flatMap(s=>s.outputs),o=all.find(o=>o.id===id);if(!o)throw new AresError('产物不属于当前项目');const artifact=inspectOutput(root,p,o,all);if(!artifact.valid)throw new AresError(artifact.error||'产物未通过结构检查');if(o.kind==='directory')return {artifact,text:sourceFiles(safePath(root,artifact.path)).map(f=>f.path+'  '+f.sha256).join('\n')};const parent=o.kind==='section'?all.find(x=>x.id===o.parentId):o;return {artifact,text:probe(safePath(root,artifact.path),parent.format).text};}

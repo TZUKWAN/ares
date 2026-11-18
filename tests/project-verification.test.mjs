@@ -9,23 +9,130 @@ import {fileURLToPath} from 'node:url';
 import {defaults,saveConfiguration,readConfiguration,competitionCatalog} from '../host/catalog.js';
 import {linkRoot,initializeProject,recordRules,taskAction,taskChecks,verifyProject,changeProject,previewUpgrade,upgradeProject} from '../host/projects.js';
 import {configureRuleChecklist,confirmRuleItem} from '../host/rule-checklist.js';
+import {freezeProjectRelease,readRelease} from '../host/project-workbench.js';
 import {hash} from '../host/storage.js';
 import {randomUUID} from 'node:crypto';
 
-function setup({owner=true,checklist=true,reviewActor}={}){
+function setup({owner=true,checklist=true,reviewActor,requirement='required',writeArtifact=true,management=false,facts}={}){
  const base=mkdtempSync(join(process.env.ARES_TEST_ROOT||tmpdir(),'ares-delivery-gate-')),root=join(base,'project'),home=join(base,'home');process.env.ARES_HOME=home;mkdirSync(root);linkRoot(root);
- const config=defaults(),flow=structuredClone(config.workflows.find(row=>row.id==='modeling'));flow.id='delivery-software-fixture';flow.steps=[{...flow.steps[0],outputs:[{id:'actual-file',title:'真实软件验证文件',kind:'file',format:'md',path:'actual.md',requirement:'required'}]}];config.workflows.push(flow);saveConfiguration(config,0);
- let p=initializeProject({root,name:'内部交付门禁软件验证（非竞赛成果）',competitionId:5,track:competitionCatalog(config).find(row=>row.id===5).tracks[0].track,workflowId:flow.id,edition:'SOFTWARE-QA'});
+ const config=defaults(),flow=structuredClone(config.workflows.find(row=>row.id==='modeling')),step=flow.steps[0];
+ flow.id='delivery-software-fixture';
+ step.outputs=[{id:'actual-file',title:'真实软件验证文件',kind:'file',format:'md',path:'actual.md',requirement,...(requirement==='conditional'?{condition:{field:'facts.deliverReport',equals:true}}:{})}];
+ flow.steps=[step];
+ if(management){
+  flow.steps.unshift({...structuredClone(step),id:'coordination',title:'团队排期确认',execution:'human',outputs:[{id:'meeting-notes',title:'可选会议记录',kind:'file',format:'md',path:'meeting.md',requirement:'optional'}]});
+  step.dependsOn=['coordination'];
+ }
+ config.workflows.push(flow);saveConfiguration(config,0);
+ let p=initializeProject({root,name:'内部交付门禁软件验证（非竞赛成果）',competitionId:5,track:competitionCatalog(config).find(row=>row.id===5).tracks[0].track,workflowId:flow.id,edition:'SOFTWARE-QA',facts});
  const quote='Explicit software QA scope; this is not an actual competition rule.';writeFileSync(join(root,'scope.txt'),quote);
  p=recordRules({root,expectedRevision:p.revision,edition:'SOFTWARE-QA',sourceUrl:'https://example.invalid/owned-software-rule-fixture',snapshotPath:'scope.txt',quote},owner?'user':'agent');
- mkdirSync(join(root,p.outputDir),{recursive:true});const artifact=join(root,p.outputDir,'actual.md');writeFileSync(artifact,'# Software verification document\nActual bytes for the state-machine contract, not a contest submission.');
- const body={root,expectedRevision:p.revision,stepId:flow.steps[0].id,action:'complete'};
+ mkdirSync(join(root,p.outputDir),{recursive:true});const artifact=join(root,p.outputDir,'actual.md');
+ if(writeArtifact)writeFileSync(artifact,'# Software verification document\nActual bytes for the state-machine contract, not a contest submission.');
+ if(management)p=taskAction({root,expectedRevision:p.revision,stepId:'coordination',action:'complete',confirmHuman:true,review:{summary:'排期已由软件验收夹具负责人确认。',findings:[]}},'user');
+ const body={root,expectedRevision:p.revision,stepId:step.id,action:'complete'};
  if(owner)body.review={summary:'Only this real software QA document was inspected, no actual contest content is certified.',findings:[]};
- else{const path='agent-review.json';writeFileSync(join(root,path),JSON.stringify({passed:true,summary:'Explicit agent-authored QA review.',findings:[],artifactHashes:taskChecks(root,flow.steps[0].id).artifactHashes}));body.reviewPath=path;}
+ else{const path='agent-review.json';writeFileSync(join(root,path),JSON.stringify({passed:true,summary:'Explicit agent-authored QA review.',findings:[],artifactHashes:taskChecks(root,step.id).artifactHashes}));body.reviewPath=path;}
  p=taskAction(body,owner?'user':'agent',reviewActor);
  if(checklist){p=configureRuleChecklist({root,expectedRevision:p.revision,items:[{id:'scope-check',label:'Software QA scope explicitly checked against the actual scope file',kind:'mandatory'}]});p=confirmRuleItem({root,expectedRevision:p.revision,ruleId:'scope-check',confirmChecked:true,evidencePath:'scope.txt',summary:'Explicit owner API contract confirmation of the software QA scope.'});}
  return {base,root,home,p,artifact};
 }
+
+function freezeSubmission(f){
+ return freezeProjectRelease({root:f.root,expectedRevision:f.p.revision,kind:'submission'});
+}
+
+function assertCurrentSubmission(f,verification){
+ assert.equal(verification.checksPassed,true,JSON.stringify(verification.blocking));
+ assert.equal(verification.submissionReadiness,'project-checks-passed');
+ const {project,release}=freezeSubmission(f);
+ assert.equal(project.revision,verification.projectRevision+1);
+ assert.equal(release.payload.baseRevision,verification.projectRevision);
+ assert.deepEqual(release.payload.stepIds,f.p.workflow.steps.map(step=>step.id));
+ assert.deepEqual(release.payload.artifactVersionIds,verification.steps.flatMap(step=>step.acceptedVersionIds));
+ assert.deepEqual(readRelease(f.root,release.id).payload.files.map(row=>[row.workingPath,row.sha256]),
+  verification.files.filter(row=>row.accepted).map(row=>[row.path,row.sha256]));
+ assert.equal(release.payload.files.length,1);
+ assert.equal(release.payload.files[0].sha256,hash(readFileSync(f.artifact)));
+}
+
+test('accepted management and optional steps with no works cannot pass the project submission gate',()=>{
+ const f=setup({requirement:'optional',writeArtifact:false});
+ const saved=join(f.root,'.ares/project.json'),before=readFileSync(saved);
+ const report=verifyProject(f.root);
+ assert.equal(report.steps[0].status,'done');
+ assert.equal(report.contentReview.ownerReviewed,1);
+ assert.equal(report.rules.confirmed,1);
+ assert.equal(report.files.length,0);
+ assert.equal(report.completeness.requiredArtifacts,0);
+ assert.throws(()=>freezeSubmission(f),/没有可固定的(?:已验收)?实际作品/);
+ assert.equal(report.checksPassed,false);
+ assert.equal(report.submissionReadiness,'blocked');
+ assert.deepEqual(report.blocking.map(row=>row.code),['submission-artifacts-missing']);
+ assert.deepEqual(readFileSync(saved),before);
+});
+
+test('an optional-only workflow submits an accepted work, never a later unreviewed draft',()=>{
+ const f=setup({requirement:'optional',writeArtifact:false});
+ writeFileSync(f.artifact,'# Actual optional work\nCreated after step review.');
+ const draft=verifyProject(f.root);
+ assert.equal(draft.files.length,1);
+ assert.equal(draft.files[0].accepted,false);
+ assert.equal(draft.checksPassed,false);
+ assert.ok(draft.blocking.some(row=>row.code==='submission-artifacts-missing'));
+ assert.throws(()=>freezeSubmission(f),{status:409});
+ f.p=taskAction({root:f.root,expectedRevision:f.p.revision,stepId:'context',action:'complete',
+  review:{summary:'负责人检查实际可选工作稿。',findings:[]}},'user');
+ assertCurrentSubmission(f,verifyProject(f.root));
+});
+
+test('a pure management step needs owner review but no file when the project has accepted required work',()=>{
+ const f=setup({management:true});
+ const report=verifyProject(f.root);
+ assert.equal(report.contentReview.ownerReviewed,2);
+ assert.deepEqual(report.steps[0].acceptedVersionIds,[]);
+ assert.equal(report.steps[0].checks[0].valid,false);
+ assert.equal(report.completeness.requiredArtifacts,1);
+ assertCurrentSubmission(f,report);
+});
+
+test('conditional work can qualify when required and accepted, while inactive conditions cannot make an empty submission ready',()=>{
+ const inactive=setup({requirement:'conditional',facts:{deliverReport:false},writeArtifact:false});
+ const inactiveReport=verifyProject(inactive.root);
+ assert.equal(inactiveReport.steps[0].status,'done');
+ assert.equal(inactiveReport.steps[0].checks[0].required,false);
+ assert.equal(inactiveReport.checksPassed,false);
+ assert.ok(inactiveReport.blocking.some(row=>row.code==='submission-artifacts-missing'));
+ assert.throws(()=>freezeSubmission(inactive),{status:409});
+
+ const missing=setup({requirement:'conditional',facts:{deliverReport:true},writeArtifact:false});
+ const missingReport=verifyProject(missing.root);
+ assert.equal(missingReport.steps[0].checks[0].required,true);
+ assert.equal(missingReport.checksPassed,false);
+ assert.ok(missingReport.blocking.some(row=>row.code==='artifact-check-failed'));
+ assert.throws(()=>freezeSubmission(missing),{status:409});
+
+ const present=setup({requirement:'conditional',facts:{deliverReport:true}});
+ const report=verifyProject(present.root);
+ assert.equal(report.steps[0].checks[0].required,true);
+ assertCurrentSubmission(present,report);
+});
+
+test('a changed accepted optional work blocks a fresh submission and leaves the prior release intact',()=>{
+ const f=setup({requirement:'optional'}),before=verifyProject(f.root);
+ assertCurrentSubmission(f,before);
+ const statePath=join(f.root,'.ares/project.json'),state=JSON.parse(readFileSync(statePath,'utf8'));
+ const releaseId=state.workbench.releaseIds.at(-1),old=readRelease(f.root,releaseId);
+ f.p.revision=state.revision;
+ writeFileSync(f.artifact,'# Actual later working copy\nThe accepted content no longer matches.');
+ const report=verifyProject(f.root);
+ assert.equal(report.steps[0].status,'stale');
+ assert.equal(report.checksPassed,false);
+ assert.equal(report.files.some(row=>row.accepted),false);
+ assert.throws(()=>freezeSubmission(f),{status:409});
+ assert.deepEqual(readRelease(f.root,releaseId),old);
+ assert.deepEqual(JSON.parse(readFileSync(statePath,'utf8')),state);
+});
 test('agent-authored rule/review records and an empty checklist cannot become owner acceptance',()=>{
  const f=setup({owner:false,checklist:false}),result=verifyProject(f.root);assert.equal(result.checksPassed,false);assert.ok(result.blocking.some(row=>/负责人/.test(row.reason)));
 });

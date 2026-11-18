@@ -34,6 +34,15 @@ export function captureTaskArtifacts(root,project,workflow,step,checks,{actor,so
  return versions.map(item=>item.id);
 }
 export function artifactVersion(root,id,{verify=true}={}){const record=readProjectRecord(root,'artifact-versions',id);if(verify)for(const file of record.payload.files)if(readProjectObject(root,file.sha256).length!==file.bytes)throw new AresError('作品版本大小不符',409);return record;}
+export function addReleaseFiles(fileMap,files){
+ for(const file of files){
+  const key=relativeName(file.workingPath);
+  if(sensitiveFile(key))throw new AresError('不能固定凭据文件');
+  const previous=fileMap.get(key);
+  if(previous&&previous.sha256!==file.sha256)throw new AresError('相同文件对应不同作品内容，请刷新',409);
+  fileMap.set(key,{...file,workingPath:key});
+ }
+}
 export function artifactHeads(root,project){const state=ensureProjectWorkbench(project);return Object.values(state.artifacts).map(entry=>{if(!entry.currentVersionId)return {...entry,versionCount:entry.versionIds.length,current:null};try{const record=artifactVersion(root,entry.currentVersionId,{verify:false});return {...entry,versionCount:entry.versionIds.length,current:record};}catch(error){return {...entry,versionCount:entry.versionIds.length,current:null,error:error.message};}});}
 export function acceptedVersionsCurrent(root,project,ids){try{return ids.every(id=>{const v=readProjectRecord(root,'artifact-versions',id).payload;if(v.projectId!==project.id)return false;if(v.kind==='directory')return hash(completeDirectory(safePath(root,v.workingPath,{existing:true})))===hash(v.files.map(f=>({path:f.path,sha256:f.sha256})));return v.files.every(file=>hash(readFileSync(safePath(root,file.workingPath,{existing:true})))===file.sha256);});}catch{return false;}}
 export function syntheticEvidence(root,project,check,output,{sourceFiles}={}){

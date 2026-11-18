@@ -99,11 +99,27 @@ jobs:
         run: |
           node --test --test-concurrency=1 --test-reporter=tap tests/*.test.mjs | Tee-Object -FilePath (Join-Path $env:ARES_TEST_ROOT 'node-tests.tap')
           exit $LASTEXITCODE
-      - name: Upload actual test evidence
-        if: always()
+      - name: Upload successful test evidence
+        if: success()
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
         with:
           name: ares-evidence-${{ matrix.os }}
+          # A four-size verification set is enough for review. Tests still take all their screenshots.
+          path: |
+            ${{ runner.temp }}/ares-evidence/node-tests.tap
+            ${{ runner.temp }}/ares-evidence/rule-source-status.json
+            ${{ runner.temp }}/ares-evidence/**/evidence.json
+            ${{ runner.temp }}/ares-evidence/**/*-evidence.json
+            ${{ runner.temp }}/ares-evidence/**/*.capture.json
+            ${{ runner.temp }}/ares-evidence/ares-neural-scene-*/layout-performance.json
+            ${{ runner.temp }}/ares-evidence/ares-verification-ui-*/report-*.png
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload diagnostic evidence for unsuccessful runs
+        if: failure() || cancelled()
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
+        with:
+          name: ares-debug-${{ matrix.os }}
           # Keep test homes, owner keys and raw project stores out of artifacts.
           path: |
             ${{ runner.temp }}/ares-evidence/node-tests.tap
@@ -112,4 +128,5 @@ jobs:
             ${{ runner.temp }}/ares-evidence/**/*-evidence.json
             ${{ runner.temp }}/ares-evidence/**/*.png
             ${{ runner.temp }}/ares-evidence/**/*.capture.json
+            ${{ runner.temp }}/ares-evidence/ares-neural-scene-*/layout-performance.json
           retention-days: 7

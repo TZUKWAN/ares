@@ -15,7 +15,7 @@ codex plugin add ares@ares-local-codex
 
 ZCode：解压对应ZIP，在“设置→插件→创建→添加插件市场”中选择解压的`ares`目录或其中`.zcode-plugin/marketplace.json`，安装ARES。支持本地插件及 MCP Apps 的宿主可打开工作台；本机尚未执行 ZCode 桌面验收。
 
-新会话中使用ARES技能或直接说明竞赛目标。本轮实际 Codex CLI 0.154.0 在任务专属配置目录完成安装，真实 app-server 初始化发现 10 个工具和 22 个资源，并读回工作台资源及技能；未创建聊天或调用模型。ZCode 本机未安装，真实桌面使用仍待验收。Codex以技能和真实工具为稳定入口；自定义MCP Apps页面依宿主支持，不能把协议验证理解为Codex已具备DSH的嵌入会话界面。插件不替换宿主的原生聊天窗口。
+新会话中使用ARES技能或直接说明竞赛目标。Codex CLI 0.154.0 已在任务专用配置目录完成安装、MCP 工具和资源发现。模型回合与 ZCode 桌面使用的实际验收结果见 [当前 PR 的验证记录](https://github.com/TZUKWAN/ares/pull/1)。Codex 以技能和真实工具为稳定入口，自定义 MCP Apps 页面依宿主支持。
 
 ## 开始使用
 
