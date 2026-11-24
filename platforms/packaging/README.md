@@ -2,6 +2,10 @@
 
 与DSH运行版共用竞赛目录、流程、项目、作品和版本业务核心。Codex/ZCode使用各自原生助手与工具，插件不另接模型API、不自动安装其他MCP，也不默认写入DSH的数据目录。
 
+## 研究设计建议
+
+在项目范围内用 `ares_project` 的 `research` 读取问卷、提纲与编码建议结构，用 `research-proposal` 保存待审版本。完整研究编辑、转写和数据资源操作在 DSH 项目内的研究工具工作台。参见[研究工具手册](docs/RESEARCH_TOOLS.md)。
+
 ## 安装
 
 需要Node.js 20或以上；本轮实测环境为Windows、Node.js v25.6.0。Office/PDF等检查仍按原ARES文档需要对应Python工具。服务器与页面SDK已随包自包含，无须为了运行再执行npm install。
@@ -13,9 +17,9 @@ codex plugin marketplace add "解压后的ares绝对路径"
 codex plugin add ares@ares-local-codex
 ```
 
-ZCode：解压对应ZIP，在“设置→插件→创建→添加插件市场”中选择解压的`ares`目录或其中`.zcode-plugin/marketplace.json`，安装ARES。本地桌面工作区可打开ARES侧栏面板。
+ZCode：解压对应ZIP，在“设置→插件→创建→添加插件市场”中选择解压的`ares`目录或其中`.zcode-plugin/marketplace.json`，安装ARES。支持本地插件及 MCP Apps 的宿主可打开工作台；本机尚未执行 ZCode 桌面验收。
 
-新会话中使用ARES技能或直接说明竞赛目标。Codex以技能和真实工具为稳定入口；自定义MCP Apps页面依宿主支持，不能把协议验证理解为Codex已具备DSH的嵌入会话界面。插件不替换宿主的原生聊天窗口。
+新会话中使用ARES技能或直接说明竞赛目标。Codex CLI 0.154.0 已在任务专用配置目录完成安装、MCP 工具和资源发现。模型回合与 ZCode 桌面使用的实际验收结果见 [当前 PR 的验证记录](https://github.com/TZUKWAN/ares/pull/1)。Codex 以技能和真实工具为稳定入口，自定义 MCP Apps 页面依宿主支持。
 
 ## 开始使用
 
@@ -33,10 +37,17 @@ node scripts/ares-local.mjs --host codex --root "已授权项目绝对路径" --
 
 默认数据目录为`~/.ares/codex`或`~/.ares/zcode`。要有意共享现有DSH配置/固定版本，显式配置同一个`--home`或MCP的`ARES_HOME`；不自动复制或替换任何原项目。DSH绑定的项目如便携进程无法核验其会话空闲，保留写入拦截。
 
-模型不能通过JSON把自己设成负责人。结构检查、内容复核和负责人验收分别保留；受支持的本机操作由宿主标准确认表单批准一次，确认绑定当次参数和实际文件哈希，确认期间变更、取消或过期都会拒绝。缺少受信表单能力时保持待验收，原生命令入口也不能自行批准。该机制信任本机宿主的确认响应，不提供账号身份认证。公开分享、权限更改与云发布不会被插件自动授权。金山状态必须以实际工具结果为准，本轮没有代用户做线上模型或金山写入测试。
+模型不能通过JSON把自己设成负责人。结构检查、内容复核和负责人验收分别保留；受支持的本机操作由宿主标准确认表单批准一次，确认绑定当次参数和实际文件哈希，确认期间变更、取消或过期都会拒绝。缺少受信表单能力时保持待验收，原生命令入口也不能自行批准。该机制信任本机宿主的确认响应，不提供账号身份认证。公开分享、权限更改与云发布不会被插件自动授权。金山状态必须以实际工具结果为准，本轮没有调用线上模型；金山生产链路已在专用验收目录真实读写和回读，未改动用户原项目。
 
 ## 自包含来源
 
 `PACKAGE_FILES.json`记录包内真实文件SHA。`PORTABLE_NOTICES.md`与`assets/neural-reference/`保留动画素材许可；`platforms/shared/vendor/`、`platforms/ui/licenses/`保留官方SDK和依赖许可。原神经动画媒体保持原字节，经固定分片资源传入页面，页面不连接外部资源域名。
 
 本包用于本地私有安装；没有公开发布。参考媒体含非商用许可及记录的旧版MIT例外，不能把整个组合包描述为无条件商用MIT。
+
+
+## 本轮启动兼容性修复
+
+Codex MCP 配置使用 `cwd: "."` 和 `scripts/ares-mcp.mjs`。宿主会把相对 cwd 解析为安装根目录；不要改成 `${PLUGIN_ROOT}`，当前实测 MCP 读取器不会替换它，会报目录名称无效。Hook 环境变量的支持不等于 MCP 配置支持相同替换。源码依据和实际失败/修复记录见 [系统审查报告](https://github.com/TZUKWAN/ares/blob/fix/system-audit-20261118/docs/SYSTEM_AUDIT_20261118.md)。
+
+两套包的版本 2.4.0 是便携适配发布线，共用根产品 2.3.0 业务代码；具体工作分支内容按 `PACKAGE_FILES.json`、构建收据和 ZIP SHA256 核对，不以版本字符串代替逐文件一致性。

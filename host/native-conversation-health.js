@@ -1,3 +1,5 @@
+import {samePath} from './path-identity.js';
+import {observeNativeAutoReviews,actualAutoReviewsPassed} from './native-auto-evidence.js';
 /** Auto approval must see a genuine DSH-owned conversation and pending action.
  * This module submits one bounded owner request through SessionController. It
  * never writes request headers, assistant messages, steps or tool-call events.
@@ -12,7 +14,7 @@ export const healthJobSucceeded=job=>job?.status==='completed'&&/^exit code: 0(?
 export function healthJobSnapshot(value,id){if(!value||value.id!==id||!['running','stopping','completed','failed','killed'].includes(value.status))throw new AresError('原生任务观察未返回对应的实际任务，未猜测完成状态',502);return value;}
 const texts=value=>(value?.content||[]).filter(row=>row.type==='text').map(row=>row.text).join('\n');
 const args=value=>{try{return typeof value==='string'?JSON.parse(value):value;}catch{return null;}};
-const samePath=(left,right)=>typeof left==='string'&&resolve(left).toLowerCase()===resolve(right).toLowerCase();
+
 
 export function healthConversationPlan(root,id=randomUUID()){
  const nonce='ARES_HEALTH_'+id,challenge='ARES_READ_'+randomUUID(),marker='ARES_SUM_'+randomUUID()+'|',values=[7,11,17],sum=values.reduce((a,b)=>a+b,0),file=safePath(root,'.ares-healthcheck/'+id+'/marker.txt'),content=challenge+'\n';
@@ -49,7 +51,7 @@ export function verifyHealthConversation(events,plan,expectedServiceId){
 
 export async function runConversationHealth(ctx,agent,surface,{signal,expectedServiceId,timeoutMs=180000}={}){
  const plan=healthConversationPlan(agent.session.header.cwd),report={schema_version:1,implementation:'ares-native-health-v1',implementationRevision:3,pluginVersion:'2.3.0',id:plan.id,sessionId:agent.id,requestId:plan.requestId,checkedAt:now(),reportPath:join(home(),'ares-health-reports',plan.id+'.json'),executionMode:'dsh-native-conversation',complete:false,status:'running',modelConversationRequested:false,newSessionsCreated:0,newDshHostsStarted:0,userWindowsControlled:0,presentation:surface?.presentation,toolNames:surface?.visibleTools||[],checks:[],calls:[],blockers:[],jobs:[]};
- const controller=ctx.get?.('sessionController'),registry=agent.ctx?.get?.('jobs')||ctx.get?.('jobs');let stop=null,stopGuard=null,admitted=false,done=false,timeout;const jobs=new Map(),waits=[];
+ const controller=ctx.get?.('sessionController'),registry=agent.ctx?.get?.('jobs')||ctx.get?.('jobs');let stop=null,stopGuard=null,autoEvidence=null,admitted=false,done=false,timeout;const jobs=new Map(),waits=[];
  const check=(name,value)=>report.checks.push({name,status:value?'passed':'failed'});
  const save=()=>atomicJson(report.reportPath,{...report,updatedAt:now()});
  const ownsActiveTurn=()=>{const events=agent.session.snapshotEvents(),start=events.filter(row=>row.type==='turn/start').at(-1),own=events.find(row=>row.type==='user/message'&&row.seq>start?.seq&&row.data?.source?.rpcId===plan.requestId);return !!own&&!events.some(row=>row.type==='turn/end'&&row.seq>start.seq)&&!events.some(row=>row.type==='user/message'&&row.seq>own.seq&&row.data?.source?.kind==='user'&&row.data.source.rpcId!==plan.requestId);};
@@ -71,6 +73,8 @@ export async function runConversationHealth(ctx,agent,surface,{signal,expectedSe
    return allowed?decision:{kind:'deny',reason:'本次ARES固定体检仅允许指定的配置读取、标记文件读写和固定算术命令；未执行额外操作。'};
   });
   stop=registry.events.subscribe({owner:agent.id},event=>{const job=event.job;if(event.type!=='registered'||job?.owner!==agent.id||!job.label?.includes(plan.nonce)||jobs.has(job.id))return;const row={id:job.id,status:job.status};jobs.set(job.id,row);waits.push((async()=>{try{let current=healthJobSnapshot(job,job.id);const deadline=Date.now()+timeoutMs;while(!terminal(current)){if(signal?.aborted||Date.now()>=deadline)throw new Error('Owned job observation interrupted');current=healthJobSnapshot(await registry.wait(job.id,Math.min(30000,Math.max(1,deadline-Date.now())),agent.id),job.id);}row.status=current.status;row.detail=current.detail;}catch{row.status='unknown';}})());});
+  const permissions=agent.ctx?.get?.('permissionPresets')||ctx.get?.('permissionPresets');report.permission=permissions?.current?.(agent.session)??surface?.permissions?.current??null;
+  if(report.permission==='auto')autoEvidence=observeNativeAutoReviews(ctx,agent,plan.requestId);
   signal?.throwIfAborted();save();
   const accepted=await controller.prompt({sessionId:agent.id,requestId:plan.requestId,mode:'followup',content:[{type:'text',text:plan.instruction}],clientTimeZone:'Asia/Shanghai'},signal||new AbortController().signal);
   admitted=true;report.modelConversationRequested=true;if(accepted?.accepted!==true)throw new AresError('DSH没有确认接收体检消息，未重复发送',502);save();
@@ -79,6 +83,7 @@ export async function runConversationHealth(ctx,agent,surface,{signal,expectedSe
   const interrupted=new Promise((_,reject)=>{const abort=()=>reject(new DOMException('体检已取消或超时','AbortError'));if(active.aborted)abort();else{active.addEventListener('abort',abort,{once:true});timeout=()=>active.removeEventListener('abort',abort);}});
   await Promise.race([idle,interrupted]);await Promise.race([Promise.all(waits),interrupted]);
   const proof=verifyHealthConversation(agent.session.snapshotEvents(),plan,expectedServiceId);Object.assign(report,proof);report.checks.unshift({name:'actual-tool-surface',status:'passed'});
+  if(report.permission==='auto'){report.autoReviews=autoEvidence?.reviews||[];check('auto-permission-retained',permissions?.current?.(agent.session)==='auto');check('actual-auto-reviews',actualAutoReviewsPassed(proof.calls,report.autoReviews,surface.presentation));if(report.checks.at(-1).status!=='passed')report.blockers.push({code:'native-auto-review-not-proven',message:'未观察到与真实待执行调用对应的原生Auto在线审批及允许决定；工具执行成功不能替代审批验收。'});}
   check('actual-filesystem-write',readFileSync(plan.file,'utf8')===plan.content);check('owned-job-observation',jobs.size>0&&[...jobs.values()].every(healthJobSucceeded));
   const end=agent.session.snapshotEvents().find(row=>row.type==='turn/end'&&row.data.turn===proof.turn);check('actual-conversation-finished',end?.data.reason?.kind==='completed');
   report.complete=report.checks.every(row=>row.status==='passed');if(!report.complete)report.error='原生对话已结束，但实际调用、审批回执或文件检查未全部通过；未采信模型自述。';
@@ -86,6 +91,6 @@ export async function runConversationHealth(ctx,agent,surface,{signal,expectedSe
   if(admitted&&!done&&ownsActiveTurn()){try{controller.cancel({sessionId:agent.id});await Promise.race([agent.whenIdle().then(()=>{done=true;}),new Promise(resolve=>{const timer=setTimeout(resolve,10000);timer.unref?.();})]);}catch{}}
   if(report.status!=='blocked')report.status=admitted&&!done?'unknown':'failed';
   report.error=error instanceof AresError?error.message:signal?.aborted?'原生对话体检已取消，未影响其他会话':'原生对话体检未完成，请核对DSH实际模型连接与调用记录。';
- }finally{timeout?.();if(typeof stop==='function')stop();else stop?.dispose?.();if(stopGuard){if(admitted&&!done)agent.whenIdle().finally(()=>stopGuard()).catch(()=>{});else stopGuard();}report.jobs=[...jobs.values()];if(report.status==='running')report.status=report.complete?'passed':'failed';report.finishedAt=now();save();}
+ }finally{autoEvidence?.stop?.();if(autoEvidence)report.autoReviews=autoEvidence.reviews;timeout?.();if(typeof stop==='function')stop();else stop?.dispose?.();if(stopGuard){if(admitted&&!done)agent.whenIdle().finally(()=>stopGuard()).catch(()=>{});else stopGuard();}report.jobs=[...jobs.values()];if(report.status==='running')report.status=report.complete?'passed':'failed';report.finishedAt=now();save();}
  return report;
 }

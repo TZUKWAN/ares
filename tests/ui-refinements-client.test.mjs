@@ -1,3 +1,5 @@
+import {capture} from './helpers/capture.mjs';
+import {sceneBrowserArgs} from './helpers/environment.mjs';
 /** Actual app, files and production routes. ARES's actual native empty-state
  * view is evaluated with explicit blank-session hooks and input-slot markup.
  * This is a style/interaction fixture, not an online model or native Portal. */
@@ -57,7 +59,7 @@ const native={capability:()=>({available:false,source:'explicit-owned-ui-boundar
 const server=createRoutes(ctx,native,undefined,{standalone:true}),origin='http://127.0.0.1:64365';
 const errors=[],external=[],proof=[];let browser;
 const {chromium}=createRequire(import.meta.url)(process.env.ARES_PLAYWRIGHT_PACKAGE);
-before(async()=>browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']}));
+before(async()=>browser=await chromium.launch({headless:true,args:sceneBrowserArgs}));
 after(async()=>{server.dispose();await browser?.close();});
 async function production(path,data,headers){
   const url='/ares/api/v2/'+path,route=server.routes.find(row=>row.path===url.split('?')[0]);assert.ok(route,'Actual route '+path);
@@ -82,7 +84,7 @@ async function resident(page,kind,stage){
   await input.click();assert.equal(await input.evaluate(node=>document.activeElement===node),true,stage);
   proof.push({stage,kind,...info});
 }
-const snap=(page,name)=>page.screenshot({path:join(base,name+'.png')});
+const snap=(page,name)=>capture(page,join(base,name+'.png'));
 
 test('owned controls keep steady bounds, actual loading/focus feedback and readable native-resident functional layouts',async()=>{
   const page=await browser.newPage({viewport:{width:1920,height:1080},reducedMotion:'reduce'});page.setDefaultTimeout(14000);

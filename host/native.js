@@ -1,4 +1,5 @@
 import {inspectNativeSession,nativeSessionAvailable} from './native-session.js';
+import {nativeToolPresentation} from './native-tool-presentation.js';
 import {readConfiguration,readStoredConfiguration,validateConfiguration,saveConfiguration,freezeWorkflow,loadVersion,versionList,previewStep} from './catalog.js?v=2.3.0-directory1';
 import {EDITOR_PRESET_ID,editorDefinition,editorToolStatus} from './editor-definition.js';
 import {nativePlugins,standardSource} from './native-toolbox.js';
@@ -68,14 +69,15 @@ export function createNativeCatalog(ctx){
    return {configuration:saved,warning:notify(),capabilities:{native:capability()}};
   }finally{committing=false;}
  }
- async function inspectEditorTools(agent,wireSchemas){
-  requireService();const tools=ctx.get?.('tools');if(!tools?.schemas||!tools.wireSchemas||!tools.modeFor)throw new AresError('DSH原生工具目录服务尚未就绪',503);
+ async function inspectEditorTools(agent,wireSchemas,toolSet){
+  requireService();const tools=ctx.get?.('tools');if(typeof tools?.schemas!=='function')throw new AresError('DSH原生工具目录服务尚未就绪',503);
   const lease=await service.acquireScope('standard');
   try{
    const registered=tools.schemas(agent),permissionPresets=ctx.get?.('permissionPresets'),sandbox=ctx.get?.('sandboxPolicy'),approval=ctx.get?.('approval');
    const permissions={available:!!permissionPresets?.catalog&&!!permissionPresets?.current&&!!sandbox?.resolve&&!!approval?.effectivePolicy};
    if(permissions.available){const catalog=permissionPresets.catalog();Object.assign(permissions,{current:permissionPresets.current(agent.session),defaultPreset:catalog.defaultPreset,options:catalog.options.map(item=>item.value),sandbox:sandbox.resolve({session:agent.session}),approval:approval.effectivePolicy(agent.session)});}
-   return editorToolStatus(registered,tools.schemas(lease.key),registered,tools.schemas(),{presentation:tools.modeFor(agent),standardPresentation:tools.modeFor(lease.key),expectedWire:tools.wireSchemas(agent).schemas,wireSchemas:wireSchemas||tools.wireSchemas(agent).schemas,permissions});
+   const actual=nativeToolPresentation(tools,agent,toolSet),standard=nativeToolPresentation(tools,lease.key);
+   return editorToolStatus(registered,tools.schemas(lease.key),registered,tools.schemas(),{presentation:actual.presentation,standardPresentation:standard.presentation,expectedWire:actual.schemas,wireSchemas:wireSchemas||actual.schemas,permissions});
   }finally{await lease[Symbol.asyncDispose]();}
  }
  async function forEditor(){
@@ -93,7 +95,9 @@ export function createNativeCatalog(ctx){
  const removeGuard=ctx.on?.('system-prompt/assemble',async(_assembly,context,next)=>{
   const result=await next(),agent=context.agent;if(!alive||!agent||service?.composedPreset(agent.ctx)!==EDITOR_PRESET_ID)return result;
   const agents=ctx.get?.('agents');if(agents?.roots&&!agents.roots().includes(agent))return result;
-  const status=await inspectEditorTools(agent,result.tools);if(!status.ready)throw Object.assign(new AresError(status.message,503),{code:'ares/editor-tools-unavailable'});return result;
+  // Current DSH keeps model tools provider-owned and attaches them only after this waterfall.
+  const tools=ctx.get?.('tools'),wire=typeof tools?.selectExecutor==='function'?nativeToolPresentation(tools,agent,context.toolSet).schemas:result.tools;
+  const status=await inspectEditorTools(agent,wire,context.toolSet);if(!status.ready)throw Object.assign(new AresError(status.message,503),{code:'ares/editor-tools-unavailable'});return result;
  },{prepend:true});
  ctx.inject(['agentPresets'],scope=>{
   const registry=scope.agentPresets;if(typeof registry.register!=='function'){error='当前DSH没有原生模式注册接口';return;}service=registry;

@@ -1,11 +1,21 @@
 """Owned format/budget fixtures; no competition results or desktop apps."""
-import csv, importlib.util, tempfile, unittest, zipfile
+import csv, importlib.util, tempfile, unittest, zipfile, shutil
 from pathlib import Path
 
 spec=importlib.util.spec_from_file_location('artifact_inspector',Path(__file__).resolve().parents[1]/'scripts/inspect_artifact.py')
 inspector=importlib.util.module_from_spec(spec);spec.loader.exec_module(inspector)
 
 class ArtifactContracts(unittest.TestCase):
+    def test_ffprobe_reads_real_media_at_a_unicode_path(self):
+        self.assertIsNotNone(shutil.which('ffprobe'), 'Media validation requires an installed ffprobe; this is an environment prerequisite, not a passed media check')
+        source=Path(__file__).resolve().parents[1]/'assets/neural-reference/orb.mp4'
+        with tempfile.TemporaryDirectory(prefix='ares-media-') as root:
+            target=Path(root)/'作品 视频.mp4';shutil.copyfile(source,target)
+            result=inspector.inspect(str(target),'mp4')
+            self.assertTrue(result['valid'],result.get('error'))
+            self.assertEqual(result['details']['format']['filename'],str(target))
+            self.assertTrue(any(stream.get('codec_type')=='video' for stream in result['details']['streams']))
+
     def test_office_extension_cannot_be_checked_as_plain_text(self):
         with tempfile.TemporaryDirectory(prefix='ares-format-') as root:
             file=Path(root)/'fixture.docx';file.write_text('Explicit plain-text software fixture',encoding='utf-8')

@@ -35,7 +35,7 @@ export function listExtensions(root){
  return {templates:[surveyExtension],activeRuns:Object.values(p.workbench.activeExtensionRuns||{}),extensions:rows,runs};
 }
 export function repairExtensionManifest(body,actor={kind:'user',id:'owner'}){
- if(actor.kind!=='user')throw new AresError('扩展包修复须由项目负责人操作',403);let repair;
+ if(actor.kind!=='user'||actor.id!=='owner')throw new AresError('扩展包修复须由项目负责人操作',403);let repair;
  const project=changeProject(body,p=>{
   const extension=extensions(p)[body.id];if(!extension||extension.manifestHash!==body.manifestHash)throw new AresError('扩展版本发生变化，请刷新',409);
   const path=manifestPackagePath(extension),candidates=[];
@@ -52,7 +52,7 @@ function finishApproval(project,extensionId,receiptId){
  if(!receiptId)return;try{activateExtensionApproval(project.root,project,project.workbench.extensions[extensionId],receiptId);}catch{throw new AresError('项目配置已保存，但执行授权尚未激活；请刷新后重新启用固定版本',409);}
 }
 export function buildExtension(body,actor={kind:'user',id:'owner'}){
- if(actor.kind!=='user')throw new AresError('子插件构建和权限启用须由项目负责人操作',403);
+ if(actor.kind!=='user'||actor.id!=='owner')throw new AresError('子插件构建和权限启用须由项目负责人操作',403);
  const manifest=validateExtension(body.manifest),bytes=Buffer.from(JSON.stringify(manifest,null,2)+'\n');let path,receiptId;
  const project=changeProject(body,p=>{
   const sha=putProjectObject(p.root,bytes).sha256;path='.ares/extensions/packages/'+manifest.id+'-'+sha.slice(0,16);mkdirSync(safePath(p.root,path),{recursive:true});const file=safePath(p.root,path+'/ares-extension.json');try{writeFileSync(file,bytes,{flag:'wx'});}catch(error){if(error.code!=='EEXIST')throw error;if(hash(readFileSync(file))!==sha)throw new AresError('同名扩展包损坏，未替换历史',409);}
@@ -62,14 +62,14 @@ export function buildExtension(body,actor={kind:'user',id:'owner'}){
  });finishApproval(project,manifest.id,receiptId);return {project,path};
 }
 export function toggleExtension(body,actor={kind:'user',id:'owner'}){
- if(actor.kind!=='user')throw new AresError('扩展权限须由负责人调整',403);let receiptId;
+ if(actor.kind!=='user'||actor.id!=='owner')throw new AresError('扩展权限须由负责人调整',403);let receiptId;
  const project=changeProject(body,p=>{const extension=extensions(p)[body.id];if(!extension||extension.manifestHash!==body.manifestHash)throw new AresError('子插件版本已变化，请刷新',409);
   // Even if the project write later fails, a revoked capability stays revoked.
   revokeExtensionApproval(p.root,p,extension);extension.enabled=body.enabled===true;delete extension.grantReceiptId;
   if(extension.enabled){receiptId=prepareExtensionApproval(p.root,p,extension,actor);extension.grantReceiptId=receiptId;}projectEvent(p.root,p,'extension.permission-changed',{id:extension.id,manifestHash:extension.manifestHash,enabled:extension.enabled},actor);
  });finishApproval(project,body.id,receiptId);return project;
 }
-export function bindExtensionStep(body,actor={kind:'user',id:'owner'}){if(actor.kind!=='user')throw new AresError('节点能力绑定须由负责人确认',403);return changeProject(body,(p,v)=>{const e=extensions(p)[body.id];if(!e||e.manifestHash!==body.manifestHash||!v.workflow.steps.some(s=>s.id===body.stepId))throw new AresError('节点或子插件版本不匹配，请刷新',409);const state=ensureProjectWorkbench(p);state.extensionBindings??={};const rows=(state.extensionBindings[body.stepId]||[]).filter(r=>r.id!==e.id);if(body.remove!==true)rows.push({id:e.id,manifestHash:e.manifestHash});state.extensionBindings[body.stepId]=rows;projectEvent(p.root,p,'extension.step-bound',{stepId:body.stepId,id:e.id,manifestHash:e.manifestHash,removed:body.remove===true},actor);});}
+export function bindExtensionStep(body,actor={kind:'user',id:'owner'}){if(actor.kind!=='user'||actor.id!=='owner')throw new AresError('节点能力绑定须由负责人确认',403);return changeProject(body,(p,v)=>{const e=extensions(p)[body.id];if(!e||e.manifestHash!==body.manifestHash||!v.workflow.steps.some(s=>s.id===body.stepId))throw new AresError('节点或子插件版本不匹配，请刷新',409);const state=ensureProjectWorkbench(p);state.extensionBindings??={};const rows=(state.extensionBindings[body.stepId]||[]).filter(r=>r.id!==e.id);if(body.remove!==true)rows.push({id:e.id,manifestHash:e.manifestHash});state.extensionBindings[body.stepId]=rows;projectEvent(p.root,p,'extension.step-bound',{stepId:body.stepId,id:e.id,manifestHash:e.manifestHash,removed:body.remove===true},actor);});}
 export async function runExtension(body,actor={kind:'user',id:'owner'},{signal,ctx,exec,observeDispatch}={}){
  const p=readProject(body.root),e=extensions(p)[body.id];
  if(!e||!extensionAccess(p.root,p,e).allowed)throw new AresError('此固定子插件未通过负责人有效授权，请在工作台确认启用',403);
@@ -112,7 +112,7 @@ export async function runExtension(body,actor={kind:'user',id:'owner'},{signal,c
   projectEvent(project.root,project,['pending','needs-reconciliation'].includes(status)?'extension.run-awaiting-result':'extension.run-finished',{runId,recordId:record.id,status,dataKind:manifest.dataKind,files},actor);
  });return {project,run:record,tasksAutoCompleted:false};
 }
-export function settleInterruptedExtension(body,actor={kind:'user',id:'owner'}){if(actor.kind!=='user'||body.confirmStopped!==true)throw new AresError('请实际核对原任务已停止，再登记中断，不能把未知任务记成成功',403);if(executingRuns.has(body.runId))throw new AresError('当前进程仍在执行此请求，请先取消或等待真实结果',409);return changeProject(body,p=>{const state=ensureProjectWorkbench(p),run=state.activeExtensionRuns?.[body.runId];if(!run)throw new AresError('没有此待核对任务',404);const record=putProjectRecord(p.root,'extension-runs',{projectId:p.id,runId:body.runId,extensionId:run.extensionId,manifestHash:run.manifestHash,inputHash:run.inputHash,dataKind:run.dataKind,realSampleCount:0,status:'interrupted-unverified',path:run.path,files:[],diagnostic:{reason:'负责人确认原任务已停止；没有成功回执，不能作为完成证据'},actor,at:now()});state.extensionRunIds.push(record.id);delete state.activeExtensionRuns[body.runId];projectEvent(p.root,p,'extension.interruption-recorded',{runId:body.runId,recordId:record.id,status:'interrupted-unverified'},actor);});}
+export function settleInterruptedExtension(body,actor={kind:'user',id:'owner'}){if((actor.kind!=='user'||actor.id!=='owner')||body.confirmStopped!==true)throw new AresError('请实际核对原任务已停止，再登记中断，不能把未知任务记成成功',403);if(executingRuns.has(body.runId))throw new AresError('当前进程仍在执行此请求，请先取消或等待真实结果',409);return changeProject(body,p=>{const state=ensureProjectWorkbench(p),run=state.activeExtensionRuns?.[body.runId];if(!run)throw new AresError('没有此待核对任务',404);const record=putProjectRecord(p.root,'extension-runs',{projectId:p.id,runId:body.runId,extensionId:run.extensionId,manifestHash:run.manifestHash,inputHash:run.inputHash,dataKind:run.dataKind,realSampleCount:0,status:'interrupted-unverified',path:run.path,files:[],diagnostic:{reason:'负责人确认原任务已停止；没有成功回执，不能作为完成证据'},actor,at:now()});state.extensionRunIds.push(record.id);delete state.activeExtensionRuns[body.runId];projectEvent(p.root,p,'extension.interruption-recorded',{runId:body.runId,recordId:record.id,status:'interrupted-unverified'},actor);});}
 export async function pollExtensionRun(body,{ctx,exec}={}){
  let p=readProject(body.root);const active=ensureProjectWorkbench(p).activeExtensionRuns?.[body.runId];if(!active)throw new AresError('此项目没有该待跟踪运行',404);if(p.revision!==body.expectedRevision)throw new AresError('项目已变化，请刷新',409);
  if(!ctx||!exec||active.actor.kind!=='agent'||exec.agent?.id!==active.actor.id)throw new AresError('后台任务须由原DSH项目助手跟踪',403);

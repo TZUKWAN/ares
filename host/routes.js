@@ -1,6 +1,9 @@
 import {readCompetitionWorkflow,saveCompetitionWorkflow,competitionWorkflowSummaries} from './competition-workflows.js?v=2.3.0-directory1';
 import {setProjectChatContext,bindProjectMessageContext} from './project-chat-context.js';
 import {readFileSync} from 'node:fs';
+import {pipeline} from 'node:stream/promises';
+import {registerResearchRoutes} from './research-routes.js';
+import {createKdocsAccount} from './kdocs-account.js';
 import {join} from 'node:path';
 import {ROOT,readConfiguration,saveConfiguration,competitionCatalog,skillCatalog,skillResourceFiles,previewStep,validateConfiguration,versionList,defaults,configurationForEditor} from './catalog.js?v=2.3.0-directory1';
 import {AresError,hash,safePath} from './storage.js';
@@ -38,10 +41,36 @@ function send(response,status,payload,type='application/json; charset=utf-8'){re
 async function body(request){if(!String(request.headers['content-type']||'').startsWith('application/json'))throw new AresError('需要 application/json',415);let bytes=0,chunks=[];for await(const chunk of request){bytes+=chunk.length;if(bytes>8*1024*1024)throw new AresError('请求超过8MiB',413);chunks.push(chunk);}try{return JSON.parse(Buffer.concat(chunks).toString('utf8')||'{}');}catch{throw new AresError('JSON无效');}}
 export function createRoutes(ctx={},native={capability:()=>({available:false,error:'独立验证服务未连接DSH宿主'})},editor,options={}){
  const assistant=editor||createAssistant(ctx,native),viewer=createArtifactViewer(ctx),routes=[];
- function route(path,method,fn,type){routes.push({kind:'exact',path,handler:async(req,res)=>{const cancellation=new AbortController(),abort=()=>{if(!res.writableEnded)cancellation.abort(new DOMException('请求已取消','AbortError'));};req.once('aborted',abort);res.once('close',abort);try{admitOwner(ctx,req,options);const origin=req.headers.origin;if(origin&&new URL(origin).host!==req.headers.host||req.headers['sec-fetch-site']==='cross-site')throw new AresError('拒绝跨站请求',403);if(req.method!==method)throw new AresError('此接口只接受 '+method,405);const data=method==='POST'?await body(req):new URL(req.url,'http://localhost').searchParams;const result=await fn(data,req,{signal:cancellation.signal});if(!res.destroyed)send(res,200,type?result:{ok:true,...result},type);}catch(error){if(!res.destroyed&&!res.headersSent)send(res,error.status||500,{ok:false,error:error.message});else if(!res.destroyed)res.end();}finally{req.off('aborted',abort);res.off('close',abort);}}});}
+ const kdocsAccount=createKdocsAccount();
+ function admitRequest(req,method){
+  admitOwner(ctx,req,options);
+  const origin=req.headers.origin;
+  if(origin&&new URL(origin).host!==req.headers.host||req.headers['sec-fetch-site']==='cross-site')
+   throw new AresError('拒绝跨站请求',403);
+  if(req.method!==method)throw new AresError('此接口只接受 '+method,405);
+ }
+ function stream(path,method,fn){
+  routes.push({kind:'exact',path,handler:async(req,res)=>{
+   const cancellation=new AbortController();
+   const abort=()=>{if(!res.writableEnded)cancellation.abort(new DOMException('请求已取消','AbortError'));};
+   req.once('aborted',abort);res.once('close',abort);
+   try{
+    admitRequest(req,method);
+    const result=await fn(new URL(req.url,'http://localhost').searchParams,req,res,{signal:cancellation.signal});
+    if(result)await pipeline(result,res,{signal:cancellation.signal});else if(!res.destroyed&&!res.writableEnded)res.end();
+   }catch(error){if(!res.destroyed&&!res.headersSent)send(res,error.status||500,{ok:false,error:error.message});else if(!res.destroyed)res.end();}
+   finally{req.off('aborted',abort);res.off('close',abort);}
+  }});
+ }
+ const disposeResearch=registerResearchRoutes(route,stream,options.standalone?{transport:options.researchTransport}:undefined);
+ route('/ares/api/v2/kdocs/account/status','POST',(_data,_req,options)=>kdocsAccount.status(options));
+ route('/ares/api/v2/kdocs/account/login','POST',data=>kdocsAccount.login(data));
+ route('/ares/api/v2/kdocs/account/login/status','GET',()=>kdocsAccount.read());
+ route('/ares/api/v2/kdocs-account.js','GET',()=>readFileSync(join(ROOT,'client','kdocs-account.js'),'utf8'),'text/javascript; charset=utf-8');
+ function route(path,method,fn,type){routes.push({kind:'exact',path,handler:async(req,res)=>{const cancellation=new AbortController(),abort=()=>{if(!res.writableEnded)cancellation.abort(new DOMException('请求已取消','AbortError'));};req.once('aborted',abort);res.once('close',abort);try{admitRequest(req,method);const data=method==='POST'?await body(req):new URL(req.url,'http://localhost').searchParams;const result=await fn(data,req,{signal:cancellation.signal});if(!res.destroyed)send(res,200,type?result:{ok:true,...result},type);}catch(error){if(!res.destroyed&&!res.headersSent)send(res,error.status||500,{ok:false,error:error.message});else if(!res.destroyed)res.end();}finally{req.off('aborted',abort);res.off('close',abort);}}});}
  function draftForRead(data){if(!data.configuration)return readConfiguration();const value=data.configuration;if(value.schema_version!==2||!Array.isArray(value.skills)||value.skills.length>5000)throw new AresError('技能草稿结构无效');return value;}
  function selectedSkill(data,content=false){const skill=skillCatalog(draftForRead(data),{content,ids:new Set([data.id])}).find(item=>item.id===data.id);if(!skill)throw new AresError('技能不存在',404);return skill;}
- const boot=()=>{const {configuration,configurationError}=configurationForEditor();return {configuration,configurationError,competitionWorkflows:competitionWorkflowSummaries(configuration),workspaceRevision:1,workflowTemplates:defaults().workflows,competitionReferences:competitionReferences(),competitions:competitionCatalog(configuration),skills:skillCatalog(configuration,{content:false,tolerant:true}).map(({content,root,files,...s})=>({...s,characters:content?.length??s.characters??null})),library:libraryInfo(),projects:listProjects(),roots:roots(),versions:versionList(),nativeVersions:native.versions?.()||[],capabilities:{native:native.capability(),assistant:assistant.capability(),nativeHealth:{implemented:true,requiresExistingEditorSession:true,revision:3,autoUsesNativeConversation:true},projectProgress:{implemented:true,revision:1,ownerReportedWork:true}}};};
+ const boot=()=>{const {configuration,configurationError}=configurationForEditor();return {configuration,configurationError,competitionWorkflows:competitionWorkflowSummaries(configuration),workspaceRevision:1,workflowTemplates:defaults().workflows,competitionReferences:competitionReferences(),competitions:competitionCatalog(configuration),skills:skillCatalog(configuration,{content:false,tolerant:true}).map(({content,root,files,...s})=>({...s,characters:content?.length??s.characters??null})),library:libraryInfo(),projects:listProjects(),roots:roots(),versions:versionList(),nativeVersions:native.versions?.()||[],capabilities:{native:native.capability(),assistant:assistant.capability(),nativeHealth:{implemented:true,requiresExistingEditorSession:true,revision:3,autoUsesNativeConversation:true},projectProgress:{implemented:true,revision:1,ownerReportedWork:true},research:{implemented:true,revision:1}}};};
  route('/ares/api/v2/library/info','GET',()=>({library:libraryInfo()}));
  route('/ares/api/v2/library/source','POST',(data,_request,{signal})=>addLibrarySource(data.source,data.expectedRevision,{ownerAction:true,signal}));
  route('/ares/api/v2/library/source/remove','POST',data=>removeLibrarySource(data.id,data.expectedRevision));
@@ -167,8 +196,8 @@ export function createRoutes(ctx={},native={capability:()=>({available:false,err
  route('/ares/api/v2/project-session.js','GET',()=>readFileSync(join(ROOT,'client','project-session.js'),'utf8'),'text/javascript; charset=utf-8');
  route('/ares/api/v2/extension-form.js','GET',()=>readFileSync(join(ROOT,'host','extension-form.js'),'utf8'),'text/javascript; charset=utf-8');
  route('/ares/api/host/extension-form.js','GET',()=>readFileSync(join(ROOT,'host','extension-form.js'),'utf8'),'text/javascript; charset=utf-8');
- route('/ares/api/v2/style.css','GET',()=>readFileSync(join(ROOT,'client','style.css'),'utf8')+'\n'+readFileSync(join(ROOT,'client','workshop.css'),'utf8'),'text/css; charset=utf-8');
+ route('/ares/api/v2/style.css','GET',()=>readFileSync(join(ROOT,'client','style.css'),'utf8')+'\n'+readFileSync(join(ROOT,'client','workshop.css'),'utf8')+'\n'+readFileSync(join(ROOT,'client','research.css'),'utf8'),'text/css; charset=utf-8');
  route('/ares/api/v1/state','GET',()=>({enabled:true,roots:roots(),competitions:132,apiVersion:2}));
  route('/ares/api/v1/projects','GET',()=>({projects:listProjects()}));
- return {routes,dispose:()=>{viewer.dispose();assistant.dispose();}};
+ return {routes,dispose:()=>{kdocsAccount.dispose();disposeResearch();viewer.dispose();assistant.dispose();}};
 }

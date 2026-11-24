@@ -1,3 +1,5 @@
+import {capture} from './helpers/capture.mjs';
+import {sceneBrowserArgs} from './helpers/environment.mjs';
 /** Neural UI integration using actual client/client.js, React DOM portals,
  * actual ARES assets and production routes/editor/storage. Native session
  * create/retain/provider/input and tool metadata are explicit ABI fixtures.
@@ -63,7 +65,7 @@ const origin='http://127.0.0.1:64359',errors=[],external=[],requests=[];
 const runtime=reactBrowserRuntime(process.env.ARES_REACT_TEST_MODULES),surface=nativeThemeSurface(process.env.ARES_NATIVE_CONVERSATION_SOURCE);
 const {chromium}=createRequire(import.meta.url)(process.env.ARES_PLAYWRIGHT_PACKAGE);let browser;
 const assetHashes=()=>Object.fromEntries(['client.js','app.js','editor-session.js','project-session.js','style.css','neural-scene.js','neural-theme.css','workshop-scene.js'].map(name=>[name,createHash('sha256').update(readFileSync(new URL('../client/'+name,import.meta.url))).digest('hex')]));
-before(async()=>browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']}));
+before(async()=>browser=await chromium.launch({headless:true,args:sceneBrowserArgs}));
 after(async()=>{server.dispose();nodeService.dispose();editor.dispose();await browser?.close();});
 
 async function productionRequest(path,data,headers){
@@ -171,7 +173,7 @@ test('neural UI retains actual native chat portals through focused steps, workpi
   assert.ok(await page.locator('[data-neural-scene=true] canvas.ff-gl').evaluate(node=>node.width>0&&node.height>0));
   assert.equal(await page.locator('[data-neural-scene=true]').getAttribute('data-renderer'),'reference-video-canvas');
   await neutralTheme(page,'project');await residentInput(page,'项目','keptProjectInput','project');
-  await page.screenshot({path:join(base,'neural-project.png')});
+  await capture(page,join(base,'neural-project.png'));
   const firstStep=project.workflow.steps[0].id;
   await page.locator('.process-step[data-process-step="'+firstStep+'"]').click();
   await page.locator('[data-neural-focus]').waitFor({state:'visible'});
@@ -185,16 +187,16 @@ test('neural UI retains actual native chat portals through focused steps, workpi
   await page.locator('[data-neural-scene=true][data-phase=note]').waitFor();
   await page.locator('.ff-right [data-document-body]').getByRole('heading',{name:'真实本地验证文件',exact:true}).waitFor();
   await residentInput(page,'项目','keptProjectInput','selected-workpiece-preview');
-  await page.screenshot({path:join(base,'neural-selected-workpiece.png')});
+  await capture(page,join(base,'neural-selected-workpiece.png'));
   await page.locator('.ff-right [data-action=work-preview-expand]').first().click();
   const workpiece=page.locator('.galaxy-console[data-galaxy-panel=workpiece]');await workpiece.waitFor({state:'visible'});
   await workpiece.locator('[data-document-body]').getByRole('heading',{name:'真实本地验证文件',exact:true}).waitFor();
   await neutralTheme(page,'workpiece');await residentInput(page,'项目','keptProjectInput','expanded-workpiece');
   assert.equal(await page.getByLabel('项目原生协议输入',{exact:true}).inputValue(),'项目原生输入草稿，切换后保留，不发送。');
-  await page.screenshot({path:join(base,'neural-workpiece-chat.png')});
+  await capture(page,join(base,'neural-workpiece-chat.png'));
   await page.setViewportSize({width:1280,height:950});
   await residentInput(page,'项目','keptProjectInput','expanded-workpiece-1280');
-  await page.screenshot({path:join(base,'neural-workpiece-chat-1280.png')});
+  await capture(page,join(base,'neural-workpiece-chat-1280.png'));
   await page.setViewportSize({width:1920,height:1080});
   await page.getByRole('button',{name:'返回项目',exact:true}).click();
   await residentInput(page,'项目','keptProjectInput','project-after-workpiece');
@@ -219,10 +221,10 @@ test('neural UI retains actual native chat portals through focused steps, workpi
   assert.equal(latest.data.workflowId,context.workflowId);assert.equal(latest.data.activeStepId,stepId);
   assert.equal(latest.data.configuration.workflows.find(row=>row.id===context.workflowId).steps.find(row=>row.id===stepId).objective,goal);
   await neutralTheme(page,'composer');await residentInput(page,'编排','keptEditorInput','composer-unsaved');
-  await page.screenshot({path:join(base,'neural-composer-unsaved.png')});
+  await capture(page,join(base,'neural-composer-unsaved.png'));
   await page.setViewportSize({width:1280,height:950});
   await residentInput(page,'编排','keptEditorInput','composer-1280');
-  await page.screenshot({path:join(base,'neural-composer-1280.png')});
+  await capture(page,join(base,'neural-composer-1280.png'));
   await page.setViewportSize({width:1920,height:1080});
   for(let i=0;i<2;i++){
    await page.locator('[data-action=workspace][data-id=projects]').click();
@@ -277,11 +279,11 @@ test('neural UI retains actual native chat portals through focused steps, workpi
   assert.equal(finalProof.retains.filter(id=>id===created[0].id).length,1,'Editor lease survives explicit project creation');
   assert.deepEqual(readFileSync(join(root,'.ares/project.json')),projectBytes);
   assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
-  await page.screenshot({path:join(base,'neural-new-project.png')});
+  await capture(page,join(base,'neural-new-project.png'));
   assert.deepEqual(assetHashes(),sourceHashes,'Production assets must stay unchanged during the recorded verification');
   writeFileSync(join(base,'neural-native-workspaces-evidence.json'),JSON.stringify({mode:'Actual ARES client/client.js + React DOM portals + real routes/editor/storage/assets. Native session/provider/input/tool metadata are explicit protocol fixtures; no model prompt, tool execution, cloud write or user DSH operation.',sourceHashes,proofBeforeSave:proof,proof:finalProof,created,projectCreated,visualProof,editorContext:context,unsavedStep:step.step,savedWorkflowId:stored.id,adopted:{id:adopted.id,definitionId:adopted.definitionId,competition:adopted.competition,objective:adopted.workflow.steps.find(row=>row.id===stepId).objective,done:adopted.progress.done},requestPaths:requests.map(row=>row.path),nativeCss:surface.provenance,errors,external},null,2));
   console.log('NEURAL_NATIVE_WORKSPACES_EVIDENCE',base);
- }catch(error){writeFileSync(join(base,'failure.json'),JSON.stringify({message:error.message,errors,external,requests:requests.map(row=>({path:row.path,workflowId:row.data?.workflowId,activeStepId:row.data?.activeStepId})),body:await page.locator('body').textContent()},null,2));await page.screenshot({path:join(base,'failure.png')});throw error;}
+ }catch(error){writeFileSync(join(base,'failure.json'),JSON.stringify({message:error.message,errors,external,requests:requests.map(row=>({path:row.path,workflowId:row.data?.workflowId,activeStepId:row.data?.activeStepId})),body:await page.locator('body').textContent()},null,2));await capture(page,join(base,'failure.png'));throw error;}
  finally{await page.close();}
 });
 
@@ -312,11 +314,12 @@ test('flow assistant retries only after a failed native lease and keeps the same
   await page.getByLabel('编排原生协议输入',{exact:true}).fill('连接已恢复的输入草稿，不发送。');await page.evaluate(()=>window.reconnectedDraftNode=document.querySelector('[aria-label="编排原生协议输入"]'));
   assert.equal(await page.locator('.galaxy-chat').getByRole('button',{name:'重试连接',exact:true}).count(),0);await page.locator('.galaxy-chat [data-native-connection-state=connected]').waitFor();const reopened=page.waitForResponse(r=>r.url().includes('/assistant/session')&&r.status()===200);await page.evaluate(()=>window.ownedAresManagers.editor.reconnect());await reopened;await page.evaluate(()=>new Promise(done=>requestAnimationFrame(()=>requestAnimationFrame(done))));
   assert.equal(await page.getByLabel('编排原生协议输入',{exact:true}).inputValue(),'连接已恢复的输入草稿，不发送。');assert.equal(await page.evaluate(()=>window.reconnectedDraftNode===document.querySelector('[aria-label="编排原生协议输入"]')),true);assert.deepEqual(await page.evaluate(()=>window.portalProof.retains),after.retains);assert.equal(await page.getByLabel('本步目标',{exact:true}).inputValue(),draft);assert.deepEqual(caseErrors,[]);assert.deepEqual(caseExternal,[]);
-  await page.screenshot({path:join(base,'assistant-reconnected.png')});writeFileSync(join(base,'assistant-reconnect-evidence.json'),JSON.stringify({mode:'Actual client/client.js and React Portal; explicitly failing native lease fixture followed by successful same-ID retain. No model calls or user desktop.',editorId,before,after,flowDraftRetained:true,healthyReconnectPreservesNativeDraftAndElement:true,errors:caseErrors,external:caseExternal},null,2));console.log('ARES_ASSISTANT_RECONNECT_EVIDENCE',base);
+  await capture(page,join(base,'assistant-reconnected.png'));writeFileSync(join(base,'assistant-reconnect-evidence.json'),JSON.stringify({mode:'Actual client/client.js and React Portal; explicitly failing native lease fixture followed by successful same-ID retain. No model calls or user desktop.',editorId,before,after,flowDraftRetained:true,healthyReconnectPreservesNativeDraftAndElement:true,errors:caseErrors,external:caseExternal},null,2));console.log('ARES_ASSISTANT_RECONNECT_EVIDENCE',base);
  }catch(error){writeFileSync(join(base,'reconnect-failure.json'),JSON.stringify({message:error.message,proof:await page.evaluate(()=>window.portalProof),body:await page.locator('body').textContent(),errors:caseErrors},null,2));throw error;}finally{await page.close();}
 });
 
 test('project assistant shows one retry for metadata or native-lease failure and only status when actually connected',async()=>{
+ const initialProjectCreates=projectCreated.length;
  const page=await browser.newPage({viewport:{width:1280,height:950},reducedMotion:'reduce'}),caseErrors=[],caseExternal=[],stages=[];let metadataCalls=0;page.setDefaultTimeout(10000);
  await page.addInitScript(()=>{window.failNextAresProjectRetain=true;});page.on('pageerror',error=>caseErrors.push(error.message));
  await page.route('**/*',async route=>{
@@ -334,10 +337,10 @@ test('project assistant shows one retry for metadata or native-lease failure and
  try{
   await page.goto(origin);const chat=page.locator('.galaxy-chat'),retry=chat.getByRole('button',{name:'重试连接',exact:true});
   await chat.getByRole('alert').filter({hasText:'Explicit project metadata failure fixture'}).waitFor();assert.equal(await retry.count(),1);await chat.locator('[data-native-connection-state=error]').waitFor();stages.push({phase:'metadata-error',retryButtons:await retry.count()});
-  await retry.click();await chat.getByRole('alert').filter({hasText:'Explicit native lease recovery fixture'}).waitFor();assert.equal(await retry.count(),1);await chat.locator('[data-native-connection-state=error]').waitFor();stages.push({phase:'native-lease-error',retryButtons:await retry.count()});await page.screenshot({path:join(base,'project-connection-failed.png')});
+  await retry.click();await chat.getByRole('alert').filter({hasText:'Explicit native lease recovery fixture'}).waitFor();assert.equal(await retry.count(),1);await chat.locator('[data-native-connection-state=error]').waitFor();stages.push({phase:'native-lease-error',retryButtons:await retry.count()});await capture(page,join(base,'project-connection-failed.png'));
   const before=await page.evaluate(()=>window.portalProof);await retry.click();const input=page.getByLabel('项目原生协议输入',{exact:true});await input.waitFor({state:'visible'});await chat.locator('[data-native-connection-state=connected]').waitFor();assert.equal(await retry.count(),0);assert.equal(await chat.getByRole('button',{name:'重新连接',exact:true}).count(),0);assert.equal(await chat.getByRole('alert').count(),0);stages.push({phase:'connected',retryButtons:0});
   await input.fill('项目助手未发送草稿，连接状态变化仍保留。');await page.evaluate(()=>window.projectConnectionDraft=document.querySelector('[aria-label="项目原生协议输入"]'));await page.evaluate(()=>window.ownedAresManagers.project.reconnect());await chat.locator('[data-native-connection-state=connected]').waitFor();assert.equal(await input.inputValue(),'项目助手未发送草稿，连接状态变化仍保留。');assert.equal(await page.evaluate(()=>window.projectConnectionDraft===document.querySelector('[aria-label="项目原生协议输入"]')),true);
-  const after=await page.evaluate(()=>window.portalProof);assert.equal(after.retains.filter(id=>id===projectSession).length,before.retains.filter(id=>id===projectSession).length+1);assert.equal(after.creates.length,before.creates.length);assert.equal(after.prompts,0);assert.equal(after.attempts,0);assert.equal(projectCreated.length,0);assert.deepEqual(readFileSync(join(root,'.ares/project.json')),projectBytes);assert.deepEqual(caseErrors,[]);assert.deepEqual(caseExternal,[]);
-  await page.screenshot({path:join(base,'project-connection-ready.png')});writeFileSync(join(base,'project-connection-evidence.json'),JSON.stringify({mode:'Actual production client, React Portal, routes, metadata managers and owned project. One metadata fault and one native-lease fault are explicit ABI fixtures. No model/cloud/desktop.',sourceHashes:assetHashes(),sessionId:projectSession,stages,before,after,sameDraftAndInput:true,projectBytesUnchanged:true,errors:caseErrors,external:caseExternal},null,2));console.log('ARES_PROJECT_CONNECTION_EVIDENCE',base);
- }catch(error){writeFileSync(join(base,'project-connection-failure.json'),JSON.stringify({message:error.message,body:await page.locator('body').textContent(),errors:caseErrors,stages},null,2));await page.screenshot({path:join(base,'project-connection-failure.png')});throw error;}finally{await page.close();}
+  const after=await page.evaluate(()=>window.portalProof);assert.equal(after.retains.filter(id=>id===projectSession).length,before.retains.filter(id=>id===projectSession).length+1);assert.equal(after.creates.length,before.creates.length);assert.equal(after.prompts,0);assert.equal(after.attempts,0);assert.equal(projectCreated.length,initialProjectCreates);assert.deepEqual(readFileSync(join(root,'.ares/project.json')),projectBytes);assert.deepEqual(caseErrors,[]);assert.deepEqual(caseExternal,[]);
+  await capture(page,join(base,'project-connection-ready.png'));writeFileSync(join(base,'project-connection-evidence.json'),JSON.stringify({mode:'Actual production client, React Portal, routes, metadata managers and owned project. One metadata fault and one native-lease fault are explicit ABI fixtures. No model/cloud/desktop.',sourceHashes:assetHashes(),sessionId:projectSession,stages,before,after,sameDraftAndInput:true,projectBytesUnchanged:true,errors:caseErrors,external:caseExternal},null,2));console.log('ARES_PROJECT_CONNECTION_EVIDENCE',base);
+ }catch(error){writeFileSync(join(base,'project-connection-failure.json'),JSON.stringify({message:error.message,body:await page.locator('body').textContent(),errors:caseErrors,stages},null,2));await capture(page,join(base,'project-connection-failure.png'));throw error;}finally{await page.close();}
 });

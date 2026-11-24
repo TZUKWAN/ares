@@ -1,3 +1,4 @@
+import './helpers/environment.mjs';
 /** Representative functional-page theme checks on actual ARES source/routes.
  * All files belong to this test's temporary home. Native slots are explicit
  * input/layout protocol fixtures; they do not create sessions or send prompts.

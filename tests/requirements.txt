@@ -1,0 +1,7 @@
+# Test/parser dependencies; no Office desktop or account credentials required.
+python-docx==1.2.0
+python-pptx==1.0.2
+openpyxl==3.1.5
+pypdf==6.9.1
+Pillow==12.3.0
+PyMuPDF==1.26.7

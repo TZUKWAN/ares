@@ -1,3 +1,4 @@
+import {sceneBrowserArgs} from './helpers/environment.mjs';
 /** Actual production app/routes/storage in owned headless Chromium. The native
  * session and composer seat are explicitly labeled protocol fixtures; no model,
  * tool execution, cloud write, DSH instance or user's window is involved. */
@@ -15,7 +16,7 @@ import {readCompetitionWorkflow,saveCompetitionWorkflow} from '../host/competiti
 const base=mkdtempSync(join(process.env.ARES_TEST_ROOT||tmpdir(),'ares-workflow-canvas-'));
 const origin='http://127.0.0.1:64365';
 const {chromium}=createRequire(import.meta.url)(process.env.ARES_PLAYWRIGHT_PACKAGE);let browser;
-before(async()=>browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']}));
+before(async()=>browser=await chromium.launch({headless:true,args:sceneBrowserArgs}));
 after(async()=>browser?.close());
 
 function seedWorkflow(count){

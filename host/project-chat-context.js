@@ -1,3 +1,4 @@
+import {resolvedPathKey,samePath} from './path-identity.js';
 /** Owner-selected project view, separate from progress and acceptance.
  * A native Send binds its exact selection to the immutable request ID. Runtime
  * messages never borrow whatever happens to be selected later in the UI. */
@@ -12,7 +13,7 @@ const requestPattern = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i;
 const identityKeys = new Set(['root','projectId','definitionId','sessionId','view','requestId']);
 const viewKeys = new Set(['stepId','artifactId','file','path','version','versionId','page','sheet','selection','region']);
 const runtimeViews = new WeakMap();
-const samePath = (a,b) => typeof a === 'string' && typeof b === 'string' && resolve(a).toLowerCase() === resolve(b).toLowerCase();
+
 const fail = message => new AresError(message,409);
 
 function text(value, name, max, {nullable=true}={}) {
@@ -87,7 +88,7 @@ function selectedView(p,raw={}) {
   return view;
 }
 function recordPath(p,sessionId,requestId=null) {
-  const prefix='ares-project-context/'+hash([resolve(p.root).toLowerCase(),p.id])+'/'+hash(sessionId);
+  const prefix='ares-project-context/'+hash([resolvedPathKey(p.root),p.id])+'/'+hash(sessionId);
   return safePath(home(),prefix+(requestId?'/messages/'+hash(requestId)+'.json':'/view.json'));
 }
 function identity(p,sessionId,view) {

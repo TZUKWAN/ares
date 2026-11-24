@@ -1,6 +1,6 @@
 import {registerProjectChatContextRuntime} from './project-chat-context.js';
 import {registerRuntimeLibrary} from './runtime-library.js?v=2.3.0-directory1';
-import {registerRuntimeWorkbench} from './runtime-workbench.js?v=2.3.0-directory1';
+import {registerRuntimeWorkbench} from './runtime-workbench.js?v=2.3.0-research1';
 import {readFileSync, existsSync} from 'node:fs';
 import {join} from 'node:path';
 import {loadVersion,competitionCatalog,ROOT} from './catalog.js?v=2.3.0-directory1';

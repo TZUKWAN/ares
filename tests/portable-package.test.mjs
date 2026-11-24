@@ -6,13 +6,13 @@ import assert from 'node:assert/strict';
 import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,existsSync,realpathSync} from 'node:fs';
 import {join,resolve,basename,dirname,sep} from 'node:path';
 import {tmpdir} from 'node:os';
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {Client} from '../platforms/shared/node_modules/@modelcontextprotocol/client/dist/index.mjs';
 import {StdioClientTransport} from '../platforms/shared/node_modules/@modelcontextprotocol/client/dist/stdio.mjs';
 
-const output=process.env.ARES_PACKAGE_OUTPUT||'C:/Users/lauze/Documents/Codex/2026-11-02/c/outputs/ARES-跨平台插件-20261113';
+const output=process.env.ARES_PACKAGE_OUTPUT||mkdtempSync(join(process.env.ARES_TEST_ROOT||tmpdir(),'ares-current-packages-'));
 const evidence=mkdtempSync(join(process.env.ARES_TEST_ROOT||tmpdir(),'ares-包重定位 验证-'));
 const sha=value=>createHash('sha256').update(value).digest('hex'),canonical=path=>resolve(path).toLowerCase();
 const readJson=path=>JSON.parse(readFileSync(path,'utf8'));
@@ -69,10 +69,12 @@ function manifestLaunch(packageRoot,host,projectRoot,dataHome){
  const manifest=readJson(join(packageRoot,'.'+host+'-plugin','plugin.json'));
  const servers=typeof manifest.mcpServers==='string'?readJson(resolve(packageRoot,manifest.mcpServers)).mcpServers:manifest.mcpServers;
  assert.ok(servers?.ares);const config=servers.ares;
- const variables={PLUGIN_ROOT:packageRoot,ZCODE_PLUGIN_ROOT:packageRoot,ZCODE_PROJECT_DIR:projectRoot,ZCODE_PLUGIN_DATA:dataHome};
+ const variables={ZCODE_PLUGIN_ROOT:packageRoot,ZCODE_PROJECT_DIR:projectRoot,ZCODE_PLUGIN_DATA:dataHome};
  function expand(value){assert.equal(typeof value,'string');const result=value.replace(/\$\{([^}]+)\}/g,(_match,key)=>{assert.ok(Object.hasOwn(variables,key),'Unknown manifest placeholder '+key);return variables[key];});assert.equal(/\$\{/.test(result),false);return result;}
- const launch={command:expand(config.command),args:config.args.map(expand),cwd:expand(config.cwd),env:Object.fromEntries(Object.entries(config.env||{}).map(([key,value])=>[key,expand(value)]))};
- assert.equal(canonical(launch.args[0]),canonical(join(packageRoot,'scripts/ares-mcp.mjs')));
+ // Codex resolves a relative configured cwd against the installed plugin root.
+ // Do not invent a PLUGIN_ROOT expansion that the actual MCP loader never does.
+ const launch={command:expand(config.command),args:config.args.map(expand),cwd:resolve(packageRoot,expand(config.cwd)),env:Object.fromEntries(Object.entries(config.env||{}).map(([key,value])=>[key,expand(value)]))};
+ assert.equal(canonical(resolve(launch.cwd,launch.args[0])),canonical(join(packageRoot,'scripts/ares-mcp.mjs')));
  assert.equal(canonical(launch.cwd),canonical(host==='codex'?packageRoot:projectRoot));
  return {manifest,launch};
 }
@@ -97,6 +99,7 @@ async function runtime(packageRoot,host,projectRoot,dataHome,auditRoot){
 }
 
 test('both final ZIPs run from their actual relocated manifests without node_modules and use the extracted checker and UI resources',{timeout:120000},async()=>{
+ if(!process.env.ARES_PACKAGE_OUTPUT)execFileSync(process.execPath,[fileURLToPath(new URL('../scripts/package_plugins.mjs',import.meta.url)),'--out',output],{encoding:'utf8',timeout:60000,windowsHide:true,maxBuffer:65536});
  const metadata=readJson(join(output,'packages.json')),receipts=[];
  try{
   for(const host of ['codex','zcode']){

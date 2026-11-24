@@ -1,3 +1,5 @@
+import './helpers/environment.mjs';
+import {sceneBrowserArgs} from './helpers/environment.mjs';
 /** Production drawing/UI and real files in an owned headless browser.
  * Native slots are explicit fixtures; no online model or cloud calls. */
 import {test,before,after} from 'node:test';
@@ -32,7 +34,7 @@ test('neural targets keep all 1/9/40 real steps and bounded selectable pages wit
 });
 
 const api=directRoutes(),origin='http://127.0.0.1:64357',errors=[],external=[],{chromium}=createRequire(import.meta.url)(process.env.ARES_PLAYWRIGHT_PACKAGE);let browser;
-before(async()=>browser=await chromium.launch({headless:true}));after(async()=>{await browser?.close();api.dispose();});
+before(async()=>browser=await chromium.launch({headless:true,args:sceneBrowserArgs}));after(async()=>{await browser?.close();api.dispose();});
 async function ownedPage({motion=false,record=false}={}){const page=await browser.newPage({viewport:{width:1920,height:1080},reducedMotion:motion?'no-preference':'reduce',...(record?{recordVideo:{dir:join(base,'recordings'),size:{width:1920,height:1080}}}:{})});page.setDefaultTimeout(14000);page.on('pageerror',e=>errors.push(e.message));await page.route('**/*',async route=>{
  const request=route.request(),url=new URL(request.url());if(url.origin!==origin){external.push(url.href);await route.abort();return;}
  if(url.pathname==='/'){await route.fulfill({contentType:'text/html',body:`<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="stylesheet" href="/ares/api/v2/style.css"><style>html,body,#root{margin:0;width:100%;height:100%}.neural-native-fixture{height:100%;display:flex;flex-direction:column;color:#aaa;font:12px sans-serif}.neural-native-fixture textarea{margin-top:auto;min-height:90px;background:#1b1d1a;border:1px solid #d1c99f33;border-radius:15px;color:#ddd;padding:15px;font:15px/1.8 sans-serif}</style></head><body><div id="root"></div><script type="module">import{mountAres}from'/ares/api/v2/app.js';const seat=document.createElement('div');seat.className='neural-native-fixture';seat.innerHTML='<small>界面验证 · 原生服务协议夹具 · 不调用模型</small><textarea aria-label="项目助手协议草稿">驻留输入，切换后保留</textarea>';const ed=seat.cloneNode(true);ed.querySelector('textarea').setAttribute('aria-label','编排助手协议草稿');const editorSession={subscribe(){return()=>{}},getState(){return{running:false}},setVisible(){},updateContext(){}};const projectSession={subscribe(){return()=>{}},getState(){return{running:false}},setProject(){},setView(){}};window.app=mountAres(document.querySelector('#root'),{editorSession,projectSession,mountProject(n){if(!n.contains(seat))n.append(seat)},mountEditor(n){if(!n.contains(ed))n.append(ed)}});</script></body></html>`});return;}
@@ -112,5 +114,33 @@ test('switching two real stage artifacts and expanding them never reuses another
  const bytes=readFileSync(join(root,'.ares/project.json')),files=['first','second'].map(id=>readFileSync(join(root,project.outputDir,id+'.md'))),page=await ownedPage();
  try{await select(page,{project,count:1});await page.locator('.process-step[data-id=multi-step]').click();for(const id of ['first','second']){await page.locator('.neural-output[data-id=artifact-'+id+']').click();await page.locator('.ff-right').getByRole('heading',{name:id+' 实际文件',exact:true}).waitFor();await page.locator('.ff-right [data-action=work-preview-expand]').click();await page.locator('.galaxy-console').getByRole('heading',{name:id+' 实际文件',exact:true}).waitFor();await page.getByRole('button',{name:'返回项目',exact:true}).click();}
   assert.deepEqual(readFileSync(join(root,'.ares/project.json')),bytes);for(let i=0;i<2;i++)assert.deepEqual(readFileSync(join(root,project.outputDir,['first','second'][i]+'.md')),files[i]);assert.equal(readProject(root).progress.done,0);assert.ok((await hit(page,'[aria-label="项目助手协议草稿"]')).hit);assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
+ }finally{await page.close();}
+});
+
+
+test('four viewport layouts keep real phase controls clear of progress and measure actual scene cost', {timeout:180000},async()=>{
+ const started=performance.now(),page=await ownedPage(),results=[];
+ try{
+  await select(page,fixtures[1]);const actualPageReadyMs=performance.now()-started;
+  for(const [width,height] of [[1920,1080],[1366,768],[1024,768],[390,844]]){
+   await page.setViewportSize({width,height});await page.mouse.move(1,1);
+   await page.waitForFunction(()=>window.app.inspectGalaxy()?.layout?.width>0);
+   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+   const layout=await page.evaluate(()=>{
+    const rect=node=>{const r=node.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom};};
+    const dock=rect(document.querySelector('.reference-project-dock')),actors=[...document.querySelectorAll('.process-step:not([hidden])')].map(node=>({id:node.dataset.id,...rect(node)}));
+    const overlap=(a,b)=>Math.min(a.right,b.right)-Math.max(a.x,b.x)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.y,b.y)>1;
+    return {dock,actors,overlapping:actors.filter(row=>overlap(row,dock)).map(row=>row.id),overflow:document.documentElement.scrollWidth-innerWidth,chatMounted:document.querySelector('[aria-label="项目助手协议草稿"]')?.isConnected===true,scene:window.app.inspectGalaxy().layout,heapBytes:performance.memory?.usedJSHeapSize??null};
+   });
+   await page.screenshot({path:join(base,'layout-audit-'+width+'.png'),timeout:30000,animations:'disabled'});
+   const switchStart=performance.now();await page.locator('.galaxy-nav [data-action=workspace][data-id=composer]').click();await page.locator('#root[data-workspace=composer]').waitFor();const composerSwitchMs=performance.now()-switchStart;
+   await page.locator('.galaxy-nav [data-action=workspace][data-id=projects]').click();await page.locator('#root[data-workspace=projects]').waitFor();
+   assert.equal(await page.getByLabel('项目助手协议草稿').inputValue(),'驻留输入，切换后保留');
+   await page.emulateMedia({reducedMotion:'no-preference'});await page.mouse.move(1,1);const before=await page.evaluate(()=>({at:performance.now(),frames:window.app.inspectGalaxy().renderStats.frames}));await page.waitForTimeout(1600);const after=await page.evaluate(()=>({at:performance.now(),frames:window.app.inspectGalaxy().renderStats.frames}));await page.emulateMedia({reducedMotion:'reduce'});
+   results.push({width,height,...layout,composerSwitchMs,sceneFramesPerSecond:(after.frames-before.frames)*1000/(after.at-before.at),source:'actual headless CPU browser/production routes; native chat is an explicit protocol fixture'});
+  }
+  writeFileSync(join(base,'layout-performance.json'),JSON.stringify({pageReadyAndInitialProjectMs:actualPageReadyMs,totalMeasurementMs:performance.now()-started,results},null,2));console.log('UI_LAYOUT_PERFORMANCE_EVIDENCE',base);
+  for(const row of results){assert.equal(row.overflow<=1,true,JSON.stringify(row));assert.equal(row.chatMounted,true);assert.deepEqual(row.overlapping,[],String(row.width)+' phase labels must not be covered by the progress dock');}
+  assert.deepEqual(readFileSync(join(fixtures[1].root,'.ares/project.json')),fixtures[1].bytes);
  }finally{await page.close();}
 });

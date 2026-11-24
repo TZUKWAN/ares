@@ -1,3 +1,4 @@
+import {sceneBrowserArgs} from './helpers/environment.mjs';
 /** Actual official MCP Apps AppBridge + PostMessageTransport, the real portable
  * HTML, and a real official SDK stdio client/server process. Only the host chat
  * and updateModelContext are explicit capture-only fixtures. No model, cloud
@@ -81,7 +82,7 @@ test('official browser MCP Apps handshake drives real project files and editable
   const resource=await s.client.readResource({uri:'ui://ares/workbench.html'}),html=resource.contents.find(row=>typeof row.text==='string').text;
   assert.equal(sha(html),sha(readFileSync(join(source,'platforms/ui/workbench.html'))));receipt.html={sha256:sha(html),bytes:Buffer.byteLength(html)};
   const host=await hostBundle({root,workspace:entry.workspace});receipt.hostBundleSha256=sha(host);
-  browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});page=await browser.newPage({viewport:{width:1280,height:950},reducedMotion:'reduce'});page.setDefaultTimeout(20000);
+  browser=await chromium.launch({headless:true,args:sceneBrowserArgs});page=await browser.newPage({viewport:{width:1280,height:950},reducedMotion:'reduce'});page.setDefaultTimeout(20000);
   page.on('pageerror',error=>errors.push({message:error.message,stack:error.stack}));
   await page.exposeBinding('__aresRealTool',async(_source,params)=>{const response=await s.client.callTool(params),value=valueOf(response);calls.push({name:params.name,args:structuredClone(params.arguments),isError:!!response.isError,code:value?.code,status:value?.status,message:value?.message});return response;});
   await page.exposeBinding('__aresRealResource',async(_source,params)=>{const response=await s.client.readResource(params);resources.push({uri:params.uri,contents:response.contents.map(row=>({mimeType:row.mimeType,bytes:row.blob?Buffer.from(row.blob,'base64').length:Buffer.byteLength(row.text||'')}))});return response;});

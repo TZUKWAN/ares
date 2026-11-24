@@ -1,149 +1,617 @@
 {
- "competition_id": 79,
- "competition_name": "数字建筑创新应用大赛",
- "judging_dimensions": [
-  {
-   "dimension": "技能操作成果（建模/算量计价正确性）",
-   "weight": "约60%-70%（机考赛项100分制，自动评分软件）【推断：由占总成绩主体地位推定】",
-   "official_wording": "校内选拔赛通知（常州大学怀德学院）原文：'比赛评分：通过自动评分软件完成评分，具体评分规则…比赛评分：总分100分，通过自动评分软件完成评分及排名'。全国选拔赛同机考形式。量化权重为官方口径（100分制）。",
-   "scoring_points": [
-    "BIM公建/住宅建模：构件完整性与几何精度，按自动评分软件逐项比对",
-    "工程量清单编制：清单项齐全、算量结果与标准答案偏差小",
-    "招标控制价编制：组价正确、取费与计价程序无误",
-    "工程进度计划管理/BIM施工管理：逻辑关系、参数设置符合题面要求"
-   ],
-   "common_deductions": [
-    "模型缺项漏项、命名与轴网不规范导致软件识别失败",
-    "算量结果超偏差、清单漏项",
-    "未按要求保存/提交结果文件导致无法评分"
-   ]
-  },
-  {
-   "dimension": "作品质量（创新性、实用性、技术先进性）",
-   "weight": "综合应用/作品类赛项核心维度，约60%-70%【推断】",
-   "official_wording": "西安培华学院赛事报道转述总决赛作品标准围绕'创新性、实用性、技术先进性'等维度展开；官方《赛项规程》未公开分值表，权重为【推断：参照BIM类作品评审惯例（中国建设教育协会系列赛）三分维结构推定】。",
-   "scoring_points": [
-    "创新性：方案在数字技术应用、流程或管理方法上的新意",
-    "实用性：与真实工程场景结合度、可落地性",
-    "技术先进性：BIM/数字施工/智能建造工具与方法的运用深度",
-    "成果完整性：模型、报告、图纸、视频等成果体系齐备"
-   ],
-   "common_deductions": [
-    "作品为软件教程式套用、无自主创新点",
-    "模型与报告数据矛盾、成果拼凑",
-    "脱离工程实际、炫技但不实用"
-   ]
-  },
-  {
-   "dimension": "现场展示与答辩",
-   "weight": "总决赛环节约20%-30%【推断】",
-   "official_wording": "团体实践赛采用'报告评审+现场展示答辩'的评审方式（高校赛事目录与历届总决赛安排转述）；具体分值为【推断：参照同类建设类赛事决赛答辩占比推定】。",
-   "scoring_points": [
-    "陈述逻辑清晰、突出数字技术解决工程痛点的路径",
-    "答辩答问准确、团队成员分工明确",
-    "展示材料（PPT/视频）制作专业"
-   ],
-   "common_deductions": [
-    "答辩与提交报告口径不一致",
-    "陈述超时、答非所问",
-    "仅个别成员能答、暴露'挂名'问题"
-   ]
-  },
-  {
-   "dimension": "团队协作与规范性",
-   "weight": "定性贯穿维度（入围门槛+酌情加减分）",
-   "official_wording": "通知要求'每队3名成员，可配1~2名指导教师'，各赛项按本科组/高职组分组评审（南通大学转发2026年通知）；规范性为组合维度【推断】。",
-   "scoring_points": [
-    "报名信息与作品署名一致、符合分组要求",
-    "按指定软件版本与文件格式提交",
-    "三人分工在成果中可辨识"
-   ],
-   "common_deductions": [
-    "成员人数或组别不符规定",
-    "使用非指定软件版本导致文件不兼容",
-    "逾期提交"
-   ]
+  "competition_id": 79,
+  "competition_name": "数字建筑创新应用大赛",
+  "judging_dimensions": [
+    {
+      "dimension": "技能操作成果（建模/算量计价正确性）",
+      "weight": "约60%-70%（机考赛项100分制，自动评分软件）【推断：由占总成绩主体地位推定】",
+      "official_wording": "校内选拔赛通知（常州大学怀德学院）原文：'比赛评分：通过自动评分软件完成评分，具体评分规则…比赛评分：总分100分，通过自动评分软件完成评分及排名'。全国选拔赛同机考形式。量化权重为官方口径（100分制）。",
+      "scoring_points": [
+        "BIM公建/住宅建模：构件完整性与几何精度，按自动评分软件逐项比对",
+        "工程量清单编制：清单项齐全、算量结果与标准答案偏差小",
+        "招标控制价编制：组价正确、取费与计价程序无误",
+        "工程进度计划管理/BIM施工管理：逻辑关系、参数设置符合题面要求"
+      ],
+      "common_deductions": [
+        "模型缺项漏项、命名与轴网不规范导致软件识别失败",
+        "算量结果超偏差、清单漏项",
+        "未按要求保存/提交结果文件导致无法评分"
+      ]
+    },
+    {
+      "dimension": "作品质量（创新性、实用性、技术先进性）",
+      "weight": "综合应用/作品类赛项核心维度，约60%-70%【推断】",
+      "official_wording": "西安培华学院赛事报道转述总决赛作品标准围绕'创新性、实用性、技术先进性'等维度展开；官方《赛项规程》未公开分值表，权重为【推断：参照BIM类作品评审惯例（中国建设教育协会系列赛）三分维结构推定】。",
+      "scoring_points": [
+        "创新性：方案在数字技术应用、流程或管理方法上的新意",
+        "实用性：与真实工程场景结合度、可落地性",
+        "技术先进性：BIM/数字施工/智能建造工具与方法的运用深度",
+        "成果完整性：模型、报告、图纸、视频等成果体系齐备"
+      ],
+      "common_deductions": [
+        "作品为软件教程式套用、无自主创新点",
+        "模型与报告数据矛盾、成果拼凑",
+        "脱离工程实际、炫技但不实用"
+      ]
+    },
+    {
+      "dimension": "现场展示与答辩",
+      "weight": "总决赛环节约20%-30%【推断】",
+      "official_wording": "团体实践赛采用'报告评审+现场展示答辩'的评审方式（高校赛事目录与历届总决赛安排转述）；具体分值为【推断：参照同类建设类赛事决赛答辩占比推定】。",
+      "scoring_points": [
+        "陈述逻辑清晰、突出数字技术解决工程痛点的路径",
+        "答辩答问准确、团队成员分工明确",
+        "展示材料（PPT/视频）制作专业"
+      ],
+      "common_deductions": [
+        "答辩与提交报告口径不一致",
+        "陈述超时、答非所问",
+        "仅个别成员能答、暴露'挂名'问题"
+      ]
+    },
+    {
+      "dimension": "团队协作与规范性",
+      "weight": "定性贯穿维度（入围门槛+酌情加减分）",
+      "official_wording": "通知要求'每队3名成员，可配1~2名指导教师'，各赛项按本科组/高职组分组评审（南通大学转发2026年通知）；规范性为组合维度【推断】。",
+      "scoring_points": [
+        "报名信息与作品署名一致、符合分组要求",
+        "按指定软件版本与文件格式提交",
+        "三人分工在成果中可辨识"
+      ],
+      "common_deductions": [
+        "成员人数或组别不符规定",
+        "使用非指定软件版本导致文件不兼容",
+        "逾期提交"
+      ]
+    }
+  ],
+  "deliverable_requirements": [
+    {
+      "item": "机考成果文件",
+      "format": "指定软件（广联达BIM/计价/Revit等）生成的工程文件与结果文件",
+      "page_limit": "未明确",
+      "deadline_note": "校赛约6月，全国选拔赛约9月，总决赛10-11月（2024届获奖名单10月29日公布）"
+    },
+    {
+      "item": "综合应用作品（模型+报告）",
+      "format": "BIM模型文件+Word/PDF报告+展示PPT/视频（按当届赛项规程）",
+      "page_limit": "未明确（以官方《赛项规程》为准）",
+      "deadline_note": "总决赛前按通知提交"
+    },
+    {
+      "item": "报名表",
+      "format": "纸质表（学院盖章）+电子档，3人/队+1~2名指导教师",
+      "page_limit": "未明确",
+      "deadline_note": "校级报名约5-6月，全国报名8-10月26日"
+    }
+  ],
+  "process_stages": [
+    {
+      "stage": "校级选拔赛",
+      "format": "校内机考（自动评分软件）或作品评审",
+      "notes": "约6月完成；每赛项推荐不超过3个团队晋级国赛"
+    },
+    {
+      "stage": "全国选拔赛",
+      "format": "统一线上机考（自动评分）",
+      "notes": "约9月举行，按成绩排序晋级总决赛"
+    },
+    {
+      "stage": "全国总决赛",
+      "format": "机考+作品评审+现场展示答辩（按赛项而定）",
+      "notes": "10-11月举行，中国建设教育协会公布获奖名单"
+    }
+  ],
+  "review_format": "技能赛项由自动评分软件按标准答案机评排名，综合/作品类赛项由专家评委按创新性、实用性、技术先进性评审并辅以现场答辩。",
+  "judge_preferences": [
+    "数字技术在真实工程场景中的深度应用而非软件操作演示",
+    "成果体系完整：模型、报告、展示相互印证",
+    "答辩陈述紧扣工程痛点与解决方案",
+    "按本科组/高职组分组评审，强调公平与规范化"
+  ],
+  "past_winning_patterns": [],
+  "forbidden_or_risky": [
+    "未使用大赛指定软件与版本，文件无法评分",
+    "抄袭、请人代做作品，取消资格",
+    "逾期提交或提交格式不符",
+    "虚报学校/组别信息，取消成绩",
+    "总决赛现场违规使用未授权资料"
+  ],
+  "sources": [
+    {
+      "title": "中国建设教育协会——2026年18届全国数字建筑创新应用大赛（官网/通知）",
+      "url": "http://bisai.ccen.com.cn/annouce/3784147313361323008?type=notice",
+      "accessed": "2026-09-28",
+      "authority": "A"
+    },
+    {
+      "title": "南通大学创新创业学院转发《关于组织参加2026年全国数字建筑创新应用大赛的通知》",
+      "url": "https://cxcyxy.ntu.edu.cn/2026/0509/c10412a290644/page.htm",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    },
+    {
+      "title": "常州大学怀德学院第六届数字建筑创新应用大赛校内选拔赛通知（含总分100分自动评分规则）",
+      "url": "https://hdc.cczu.edu.cn/hdjwc/2026/0323/c21317a411827/page.htm",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    },
+    {
+      "title": "成都大学教务处——关于2024全国数字建筑创新应用大赛报名的通知",
+      "url": "https://jw.cdu.edu.cn/info/1039/11411.htm",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    }
+  ],
+  "confidence": "low",
+  "last_updated": "2026-09-28",
+  "notes": "官方《赛项规程》分值表未公开（官网bisai.ccen.com.cn为JS动态页，正文无法直接抓取）；机考100分制自动评分、3人团队、校赛奖项比例(15%/25%/30%)、赛项设置均来自高校转发通知（多校交叉一致）。'创新性、实用性、技术先进性'三维度来自获奖院校报道转述，作品类权重与答辩占比为参照同类建设类赛事的【推断】，已在对应字段标注。",
+  "provenance": {
+    "schemaVersion": 1,
+    "assessedAt": "2026-11-18",
+    "method": "field-inventory-and-source-status-audit; no original-clause verification",
+    "legacyConfidence": "medium",
+    "scope": {
+      "competitionId": 79,
+      "edition": null,
+      "tracks": [],
+      "groups": []
+    },
+    "ruleVersion": "2026-09-28",
+    "sourceChecks": [
+      {
+        "id": "source-1",
+        "urlSha256": "61d67483227527c0e11884d1781d9cf8f65f3376ed6cac551b7de460d56c8832",
+        "locatorKind": "document",
+        "state": "unverified"
+      },
+      {
+        "id": "source-2",
+        "urlSha256": "71a999705a7f70626f33a8c5ad5f6ae00ccc20f517f251848a1fb8f25a5df450",
+        "locatorKind": "document",
+        "state": "unverified"
+      },
+      {
+        "id": "source-3",
+        "urlSha256": "64b7d323a9f1c1a28755ffbc3f4a154b6f36eb08cde6d6601ba8230886f6a764",
+        "locatorKind": "document",
+        "state": "unverified"
+      },
+      {
+        "id": "source-4",
+        "urlSha256": "a7d2ba117719f803497272a4bb4394695c974bb67be6140b396a04ef6508f6d4",
+        "locatorKind": "document",
+        "state": "unverified"
+      }
+    ],
+    "fields": {
+      "/competition_name": {
+        "sha256": "4da40c541d7175475a1e1d94d784bb21467c935603a2ff9152c12cfabdc35e6c",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/dimension": {
+        "sha256": "25fce145d5ee31f9af71da1ee5fb977356fa2331a5ef4c4fcaf91964a4739947",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/weight": {
+        "sha256": "4105a3eb955949ce38933d8bfc483dfd68f14f864f849ad92e8f62d5755731c4",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/official_wording": {
+        "sha256": "b7196be48cdbc8ff29f1899e09eab9fe06fd0162fba77e6e0d795f4451bb2309",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/0": {
+        "sha256": "612db736f8c6fc42576bebcc355d1245d5da4a8798c69220b7ad0ad103df70f5",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/1": {
+        "sha256": "593ce558a4aaebba55d98ec6526b34af624b771e9df54d526ae46610c9a6beba",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/2": {
+        "sha256": "023e07ce2944d9dec1601ae2c61dda6d7766f5437b1e03f1536bbf598432acef",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/3": {
+        "sha256": "a090eb5cd7929ca526f78447f156bf36bc3dcb8f52102c7963385138998f2533",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/0": {
+        "sha256": "dd2f4822635a4090115b0fad452a02833be99ea3018bf5cbfedcb60f487da5bd",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/1": {
+        "sha256": "067400defd4bd28aa842732a66b4146d9ef3e7e6e3f593003fd49dd876704093",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/2": {
+        "sha256": "e5831f10018ebe8a8d7c48d6bf6ed83c710b1bcde65324bbfe135ec99bdfeb95",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/dimension": {
+        "sha256": "ed9982aa0b3bf3c88360ba2d59938455190841828265aa23bae720640afc8198",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/weight": {
+        "sha256": "b20966622d6a391a4f3b9976b041fc744888d6036ba8b6fe8e069014c1af6108",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/official_wording": {
+        "sha256": "b43cb98162f6ca9b59d2c02de30f7dd87964b68b3a479873eb4ae02caaa58ef9",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/0": {
+        "sha256": "0f8e97587b5f1ccda982d633463c6321acdaf570cc92059bd7d4673d91ac18ea",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/1": {
+        "sha256": "23b337c849b2f3880556cbf18edd32d64a2aa3b6e0ef378681940cdffddab261",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/2": {
+        "sha256": "abf41ebf84eb7d97c9e87cd3d7b4055004b7a4ef5001fe5a322c38340c8c7e22",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/3": {
+        "sha256": "3e7806f057bd28bb235732103afc9d870bb1f04b7e7ba6d24786760a8b6db895",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/0": {
+        "sha256": "6bf27fe172c6cc6b83b68858b721e51073ed2c344c343948dbe0484d5c307463",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/1": {
+        "sha256": "b7ef452a82061f66fdde8c48bc9f38691ccab389d1467204b3e6398525834e13",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/2": {
+        "sha256": "d6224d6dc012438ebb144bb2d65b826857cd8637c3d3d7c24b738487548fa31f",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/dimension": {
+        "sha256": "1f8b64a430bca353d113f6da40cd580eb12624b186ac16a4235b86a4dad36a1f",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/weight": {
+        "sha256": "d429a412dfba4b990881805d83081ea6ce4eaa78397a9ab73df11fd3952124de",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/official_wording": {
+        "sha256": "5deedd43974a2803145f2ea2f4a3e48e1243507caa586a0dcdaf7f1e693b22e3",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/0": {
+        "sha256": "59115aaab5d61a44446f9e0009c433b7b928c410ad8633123190d8cc62e16ccd",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/1": {
+        "sha256": "d13a1fe65c74496026e4bb3efee5797deec49b6dda665955127f03888c2c2d3a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/2": {
+        "sha256": "8aae4a868f47c93bb39d046b79a28b5451a8f0103c7f9f002ce306a6fe946535",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/0": {
+        "sha256": "f56e3ad78da989fee8931790a1485e233770a8980fe2aecf5e076e302dd13e42",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/1": {
+        "sha256": "eda3570a88ad73ff92e544facd46998e23c357cf7e62e6787b46b13825ab0443",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/2": {
+        "sha256": "40e0b7e311ddd9f61722d3505c0a02db6bef6ad9784687fd4bd738713eb29d30",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/dimension": {
+        "sha256": "6318aa4df7315be1b6288203c5c925546ed04d447fcacb6653cc0eb9f12bc789",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/weight": {
+        "sha256": "168c6b42a0be823e4a697f6c4c5671ac515df0393d5deb2002097d7e6575d4be",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/official_wording": {
+        "sha256": "b5480afc60c155762f28f793ff9835a6fedb1479fd44a7156db10451ebb823d7",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/0": {
+        "sha256": "f7c52c28ab5b873741649253ef39dbb7bd521af96162d8e4406de8c7928c434b",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/1": {
+        "sha256": "a30a861eb034c58e580b59c3191d915b11fff60445387557581abd7de79f645b",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/2": {
+        "sha256": "8ca9f3ec1dde9dcf20d692236d69419136dc15dbe56a9a96b1c0dcf0cffee160",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/0": {
+        "sha256": "967fd7d70ef49d5634f10dba8db31e6e0fc8ddf88b640842b385b683e7f4cc8e",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/1": {
+        "sha256": "e98a40275c0216885e0966f83a8fbf8f3472a138b67671e51230cb2097a93a40",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/2": {
+        "sha256": "12b92759ea49dcf4b4d9457228f33c72497e6ce25a99b4e898fa6a48bc6080d5",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/item": {
+        "sha256": "d56fdeefe81e9e26b52a2114ef728a3b9cc07ced857e732838170e85a4e34527",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/format": {
+        "sha256": "009c6cb72170de60a78317add1ebb289f1d721cbd1f4891a6146e3a4561c3a6b",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/page_limit": {
+        "sha256": "b40ca4d5dda791fc8d94ff0edb09215aea4ca0e3dde6e1c825fdea7cb97a414a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/deadline_note": {
+        "sha256": "1d13f9b0c9038c52b6a70855f297625bdf1e35fa674acdb22ee3fae227cd53b6",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/item": {
+        "sha256": "b9dc60e6286e113ca3aeda1f2048b9be5f4950e47a44189bba86f1bc5e58fd14",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/format": {
+        "sha256": "384a20ebfe77f4852cf23e704c6675a52e2156ca82df34cd85cab5ecb2bafd0f",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/page_limit": {
+        "sha256": "96e3e7b92693b683a450953aaf29ec71741a25eefa1c2ed0a4ac4239d324e904",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/deadline_note": {
+        "sha256": "9a41f7db15f3743a48cf2223d59577dc6730ab1a639c862196980dba35dba48c",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/item": {
+        "sha256": "bd4cd3588a967fb54c66a129c9f4e2c3046461afe90f3f4e1081a6ac83826c5c",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/format": {
+        "sha256": "b42862a088599653df4e3bcf5081b4a7b33a98e07fcf24e5c7fbed68f1840c2d",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/page_limit": {
+        "sha256": "b40ca4d5dda791fc8d94ff0edb09215aea4ca0e3dde6e1c825fdea7cb97a414a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/deadline_note": {
+        "sha256": "80dfde2a208d9b3d2d2f1df3412404724d3a57f6aa7308edee279f35fee2abbb",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/stage": {
+        "sha256": "3b034954bb59b46071d357ad53e1dd9a976d85ccdc08a99ff085d30d2f15e856",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/format": {
+        "sha256": "33a99c4c9a4219e841e924c2fa1d671534d1ad638ae79bce5a74f1c16eec6e6f",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/notes": {
+        "sha256": "1c7719f290ea80642a77248d5a47df40af751ca085a8ef1e9f40fd765f7bbadb",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/stage": {
+        "sha256": "dfc9ab06b04062c134d54b4a967d0bfa75e5d16d101ae192f11b18b1696b207a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/format": {
+        "sha256": "59273be75798770d6e98e7e63c9e6d0a92c854a95f600acd2786a6f0371935d7",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/notes": {
+        "sha256": "f475195e23a739d88c03f5c726167a5bd71e58ec82fa5e561b1ba18f6aa101ce",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/stage": {
+        "sha256": "9229efa4cb7900e9f141c75e71c66a7937ede907ef61cd2a4f20b96af13be8a4",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/format": {
+        "sha256": "1be21dc8fb25549b4d255bfa8c20151250529c2e6c0e80a1b1941fc9c7a82544",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/notes": {
+        "sha256": "4ef32364e62d4322d841ec24e398bbe36f3f1d494207d8931836c8b3dfd74398",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/review_format": {
+        "sha256": "9e4476fff6041438f0635ec351272554482a296b469e07931f11aec5ad7ee983",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/0": {
+        "sha256": "7aee03115ea0722b4a0e73a77bcb06d3c3e263ccd36d0b66270bccaa9ecde464",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/1": {
+        "sha256": "7d3af4f896db80ef8c438614a6b08920af597ef70c6637396fd0ceb325766da6",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/2": {
+        "sha256": "34024946945e3c03cde7d7d38796dbf5f4ed3a949d08132bc74987d2818239d8",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/3": {
+        "sha256": "f76d16d05ed0dc07602377260f831823faded11dc2c649652a50bd9dd7578ca6",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/0": {
+        "sha256": "3c7af57f7fa9156817b0aba66ce4db10dfa7bb5b0bdcd50e0cc46bb5f75bc3db",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/1": {
+        "sha256": "29af64dc31a8eed1b7e547516ef68120f228a8b1627e3c7c66c58b86e66b6d50",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/2": {
+        "sha256": "f0d73d3cfbd80feeab58d98ab021943abf979d87b0075c077a0ba15099d8f5be",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/3": {
+        "sha256": "fabd08c09cf7ed4aac80a1bf8eade1eb76a35b3a10a13d868738931d23199782",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/4": {
+        "sha256": "4583a26c74b6a7ec46b0d4624932fe4fcc05450254668e840c9ac972c7687d01",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/notes": {
+        "sha256": "97221541da31a2140bca54d382774243f9e083fdd0d07718b8604eb40dbb4e47",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      }
+    },
+    "note": "来源候选尚未逐条对应原文；历届说明、推断权重和建议不能作为已确认的当届官方标准。空届次、赛道和组别表示未确定适用范围，不表示通用。"
   }
- ],
- "deliverable_requirements": [
-  {
-   "item": "机考成果文件",
-   "format": "指定软件（广联达BIM/计价/Revit等）生成的工程文件与结果文件",
-   "page_limit": "未明确",
-   "deadline_note": "校赛约6月，全国选拔赛约9月，总决赛10-11月（2024届获奖名单10月29日公布）"
-  },
-  {
-   "item": "综合应用作品（模型+报告）",
-   "format": "BIM模型文件+Word/PDF报告+展示PPT/视频（按当届赛项规程）",
-   "page_limit": "未明确（以官方《赛项规程》为准）",
-   "deadline_note": "总决赛前按通知提交"
-  },
-  {
-   "item": "报名表",
-   "format": "纸质表（学院盖章）+电子档，3人/队+1~2名指导教师",
-   "page_limit": "未明确",
-   "deadline_note": "校级报名约5-6月，全国报名8-10月26日"
-  }
- ],
- "process_stages": [
-  {
-   "stage": "校级选拔赛",
-   "format": "校内机考（自动评分软件）或作品评审",
-   "notes": "约6月完成；每赛项推荐不超过3个团队晋级国赛"
-  },
-  {
-   "stage": "全国选拔赛",
-   "format": "统一线上机考（自动评分）",
-   "notes": "约9月举行，按成绩排序晋级总决赛"
-  },
-  {
-   "stage": "全国总决赛",
-   "format": "机考+作品评审+现场展示答辩（按赛项而定）",
-   "notes": "10-11月举行，中国建设教育协会公布获奖名单"
-  }
- ],
- "review_format": "技能赛项由自动评分软件按标准答案机评排名，综合/作品类赛项由专家评委按创新性、实用性、技术先进性评审并辅以现场答辩。",
- "judge_preferences": [
-  "数字技术在真实工程场景中的深度应用而非软件操作演示",
-  "成果体系完整：模型、报告、展示相互印证",
-  "答辩陈述紧扣工程痛点与解决方案",
-  "按本科组/高职组分组评审，强调公平与规范化"
- ],
- "past_winning_patterns": [],
- "forbidden_or_risky": [
-  "未使用大赛指定软件与版本，文件无法评分",
-  "抄袭、请人代做作品，取消资格",
-  "逾期提交或提交格式不符",
-  "虚报学校/组别信息，取消成绩",
-  "总决赛现场违规使用未授权资料"
- ],
- "sources": [
-  {
-   "title": "中国建设教育协会——2026年18届全国数字建筑创新应用大赛（官网/通知）",
-   "url": "http://bisai.ccen.com.cn/annouce/3784147313361323008?type=notice",
-   "accessed": "2026-09-28",
-   "authority": "A"
-  },
-  {
-   "title": "南通大学创新创业学院转发《关于组织参加2026年全国数字建筑创新应用大赛的通知》",
-   "url": "https://cxcyxy.ntu.edu.cn/2026/0509/c10412a290644/page.htm",
-   "accessed": "2026-09-28",
-   "authority": "B"
-  },
-  {
-   "title": "常州大学怀德学院第六届数字建筑创新应用大赛校内选拔赛通知（含总分100分自动评分规则）",
-   "url": "https://hdc.cczu.edu.cn/hdjwc/2026/0323/c21317a411827/page.htm",
-   "accessed": "2026-09-28",
-   "authority": "B"
-  },
-  {
-   "title": "成都大学教务处——关于2024全国数字建筑创新应用大赛报名的通知",
-   "url": "https://jw.cdu.edu.cn/info/1039/11411.htm",
-   "accessed": "2026-09-28",
-   "authority": "B"
-  }
- ],
- "confidence": "medium",
- "last_updated": "2026-09-28",
- "notes": "官方《赛项规程》分值表未公开（官网bisai.ccen.com.cn为JS动态页，正文无法直接抓取）；机考100分制自动评分、3人团队、校赛奖项比例(15%/25%/30%)、赛项设置均来自高校转发通知（多校交叉一致）。'创新性、实用性、技术先进性'三维度来自获奖院校报道转述，作品类权重与答辩占比为参照同类建设类赛事的【推断】，已在对应字段标注。"
 }

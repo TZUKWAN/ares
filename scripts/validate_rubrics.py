@@ -16,6 +16,7 @@ import json
 import os
 import re
 import sys
+from rubric_evidence import validate_provenance
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RUBRIC_DIR = os.path.join(HERE, "..", "data", "rubrics")
@@ -72,6 +73,7 @@ def check_one(cid, strict_star=True):
         errs.append("last_updated 须为 YYYY-MM-DD")
     if strict_star and cid in STARRED and not (r.get("past_winning_patterns") or []):
         errs.append("标★赛事缺 past_winning_patterns（获奖作品共性分析）")
+    errs.extend(validate_provenance(r, os.path.join(HERE, "..")))
     return errs
 
 

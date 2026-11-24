@@ -3,8 +3,8 @@ import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {dirname} from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {AresError,clone,hash,safePath,now,atomicJson} from './storage.js';
-import {readProject,changeProject,inspectOutput,sourceFiles,inputHash,verifyProject} from './projects.js?v=2.3.0-directory1';
-import {ensureProjectWorkbench,captureCheckedArtifact,captureTaskArtifacts,artifactVersion,artifactHeads,projectEvent,relativeName,sensitiveFile,syntheticEvidence} from './project-artifacts.js';
+import {readProject,changeProject,inspectOutput,sourceFiles,inputHash,inspectProjectSubmission} from './projects.js?v=2.3.0-directory1';
+import {ensureProjectWorkbench,captureCheckedArtifact,captureTaskArtifacts,artifactVersion,artifactHeads,projectEvent,relativeName,addReleaseFiles,syntheticEvidence} from './project-artifacts.js';
 import {putProjectObject,putProjectRecord,readProjectRecord,readProjectObject} from './project-objects.js';
 
 const actorDefault={kind:'user',id:'owner'};
@@ -37,11 +37,7 @@ function reviewedArtifactVersions(root,project,version,step,checks,actor){
  task.reviewObject=putProjectObject(root,reviewBytes).sha256;
  return ids;
 }
-function snapshot(root,p,v,body,actor){
- const kind=body.kind||'checkpoint';if(!['checkpoint','stage','submission'].includes(kind))throw new AresError('版本类型无效');
- const ids=body.stepIds??(kind==='stage'?v.workflow.steps.filter(s=>p.tasks[s.id].status==='done').map(s=>s.id):v.workflow.steps.map(s=>s.id));
- if(!Array.isArray(ids)||!ids.length||new Set(ids).size!==ids.length||ids.some(id=>!v.workflow.steps.some(s=>s.id===id)))throw new AresError('请选择有效且不重复的节点');
- if(kind==='submission'){const verification=verifyProject(root);if(!verification.checksPassed)throw new AresError('提交版仍有未验收节点或规则缺口',409);if(ids.length!==v.workflow.steps.length)throw new AresError('提交版必须包含整套流程');}
+function collectWorkingRelease(root,p,v,kind,ids,actor){
  if(kind!=='checkpoint')for(const id of ids){const s=v.workflow.steps.find(s=>s.id===id);if(p.tasks[id].status!=='done'||s.dependsOn.some(dep=>!ids.includes(dep)))throw new AresError('阶段版本必须包含已验收节点及其全部前置节点',409);}
  const all=v.workflow.steps.flatMap(s=>s.outputs),versionIds=[];
  for(const step of v.workflow.steps.filter(s=>ids.includes(s.id))){const checks=step.outputs.map(o=>inspectOutput(root,p,o,all));
@@ -49,9 +45,23 @@ function snapshot(root,p,v,body,actor){
   const captured=kind==='checkpoint'?captureTaskArtifacts(root,p,v.workflow,step,checks,{actor,sourceFiles,inputHash:inputHash(p,step)}):reviewedArtifactVersions(root,p,v,step,checks,actor);versionIds.push(...captured);
  }
  if(!versionIds.length)throw new AresError('没有可固定的实际作品');
- const fileMap=new Map();for(const id of versionIds){const version=artifactVersion(root,id);if(kind!=='checkpoint'&&version.payload.provenance.kind==='synthetic')throw new AresError('模拟预测试产物不能作为正式阶段或提交版证据',409);for(const file of version.payload.files){const key=relativeName(file.workingPath);if(sensitiveFile(key))throw new AresError('不能固定凭据文件');const old=fileMap.get(key);if(old&&old.sha256!==file.sha256)throw new AresError('相同文件对应不同作品内容，请刷新',409);fileMap.set(key,{...file,workingPath:key});}}
+ const fileMap=new Map();for(const id of versionIds){const version=artifactVersion(root,id);if(kind!=='checkpoint'&&version.payload.provenance.kind==='synthetic')throw new AresError('模拟预测试产物不能作为正式阶段或提交版证据',409);addReleaseFiles(fileMap,version.payload.files);}
+ return {artifactVersionIds:[...new Set(versionIds)],files:[...fileMap.values()]};
+}
+function snapshot(root,p,v,body,actor){
+ const kind=body.kind||'checkpoint';if(!['checkpoint','stage','submission'].includes(kind))throw new AresError('版本类型无效');
+ const ids=body.stepIds??(kind==='stage'?v.workflow.steps.filter(s=>p.tasks[s.id].status==='done').map(s=>s.id):v.workflow.steps.map(s=>s.id));
+ if(!Array.isArray(ids)||!ids.length||new Set(ids).size!==ids.length||ids.some(id=>!v.workflow.steps.some(s=>s.id===id)))throw new AresError('请选择有效且不重复的节点');
+ let contents;
+ if(kind==='submission'){
+  if(ids.length!==v.workflow.steps.length)throw new AresError('提交版必须包含整套流程');
+  // Under the project write lock, use the exact immutable files verified by the same gate as the report.
+  const {report,submission}=inspectProjectSubmission(p,v);
+  if(!submission)throw new AresError('提交版仍有未验收节点或规则缺口：'+report.blocking[0].reason,409);
+  contents=submission;
+ }else contents=collectWorkingRelease(root,p,v,kind,ids,actor);
  const rules=p.competition.ruleBaseline?{...clone(p.competition.ruleBaseline),object:putProjectObject(root,readFileSync(safePath(root,p.competition.ruleBaseline.snapshotPath,{existing:true}))).sha256}:null;if(rules&&rules.sha256!==rules.object)throw new AresError('规则原文在固定版本时变化，请重新复核',409);
- const release=putProjectRecord(root,'releases',{projectId:p.id,title:shortText(body.title||p.name+' · '+({checkpoint:'工作快照',stage:'阶段版本',submission:'提交版本'}[kind]),'版本名称'),kind,stepIds:ids,artifactVersionIds:[...new Set(versionIds)],files:[...fileMap.values()],definition:v,facts:clone(p.facts),competition:clone(p.competition),ruleBaseline:rules,tasks:clone(p.tasks),outputDir:p.outputDir,extensionBindings:clone(ensureProjectWorkbench(p).extensionBindings||{}),extensionVersions:Object.values(p.workbench.extensions||{}).map(e=>({id:e.id,manifestHash:e.manifestHash,version:e.version})),extensionRunIds:[...(p.workbench.extensionRunIds||[])],baseRevision:p.revision,actor,at:now()});
+ const release=putProjectRecord(root,'releases',{projectId:p.id,title:shortText(body.title||p.name+' · '+({checkpoint:'工作快照',stage:'阶段版本',submission:'提交版本'}[kind]),'版本名称'),kind,stepIds:ids,...contents,definition:v,facts:clone(p.facts),competition:clone(p.competition),ruleBaseline:rules,tasks:clone(p.tasks),outputDir:p.outputDir,extensionBindings:clone(ensureProjectWorkbench(p).extensionBindings||{}),extensionVersions:Object.values(p.workbench.extensions||{}).map(e=>({id:e.id,manifestHash:e.manifestHash,version:e.version})),extensionRunIds:[...(p.workbench.extensionRunIds||[])],baseRevision:p.revision,actor,at:now()});
  ensureProjectWorkbench(p).releaseIds.push(release.id);return release;
 }
 export function freezeProjectRelease(body,actor=actorDefault){let release;const project=changeProject(body,(p,v)=>{release=snapshot(p.root,p,v,body,actor);projectEvent(p.root,p,'release.frozen',{releaseId:release.id,kind:release.payload.kind,title:release.payload.title},actor);});return {project,release};}

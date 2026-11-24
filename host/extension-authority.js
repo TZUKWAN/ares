@@ -11,7 +11,7 @@ function store(){const value=readJson(authorityPath(),{schema_version:1,receipts
 function checked(record){if(!object(record))return false;const {fingerprint,...payload}=record;return typeof fingerprint==='string'&&fingerprint===hash(payload)&&['prepared','active','revoked'].includes(record.status);}
 function saveReceipt(state,id,payload){state.receipts[id]={...payload,fingerprint:hash(payload)};atomicJson(authorityPath(),state);return id;}
 export function prepareExtensionApproval(root,project,extension,actor){
- if(actor.kind!=='user'||!outsideProject(root))throw new AresError('启用子插件需负责人确认，并使用不包含DSH全局设置的独立项目目录',403);
+ if((actor.kind!=='user'||actor.id!=='owner')||!outsideProject(root))throw new AresError('启用子插件需负责人确认，并使用不包含DSH全局设置的独立项目目录',403);
  return locked(authorityPath(),()=>{const state=store(),id=randomUUID();saveReceipt(state,id,{id,scope:scopeFor(root,project,extension),status:'prepared',requestedBy:actor.id,requestedAt:now(),projectRevision:project.revision});return id;});
 }
 export function activateExtensionApproval(root,project,extension,id){

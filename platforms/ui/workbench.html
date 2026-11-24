@@ -1317,6 +1317,14 @@ body[data-ds-dark-theme] .ares-app,.ares-app[data-theme=dark]{--a-bg:#15191d;--a
 .reference-project-dock { position:absolute; z-index:4; bottom:42px; left:50%; transform:translateX(-50%); width:min(560px,90%); padding:15px 20px 13px; display:grid; grid-template-columns:repeat(4,1fr); gap:12px; border:1px solid #d5d7c31c; border-radius:18px; background:linear-gradient(135deg,#30332d55,#171b16bb); box-shadow:0 10px 50px #0003,inset 0 1px #fff1; backdrop-filter:blur(16px); }
 .reference-project-dock div { display:grid; gap:4px; padding-left:12px; border-left:1px solid #e3dcc51b; }.reference-project-dock div:first-child{padding-left:0;border:0}
 .reference-project-dock span { font-size:11px; color:#90998a; }.reference-project-dock strong{font:400 21px var(--ff-mono);color:#e2e3d3}.reference-project-dock p{grid-column:1/-1;margin:2px 0 0;color:#979f8d;font-size:12px;text-align:center}
+/* The reference orbit remains unchanged. The ARES progress summary fits the
+ * clear central gap instead of covering the two lower phase labels. */
+@container ares-work-scene (min-width:761px) and (max-width:1000px) {
+ .reference-project-dock{width:320px;padding:12px 14px;gap:8px}
+ .reference-project-dock span{font-size:10px;white-space:nowrap}
+ .reference-project-dock div{padding-left:8px}
+ .reference-project-dock p{font-size:11px}
+}
 .neural-roster { position:absolute; z-index:4; bottom:2px; left:0; right:0; display:flex; justify-content:center; gap:7px; overflow:auto; pointer-events:none; }
 .neural-person { display:flex; align-items:center; gap:6px; padding:4px 8px 4px 4px; border:1px solid #d5d8be1a; border-radius:40px; background:#262d1e50; font:11px var(--sys-font); color:#aab297; cursor:pointer; white-space:nowrap; }
 .neural-person i{font-style:normal;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#acbb8117;color:#cdd4bd}
@@ -1348,6 +1356,11 @@ body[data-ds-dark-theme] .ares-app,.ares-app[data-theme=dark]{--a-bg:#15191d;--a
 
 .reference-history{position:absolute;z-index:24;left:50%;bottom:36px;transform:translateX(-50%);width:min(560px,90%);padding:14px 40px 14px 18px;border:1px solid #e6cf9840;border-radius:14px;background:#25291fea;backdrop-filter:blur(14px);color:#c7c9b6;font:12px/1.7 var(--sys-font);pointer-events:auto}
 .reference-history strong{color:#e2cf9e;font-weight:500}.reference-history p{margin:5px 0 0}.reference-history button{position:absolute;right:9px;top:9px;border:0;background:none;color:#bfc2aa;font-size:20px;cursor:pointer}.is-history{box-shadow:0 0 24px #e6cf9840!important;border-color:#e6cf98aa!important}
+.reference-history.process-activity-caption{transition:opacity .2s ease,transform .2s ease;box-sizing:border-box;max-height:28%;overflow:auto}
+.reference-history button:focus-visible{outline:2px solid #e2cf9e;outline-offset:2px;border-radius:4px}
+@starting-style{.reference-history:not([hidden]){opacity:0;transform:translate(-50%,6px)}}
+@media(prefers-reduced-motion:reduce){.reference-history.process-activity-caption{transition:none}}
+[data-motion=reduced] .reference-history.process-activity-caption,[data-motion=paused] .reference-history.process-activity-caption{transition:none}
 
 /* ARES Neural: original interface finish, inspired by the reference's neutral
  * light/material hierarchy. No reference code, assets, network fonts or runtime
@@ -2088,6 +2101,35 @@ body[data-ds-dark-theme] .ares-app,.ares-app[data-theme=dark]{--a-bg:#15191d;--a
 .ares-app .ares-connection-indicator[data-native-connection-state=connected] { color: #aec1af; }
 .ares-app .ares-connection-indicator[data-native-connection-state=error] { color: #d0a493; }
 .ares-app .ares-connection-indicator[data-native-connection-state=warning] { color: #c9b788; }
+/* Advanced template controls wrap within their actual panel width. */
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console .ares-workflow-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console .ares-workflow-bar > div {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console .ares-workflow-bar .ares-spacer { display: none; }
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console .ares-workflow-select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+.ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .galaxy-console .ares-workflow-bar > button {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+}
+/* The report groups actual blockers by step; detailed hashes remain optional. */
+.ares-verification .ares-verification-issues{list-style:none;padding:0;margin:14px 0}
+.ares-verification .ares-check-row{gap:14px;align-items:center}.ares-verification .ares-check-row>div{flex:1;min-width:0}
+.ares-verification .ares-check-row p{margin:6px 0 0;overflow-wrap:anywhere}.ares-verification .ares-check-row>.ares-btn{flex:none}
+.ares-verification h3{font-size:16px;color:#dedbd0}.ares-verification .ares-milestone strong{font-size:17px}
+.ares-verification code,.ares-verification pre{overflow-wrap:anywhere;white-space:pre-wrap;word-break:break-word}
 
 /* Container-responsive editing surface only; the reference scene is untouched. */
 .ares-app.ares-system.ares-galaxy[data-ares-ui=galaxy] .ares-studio[data-flow-layout] {
@@ -2551,7 +2593,7 @@ html,body,#app{margin:0;width:100%;height:100%;min-width:280px;overflow:hidden;b
         function createWorkflowCanvas3(element, { workflow, selectedId, view = { mode: "auto", zoom: 1 } }) {
           const viewport = element.querySelector(".ares-flow-viewport"), space = element.querySelector(".ares-flow-space"), plane = element.querySelector(".ares-flow-plane"), svg = element.querySelector(".ares-flow-wires"), edgeGroup = element.querySelector("[data-flow-edges]"), studio = element.closest(".ares-studio");
           const nodes = new Map([...plane.querySelectorAll(".ares-step")].map((node2) => [node2.dataset.id, node2])), media2 = matchMedia("(prefers-reduced-motion: reduce)");
-          let disposed2 = false, frame = 0, layout = null, scale = 1, geometryKey = "", lastWidth = 0, lastHeight = 0;
+          let disposed2 = false, frame = 0, layout = null, scale = 1, geometryKey = "", lastWidth = 0, lastHeight = 0, zoomAnimation = null;
           view.mode = view.mode === "manual" ? "manual" : "auto";
           view.zoom = clamp2(Number(view.zoom) || 1, 0.9, 1.6);
           const selectedChanged = view.selectedId !== selectedId;
@@ -2627,23 +2669,43 @@ html,body,#app{margin:0;width:100%;height:100%;min-width:280px;overflow:hidden;b
               refresh();
             });
           }
+          function finishZoom() {
+            zoomAnimation?.cancel();
+            zoomAnimation = null;
+          }
+          function animateZoom(before) {
+            if (disposed2 || media2.matches || document.hidden || element.closest("[data-ares-motion=off]") || typeof plane.animate !== "function") return;
+            const after = plane.getBoundingClientRect(), fromScale = before.width / plane.offsetWidth;
+            const animation = plane.animate([{ transform: `translate(${before.x - after.x}px,${before.y - after.y}px) scale(${fromScale})` }, { transform: plane.style.transform }], { id: "ares-flow-zoom", duration: 220, easing: "cubic-bezier(.2,.75,.2,1)" });
+            zoomAnimation = animation;
+            animation.finished.then(() => {
+              if (zoomAnimation === animation) zoomAnimation = null;
+            }, () => {
+            });
+          }
           function zoomBy(direction) {
             if (!layout) refresh();
             if (!layout) return;
+            const before = plane.getBoundingClientRect();
+            finishZoom();
             const left = Number.parseFloat(plane.style.left) || 0, top = Number.parseFloat(plane.style.top) || 0;
             const anchor2 = { x: (viewport.scrollLeft + viewport.clientWidth / 2 - left) / scale, y: (viewport.scrollTop + viewport.clientHeight / 2 - top) / scale };
             view.mode = "manual";
             view.zoom = clamp2(Math.round((scale + Number(direction) * 0.1) * 10) / 10, 0.9, 1.6);
             geometryKey = "";
             refresh(anchor2);
+            animateZoom(before);
           }
           function fit() {
+            const before = plane.getBoundingClientRect();
+            finishZoom();
             view.mode = "auto";
             view.zoom = 1;
             geometryKey = "";
             refresh();
             viewport.scrollLeft = 0;
             reveal(selectedId);
+            animateZoom(before);
           }
           function keydown(event) {
             if (event.altKey || event.ctrlKey || event.metaKey || event.target.closest("input,textarea,select,[contenteditable=true]")) return;
@@ -2661,19 +2723,26 @@ html,body,#app{margin:0;width:100%;height:100%;min-width:280px;overflow:hidden;b
           const observer = new ResizeObserver(queue);
           observer.observe(viewport);
           if (studio) observer.observe(studio);
+          function motionChanged() {
+            if (media2.matches || document.hidden) finishZoom();
+            queue();
+          }
           element.addEventListener("keydown", keydown);
           element.addEventListener("focusin", focus);
-          media2.addEventListener("change", queue);
+          media2.addEventListener("change", motionChanged);
+          document.addEventListener("visibilitychange", motionChanged);
           refresh();
           if (selectedChanged) reveal(selectedId);
           document.fonts?.ready.then(queue);
           return { zoomBy, fit, reveal, inspect: () => ({ mode: view.mode, zoom: scale, width: lastWidth, height: lastHeight, layout }), dispose() {
             disposed2 = true;
+            finishZoom();
             observer.disconnect();
             cancelAnimationFrame(frame);
             element.removeEventListener("keydown", keydown);
             element.removeEventListener("focusin", focus);
-            media2.removeEventListener("change", queue);
+            media2.removeEventListener("change", motionChanged);
+            document.removeEventListener("visibilitychange", motionChanged);
           } };
         }
         return Object.freeze({ workflowCanvasLayout: workflowCanvasLayout2, workflowCanvasMarkup: workflowCanvasMarkup3, createWorkflowCanvas: createWorkflowCanvas3 });
@@ -5226,6 +5295,39 @@ void main(){
         }
         const svgElement = (name) => document.createElementNS("http://www.w3.org/2000/svg", name);
         const ref = (value) => ({ current: value });
+        function createNeuralActivityFeed({ limit = 12, knownLimit = 8192 } = {}) {
+          let scope2 = null, known = /* @__PURE__ */ new Set(), pending = [];
+          return {
+            ingest(projectId, rows) {
+              const input3 = rows.filter((row) => typeof row?.id === "string" && row.id).slice(-knownLimit);
+              if (scope2 !== projectId) {
+                scope2 = projectId;
+                known = new Set(input3.map((row) => row.id));
+                pending = [];
+                return [];
+              }
+              const added = [];
+              for (const row of input3) {
+                if (known.has(row.id)) continue;
+                known.add(row.id);
+                added.push(row);
+                pending.push(row);
+              }
+              while (known.size > knownLimit) known.delete(known.values().next().value);
+              pending = pending.slice(-limit);
+              return added;
+            },
+            latest() {
+              return pending.at(-1) || null;
+            },
+            acknowledge() {
+              pending = [];
+            },
+            read() {
+              return { seen: known.size, queued: pending.length };
+            }
+          };
+        }
         function backgroundGraph(model, modules) {
           const nodes = [{ id: "core", kind: "core", deg: 1 }], links = [];
           for (const m2 of modules) {
@@ -5245,6 +5347,9 @@ void main(){
         function createNeuralScene(element, { project, board: board2 = {}, preferences = {}, onLayout } = {}) {
           let model = forgeModel2(project, board2), disposed2 = false, visible = true, intersecting = true, frame = null, last = 0, frames = 0, page = 0, group = null, motion = null, network = null, refs = null, size = null, groupKey = "", fanKey = "", fanStage = null, metadataKey = "", introSeen = false, historyRows = [], historyStarted = 0, historyIndex = -1;
           const p2 = preferences.neuralReference ??= { paused: false, focusId: null, artifactId: null, time: 0 };
+          const activityFeed = createNeuralActivityFeed();
+          activityFeed.ingest(model.project.id, model.progress.activities);
+          let activityMode = null;
           const media2 = matchMedia("(prefers-reduced-motion: reduce)"), reduced = () => media2.matches || preferences.reduceMotion === true;
           const stage = element.querySelector(".ff-stage"), background = element.querySelector(".ff-gl");
           element.querySelector(".ff-labels").hidden = true;
@@ -5286,13 +5391,13 @@ void main(){
           layer.prepend(stageBackground, background);
           element.classList.add("home-stage");
           const history = document.createElement("aside");
-          history.className = "reference-history";
+          history.className = "reference-history process-activity-caption";
           history.hidden = true;
           history.setAttribute("role", "status");
           history.setAttribute("aria-live", "polite");
-          history.innerHTML = '<button type="button" data-neural-action="history-close" aria-label="\u5173\u95ED\u5386\u53F2\u56DE\u653E">\xD7</button><strong>\u5386\u53F2\u56DE\u653E</strong><p></p>';
+          history.innerHTML = '<button type="button" data-neural-action="history-close" aria-label="\u5173\u95ED\u8BB0\u5F55\u63D0\u793A">\xD7</button><strong></strong><p></p>';
           stage.append(history);
-          const live = { current: null };
+          const live = { current: null }, replayNote = element.querySelector("[data-process-replay-note]"), sceneHint = replayNote?.textContent;
           function videos() {
             return [...layer.querySelectorAll("video")];
           }
@@ -5392,7 +5497,7 @@ void main(){
             layer.className = "scene neural-reference-layer stage-" + L2.stage;
             controls.querySelector("[data-neural-action=overview]").hidden = !focused;
             summary.hidden = !focused;
-            dock.hidden = !!focused;
+            dock.hidden = !!focused || !history.hidden;
             roster.hidden = !!focused;
             const signature = JSON.stringify([model.project.id, focused?.id, status?.state, model.done, model.saved, model.progress.members.map((m2) => [m2.id, m2.name])]);
             if (signature !== metadataKey) {
@@ -5480,6 +5585,33 @@ void main(){
             draw(performance.now(), reduced() || p2.paused);
             sync();
           }
+          function clearActivity() {
+            activityMode = null;
+            history.hidden = true;
+            dock.hidden = live.current?.stage !== "hub";
+            historyRows = [];
+            historyIndex = -1;
+            delete element.dataset.activityMode;
+            if (replayNote) replayNote.textContent = sceneHint;
+            for (const node2 of stage.querySelectorAll(".is-history")) node2.classList.remove("is-history");
+          }
+          function showActivity(row, prefix) {
+            history.querySelector("p").textContent = row ? `${prefix}${row.memberName || "\u672A\u5F52\u5C5E\u6210\u5458"} \xB7 ${row.sourceLabel} \xB7 ${row.summary}` : "\u6682\u65E0\u8BE5\u6210\u5458\u5173\u8054\u7684\u5DE5\u4F5C\u8BB0\u5F55";
+            history.dataset.historyId = row?.id || "";
+            for (const node2 of stage.querySelectorAll("[data-process-step],[data-process-member]")) node2.classList.toggle("is-history", !!row && (node2.hasAttribute("data-process-step") ? row.stepIds.includes(node2.dataset.id) : !!row.memberId && row.memberId === node2.dataset.id));
+          }
+          function showLiveActivity() {
+            const row = activityFeed.latest();
+            if (!row) return;
+            activityMode = "live";
+            history.hidden = false;
+            dock.hidden = true;
+            history.querySelector("strong").textContent = "\u9879\u76EE\u66F4\u65B0";
+            history.querySelector("button").setAttribute("aria-label", "\u5173\u95ED\u5DE5\u4F5C\u8BB0\u5F55\u63D0\u793A");
+            element.dataset.activityMode = "observed-update";
+            historyStarted = live.current?.time || 0;
+            showActivity(row, "");
+          }
           function draw(now, snap = false) {
             if (disposed2 || !live.current) return;
             if (snap) motion.snap();
@@ -5491,15 +5623,15 @@ void main(){
             product.classList.toggle("is-small", L2.stage !== "hub");
             element.dataset.neuralIntro = reduced() || now - L2.t0 > 3e3 ? "complete" : "playing";
             element.dataset.phase = L2.stage;
-            if (!history.hidden) {
+            if (activityMode === "history") {
               const index = historyRows.length ? Math.min(historyRows.length - 1, Math.floor(Math.max(0, L2.time - historyStarted) / 2)) : 0;
               if (index !== historyIndex) {
                 historyIndex = index;
-                const row = historyRows[index];
-                history.querySelector("p").textContent = row ? `${index + 1}/${historyRows.length} \xB7 ${row.memberName || "\u672A\u5F52\u5C5E\u6210\u5458"} \xB7 ${row.sourceLabel} \xB7 ${row.summary}` : "\u6682\u65E0\u8BE5\u6210\u5458\u5173\u8054\u7684\u5DE5\u4F5C\u8BB0\u5F55";
-                history.dataset.historyId = row?.id || "";
-                for (const label of layer.querySelectorAll("[data-process-step]")) label.classList.toggle("is-history", !!row?.stepIds.includes(label.dataset.id));
+                showActivity(historyRows[index], `${index + 1}/${historyRows.length} \xB7 `);
               }
+            } else if (activityMode === "live" && canAnimate() && L2.time - historyStarted > 5) {
+              activityFeed.acknowledge();
+              clearActivity();
             }
             frames++;
           }
@@ -5546,8 +5678,10 @@ void main(){
               page = 0;
               groupKey = "";
               metadataKey = "";
+              clearActivity();
             }
             model = next;
+            const newActivities = activityFeed.ingest(model.project.id, model.progress.activities);
             if (Object.hasOwn(nextBoard, "neuralStageId")) p2.focusId = nextBoard.neuralStageId || null;
             if (Object.hasOwn(nextBoard, "artifactFocused")) p2.artifactId = nextBoard.artifactFocused ? nextBoard.liveArtifactId : null;
             if (!model.steps.some((n) => n.id === p2.focusId)) {
@@ -5561,6 +5695,7 @@ void main(){
             updateForgeFacts(element, model);
             construct();
             populate();
+            if (newActivities.length && activityMode !== "history") showLiveActivity();
             draw(performance.now(), reduced() || p2.paused);
             sync();
           }
@@ -5569,9 +5704,8 @@ void main(){
             if (!button2) return;
             const action2 = button2.dataset.neuralAction;
             if (action2 === "history-close") {
-              history.hidden = true;
-              historyRows = [];
-              for (const label of layer.querySelectorAll(".is-history")) label.classList.remove("is-history");
+              activityFeed.acknowledge();
+              clearActivity();
               event.stopPropagation();
               return;
             }
@@ -5691,17 +5825,23 @@ void main(){
             historyRows = model.progress.activities.filter((row) => !memberId || row.memberId === memberId).slice(-20);
             historyStarted = live.current?.time || 0;
             historyIndex = -1;
+            activityMode = "history";
+            element.dataset.activityMode = "history-replay";
+            if (replayNote) replayNote.textContent = "\u5386\u53F2\u56DE\u653E \xB7 \u4EC5\u5C55\u793A\u5DF2\u6709\u5DE5\u4F5C\u8BB0\u5F55";
+            history.querySelector("strong").textContent = "\u5386\u53F2\u56DE\u653E";
+            history.querySelector("button").setAttribute("aria-label", "\u5173\u95ED\u5386\u53F2\u56DE\u653E");
             history.hidden = false;
+            dock.hidden = true;
             draw(performance.now(), reduced() || p2.paused);
             sync();
           };
           dispose.read = () => {
             const L2 = live.current;
-            return { renderer: "reference-video-canvas", mode: "actual", phase: L2?.stage || "hub", time: L2?.time || 0, holding: L2?.hold === true, orbitTime: L2?.time || 0, focus: p2.focusId, artifactId: p2.artifactId, projection: "reference-neural", layout: size ? { width: size.w, height: size.h } : null, renderStats: { frames, processNodes: model.total, visibleSteps: group?.modules.length || 0, memberNodes: model.progress.members.length, glError: null, media: refs ? Object.entries(refs.vids.current).map(([id, v]) => ({ id, ready: v.video.readyState, paused: v.video.paused, time: v.video.currentTime })) : [] }, effects: { queued: history.hidden ? 0 : historyRows.length, replay: !history.hidden }, sceneGraph: L2 ? { core: L2.orb, steps: model.progress.nodes.map((n) => ({ id: n.id, x: L2.springs.jelly[n.id]?.cur?.x || 0, y: L2.springs.jelly[n.id]?.cur?.y || 0, scale: L2.springs.jelly[n.id]?.s.x || 0, visible: group.modules.some((m2) => m2.id === n.id) })), products: [], members: [], page: group.page, pages: group.pages } : null, facts: { done: model.done, total: model.total, saved: model.saved, releases: model.releases.length, calls: model.calls.length }, disposed: disposed2 };
+            return { renderer: "reference-video-canvas", mode: "actual", phase: L2?.stage || "hub", time: L2?.time || 0, holding: L2?.hold === true, orbitTime: L2?.time || 0, focus: p2.focusId, artifactId: p2.artifactId, projection: "reference-neural", layout: size ? { width: size.w, height: size.h } : null, renderStats: { frames, processNodes: model.total, visibleSteps: group?.modules.length || 0, memberNodes: model.progress.members.length, glError: null, media: refs ? Object.entries(refs.vids.current).map(([id, v]) => ({ id, ready: v.video.readyState, paused: v.video.paused, time: v.video.currentTime })) : [] }, effects: { ...activityFeed.read(), replay: activityMode === "history" }, sceneGraph: L2 ? { core: L2.orb, steps: model.progress.nodes.map((n) => ({ id: n.id, x: L2.springs.jelly[n.id]?.cur?.x || 0, y: L2.springs.jelly[n.id]?.cur?.y || 0, scale: L2.springs.jelly[n.id]?.s.x || 0, visible: group.modules.some((m2) => m2.id === n.id) })), products: [], members: [], page: group.page, pages: group.pages } : null, facts: { done: model.done, total: model.total, saved: model.saved, releases: model.releases.length, calls: model.calls.length }, disposed: disposed2 };
           };
           return dispose;
         }
-        return Object.freeze({ neuralSceneTargets, createNeuralScene });
+        return Object.freeze({ neuralSceneTargets, createNeuralActivityFeed, createNeuralScene });
       })();
       __aresForgeModules["forge-scene-controller.js"] = (function() {
         const { createNeuralScene } = __aresForgeModules["neural-scene.js"];
@@ -35724,7 +35864,7 @@ container holding the app. Specify either width or maxWidth, and either height o
   function createWorkflowCanvas(element, { workflow, selectedId, view = { mode: "auto", zoom: 1 } }) {
     const viewport = element.querySelector(".ares-flow-viewport"), space = element.querySelector(".ares-flow-space"), plane = element.querySelector(".ares-flow-plane"), svg = element.querySelector(".ares-flow-wires"), edgeGroup = element.querySelector("[data-flow-edges]"), studio = element.closest(".ares-studio");
     const nodes = new Map([...plane.querySelectorAll(".ares-step")].map((node2) => [node2.dataset.id, node2])), media2 = matchMedia("(prefers-reduced-motion: reduce)");
-    let disposed2 = false, frame = 0, layout = null, scale = 1, geometryKey = "", lastWidth = 0, lastHeight = 0;
+    let disposed2 = false, frame = 0, layout = null, scale = 1, geometryKey = "", lastWidth = 0, lastHeight = 0, zoomAnimation = null;
     view.mode = view.mode === "manual" ? "manual" : "auto";
     view.zoom = clamp(Number(view.zoom) || 1, 0.9, 1.6);
     const selectedChanged = view.selectedId !== selectedId;
@@ -35800,23 +35940,43 @@ container holding the app. Specify either width or maxWidth, and either height o
         refresh();
       });
     }
+    function finishZoom() {
+      zoomAnimation?.cancel();
+      zoomAnimation = null;
+    }
+    function animateZoom(before) {
+      if (disposed2 || media2.matches || document.hidden || element.closest("[data-ares-motion=off]") || typeof plane.animate !== "function") return;
+      const after = plane.getBoundingClientRect(), fromScale = before.width / plane.offsetWidth;
+      const animation = plane.animate([{ transform: `translate(${before.x - after.x}px,${before.y - after.y}px) scale(${fromScale})` }, { transform: plane.style.transform }], { id: "ares-flow-zoom", duration: 220, easing: "cubic-bezier(.2,.75,.2,1)" });
+      zoomAnimation = animation;
+      animation.finished.then(() => {
+        if (zoomAnimation === animation) zoomAnimation = null;
+      }, () => {
+      });
+    }
     function zoomBy(direction) {
       if (!layout) refresh();
       if (!layout) return;
+      const before = plane.getBoundingClientRect();
+      finishZoom();
       const left = Number.parseFloat(plane.style.left) || 0, top = Number.parseFloat(plane.style.top) || 0;
       const anchor2 = { x: (viewport.scrollLeft + viewport.clientWidth / 2 - left) / scale, y: (viewport.scrollTop + viewport.clientHeight / 2 - top) / scale };
       view.mode = "manual";
       view.zoom = clamp(Math.round((scale + Number(direction) * 0.1) * 10) / 10, 0.9, 1.6);
       geometryKey = "";
       refresh(anchor2);
+      animateZoom(before);
     }
     function fit() {
+      const before = plane.getBoundingClientRect();
+      finishZoom();
       view.mode = "auto";
       view.zoom = 1;
       geometryKey = "";
       refresh();
       viewport.scrollLeft = 0;
       reveal(selectedId);
+      animateZoom(before);
     }
     function keydown(event) {
       if (event.altKey || event.ctrlKey || event.metaKey || event.target.closest("input,textarea,select,[contenteditable=true]")) return;
@@ -35834,19 +35994,26 @@ container holding the app. Specify either width or maxWidth, and either height o
     const observer = new ResizeObserver(queue);
     observer.observe(viewport);
     if (studio) observer.observe(studio);
+    function motionChanged() {
+      if (media2.matches || document.hidden) finishZoom();
+      queue();
+    }
     element.addEventListener("keydown", keydown);
     element.addEventListener("focusin", focus);
-    media2.addEventListener("change", queue);
+    media2.addEventListener("change", motionChanged);
+    document.addEventListener("visibilitychange", motionChanged);
     refresh();
     if (selectedChanged) reveal(selectedId);
     document.fonts?.ready.then(queue);
     return { zoomBy, fit, reveal, inspect: () => ({ mode: view.mode, zoom: scale, width: lastWidth, height: lastHeight, layout }), dispose() {
       disposed2 = true;
+      finishZoom();
       observer.disconnect();
       cancelAnimationFrame(frame);
       element.removeEventListener("keydown", keydown);
       element.removeEventListener("focusin", focus);
-      media2.removeEventListener("change", queue);
+      media2.removeEventListener("change", motionChanged);
+      document.removeEventListener("visibilitychange", motionChanged);
     } };
   }
 

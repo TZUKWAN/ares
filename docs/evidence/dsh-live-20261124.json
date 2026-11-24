@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "environment": "Existing running DSH native host; not a protocol fixture",
+  "checkedAt": "2026-11-24T12:13:59.123Z",
+  "baselineSource": "2e97d9e9733d403c356d736239029a9ed297d4c9",
+  "sourceFileSha256": {
+    "host/native.js": "405b8eeaee08d24e36795a60c2a2c1d9ca493adb7fdeddedf9e4b399a5d72f73",
+    "host/editor-workspace.js": "b76494b3568e9b65971d9dc8fd95148576f840c9272e4439975586d93661f709",
+    "host/native-conversation-health.js": "4e5944f0e242b2f957141a4884e220b04ef2d824fe454e9d0563bf5f6a301ddf",
+    "host/native-auto-evidence.js": "5e05d530297c5fb8fcd5eecf8aef1e65c349ed230a0f85c281df1a42fc550181",
+    "host/native-tool-presentation.js": "311792589218c27ace580a859ef9850a41f698fdc249bbc592ecbc20d166a7b3"
+  },
+  "sessionIdentitySha256": "0a8f1621e67caacfd91e84f4c8c0d6166f0c1ef16d221653eb49a36143c5c898",
+  "reportId": "a99aa807-b22c-440b-992c-10b806d2d7bc",
+  "requestId": "ares-health-a99aa807-b22c-440b-992c-10b806d2d7bc",
+  "onlineModel": {
+    "status": "passed",
+    "route": {
+      "provider": "deepseek-official",
+      "model": "deepseek-flash"
+    },
+    "turn": 5,
+    "calls": [
+      {
+        "name": "ares_config_read",
+        "callId": "call_00_4mKStkd7Qvfn4TDada7G7316",
+        "turn": 5,
+        "step": 1,
+        "callSeq": 134,
+        "resultSeq": 135,
+        "transport": "native",
+        "status": "succeeded"
+      },
+      {
+        "name": "write",
+        "callId": "call_00_ET_Y4JRRJlIN9koKhXE1vGM8327",
+        "turn": 5,
+        "step": 2,
+        "callSeq": 139,
+        "resultSeq": 140,
+        "transport": "native",
+        "status": "succeeded"
+      },
+      {
+        "name": "read",
+        "callId": "call_00_ET_2eWfE1sZmhOn9Z4tbpms0274",
+        "turn": 5,
+        "step": 3,
+        "callSeq": 144,
+        "resultSeq": 145,
+        "transport": "native",
+        "status": "succeeded"
+      },
+      {
+        "name": "pwsh",
+        "callId": "call_00_ET_Dt0OLfMAef5z5zgQqQcL3641",
+        "turn": 5,
+        "step": 4,
+        "callSeq": 149,
+        "resultSeq": 152,
+        "transport": "native",
+        "status": "succeeded"
+      }
+    ],
+    "checks": [
+      {
+        "name": "actual-tool-surface",
+        "status": "passed"
+      },
+      {
+        "name": "genuine-owner-prompt",
+        "status": "passed"
+      },
+      {
+        "name": "actual-request-route",
+        "status": "passed"
+      },
+      {
+        "name": "actual-config-context",
+        "status": "passed"
+      },
+      {
+        "name": "current-editor-service",
+        "status": "passed"
+      },
+      {
+        "name": "actual-native-write-call",
+        "status": "passed"
+      },
+      {
+        "name": "actual-native-read",
+        "status": "passed"
+      },
+      {
+        "name": "actual-pwsh-calculation",
+        "status": "passed"
+      },
+      {
+        "name": "auto-permission-retained",
+        "status": "passed"
+      },
+      {
+        "name": "actual-auto-reviews",
+        "status": "failed"
+      },
+      {
+        "name": "actual-filesystem-write",
+        "status": "passed"
+      },
+      {
+        "name": "owned-job-observation",
+        "status": "passed"
+      },
+      {
+        "name": "actual-conversation-finished",
+        "status": "passed"
+      }
+    ],
+    "marker": {
+      "bytes": 47,
+      "sha256": "9cf098225a366acb43487de755723303d3b07bb5dbac592e72df9cd7b8f753e6"
+    },
+    "jobs": [
+      {
+        "id": "pwsh-0ac1d715833443cb",
+        "status": "completed",
+        "detail": "exit code: 0"
+      }
+    ]
+  },
+  "autoApproval": {
+    "status": "failed",
+    "selectedPermission": "auto",
+    "observedNativeReviews": 0,
+    "loadedNativeGateContainsDshPurgeBypass": true,
+    "loadedGateSourceSha256": "d8e86d759990c02f08e50b3bef6fece06d3eb8bc0393d85df19c99d070619e00",
+    "blockers": [
+      {
+        "code": "native-auto-review-not-proven",
+        "message": "未观察到与真实待执行调用对应的原生Auto在线审批及允许决定；工具执行成功不能替代审批验收。"
+      }
+    ],
+    "remediationPerformed": false
+  },
+  "restoration": {
+    "originalSessionModelRestored": true,
+    "originalSessionPermissionRestored": true,
+    "globalDefaultsUnchanged": true,
+    "profileOriginalBytesRestored": true,
+    "aresBundleOriginalBytesRestored": true,
+    "activeDiagnosticEntries": 0,
+    "remainingDiagnosticModules": 0,
+    "newDshHosts": 0,
+    "newAgents": 0,
+    "userWindowsControlled": 0
+  },
+  "runtimeAfterCleanup": {
+    "aresRunning": true,
+    "agentIdle": true,
+    "toolSurface": {
+      "ready": true,
+      "visibleCount": 220,
+      "standardCount": 212,
+      "missing": [],
+      "missingWire": []
+    },
+    "ownerAuthenticatedHttpStatus": 200,
+    "unauthenticatedHttpStatus": 401
+  },
+  "localRegression": {
+    "targeted": 36,
+    "recoveryAndIsolation": 25,
+    "failed": 0,
+    "buildChecks": 2,
+    "logSha256": {
+      "targeted-tests.log": "fcfafc7d10a86ac25444abd86eff95035e4cf78b4bd54a61ed14ca3e9c48be33",
+      "isolation-recovery-tests.log": "5c68e12668a7c831ad703dd4c3c43553f726e18c14a542960beca14f8ee79bd2",
+      "forge-build-check.log": "610734e21c1cdca115ce49cb3afc9b066ebd822c3b372e16eb47230d70f031b5",
+      "portable-build-check.log": "4222e8e5e86d8cf4b00ef9bf2edd2fc0c34058d1c63ac1fb595953e892934a1a"
+    }
+  },
+  "limits": [
+    "Only four stated native tools were actually invoked; 220 visible tools are not 220 independently tested integrations.",
+    "Auto is a real failed acceptance, not pending and not passed. Native host security implementation was not modified.",
+    "Codex/ZCode packaging and installation were not repeated in this DSH-only increment.",
+    "No user window was inspected or controlled."
+  ]
+}

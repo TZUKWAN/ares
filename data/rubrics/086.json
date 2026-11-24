@@ -1,157 +1,643 @@
 {
- "competition_id": 86,
- "competition_name": "金相技能大赛个人赛",
- "judging_dimensions": [
-  {
-   "dimension": "金相图像质量",
-   "weight": "80分/100分（80%；早期版本为70分）",
-   "official_wording": "《全国大学生金相技能大赛评分标准》（经百度百科第十三届词条及河北科技大学教务处公布的评分标准附件转述）：总分100分，金相图像质量80分、样品表面质量10分、操作规范10分；郑州大学公布的早期细则中'组织正确与组织清晰度占40分，几乎看不清组织计0-5分'。图像质量权重为官方评分标准口径。",
-   "scoring_points": [
-    "组织正确：观察到的显微组织与试样材料应有的平衡/热处理组织一致（如45钢退火态铁素体+珠光体）",
-    "组织清晰：晶界、相界清晰，浸蚀深浅适中、衬度好",
-    "无明显划痕、无麻坑、无假象（如水迹、脏物、过蚀）",
-    "视场选择具代表性，拍照取景与对焦准确"
-   ],
-   "common_deductions": [
-    "组织判定错误（显示错误相区/未显出组织）重扣",
-    "划痕贯穿视场、腐蚀不均或过蚀发黑",
-    "图像离焦、视场选在边缘缺陷区"
-   ]
-  },
-  {
-   "dimension": "样品表面质量",
-   "weight": "10分/100分（10%）",
-   "official_wording": "《全国大学生金相技能大赛评分标准》转述：样品表面质量10分；清华大学材料学院赛事报道原文：'评委则从金相图像质量、样品表面质量和操作规范等三大方面对选手的实验技能进行评比考察'。",
-   "scoring_points": [
-    "磨面平整、无塌边倒角",
-    "抛光后表面光亮无肉眼可见划痕与残留",
-    "腐蚀后表面洁净、无氧化皮与污渍残留"
-   ],
-   "common_deductions": [
-    "磨面呈斜面或塌角",
-    "抛光不充分留有旧磨痕（假划痕）",
-    "水迹、指纹、腐蚀液残留污染表面"
-   ]
-  },
-  {
-   "dimension": "操作规范",
-   "weight": "10分/100分（10%），按三环节违规现场扣分",
-   "official_wording": "评分标准原文（桂林航天工业学院校内选拔赛通知转述）：操作按'预磨、抛光及腐蚀、显微镜观察'三个环节评定，'每环节出现违规情况各扣分一次'，违规包括'可能导致身体受到伤害的危险操作、违反安全卫生及设备使用规程的操作'；'评分标准明确列出可现场扣分的所有操作，未列出的操作原则上不予直接扣分'。",
-   "scoring_points": [
-    "预磨环节：水冷磨制、逐级换砂纸并转90°、砂纸选用与更换规范",
-    "抛光及腐蚀环节：抛光织物与悬浮液使用规范、试样清洗、腐蚀时间与通风防护",
-    "显微镜观察环节：按规程操作物镜/载物台，防止镜头与试样碰撞",
-    "全程安全意识：护目镜/手套佩戴、危险操作规避"
-   ],
-   "common_deductions": [
-    "干磨过热、越级跳换砂纸",
-    "试样未洗净即腐蚀或镜检、腐蚀液滴洒",
-    "镜头触碰试样、随意调节他人设备",
-    "危险操作（徒手处理腐蚀液等）每环节记一次扣分"
-   ]
-  },
-  {
-   "dimension": "制样效率与时间控制",
-   "weight": "定性门槛（规定时间内完成为前提，超时按规则处理，不单独计分）",
-   "official_wording": "各校选拔赛通知通行表述：'参赛者需在30分钟内（校赛口径）完成样品的粗磨、细磨、抛光、腐蚀（浸蚀）等工序，制备出可供金相显微镜观察、评委评分的样品'；国赛时间以当届竞赛规程为准。时间要求为官方规程口径，具体分钟数各届有别。",
-   "scoring_points": [
-    "工序衔接紧凑，全程在规定时间内完成",
-    "合理安排各级磨制时间，为抛光腐蚀留足余量",
-    "在时间约束下兼顾质量：以图像质量为主要得分点"
-   ],
-   "common_deductions": [
-    "超时未完成，图像质量自然失分",
-    "前松后紧导致抛光/腐蚀草率",
-    "重复返工（回退粗磨）浪费时间"
-   ]
+  "competition_id": 86,
+  "competition_name": "金相技能大赛个人赛",
+  "judging_dimensions": [
+    {
+      "dimension": "金相图像质量",
+      "weight": "80分/100分（80%；早期版本为70分）",
+      "official_wording": "《全国大学生金相技能大赛评分标准》（经百度百科第十三届词条及河北科技大学教务处公布的评分标准附件转述）：总分100分，金相图像质量80分、样品表面质量10分、操作规范10分；郑州大学公布的早期细则中'组织正确与组织清晰度占40分，几乎看不清组织计0-5分'。图像质量权重为官方评分标准口径。",
+      "scoring_points": [
+        "组织正确：观察到的显微组织与试样材料应有的平衡/热处理组织一致（如45钢退火态铁素体+珠光体）",
+        "组织清晰：晶界、相界清晰，浸蚀深浅适中、衬度好",
+        "无明显划痕、无麻坑、无假象（如水迹、脏物、过蚀）",
+        "视场选择具代表性，拍照取景与对焦准确"
+      ],
+      "common_deductions": [
+        "组织判定错误（显示错误相区/未显出组织）重扣",
+        "划痕贯穿视场、腐蚀不均或过蚀发黑",
+        "图像离焦、视场选在边缘缺陷区"
+      ]
+    },
+    {
+      "dimension": "样品表面质量",
+      "weight": "10分/100分（10%）",
+      "official_wording": "《全国大学生金相技能大赛评分标准》转述：样品表面质量10分；清华大学材料学院赛事报道原文：'评委则从金相图像质量、样品表面质量和操作规范等三大方面对选手的实验技能进行评比考察'。",
+      "scoring_points": [
+        "磨面平整、无塌边倒角",
+        "抛光后表面光亮无肉眼可见划痕与残留",
+        "腐蚀后表面洁净、无氧化皮与污渍残留"
+      ],
+      "common_deductions": [
+        "磨面呈斜面或塌角",
+        "抛光不充分留有旧磨痕（假划痕）",
+        "水迹、指纹、腐蚀液残留污染表面"
+      ]
+    },
+    {
+      "dimension": "操作规范",
+      "weight": "10分/100分（10%），按三环节违规现场扣分",
+      "official_wording": "评分标准原文（桂林航天工业学院校内选拔赛通知转述）：操作按'预磨、抛光及腐蚀、显微镜观察'三个环节评定，'每环节出现违规情况各扣分一次'，违规包括'可能导致身体受到伤害的危险操作、违反安全卫生及设备使用规程的操作'；'评分标准明确列出可现场扣分的所有操作，未列出的操作原则上不予直接扣分'。",
+      "scoring_points": [
+        "预磨环节：水冷磨制、逐级换砂纸并转90°、砂纸选用与更换规范",
+        "抛光及腐蚀环节：抛光织物与悬浮液使用规范、试样清洗、腐蚀时间与通风防护",
+        "显微镜观察环节：按规程操作物镜/载物台，防止镜头与试样碰撞",
+        "全程安全意识：护目镜/手套佩戴、危险操作规避"
+      ],
+      "common_deductions": [
+        "干磨过热、越级跳换砂纸",
+        "试样未洗净即腐蚀或镜检、腐蚀液滴洒",
+        "镜头触碰试样、随意调节他人设备",
+        "危险操作（徒手处理腐蚀液等）每环节记一次扣分"
+      ]
+    },
+    {
+      "dimension": "制样效率与时间控制",
+      "weight": "定性门槛（规定时间内完成为前提，超时按规则处理，不单独计分）",
+      "official_wording": "各校选拔赛通知通行表述：'参赛者需在30分钟内（校赛口径）完成样品的粗磨、细磨、抛光、腐蚀（浸蚀）等工序，制备出可供金相显微镜观察、评委评分的样品'；国赛时间以当届竞赛规程为准。时间要求为官方规程口径，具体分钟数各届有别。",
+      "scoring_points": [
+        "工序衔接紧凑，全程在规定时间内完成",
+        "合理安排各级磨制时间，为抛光腐蚀留足余量",
+        "在时间约束下兼顾质量：以图像质量为主要得分点"
+      ],
+      "common_deductions": [
+        "超时未完成，图像质量自然失分",
+        "前松后紧导致抛光/腐蚀草率",
+        "重复返工（回退粗磨）浪费时间"
+      ]
+    }
+  ],
+  "deliverable_requirements": [
+    {
+      "item": "金相试样",
+      "format": "现场按规定工序完成的金相试样（常见工业纯铁、20/45钢、T8/T12碳工钢、球墨铸铁等，当届指定试样由组委会统一公布），试样上按规则标记考号",
+      "page_limit": "未明确",
+      "deadline_note": "现场限时制备（校赛常见30分钟；国赛时间以当届规程为准）"
+    },
+    {
+      "item": "金相显微图像",
+      "format": "在指定金相显微镜上选取视场并现场拍摄/供评委现场观察评分",
+      "page_limit": "未明确",
+      "deadline_note": "制样完成后即时提交观察"
+    },
+    {
+      "item": "报名",
+      "format": "校级预选→省级复赛（按名额推荐，如陕西赛区按校赛前8名）→全国决赛；个人报名经由学校统一组织",
+      "page_limit": "未明确",
+      "deadline_note": "第十四届决赛2025年7月25-30日在成都工业学院宜宾校区举行"
+    }
+  ],
+  "process_stages": [
+    {
+      "stage": "校级预选赛",
+      "format": "现场制样+显微镜观察评分，采用与国赛相同的评分标准",
+      "notes": "约4-5月；分级赛制（东莞理工学院获奖报道确认'大赛采取分级赛制'）"
+    },
+    {
+      "stage": "省级复赛/赛区选拔",
+      "format": "统一试样、限时制样，按成绩推荐国赛名额",
+      "notes": "约5-6月"
+    },
+    {
+      "stage": "全国决赛",
+      "format": "现场独立完成磨制、抛光、腐蚀、显微观察，评委按图像质量/表面质量/操作规范三方面现场评分",
+      "notes": "教育部高等学校材料类专业教学指导委员会主办，2025年7月25-30日第十四届（徕卡杯）在成都工业学院宜宾校区举行，同期第三届'金相大会'（理论赛道：复赛、半决赛、决赛）"
+    }
+  ],
+  "review_format": "现场限时独立制样，评委依据全国统一的《评分标准》就金相图像质量（80分）、样品表面质量（10分）与操作规范（10分）三方面当场打分，操作违规按环节记录扣分。",
+  "judge_preferences": [
+    "以金相图像质量为绝对主导（80分）：组织正确且清晰远胜表面美观",
+    "组织判定是核心功力：能依据材料与状态说出应显示的组织并正确显出",
+    "操作规范看安全与规程，违规只按列明情形扣分，不搞主观泛化扣分",
+    "同分倾向比较图像清晰度与划痕水平",
+    "反感投机：套用他人制备参数而不根据材料特性调整腐蚀时间等"
+  ],
+  "past_winning_patterns": [],
+  "forbidden_or_risky": [
+    "不得请他人代磨代制或与他人交流试样，独立操作否则取消成绩",
+    "试样、砂纸、抛光盘等不得互换使用（防作弊与交叉污染）",
+    "违反安全规程的危险操作将被现场扣分直至终止比赛资格",
+    "超时未完成制样直接造成图像质量失分",
+    "获奖比例按当届规程执行（业内通行说法一等奖约10%、二等奖约20%、三等奖约30%，属转述未经官方确认）"
+  ],
+  "sources": [
+    {
+      "title": "清华大学材料学院——清华代表队在第十二届全国大学生金相技能大赛中荣获佳绩（三方面评审、金相大会赛道）",
+      "url": "https://www.mse.tsinghua.edu.cn",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    },
+    {
+      "title": "百度百科——全国大学生金相技能大赛词条（评分标准：图像80/表面10/操作10）",
+      "url": "https://baike.baidu.com",
+      "accessed": "2026-09-28",
+      "authority": "C"
+    },
+    {
+      "title": "郑州大学——大学生金相技能大赛比赛规则（图像质量40分构成、限时30分钟流程）",
+      "url": "https://www7.zzu.edu.cn",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    },
+    {
+      "title": "民航飞行学院——第十四届全国大学生金相技能大赛报道（教育部材料类教指委主办、2025年7月25-30日成都工业学院宜宾校区）",
+      "url": "https://gxzx.cafuc.edu.cn",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    },
+    {
+      "title": "桂林航天工业学院第九届金相大赛校内选拔赛通知（操作规范三环节扣分规则原文转述）",
+      "url": "https://www.guat.edu.cn",
+      "accessed": "2026-09-28",
+      "authority": "B"
+    }
+  ],
+  "confidence": "low",
+  "last_updated": "2026-09-28",
+  "notes": "评分构成（金相图像质量80分+样品表面质量10分+操作规范10分）为大赛统一评分标准口径，经百度百科（第十三届词条）、清华赛事报道、郑州大学校赛规则与桂林航天工业学院通知多来源交叉一致；早期（第五届前后）图像质量为70分版本，属标准迭代。操作规范'三环节各扣一次、未列明不扣'为评分标准原文精神。个人赛操作评分以现场制样为核心；'金相大会'为并列理论赛道。国赛时长与获奖比例未获当届官方通知原文，已注明以规程为准；比赛时间与主办单位由多校报道交叉验证。",
+  "provenance": {
+    "schemaVersion": 1,
+    "assessedAt": "2026-11-18",
+    "method": "field-inventory-and-source-status-audit; no original-clause verification",
+    "legacyConfidence": "high",
+    "scope": {
+      "competitionId": 86,
+      "edition": null,
+      "tracks": [],
+      "groups": []
+    },
+    "ruleVersion": "2026-09-28",
+    "sourceChecks": [
+      {
+        "id": "source-1",
+        "urlSha256": "31080b0c39ce2a292c17480d4d0c373958345727d8b6252bfc35369709cf13dd",
+        "locatorKind": "homepage",
+        "state": "unverified"
+      },
+      {
+        "id": "source-2",
+        "urlSha256": "f5c2bd10519369d1468f236a6e04f3181f5e520f8a6cad7946e6f0c0c97335bc",
+        "locatorKind": "search",
+        "state": "unverified"
+      },
+      {
+        "id": "source-3",
+        "urlSha256": "93b5c843c32bc358e8eac0ce0e9e20da517175c3b6ce42cb260f71ae259440c1",
+        "locatorKind": "homepage",
+        "state": "unverified"
+      },
+      {
+        "id": "source-4",
+        "urlSha256": "59c8759f72750c40ce4dbb933da2b9701831b4ac6100828a2c86fca038e321b5",
+        "locatorKind": "homepage",
+        "state": "unverified"
+      },
+      {
+        "id": "source-5",
+        "urlSha256": "4bc457973052f332d6450d0f4bf192cad3d33213cf048afb1d0045b95f7662b3",
+        "locatorKind": "homepage",
+        "state": "unverified"
+      }
+    ],
+    "fields": {
+      "/competition_name": {
+        "sha256": "19eb1570b55ae0f3189f6499f27b76ab09fd7361ff59a1ed5686ff6727e4c0e0",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/dimension": {
+        "sha256": "099760df0467cdc6add304afa1df356964f84e0c10a50e6659efd1da152534e6",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/weight": {
+        "sha256": "00fbae2c77207b138378b96553bb3ef741150a67dbacc2608be762169542bf48",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/official_wording": {
+        "sha256": "602965e217c316067db1fab0e3ad0eb045aab83076bab6eda9162eee06f382c0",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/0": {
+        "sha256": "6ce070d4b0b3b500c6fc2460920e2c2ed67d83b31ad698dcbda8f62b650b1955",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/1": {
+        "sha256": "1c3c706dc50f9223341466edff0a00a74bcdddb7ec6a40a0c115151170368082",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/2": {
+        "sha256": "fce539d2d7c2a85707a6558a988593581e70f788da4e1cb6cb7f9fe1949740c9",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/scoring_points/3": {
+        "sha256": "b7b328024bc3a12e0a832de1312d214fe1a92d78843c15102d66440097603990",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/0": {
+        "sha256": "e087f4b04f60ab86e8820fa6b9ef5654dc4d1173dcd5ff31f1973e0b2ce433af",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/1": {
+        "sha256": "91b6968ec625fffba07bb3bc4faf9c3526c26ebe9b4c12de23f4efe2165b0c20",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/0/common_deductions/2": {
+        "sha256": "0b71475e5ca534e943101788ac77a5e30f0f89e673ffbe4f4c29ba5437472711",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/dimension": {
+        "sha256": "a2ba19ecd68dc1b1a124a7bff27182a00edd8646a2eb7716dbd70f397da7109a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/weight": {
+        "sha256": "253f9fb4c2e7c3bf9a181e316dde1cdea7522974de823c26707db015bb50e77a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/official_wording": {
+        "sha256": "5c8545d549587222f004e4780c62ef3cbd09753da4ea71875ce8ce8530a85605",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/0": {
+        "sha256": "22daee040719c05552541d0a99c3c500bc4961d3b23258da76fb6c6b0597162f",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/1": {
+        "sha256": "fb3b3debf66bb5611f4fecfe1bc957773be28e92025e288f455ae217e2139f5f",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/scoring_points/2": {
+        "sha256": "6a3e4066537b0996afffcf94483f44b3cdd549d4f58909a61439aeb03efee51a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/0": {
+        "sha256": "8cd458fc16e99d56d09781df90da580d87fc5ea734bd3171ea9f7ae4d7ebd504",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/1": {
+        "sha256": "46a2fd49a21f5b0cc262778b24c9142d98dba7dea19a7d9980bb68e759a5e759",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/1/common_deductions/2": {
+        "sha256": "c22a21dc5fe695152c9461daa94aec712bb9bbb9e64642515846656f25e40de3",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/dimension": {
+        "sha256": "47961d0acb9021d40b84a1ffdc601c5901363f07a177f9de453de9e702347395",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/weight": {
+        "sha256": "a477e67f94ceedd842b62ec4301716573a51a766916bc180d6d681feebb02bfd",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/official_wording": {
+        "sha256": "c2fdd84439d04deef120078468f40ed26ca6031f63e5b00afbf8ef0b5a88f4bc",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/0": {
+        "sha256": "3e828033b69fdcc6c0ca2473ea314822032bce1249d4b778283f5d61fbee1df5",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/1": {
+        "sha256": "4d9dbfecef138c6a59758a2f17ef7eb4c13cbb4452e4cfeb5615247a612cbc86",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/2": {
+        "sha256": "89fe51b8bc459181240ea04ddec8c75e500903bd8ce7509eb0f00d87de5a2896",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/scoring_points/3": {
+        "sha256": "6f9d36f6a695a36c6fd9f4a57e46d6b33412e728b816dbf8ab32827ecdf2b1e5",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/0": {
+        "sha256": "9c0558ba5fca33012c3bbfa9944c53ba5b5c28d44eb90cf39cfa5f00e0e5af5f",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/1": {
+        "sha256": "901cb4482259af512a911623e7ba0fa1edc3816ad67d7ccde975bba223d6e62a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/2": {
+        "sha256": "bc2429f9d477f5f3fdcb997bb6dce516cc32b29fa50f5c7318861350e1082cc3",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/2/common_deductions/3": {
+        "sha256": "11af11a0b6a38ebc7d90c75ca35743574781c992ddf026a641e18cd3241e07ce",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/dimension": {
+        "sha256": "f8f6e3fb46e7b7f971ab54ebdb23a3712ef4321c0c5e30f1026c28a89a735d51",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/weight": {
+        "sha256": "a1a6edcba976bda27e0cae786c4958a2e07a43940e2e9b7bdb714b47ba7d9393",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/official_wording": {
+        "sha256": "eb2ed765ac6181108f686fab295ebb3e2ce04f0730cac21335c2178518f785ee",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/0": {
+        "sha256": "da0f47926bf334becbf1bbb88aa8ac1c26d64de7da4e70c231dd626c9f46313a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/1": {
+        "sha256": "7b43c3970d71a301b4e929e9dff21180b03e0f10ca676bc9e46eefc4085bcc04",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/scoring_points/2": {
+        "sha256": "b9a29911b3a2ff37094fa57045b6bdae2b3280865dec9f191f8af2295374bad7",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/0": {
+        "sha256": "14e81a53f46b0af53156b5906c709f49e8dd2178cceeb039a0374da8fb9dfc18",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/1": {
+        "sha256": "3ae90203a8fe8ca9bee21f75ecb2f3c5bbd2fade5842e840035cf6cb55b033fd",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judging_dimensions/3/common_deductions/2": {
+        "sha256": "c487f7b6e1ef4e8867500e9130da48fdcc2784f61097ca772af1d7e069bf0efe",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/item": {
+        "sha256": "79ce5e1a04898b8fb3535018d3e8f46bf5e9f5c8c76d64afdb49c07325c0b6d1",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/format": {
+        "sha256": "ebb8e627c3e0f1110517351d82d4208686d97f7e530da1052a055ba5d4a38b55",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/page_limit": {
+        "sha256": "b40ca4d5dda791fc8d94ff0edb09215aea4ca0e3dde6e1c825fdea7cb97a414a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/0/deadline_note": {
+        "sha256": "373186f99fb827c870e9c4a414db2e5bdc6457314dbcbfe0be135f9d1478b464",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/item": {
+        "sha256": "d6d11e308e0d8d7004df6ae1d0ed8277410b79d8e280ea64fbf8cfec02e1f6f6",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/format": {
+        "sha256": "c0c722aeb85971dc159fd1d85f04a774ec2b19ea46edda79bd68d4bf7d8c54f1",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/page_limit": {
+        "sha256": "b40ca4d5dda791fc8d94ff0edb09215aea4ca0e3dde6e1c825fdea7cb97a414a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/1/deadline_note": {
+        "sha256": "84290283ecafaf76e2acc40308df471b06fbf79fd60aa284099a18ae4bb81278",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/item": {
+        "sha256": "6616b39525e049f25e3c859a29a476d1a32789f777c95847dc77d4664507ce9f",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/format": {
+        "sha256": "e91654e736f03415b775f8449e114575b9b82582c5b2742238ae33bc0fd72922",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/page_limit": {
+        "sha256": "b40ca4d5dda791fc8d94ff0edb09215aea4ca0e3dde6e1c825fdea7cb97a414a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/deliverable_requirements/2/deadline_note": {
+        "sha256": "01fafbdfc73e2826f21f7bde32401aba3fa544524759c279b491413d5c3e9300",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/stage": {
+        "sha256": "31b8b49ca1e10dce5afe96770cf8c83ce2038e98c9cbb82617f5070aa5f7f635",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/format": {
+        "sha256": "6124cd1f81d84c1f8280b6173ba85450a9e5799fcd46e106e6c859903de6a400",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/0/notes": {
+        "sha256": "b8ea4628cee2ae16444e46168af7fd2312943f35f91c1d5e44ccce5810f871f9",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/stage": {
+        "sha256": "1a03c6ce9a29fc7b72f910ce575d69b620c19a67a14d27736d48a8670a90f675",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/format": {
+        "sha256": "bf66d89f1684d4aebf3bc451c089e29052328ebd37c10a5081d4011033d48eba",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/1/notes": {
+        "sha256": "fac383364b8303058504caf7e913f6c2c46a320a0fe9976b8eac97e05274d2bb",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/stage": {
+        "sha256": "742935475d61af7e43b0561fd68b602bc4f456d15b51bf6dbf3019e7949e801d",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/format": {
+        "sha256": "fb833e7a7a692605bcc9b84e8d0bc84e60ca7672d3173b9368c1a8b265fbc941",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/process_stages/2/notes": {
+        "sha256": "b5ae2e02dcf0e330ae6eb04989208b062207a97b39bc95b316fd875eaae7fb1d",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/review_format": {
+        "sha256": "959e140c53456a345fd87581581e59962bdc37d18ffb8247fa28ffde6986020c",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/0": {
+        "sha256": "d8d40cd0bc347b579301271e2e811b7e40aae20554b5e040f7edabb602a51ed8",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/1": {
+        "sha256": "2854f908f3ba91cdf65079eed362344956cba654e394fd16337ec8d58c0ae4a2",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/2": {
+        "sha256": "0eb327ba400b08bf36694268218c2021685c7b1b7076b97735683711a16dd2f9",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/3": {
+        "sha256": "1bc4a4d8e14362526b3d6dbf1921b18aaceafaef983a41b0eaa43f5734c9080a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/judge_preferences/4": {
+        "sha256": "3cc1ac39e73198b30cd44eed391d7386871ecb02242856d36bb5d87092784ebf",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/0": {
+        "sha256": "ab17e8aee843f5916a1165595fcc4b10e40a6178b9dc738f8e690f90cfd36142",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/1": {
+        "sha256": "6fcd0ca65cf8b478e9f8b8c2f7b14ffa078ed3a04808636d6cccb1ca71ea69e8",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/2": {
+        "sha256": "b70b81c6c537259e8a954d99e4e720dea381deaa15f9cb6a45d073054add60b7",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/3": {
+        "sha256": "8ad09b3381faba038968484a4719f605e43c028365ca4f066c65dbaa44554580",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/forbidden_or_risky/4": {
+        "sha256": "47d28d94784d1fc3d92da34218d9cc179acce3e243c1b4f2f2ca381b304ce91a",
+        "category": "unverified",
+        "state": "unverified",
+        "sourceIds": []
+      },
+      "/notes": {
+        "sha256": "e8f3a5250ba6a11a900bded407e81c322113d6f934720aa48a8bb89b1318e71a",
+        "category": "advice",
+        "state": "unverified",
+        "sourceIds": []
+      }
+    },
+    "note": "来源候选尚未逐条对应原文；历届说明、推断权重和建议不能作为已确认的当届官方标准。空届次、赛道和组别表示未确定适用范围，不表示通用。"
   }
- ],
- "deliverable_requirements": [
-  {
-   "item": "金相试样",
-   "format": "现场按规定工序完成的金相试样（常见工业纯铁、20/45钢、T8/T12碳工钢、球墨铸铁等，当届指定试样由组委会统一公布），试样上按规则标记考号",
-   "page_limit": "未明确",
-   "deadline_note": "现场限时制备（校赛常见30分钟；国赛时间以当届规程为准）"
-  },
-  {
-   "item": "金相显微图像",
-   "format": "在指定金相显微镜上选取视场并现场拍摄/供评委现场观察评分",
-   "page_limit": "未明确",
-   "deadline_note": "制样完成后即时提交观察"
-  },
-  {
-   "item": "报名",
-   "format": "校级预选→省级复赛（按名额推荐，如陕西赛区按校赛前8名）→全国决赛；个人报名经由学校统一组织",
-   "page_limit": "未明确",
-   "deadline_note": "第十四届决赛2025年7月25-30日在成都工业学院宜宾校区举行"
-  }
- ],
- "process_stages": [
-  {
-   "stage": "校级预选赛",
-   "format": "现场制样+显微镜观察评分，采用与国赛相同的评分标准",
-   "notes": "约4-5月；分级赛制（东莞理工学院获奖报道确认'大赛采取分级赛制'）"
-  },
-  {
-   "stage": "省级复赛/赛区选拔",
-   "format": "统一试样、限时制样，按成绩推荐国赛名额",
-   "notes": "约5-6月"
-  },
-  {
-   "stage": "全国决赛",
-   "format": "现场独立完成磨制、抛光、腐蚀、显微观察，评委按图像质量/表面质量/操作规范三方面现场评分",
-   "notes": "教育部高等学校材料类专业教学指导委员会主办，2025年7月25-30日第十四届（徕卡杯）在成都工业学院宜宾校区举行，同期第三届'金相大会'（理论赛道：复赛、半决赛、决赛）"
-  }
- ],
- "review_format": "现场限时独立制样，评委依据全国统一的《评分标准》就金相图像质量（80分）、样品表面质量（10分）与操作规范（10分）三方面当场打分，操作违规按环节记录扣分。",
- "judge_preferences": [
-  "以金相图像质量为绝对主导（80分）：组织正确且清晰远胜表面美观",
-  "组织判定是核心功力：能依据材料与状态说出应显示的组织并正确显出",
-  "操作规范看安全与规程，违规只按列明情形扣分，不搞主观泛化扣分",
-  "同分倾向比较图像清晰度与划痕水平",
-  "反感投机：套用他人制备参数而不根据材料特性调整腐蚀时间等"
- ],
- "past_winning_patterns": [],
- "forbidden_or_risky": [
-  "不得请他人代磨代制或与他人交流试样，独立操作否则取消成绩",
-  "试样、砂纸、抛光盘等不得互换使用（防作弊与交叉污染）",
-  "违反安全规程的危险操作将被现场扣分直至终止比赛资格",
-  "超时未完成制样直接造成图像质量失分",
-  "获奖比例按当届规程执行（业内通行说法一等奖约10%、二等奖约20%、三等奖约30%，属转述未经官方确认）"
- ],
- "sources": [
-  {
-   "title": "清华大学材料学院——清华代表队在第十二届全国大学生金相技能大赛中荣获佳绩（三方面评审、金相大会赛道）",
-   "url": "https://www.mse.tsinghua.edu.cn",
-   "accessed": "2026-09-28",
-   "authority": "B"
-  },
-  {
-   "title": "百度百科——全国大学生金相技能大赛词条（评分标准：图像80/表面10/操作10）",
-   "url": "https://baike.baidu.com",
-   "accessed": "2026-09-28",
-   "authority": "C"
-  },
-  {
-   "title": "郑州大学——大学生金相技能大赛比赛规则（图像质量40分构成、限时30分钟流程）",
-   "url": "https://www7.zzu.edu.cn",
-   "accessed": "2026-09-28",
-   "authority": "B"
-  },
-  {
-   "title": "民航飞行学院——第十四届全国大学生金相技能大赛报道（教育部材料类教指委主办、2025年7月25-30日成都工业学院宜宾校区）",
-   "url": "https://gxzx.cafuc.edu.cn",
-   "accessed": "2026-09-28",
-   "authority": "B"
-  },
-  {
-   "title": "桂林航天工业学院第九届金相大赛校内选拔赛通知（操作规范三环节扣分规则原文转述）",
-   "url": "https://www.guat.edu.cn",
-   "accessed": "2026-09-28",
-   "authority": "B"
-  }
- ],
- "confidence": "high",
- "last_updated": "2026-09-28",
- "notes": "评分构成（金相图像质量80分+样品表面质量10分+操作规范10分）为大赛统一评分标准口径，经百度百科（第十三届词条）、清华赛事报道、郑州大学校赛规则与桂林航天工业学院通知多来源交叉一致；早期（第五届前后）图像质量为70分版本，属标准迭代。操作规范'三环节各扣一次、未列明不扣'为评分标准原文精神。个人赛操作评分以现场制样为核心；'金相大会'为并列理论赛道。国赛时长与获奖比例未获当届官方通知原文，已注明以规程为准；比赛时间与主办单位由多校报道交叉验证。"
 }

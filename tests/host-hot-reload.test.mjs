@@ -23,8 +23,9 @@ const ctx={
 };
 
 before(async()=>{
- const source=readFileSync(fixture,'utf8');
- assert.equal(createHash('sha256').update(source).digest('hex'),'734784a5ea86156ffa9ea25a6ae38380cc8c89955cf90ea1aa2afd9311993acd');
+ // The captured program is text; pin canonical content across checkout EOL modes.
+ const source=readFileSync(fixture,'utf8').replace(/\r\n?/g,'\n');
+ assert.equal(createHash('sha256').update(source).digest('hex'),'352c6fc889ca29521234b7232b7ebe55c1f87bc6401a8ea5c4a7eb31a35bdcd9');
  const hook=registerHooks({load(url,context,next){return url===oldUrl.href?{format:'module',source,shortCircuit:true}:next(url,context);}});
  try{oldCatalog=await import(oldUrl.href);}finally{hook.deregister();}
  assert.equal(oldCatalog.validateCompetitionTemplate,undefined,'The actual older catalog has no newly introduced export');

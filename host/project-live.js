@@ -1,3 +1,4 @@
+import {resolvedPathKey} from './path-identity.js';
 /** Read-only observation of the actual bound project Agent; no prompt/tool dispatch. */
 import {resolve,relative,isAbsolute} from 'node:path';
 import {readProject} from './projects.js?v=2.3.0-directory1';
@@ -6,7 +7,7 @@ import {agentFamily} from './agent-state.js';
 import {sensitiveFile} from './project-artifacts.js';
 import {AresError} from './storage.js';
 
-const pathKey=value=>resolve(value).toLowerCase(),active=new Set(['preparing','running','stopping']);
+const pathKey=resolvedPathKey,active=new Set(['preparing','running','stopping']);
 const iso=value=>typeof value==='string'&&Number.isFinite(Date.parse(value))?value:null;
 function argumentsFor(value){if(typeof value==='string'){if(value.length>100000)return null;try{return JSON.parse(value);}catch{return null;}}return value&&typeof value==='object'&&!Array.isArray(value)?value:null;}
 function filesFor(project,args){const rows=[];for(const key of ['path','file_path','filePath','filename','file','target']){const value=args?.[key];if(typeof value!=='string'||!value||value.length>2000)continue;const full=resolve(project.root,value),name=relative(project.root,full).replaceAll('\\','/');if(!name||name==='..'||name.startsWith('../')||isAbsolute(name)||sensitiveFile(name))continue;if(!rows.some(row=>row.path===name))rows.push({path:name});}return rows;}
