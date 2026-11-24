@@ -1,9 +1,29 @@
 import {createSurveyWorkspace} from './research-survey-ui.js';
 import {createInterviewWorkspace} from './research-interview-ui.js';
 import {createDatasetWorkspace} from './research-dataset-ui.js';
-import {createProjectStudyWorkspace} from './project-study-ui.js';
 
 import {html,button,option,field,input,area,select,empty,heading,badge,dataLink,names,levels} from './research-ui.js';
+
+/** Older live hosts may not have registered newly added study modules yet. */
+function createStudyLoader(ctx){
+  let controller=null,pending=false,error='',disposed=false;
+  return {
+    render(){return controller?controller.render():empty(error||'正在打开比赛与作品…');},
+    afterRender(){
+      if(controller)return controller.afterRender?.();
+      if(pending||error||disposed)return;
+      pending=true;
+      void import('./project-study-ui.js').then(({createProjectStudyWorkspace})=>{
+        if(!disposed)controller=createProjectStudyWorkspace(ctx);
+      }).catch(()=>{error='比赛与作品模块尚未由当前宿主加载，请点击 DSH 一键重载后重新打开。';})
+        .finally(()=>{pending=false;if(!disposed)ctx.draw();});
+    },
+    click(...args){return controller?.click?.(...args);},submit(...args){return controller?.submit?.(...args);},
+    input(...args){return controller?.input?.(...args);},change(...args){return controller?.change?.(...args);},
+    prepareSubmit(...args){return controller?.prepareSubmit?.(...args);},pause(){controller?.pause?.();},reset(){controller?.reset?.();},
+    dispose(){disposed=true;controller?.reset?.();}
+  };
+}
 
 export function createResearchCenter({request,onProjectMutation,onPrompt}) {
   const element=document.createElement('section');
@@ -29,7 +49,7 @@ export function createResearchCenter({request,onProjectMutation,onPrompt}) {
   workspaces.set('interview',createInterviewWorkspace(context));
   workspaces.set('datasets',createDatasetWorkspace(context));
   tabs.splice(1,0,['study','比赛与作品']);
-  workspaces.set('study',createProjectStudyWorkspace(context));
+  workspaces.set('study',createStudyLoader(context));
 
   function call(path,data) {
     return request('research/'+path,{root,...data});
@@ -230,6 +250,6 @@ export function createResearchCenter({request,onProjectMutation,onPrompt}) {
       else workspaces.get(tab)?.pause?.();
     },
     openArtifact(id,versionId){if(!index)return refresh().then(()=>context.showArtifact(id,versionId));return context.showArtifact(id,versionId);},
-    dispose(){disposed=true;for(const workspace of workspaces.values())workspace.reset?.();element.remove();}
+    dispose(){disposed=true;for(const workspace of workspaces.values()){if(workspace.dispose)workspace.dispose();else workspace.reset?.();}element.remove();}
   };
 }

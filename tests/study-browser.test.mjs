@@ -12,7 +12,7 @@ import {createRoutes} from '../host/routes.js';
 import {initializeProject,linkRoot,readProject} from '../host/projects.js';
 import {competitionCatalog} from '../host/catalog.js';
 
-async function studyPage(t) {
+async function studyPage(t,{missingStudyModules=false}={}) {
   const base=mkdtempSync(join(process.env.ARES_TEST_ROOT||tmpdir(),'ares-study-browser-'));
   process.env.ARES_HOME=join(base,'home');
   const root=join(base,'project');mkdirSync(root);linkRoot(root);
@@ -32,6 +32,7 @@ async function studyPage(t) {
   const browser=await chromium.launch({headless:true,args:sceneBrowserArgs});t.after(()=>browser.close());
   const page=await browser.newPage({viewport:{width:1640,height:1050},reducedMotion:'reduce'}),errors=[];
   page.on('pageerror',error=>errors.push(error.message));
+  if(missingStudyModules)await page.route(/\/(?:kdocs-account|project-study-ui)\.js(?:\?.*)?$/,route=>route.fulfill({status:404,body:'Older host has not registered this module'}));
   await page.goto('http://127.0.0.1:'+server.address().port);
   await page.getByRole('button',{name:'研究工具',exact:true}).click();
   await page.getByRole('button',{name:'比赛与作品',exact:true}).click();
@@ -63,6 +64,19 @@ test('the ARES requirements editor imports original bytes, maps real steps and a
   assert.deepEqual(errors,[]);console.log('STUDY_REQUIREMENTS_UI_EVIDENCE',base);
 });
 
+test('missing newly registered host modules do not blank ARES or prevent original research tools and resident chat from opening',{timeout:60000},async t=>{
+  const {page,base,errors}=await studyPage(t,{missingStudyModules:true});
+  await page.getByText('比赛与作品模块尚未由当前宿主加载，请点击 DSH 一键重载后重新打开。',{exact:true}).waitFor();
+  assert.equal(await page.getByLabel('ARES 常驻聊天',{exact:true}).isVisible(),true);
+  await page.getByRole('button',{name:'问卷设计',exact:true}).click();
+  await page.getByRole('heading',{name:'新建问卷',exact:true}).waitFor();
+  await page.getByRole('button',{name:'返回项目',exact:true}).click();
+  await page.getByRole('button',{name:'金山账号与协作',exact:true}).click();
+  await page.getByText('金山账号模块尚未由当前宿主加载，请点击 DSH 一键重载后重新打开。',{exact:true}).waitFor();
+  assert.equal(await page.getByLabel('ARES 常驻聊天',{exact:true}).isVisible(),true);assert.deepEqual(errors,[]);
+  await page.screenshot({path:join(base,'older-host-modules.png'),animations:'disabled'});
+});
+
 test('the ARES evidence editor saves sourced facts, locates a real citation and applies its reviewed change',{timeout:60000},async t=>{
   const {page,base,root,project,errors}=await studyPage(t);
   const source=join(root,'observations.txt');writeFileSync(source,'Software test observations. Count = 100');
@@ -84,13 +98,23 @@ test('the ARES evidence editor saves sourced facts, locates a real citation and 
   await page.getByRole('button',{name:'关联实际引用',exact:true}).click();
   await page.getByText('引用有效',{exact:true}).waitFor();
   writeFileSync(source,'Software test observations. Count = 120');
+  let releaseEntry,entryRequested;
+  const heldEntry=new Promise(resolve=>{releaseEntry=resolve;}),entryStarted=new Promise(resolve=>{entryRequested=resolve;});
+  await page.route(/\/research\/entry\?/,async route=>{const response=await route.fetch();entryRequested();await heldEntry;await route.fulfill({response});});
   await page.getByRole('button',{name:'测试样本数',exact:true}).click();
+  await entryStarted;
+  assert.equal(await page.getByLabel('事实值',{exact:true}).count(),0,'the prior editable form must not accept typing while the saved version is loading');
+  releaseEntry();
   await page.getByLabel('事实值',{exact:true}).fill('120');
   await page.getByLabel('证据逐字摘录',{exact:true}).fill('Count = 120');
   await page.getByLabel('已核对事实值与原始证据',{exact:true}).check();
   await page.getByRole('button',{name:'保存新的事实版本',exact:true}).click();
   await page.getByText('事实已更新',{exact:true}).waitFor();
+  const previewResponse=page.waitForResponse(response=>response.url().endsWith('/research/study/reference/preview')&&response.request().method()==='POST');
   await page.getByRole('button',{name:'查看变化',exact:true}).click();
+  const actualPreview=await (await previewResponse).json();
+  assert.equal(actualPreview.ok,true,JSON.stringify(actualPreview));
+  assert.equal(actualPreview.canApply,true,JSON.stringify(actualPreview));
   await page.getByRole('button',{name:'确认更新这处引用',exact:true}).click();
   await page.getByText('引用有效',{exact:true}).waitFor();
   assert.equal(readFileSync(path,'utf8'),'# Software test report\n有效样本数为120份。');

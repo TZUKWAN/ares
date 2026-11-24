@@ -3,13 +3,14 @@ import {html,button,heading,field,input,area,select,option,empty,badge} from './
 const blank=()=>({key:'',title:'',value:'',unit:'',sourceKind:'file',sourcePath:'',researchSource:'',quote:'',locator:''});
 const states={current:'引用有效','source-updated':'证据已更新','fact-updated':'事实已更新','target-edited':'作品已编辑',unavailable:'引用需检查'};
 export function createEvidenceWorkspace(ctx) {
-  let projectRoot=null,loaded=false,loading=false,facts=[],uses=[],draft=blank(),current=null,preview=null;
+  let projectRoot=null,loaded=false,loading=false,opening=false,facts=[],uses=[],draft=blank(),current=null,preview=null;
   async function load(){const root=ctx.root;loading=true;try{const data=await ctx.get('study/evidence');if(root!==ctx.root)return;facts=data.facts;uses=data.uses;loaded=true;ctx.draw();}finally{loading=false;}}
   function render(){
     if(projectRoot!==ctx.root){projectRoot=ctx.root;loaded=false;facts=[];uses=[];current=null;draft=blank();preview=null;}
     const outputs=ctx.index.steps.flatMap(s=>s.outputs.map(o=>({...o,stepTitle:s.title})));
     const sources=ctx.index.items.filter(row=>!['pretest','fact','collection'].includes(row.kind));
     const listing='<aside class="study-sidebar"><h4>项目事实</h4>'+button('fact-new','新增事实')+facts.map(row=>button('fact-open',row.title,{data:{id:row.id}})+(row.sourceStale?badge('来源待核对'):'')).join('')+'</aside>';
+    if(opening)return '<div class="study-layout">'+listing+'<section class="study-main">'+empty('正在读取事实版本…')+'</section></div>';
     return '<div class="study-layout">'+listing+'<section class="study-main">'+heading('事实与证据','保存来源，再关联报告或演示文稿中的实际内容。',button('fact-refresh','刷新引用'))+
       '<form data-research-form="fact-save" class="study-form">'+
       '<div class="research-pair">'+field('事实名称',input('title',draft.title,'data-fact-field="title" data-focus="fact-title" required'))+
@@ -35,11 +36,14 @@ export function createEvidenceWorkspace(ctx) {
     change(event){const field=event.target.dataset.factField;if(field){draft[field]=event.target.value;if(field==='sourceKind')ctx.draw();}},
     async click(action,target){
       if(action==='fact-new'){current=null;draft=blank();preview=null;ctx.draw();}
-      if(action==='fact-open'){
+      if(action==='fact-open')await ctx.task(async()=>{
+        opening=true;ctx.draw();
+        try{
         const entry=await ctx.entry(target.dataset.id);if(entry.item.kind!=='fact')throw new Error('请选择事实记录');
         current=entry;const data=entry.data,source=data.sources[0];draft={key:data.key,title:entry.item.title,value:String(data.value),unit:data.unit,
           sourceKind:source.kind,sourcePath:source.snapshot?.sourcePath||'',researchSource:source.kind==='research'?source.itemId+'|'+source.versionId:'',quote:source.quote,locator:source.locator};ctx.draw();
-      }
+        }finally{opening=false;ctx.draw();}
+      });
       if(action==='fact-refresh')await ctx.task(load);
       if(action==='fact-compare')await ctx.task(async()=>{preview=await ctx.call('study/reference/preview',{referenceId:target.dataset.id,expectedRevision:ctx.index.revision});});
       if(action==='fact-apply')await ctx.task(async()=>{await ctx.mutate('study/reference/apply',{referenceId:preview.referenceId,token:preview.token,confirmUpdate:true});preview=null;await load();});
