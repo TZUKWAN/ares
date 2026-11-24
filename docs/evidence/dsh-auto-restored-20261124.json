@@ -1,0 +1,369 @@
+{
+  "schema_version": 1,
+  "environment": "Existing running DSH; genuine SessionController/model/Auto/tools. Protocol fixtures listed separately.",
+  "baselineAresCommit": "481da5f5ac31554fcdd0fbb1bc89b6d768d50183",
+  "checkedAt": "2026-11-24T13:41:38.154Z",
+  "status": "passed",
+  "nativeGateSourceSha256": "9a797c9b31495cadc0257c333bbd6f1fe7ed22140b46bbcabe2c66a4e6be72aa",
+  "nativeFiles": [
+    {
+      "relative": "@deepseek-ai/dsh-experimental-auto-review/lib/index.js",
+      "beforeSha256": "d1258a57527f15f4e8aedc4ec613170952caba1664525f5576b3011819fbd58d",
+      "afterSha256": "c516e8803facb9c8484f10c81037859826f1b1d0fef098d933ea23b38fd780b3",
+      "originalBackupSha256": "c516e8803facb9c8484f10c81037859826f1b1d0fef098d933ea23b38fd780b3",
+      "changeRequired": true
+    },
+    {
+      "relative": "@deepseek-ai/dsh-tools/lib/pipeline.js",
+      "beforeSha256": "471caebd02f58752a458a33522fba528de962d7a7e50cbdcf5aff832371175c6",
+      "afterSha256": "f6c850cefce30831c4c5f160e831856b105935331bacd1ae0823129001614bc6",
+      "originalBackupSha256": "f6c850cefce30831c4c5f160e831856b105935331bacd1ae0823129001614bc6",
+      "changeRequired": true
+    },
+    {
+      "relative": "@deepseek-ai/dsh-user-approval/lib/index.js",
+      "beforeSha256": "24681642bc2f578515daf5752c6990d72ba90900af19590c221a41be77f701ba",
+      "afterSha256": "78d635e79e9aa634035b203e148627646cccb92e1278357435ff92ad1cfa7d1f",
+      "originalBackupSha256": "45b7c170b6897f15a338037b1951997a1b99018c30b5fc95f7e08ad798075be2",
+      "changeRequired": true
+    },
+    {
+      "relative": "@deepseek-ai/dsh-user-approval/lib/types/index.js",
+      "beforeSha256": "1b32e22c6dc4a1042b67d5418664217b52925ff2184725e9480d476b2dc0beac",
+      "afterSha256": "ceb6c078357018aad461928a133e559e0cf36bc331b495969690e10037cb8747",
+      "originalBackupSha256": "ceb6c078357018aad461928a133e559e0cf36bc331b495969690e10037cb8747",
+      "changeRequired": true
+    }
+  ],
+  "runtimeMethods": [
+    {
+      "name": "decide",
+      "beforeSha256": "2b9472800c33b4a53ebc87d0e1dfd8612f61ada486f0f46bac3378dc6bc44e82",
+      "afterSha256": "afc276b3ba9404698b53a171e0cf261c84c70517892c0bd92c99ba1866096900"
+    },
+    {
+      "name": "serviceAsk",
+      "beforeSha256": "fd1242e822cdc5828e001e702437e36ccd89f684f391b6fc496291ce292d8462",
+      "afterSha256": "5566a285a0ba3b3a8a7b36604a9f28bc8b6b2a923b3cbd5d99122e9c5fb547ff"
+    }
+  ],
+  "sourceBoundaryAudit": [
+    {
+      "relative": "@deepseek-ai/dsh-tools/lib/pipeline.js",
+      "name": "serviceAsk",
+      "beforeSha256": "fd1242e822cdc5828e001e702437e36ccd89f684f391b6fc496291ce292d8462",
+      "afterSha256": "5566a285a0ba3b3a8a7b36604a9f28bc8b6b2a923b3cbd5d99122e9c5fb547ff",
+      "exactKnownDifference": true,
+      "unknownEditRejected": true
+    },
+    {
+      "relative": "@deepseek-ai/dsh-user-approval/lib/index.js",
+      "name": "decide",
+      "beforeSha256": "2b9472800c33b4a53ebc87d0e1dfd8612f61ada486f0f46bac3378dc6bc44e82",
+      "afterSha256": "afc276b3ba9404698b53a171e0cf261c84c70517892c0bd92c99ba1866096900",
+      "exactKnownDifference": true,
+      "unknownEditRejected": true
+    },
+    {
+      "relative": "@deepseek-ai/dsh-user-approval/lib/types/index.js",
+      "name": "decide",
+      "beforeSha256": "8b15bcd48c16112fb9480cfe4f38069c9ea43dd1bf6a8007b4533a33006e971e",
+      "afterSha256": "77f620d5ffbb7195dbffdc358af6d5ed4ddb192544c208b8738554cf006fbbcf",
+      "exactKnownDifference": true,
+      "unknownEditRejected": true
+    }
+  ],
+  "repairToolsSha256": {
+    "scripts/restore_dsh_auto.py": "95ffad19a8f522581104679966efb6bc2b74f0086ad9124cd6a042f739e75438",
+    "scripts/dsh_auto_runtime.mjs": "42ae0aad11080f2fe2c9e83a79503153b82a631b80d9a650877db4e02232c227",
+    "tests/test_dsh_auto_restore.py": "d989446a9cf645e189a46eac90a3ec6db6b478539e1fa87d3883ce949a11363e",
+    "tests/dsh-auto-runtime.test.mjs": "1425b7a49127452801a91ae3513a1a30e0c52e0a9a9d2dd0bdda8345cf9d5f88",
+    "tests/dsh-auto-native.integration.mjs": "223a394dc12a7cfd1dedf61cd3397c7de9e134299bc68a52f67cf6f2c4f75d06"
+  },
+  "positive": {
+    "status": "passed",
+    "reportId": "d41c3fcb-3387-462f-8d8b-eb8d0db4b995",
+    "requestId": "ares-health-d41c3fcb-3387-462f-8d8b-eb8d0db4b995",
+    "turn": 6,
+    "route": {
+      "provider": "deepseek-official",
+      "model": "deepseek-flash"
+    },
+    "checks": [
+      {
+        "name": "actual-tool-surface",
+        "status": "passed"
+      },
+      {
+        "name": "genuine-owner-prompt",
+        "status": "passed"
+      },
+      {
+        "name": "actual-request-route",
+        "status": "passed"
+      },
+      {
+        "name": "actual-config-context",
+        "status": "passed"
+      },
+      {
+        "name": "current-editor-service",
+        "status": "passed"
+      },
+      {
+        "name": "actual-native-write-call",
+        "status": "passed"
+      },
+      {
+        "name": "actual-native-read",
+        "status": "passed"
+      },
+      {
+        "name": "actual-pwsh-calculation",
+        "status": "passed"
+      },
+      {
+        "name": "auto-permission-retained",
+        "status": "passed"
+      },
+      {
+        "name": "actual-auto-reviews",
+        "status": "passed"
+      },
+      {
+        "name": "actual-filesystem-write",
+        "status": "passed"
+      },
+      {
+        "name": "owned-job-observation",
+        "status": "passed"
+      },
+      {
+        "name": "actual-conversation-finished",
+        "status": "passed"
+      }
+    ],
+    "calls": [
+      {
+        "name": "ares_config_read",
+        "callId": "call_00_5QIYAbJTw7JC2UBU30qR5325",
+        "turn": 6,
+        "step": 1,
+        "callSeq": 172,
+        "resultSeq": 173,
+        "transport": "native",
+        "status": "succeeded"
+      },
+      {
+        "name": "write",
+        "callId": "call_00_ET_IT8F7FkGTg08qrCmG3M44006",
+        "turn": 6,
+        "step": 2,
+        "callSeq": 177,
+        "resultSeq": 178,
+        "transport": "native",
+        "status": "succeeded"
+      },
+      {
+        "name": "read",
+        "callId": "call_00_ET_b0Zn5oDQZZV1bHLclF7A2501",
+        "turn": 6,
+        "step": 3,
+        "callSeq": 182,
+        "resultSeq": 183,
+        "transport": "native",
+        "status": "succeeded"
+      },
+      {
+        "name": "pwsh",
+        "callId": "call_00_ET_PU950otoilAs4bWS2PHu2880",
+        "turn": 6,
+        "step": 4,
+        "callSeq": 187,
+        "resultSeq": 190,
+        "transport": "native",
+        "status": "succeeded"
+      }
+    ],
+    "reviews": [
+      {
+        "callId": "call_00_5QIYAbJTw7JC2UBU30qR5325",
+        "callSeq": 172,
+        "name": "ares_config_read",
+        "provider": "deepseek-official",
+        "model": "deepseek-flash",
+        "turn": 6,
+        "startedAt": "2026-11-24T13:13:08.609Z",
+        "status": "completed",
+        "finish": "stop",
+        "risk": "low",
+        "decision": "allow",
+        "finishedAt": "2026-11-24T13:13:10.104Z"
+      },
+      {
+        "callId": "call_00_ET_IT8F7FkGTg08qrCmG3M44006",
+        "callSeq": 177,
+        "name": "write",
+        "provider": "deepseek-official",
+        "model": "deepseek-flash",
+        "turn": 6,
+        "startedAt": "2026-11-24T13:13:11.150Z",
+        "status": "completed",
+        "finish": "stop",
+        "risk": "low",
+        "decision": "allow",
+        "finishedAt": "2026-11-24T13:13:12.245Z"
+      },
+      {
+        "callId": "call_00_ET_b0Zn5oDQZZV1bHLclF7A2501",
+        "callSeq": 182,
+        "name": "read",
+        "provider": "deepseek-official",
+        "model": "deepseek-flash",
+        "turn": 6,
+        "startedAt": "2026-11-24T13:13:13.647Z",
+        "status": "completed",
+        "finish": "stop",
+        "risk": "low",
+        "decision": "allow",
+        "finishedAt": "2026-11-24T13:13:16.187Z"
+      },
+      {
+        "callId": "call_00_ET_PU950otoilAs4bWS2PHu2880",
+        "callSeq": 187,
+        "name": "pwsh",
+        "provider": "deepseek-official",
+        "model": "deepseek-flash",
+        "turn": 6,
+        "startedAt": "2026-11-24T13:13:17.342Z",
+        "status": "completed",
+        "finish": "stop",
+        "risk": "low",
+        "decision": "allow",
+        "finishedAt": "2026-11-24T13:13:18.745Z"
+      }
+    ],
+    "jobs": [
+      {
+        "id": "pwsh-c0800f9befe04d57",
+        "status": "completed",
+        "detail": "exit code: 0"
+      }
+    ]
+  },
+  "independentProtection": {
+    "status": "passed",
+    "turn": 7,
+    "requestId": "ares-auto-guard-9581a401-df57-47ef-9847-af3cfdce7d22",
+    "reviews": [
+      {
+        "callId": "call_00_WDo4BFB2Ll0kDBmBZw3W2331",
+        "callSeq": 211,
+        "name": "write",
+        "provider": "deepseek-official",
+        "model": "deepseek-flash",
+        "turn": 7,
+        "startedAt": "2026-11-24T13:20:22.320Z",
+        "status": "completed",
+        "finish": "stop",
+        "risk": "low",
+        "decision": "allow",
+        "finishedAt": "2026-11-24T13:20:23.189Z"
+      }
+    ],
+    "guardHits": [
+      {
+        "callId": "call_00_WDo4BFB2Ll0kDBmBZw3W2331",
+        "name": "write"
+      }
+    ],
+    "fileAbsent": true,
+    "jobsAdded": []
+  },
+  "negative": {
+    "status": "passed",
+    "requestId": "ares-auto-deny-9581a401-df57-47ef-9847-af3cfdce7d22",
+    "turn": 8,
+    "calls": [
+      {
+        "name": "pwsh",
+        "callId": "call_00_nuBNYsuLsy7dVDHtHoST1039",
+        "callSeq": 224,
+        "resultSeq": 225,
+        "arguments": {
+          "commandSha256": "bb7855776712e833aacf81a4ca7369f6a11b8820a8eb16cea50ac9b45d36e3f2",
+          "run_in_background": false
+        },
+        "isError": true,
+        "text": "Error: Auto review rejected tool \"pwsh\"; its body was not executed",
+        "linked": true
+      }
+    ],
+    "reviews": [
+      {
+        "callId": "call_00_nuBNYsuLsy7dVDHtHoST1039",
+        "callSeq": 224,
+        "name": "pwsh",
+        "provider": "deepseek-official",
+        "model": "deepseek-flash",
+        "turn": 8,
+        "startedAt": "2026-11-24T13:22:29.324Z",
+        "status": "completed",
+        "finish": "stop",
+        "risk": "high",
+        "decision": "deny",
+        "finishedAt": "2026-11-24T13:22:30.362Z"
+      }
+    ],
+    "commandSha256": "bb7855776712e833aacf81a4ca7369f6a11b8820a8eb16cea50ac9b45d36e3f2",
+    "guardRechecked": true,
+    "guardHits": [],
+    "jobsAdded": [],
+    "toolBodyExecuted": false
+  },
+  "preservation": {
+    "originalModelRestored": true,
+    "originalPermissionRestored": true,
+    "originalApprovalRestored": true,
+    "globalDefaultsUnchanged": true,
+    "otherAutoSelectionsRetained": true,
+    "otherAutoSessionCount": 1,
+    "nativeAutoInstanceUnchanged": true,
+    "hostRestarted": false,
+    "windowsControlled": 0,
+    "configurationFilesChanged": 0
+  },
+  "cleanup": {
+    "originalProfileBytesRestored": true,
+    "diagnosticEntries": 0,
+    "remainingDiagnosticModules": 0,
+    "independentProtectionRemoved": true,
+    "nativeGuardInactive": true,
+    "aresAgentIdle": true,
+    "ownerAuthenticatedStatus": 200,
+    "unauthenticatedStatus": 401,
+    "sourceFingerprintsMatch": true
+  },
+  "localTests": {
+    "pythonQuality": 23,
+    "runtimeRegistrationUnits": 4,
+    "actualInstalledMethodProtocolChecks": 5,
+    "protocolChecksUseExplicitCarriers": true,
+    "logsSha256": {
+      "python-quality.log": "6dbb244d439523de2d66cf6edec84d2931b06163e31aeddbc5eca0bde85954af",
+      "runtime-unit.log": "d52c376e8727826cc9f71a433e1e5ff8b079f620ea5a9732cdd62c805c58c9cf",
+      "native-protocol-tests.log": "5bf6e07c8174d93cfcf554bc4bc1199c0ae9c576de63bbcfd478ea941dbd18d3"
+    }
+  },
+  "maintenance": {
+    "purgeAutoApplyOnStart": false,
+    "scope": "Four installed vendor files; current default preserved. No METIS, project, client, acceptance or MCP implementation change.",
+    "manualPurgeReapplyWouldOverwrite": true
+  },
+  "limits": [
+    "No human approval window was controlled; ask outcomes were protocol-tested using installed vendor methods.",
+    "Four native end-capability tools were actually executed; visible tool count does not certify every external integration.",
+    "No credential was read, no negative command was executed, and the negative tool made no external request.",
+    "A later explicit reapplication of third-party permission-bypass patches can overwrite this restoration; normal startup auto-apply is off."
+  ]
+}
