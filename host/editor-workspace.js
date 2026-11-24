@@ -54,7 +54,7 @@ export function createEditorWorkspace(ctx={},native={}){
   const value=await inspectNativeSession(ctx,sessionId),preset=value.events?.filter(e=>e.type==='agent-preset/selected').at(-1)?.data?.agentPreset||value.meta?.agentPreset;
   if(value.meta?.id!==sessionId||preset!==EDITOR_PRESET_ID||!samePath(value.meta?.cwd,cwd()))throw new AresError('会话未绑定ARES配置编辑目录或原生编辑模式',409);
   const agents=ctx.get?.('agents');let agent=agents?.get?.(sessionId);
-  if(!agent){if(typeof controller().resolveAgent!=='function')throw new AresError('DSH冷会话恢复接口尚未就绪',503);const result=await controller().resolveAgent(sessionId);if(result.error)throw result.error;agent=result.agent;}
+  if(!agent){if(typeof controller().resolveAgent!=='function')throw new AresError('DSH冷会话恢复接口尚未就绪',503);const result=await controller().resolveAgent(sessionId);if(result.error)throw result.error;agent=result?.agent||result;}
   if(!agent||agents?.get?.(sessionId)!==agent||agent.session?.header?.id!==sessionId)throw new AresError('ARES原生Agent恢复身份不符',409);
   if(agent.status==='idle')await native.refreshEditor?.(agent);return value;
  }

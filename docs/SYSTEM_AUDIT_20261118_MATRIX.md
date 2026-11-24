@@ -1,3 +1,5 @@
+> 2026-11-24 DSH 续验更新：真实在线模型四工具链已通过；Auto 因宿主直接放行补丁而实际失败，不再只是待验收。详见 [本轮结果与阻断](DSH_LIVE_ACCEPTANCE_20261124.md)。下列 11 月 18 日矩阵保留原时间范围。
+
 # ARES 审查问题与验收矩阵
 
 基线为 `0534a53c2061329f4b4de0642cbfd3556e751189`，修复分支为 `fix/system-audit-20261118`。[PR #1](https://github.com/TZUKWAN/ares/pull/1) 保持独立，不合并 `main`。具体修复经过、失败日志与边界见 [整改记录](SYSTEM_AUDIT_20261118.md)。
