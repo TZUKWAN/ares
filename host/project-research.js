@@ -11,7 +11,8 @@ import {researchTools} from './research-registry.js';
 export const researchOwner=Object.freeze({kind:'user',id:'owner'});
 export const researchKinds=Object.freeze({
   survey:'问卷', guide:'访谈提纲', interview:'访谈记录', codebook:'编码本',
-  responses:'实际答卷', pretest:'模拟预测试', dataset:'数据集', report:'研究报告'
+  responses:'实际答卷', pretest:'模拟预测试', dataset:'数据集', report:'研究报告',
+  requirements:'比赛要求',fact:'事实与证据',experiment:'模型实验',defense:'答辩演练',collection:'问卷回收',reuse:'跨赛改编'
 });
 const uuid=/^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/;
 const VERSION_LIMIT=300;

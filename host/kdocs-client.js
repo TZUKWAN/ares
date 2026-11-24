@@ -4,9 +4,9 @@ import {join} from 'node:path';
 import {homedir} from 'node:os';
 import {AresError} from './storage.js';
 
-const actions=new Set(['get-file-info','get-file-link','list-my-files','list-files','read-file','download-file','list-file-versions','get-file-version-download','upload-new-file','list-document-collaborators','list-drive-roles','create-document-comment','list-document-comments','get-share-info','share-file','search-document-collaborators','set-collaborator-permissions']);
+const actions=new Set(['get-file-info','get-file-link','list-my-files','list-files','read-file','download-file','list-file-versions','get-file-version-download','upload-new-file','list-document-collaborators','list-drive-roles','create-document-comment','list-document-comments','get-share-info','share-file','search-document-collaborators','set-collaborator-permissions','create-folder','create-empty-file','search-files']);
 export function kdocsExecutable(){const installed=join(process.env.LOCALAPPDATA||join(homedir(),'AppData','Local'),'kdocs-cli','kdocs-cli.exe');return existsSync(installed)?installed:'kdocs-cli';}
-const writes=new Set(['upload-new-file','create-document-comment','share-file','set-collaborator-permissions']);
+const writes=new Set(['upload-new-file','create-document-comment','share-file','set-collaborator-permissions','create-folder','create-empty-file']);
 /** Only documented numeric codes are classified; raw provider/process text is never echoed. */
 function cloudFailure(kind,{write=false,uncertain=false,businessCode}={}){
  const messages={'tool-missing':'未找到金山CLI，请安装后使用CLI自身的登录功能。','tool-unavailable':'金山CLI无法启动，请检查可执行文件及本机执行权限。','auth-required':'金山账号尚未登录或认证已过期，请在本机金山CLI重新登录。','permission-denied':'金山拒绝访问，当前账号没有此文件或操作权限（企业账号限制也可能返回此状态）。','service-unavailable':'金山服务暂时不可用或请求受限；未自动重试，请按服务恢复时间再核对。','request-failed':'金山请求失败，未把错误结果记录为成功。','cancelled':'金山请求已取消。'};
@@ -32,6 +32,16 @@ export async function kdocsCall(action,params,{signal}={}){
 export async function kdocsAnnotationCall(action,params,{signal}={}){
  if(!['read-element','write-element'].includes(action)||params?.type!=='comment'||(action==='read-element'?params.action!=='list':params.action!=='paragraph_insert'))throw new AresError('此文档批注操作未开放');
  const write=action==='write-element',raw=await execute(['wps',action,'--output','json','--timeout','60000'],JSON.stringify(params),{signal,write});let value;try{value=JSON.parse(raw);}catch{throw cloudFailure('request-failed',{write,uncertain:true});}return decodeKdocsResponse(value,{write});
+}
+/** Fixed operations for the research collection connector. */
+export async function kdocsTableCall(action,params,{signal}={}){
+ const readable=new Set(['get-schema','views-list','list-records','form-list-fields','form-get-meta','share-view-status']);
+ const writable=new Set(['create-sheet','create-view','create-records']);
+ if(!readable.has(action)&&!writable.has(action))throw new AresError('此金山数据表操作未开放');
+ const write=writable.has(action),raw=await execute(['dbsheet',action,'--output','json','--timeout','60000'],JSON.stringify(params),{signal,write});
+ let result;try{result=JSON.parse(raw);}catch{throw cloudFailure('request-failed',{write,uncertain:true});}
+ const data=decodeKdocsResponse(result,{write});
+ return data?.result==='ok'&&data.detail?data.detail:data;
 }
 /** CLI output can contain both a transport envelope and an API envelope. */
 export function decodeKdocsResponse(result,{write=false}={}){

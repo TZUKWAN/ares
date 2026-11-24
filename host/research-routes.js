@@ -10,6 +10,13 @@ import {createDatasetTools,streamDatasetFile,profileDataset} from './research-da
 import {importSurveyResponses,pretestPlan,startSurveyPretest,saveSurvey} from './research-surveys.js';
 import {researchExport,researchWorkDraft} from './research-exports.js';
 import {buildExtension,listExtensions,surveyExtension,toggleExtension} from './project-extensions.js';
+import {importRequirements,saveRequirements,adoptRequirements,requirementsCoverage} from './study-requirements.js';
+import {readProjectObject} from './project-objects.js';
+import {saveFact,registerFactReference,projectEvidence,previewFactUpdate,applyFactUpdate} from './study-evidence.js';
+import {startAnalysis,compareExperiments,previewScriptAnalysis,prepareScriptAnalysis,collectScriptAnalysis,previewExperimentData} from './study-experiments.js';
+import {inspectCollection,saveCollection,startCollection,reviewCollection,adoptCollection} from './study-collection.js';
+import {defenseContext,prepareDefense,adoptDefense,saveDefenseAnswers,defenseFollowup,resolveDefenseFollowup} from './study-defense.js';
+import {reuseCatalog,reuseTargets,previewReuse,applyReuse,resumeReuse} from './study-reuse.js';
 
 async function framedUpload(request) {
   const input=request[Symbol.asyncIterator]();
@@ -45,6 +52,47 @@ export function registerResearchRoutes(route,stream,{transport}={}) {
   get('entry',query=>researchEntry(query.get('root'),query.get('id'),query.get('versionId')));
   post('bind',data=>bindResearch(data));
   post('work-draft',data=>researchWorkDraft(data));
+  post('study/requirements/import',(data,_req,options)=>importRequirements(data,options));
+  post('study/requirements/save',data=>saveRequirements(data));
+  post('study/requirements/adopt',data=>adoptRequirements(data));
+  get('study/requirements',query=>({items:requirementsCoverage(query.get('root'))}));
+  post('study/fact',data=>saveFact(data));
+  get('study/evidence',query=>projectEvidence(query.get('root')));
+  post('study/reference',data=>registerFactReference(data));
+  post('study/reference/preview',data=>previewFactUpdate(data));
+  post('study/reference/apply',data=>applyFactUpdate(data));
+  post('study/experiment/run',data=>startAnalysis(jobs,data));
+  post('study/experiment/data',data=>previewExperimentData(data));
+  post('study/experiment/compare',data=>compareExperiments(data));
+  post('study/experiment/script/preview',data=>previewScriptAnalysis(data));
+  post('study/experiment/script/prepare',data=>prepareScriptAnalysis(data));
+  post('study/experiment/script/collect',data=>collectScriptAnalysis(data));
+  post('study/collection/inspect',(data,_req,options)=>inspectCollection(data,options));
+  post('study/collection/connect',(data,_req,options)=>saveCollection(data,options));
+  post('study/collection/pull',data=>startCollection(jobs,data));
+  post('study/collection/review',data=>reviewCollection(data));
+  post('study/collection/adopt',data=>adoptCollection(data));
+  get('study/defense',query=>defenseContext(query.get('root')));
+  post('study/defense/prepare',(data,_req,options)=>prepareDefense(data,options));
+  post('study/defense/adopt',data=>adoptDefense(data));
+  post('study/defense/answers',data=>saveDefenseAnswers(data));
+  post('study/defense/followup',data=>defenseFollowup(data));
+  post('study/defense/followup/resolve',data=>resolveDefenseFollowup(data));
+  get('study/reuse/catalog',query=>reuseCatalog(query.get('root')));
+  post('study/reuse/targets',data=>reuseTargets(data));
+  post('study/reuse/preview',data=>previewReuse(data));
+  post('study/reuse/apply',data=>applyReuse(data));
+  post('study/reuse/resume',data=>resumeReuse(data));
+  stream(path+'study/source','GET',(query,_req,res)=>{
+    const entry=researchEntry(query.get('root'),query.get('id'),query.get('versionId'));
+    const source=entry.data.source;
+    if(!source?.object)throw new AresError('此研究记录没有原文快照',404);
+    const bytes=readProjectObject(query.get('root'),source.object.sha256);
+    res.writeHead(200,{'content-type':source.format==='pdf'?'application/pdf':'application/octet-stream',
+      'content-length':bytes.length,'content-disposition':"attachment; filename*=UTF-8''"+encodeURIComponent(source.name.split(/[\\/]/).pop()).replace(/'/g,'%27'),
+      'cache-control':'no-store','x-content-type-options':'nosniff'});
+    return Readable.from([bytes]);
+  });
   get('jobs',query=>({jobs:listResearchJobs(query.get('root'))}));
   get('job',query=>({job:getResearchJob(query.get('root'),query.get('id'))}));
   post('job/cancel',data=>jobs.cancel(data.root,data.id));
@@ -98,7 +146,7 @@ export function registerResearchRoutes(route,stream,{transport}={}) {
       'cache-control':'no-store','content-disposition':"attachment; filename*=UTF-8''"+encodeURIComponent(file.filename).replace(/'/g,'%27')});
     return Readable.from([file.bytes]);
   });
-  for (const file of ['research-center.js','research-survey-ui.js','research-survey-model.js','research-interview-ui.js','research-guide-ui.js','research-code-ui.js','research-ui.js','research-dataset-ui.js'])
+  for (const file of ['research-center.js','research-survey-ui.js','research-survey-model.js','research-interview-ui.js','research-guide-ui.js','research-code-ui.js','research-ui.js','research-dataset-ui.js','project-study-ui.js','study-requirements-ui.js','study-evidence-ui.js','study-experiments-ui.js','study-collection-ui.js','study-defense-ui.js','study-reuse-ui.js'])
     route('/ares/api/v2/'+file,'GET',()=>readFileSync(new URL('../client/'+file,import.meta.url),'utf8'),'text/javascript; charset=utf-8');
   return jobs.dispose;
 }

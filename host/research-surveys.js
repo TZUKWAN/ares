@@ -130,11 +130,8 @@ function responseRows(body,compiled) {
     }));
   });
 }
-export function importSurveyResponses(body) {
-  if (body.confirmActual!==true) throw new AresError('请选择真实采集文件并确认来源',403);
+export function writeSurveyResponses(p,body,{lineage=null}={}) {
   const origin=researchInput(()=>researchText(body.origin,'实际采集来源',1200));
-  let result;
-  const project=changeProject(body,p=>{
     const version=requireKind(researchVersion(p,body.id,body.versionId),'survey');
     if (version.version.payload.status!=='final') throw new AresError('实际答卷必须关联已定稿的问卷');
     if (typeof body.content!=='string') throw new AresError('请选择实际答卷文件');
@@ -150,13 +147,18 @@ export function importSurveyResponses(body) {
     const object=putProjectObject(p.root,Buffer.from(body.content));
     const source={itemId:version.item.id,versionId:version.version.id};
     const summary=summarizeResponses(compiled.survey,values);
-    result=writeResearchVersion(p,{...body,id:undefined},{
+    return writeResearchVersion(p,{...body,id:undefined},{
       kind:'responses',status:'owner-attested',title:version.item.title.slice(0,140)+' · 实际答卷',source,provenance:'owner-attested',
-      data:{dataKind:'field-responses',origin,sourceObject:object,sourceFormat:body.format,summary,rows:values}
+      data:{...(lineage?{lineage}:{}),dataKind:'field-responses',origin,sourceObject:object,sourceFormat:body.format,summary,rows:values}
     });
-  });
+}
+export function importSurveyResponses(body) {
+  if (body.confirmActual!==true) throw new AresError('请选择真实采集文件并确认来源',403);
+  let result;
+  const project=changeProject(body,p=>{result=writeSurveyResponses(p,body);});
   return {...result,revision:project.revision};
 }
+
 function summarizeResponses(survey,rows) {
   const columns=survey.pages.flatMap(page=>page.questions).map(q=>{
     let present=0,sum=0,min=Infinity,max=-Infinity;

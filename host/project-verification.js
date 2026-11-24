@@ -7,6 +7,7 @@ import {readProjectObject,readProjectRecord} from './project-objects.js';
 import {verifyFrozenResources} from './native-versions.js';
 import {ruleItems,ruleItemState} from './rule-checklist-model.js';
 import {readNodeRunRecord} from './node-run-records.js';
+import {studyEvidenceIssues} from './study-evidence-model.js';
 
 function executionReport(project,block,warnings){
  const runs=[];
@@ -91,6 +92,7 @@ export function buildProjectVerification(project,{definition,checkStep,ruleEvide
  if(!baseline?.scopeBinding||hash(baseline.scopeBinding)!==hash(scope))block({code:'rules-scope-mismatch',reason:'规则基线未绑定当前比赛、届次、赛道及组别'});
  if(!mandatory.length)block({code:'rules-checklist-missing',reason:'尚未建立本届规则的必需条目，请先按原文逐项核对'});
  blocking.push(...ruleIssues);
+ blocking.push(...studyEvidenceIssues(project));
  const rules={state:blocking.some(row=>row.code?.startsWith('rules-')||row.ruleId)?'pending':'verified',scope,baseline:baseline||null,mandatory:mandatory.length,confirmed:mandatory.filter(item=>item.state==='confirmed').length,items};
  const cloud=cloudReport(project,block),execution=executionReport(project,block,warnings);
  if(!submissionFiles.size)block({code:'submission-artifacts-missing',reason:'没有可固定的已验收实际作品，请至少验收一份交付物'});

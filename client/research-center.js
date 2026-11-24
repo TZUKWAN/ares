@@ -1,6 +1,7 @@
 import {createSurveyWorkspace} from './research-survey-ui.js';
 import {createInterviewWorkspace} from './research-interview-ui.js';
 import {createDatasetWorkspace} from './research-dataset-ui.js';
+import {createProjectStudyWorkspace} from './project-study-ui.js';
 
 import {html,button,option,field,input,area,select,empty,heading,badge,dataLink,names,levels} from './research-ui.js';
 
@@ -27,6 +28,8 @@ export function createResearchCenter({request,onProjectMutation,onPrompt}) {
   workspaces.set('survey',createSurveyWorkspace(context));
   workspaces.set('interview',createInterviewWorkspace(context));
   workspaces.set('datasets',createDatasetWorkspace(context));
+  tabs.splice(1,0,['study','比赛与作品']);
+  workspaces.set('study',createProjectStudyWorkspace(context));
 
   function call(path,data) {
     return request('research/'+path,{root,...data});

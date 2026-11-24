@@ -63,7 +63,7 @@ test('real owner routes bind exact research versions and stage checked output wi
   assert.equal(mime.status,401);
   const caller=await fetch(url+'index?'+new URLSearchParams({root}),{headers:{authorization:'Case owner'}});
   const registry=await caller.json();
-  assert.equal(registry.tools.length,8);
+  assert.deepEqual(registry.tools.map(tool=>tool.id),['survey.design','survey.pretest','survey.responses','interview.design','interview.records','interview.transcribe','interview.codes','dataset.resources','study.requirements','study.evidence','study.experiments','study.collection','study.defense','study.reuse']);
   assert.ok(registry.history.some(row=>row.type==='research.artifact-draft'));
 });
 

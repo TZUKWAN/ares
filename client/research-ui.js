@@ -13,6 +13,6 @@ export const select=(name,options,attrs='')=>'<select name="'+html(name)+'" '+at
 export const empty=(text)=>'<p class="research-empty">'+html(text)+'</p>';
 export const heading=(title,detail='',actions='')=>'<header class="research-heading"><div><h3>'+html(title)+'</h3>'+(detail?'<p>'+html(detail)+'</p>':'')+'</div><div class="research-actions">'+actions+'</div></header>';
 export const dataLink=(path,data)=>'/ares/api/v2/research/'+path+'?'+new URLSearchParams(data);
-export const names={survey:'问卷',guide:'访谈提纲',interview:'访谈记录',codebook:'编码本',responses:'实际答卷',pretest:'模拟预测试',dataset:'数据集',report:'研究报告'};
-export const levels={draft:'草稿',proposal:'待采用',template:'模板',final:'已定稿','owner-attested':'负责人登记',completed:'已完成',failed:'失败',cancelled:'已取消'};
+export const names={survey:'问卷',guide:'访谈提纲',interview:'访谈记录',codebook:'编码本',responses:'实际答卷',pretest:'模拟预测试',dataset:'数据集',report:'研究报告',requirements:'比赛要求',fact:'事实与证据',experiment:'模型实验',defense:'答辩演练',collection:'问卷回收',reuse:'跨赛改编'};
+export const levels={ready:'已就绪','awaiting-review':'待复核',reviewed:'已复核',adopted:'已采用',draft:'草稿',proposal:'待采用',template:'模板',final:'已定稿','owner-attested':'负责人登记',completed:'已完成',failed:'失败',cancelled:'已取消'};
 export const badge=value=>'<span class="research-chip" data-state="'+html(value)+'">'+html(levels[value]??value)+'</span>';

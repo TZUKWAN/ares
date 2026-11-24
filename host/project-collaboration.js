@@ -8,14 +8,15 @@ import {readProject,changeProject} from './projects.js?v=2.3.0-directory1';
 import {ensureProjectWorkbench,projectEvent,sensitiveFile} from './project-artifacts.js';
 import {readRelease} from './project-workbench.js?v=2.3.0-directory1';
 import {readProjectObject,putProjectObject,putProjectRecord} from './project-objects.js';
-import {kdocsCall,kdocsCapability,safeCloudInfo,resolveCloudLink} from './kdocs-client.js';
+import {kdocsCall,safeCloudInfo,resolveCloudLink} from './kdocs-client.js';
+import {kdocsAccountStatus} from './kdocs-account.js';
 import {assertCloudPublicationIdle,withCloudPublication} from './cloud-operations.js';
 import {cloudHistoryPage,cloudCommentPresent,cloudPublicationMatches,cloudItems,cloudPageToken,cloudPublicationFiles} from './cloud-results.js';
 
 const identifier=(value,label)=>{if(typeof value!=='string'||!/^[a-zA-Z0-9_-]{1,160}$/.test(value))throw new AresError(label+'无效');return value;};
 function configFor(root){const p=readProject(root),c=ensureProjectWorkbench(p).collaboration;if(c.provider!=='kdocs'||!c.driveId||!c.folderId)throw new AresError('项目尚未连接金山协作目录',409);return {p,c};}
 function fileFor(c,id){const file=(c.documents||[]).find(f=>f.id===id);if(!file)throw new AresError('文档未在此项目登记，不能访问其他云文件',403);return file;}
-export async function collaborationStatus(root){const p=readProject(root),c=ensureProjectWorkbench(p).collaboration;return {capability:await kdocsCapability(),collaboration:c};}
+export async function collaborationStatus(root){const p=readProject(root),c=ensureProjectWorkbench(p).collaboration;return {capability:await kdocsAccountStatus(),collaboration:c};}
 export async function browseCollaborationFolders(body,{signal}={}){
  const p=readProject(body.root);if(p.kind!=='v2')throw new AresError('请先建立竞赛项目');
  let driveId=body.driveId?identifier(body.driveId,'云盘ID'):null,folderId=identifier(body.folderId||'0','目录ID');

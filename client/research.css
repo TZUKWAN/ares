@@ -5,6 +5,25 @@
   padding: 7px 11px;
   font-size: 13px;
 }
+.ares-kdocs-account { display: grid; gap: 18px; max-width: 920px; margin: auto; padding: 12px; }
+.ares-kdocs-account-card { min-width: 0; display: grid; gap: 14px; padding: clamp(18px,3vw,30px); border: 1px solid #4d4638; border-radius: 16px; background: linear-gradient(145deg,#292723,#202020); }
+.ares-kdocs-account-card h3 { margin: 0; color: #f1ebdc; font-size: clamp(19px,2vw,25px); line-height: 1.4; }
+.ares-kdocs-account-card p { margin: 0; color: #c1baaa; line-height: 1.8; overflow-wrap: anywhere; }
+.ares-kdocs-eyebrow { color: #e4c889; font-size: 13px; letter-spacing: .1em; }
+.ares-kdocs-auth { display: grid; gap: 12px; border-top: 1px solid #4d4638; padding-top: 16px; }
+.study-navigation { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.study-layout { display: grid; grid-template-columns: 205px minmax(0,1fr); gap: 24px; align-items: start; }
+.study-sidebar,.study-main,.study-form { display: grid; gap: 16px; min-width: 0; }
+.study-sidebar { position: sticky; top: 58px; }
+.study-sidebar > button { text-align: left; overflow-wrap: anywhere; }
+.study-requirements { display: grid; gap: 16px; }
+.study-requirement { border: 1px solid var(--research-line); padding: 18px; border-radius: 12px; background: var(--research-card); display: grid; gap: 12px; }
+.study-requirement > header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+@container ares-research (max-width: 680px) {
+ .study-layout { grid-template-columns: minmax(0,1fr); }
+ .study-sidebar { position: static; grid-template-columns: repeat(2,minmax(0,1fr)); }
+ .study-sidebar h4 { grid-column: 1/-1; }
+}
 @container ares-work-scene (max-width: 640px) {
   .ares-app.ares-system .work-header > .ares-project-research {
     align-self: flex-start;
